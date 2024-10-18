@@ -21,7 +21,7 @@ class CfgPatches {
 
 class Extended_PostInit_EventHandlers {
 	class RootPostInitSwarmer 	{
-		init = "call compile preprocessFileLineNumbers 'scripts\Swarmer\postinit_swarmer.sqf'";
+		init = "call compile preprocessFileLineNumbers '\z\root_anomalies\addons\main\scripts\Swarmer\postinit_swarmer.sqf'";
 		disableModuload = 1;
 	};
 	class RootPostInitWorm 	{
