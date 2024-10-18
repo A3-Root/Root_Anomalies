@@ -1,0 +1,29 @@
+name = "Root's Anomalies"
+prefix = "root_anomalies"
+mainprefix = "z"
+
+[properties]
+author = "Root"
+url = "https://github.com/A3-Root/Root_Anomalies"
+
+[files]
+include = [
+    "CHANGELOG.md",
+    "meta.cpp",
+    "mod.cpp",
+    "LICENSE",
+    "README.md",
+    "logo_co.paa",
+    "logo_ca.paa",
+    "logo_co.png",
+]
+exclude = [
+    "*.psd",
+    "*.txt",
+]
+
+[version]
+major = 4
+minor = 0
+patch = 0
+build = 0
