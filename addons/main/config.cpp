@@ -13,9 +13,11 @@ class CfgPatches {
 		requiredAddons[] = {
 			"A3_Modules_F_Curator", 
 			"cba_main", 
-			"zen_custom_modules"
+			"zen_custom_modules",
+			"zen_modules"
 		};
 		requiredVersion = REQUIRED_VERSION;
+		skipWhenMissingDependencies = 1;
 	};
 };
 
