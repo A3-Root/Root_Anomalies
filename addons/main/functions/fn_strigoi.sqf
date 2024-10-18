@@ -7,7 +7,7 @@
 ================================================================================================================================
 STRIGOI Parameters =======================
 ================================================================================================================================
-[_marker_name, _territory, _day_activ, _inflicted_damage, _hp_strigoi] execvm "\Root_Anomalies\Root_Strigoi\AL_strigoi\strigoi_main.sqf"
+[_marker_name, _territory, _day_activ, _inflicted_damage, _hp_strigoi] execVM "\Root_Anomalies\Root_Strigoi\AL_strigoi\strigoi_main.sqf"
 
 _marker_name		- string, name of the marker where you want to place the anomaly
 _territory			- number, meters, strigoi will move and be active only within boundaries of his territory
@@ -18,10 +18,10 @@ _hp_strigoi			- number, strigois health points, as higher it is as resilient wil
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -50,7 +50,7 @@ deleteVehicle _logic;
 		params ["_results", "_strigoiMarkerName"];
 		_results params ["_strigoi_hp", "_territory_override", "_strigoi_territory", "_strigoi_damage", "_isaipanic", "_isnightonly", "_noseizure"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_strigoi_territory < 75) then {
             	_strigoi_territory = 75;
         	};
@@ -58,7 +58,7 @@ deleteVehicle _logic;
 
 		["Strigoi Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "\Root_Anomalies\Root_Strigoi\AL_strigoi\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "..\scripts\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;

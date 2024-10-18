@@ -18,10 +18,10 @@ teleport_protect- classname of the object you want to function as protection to 
 // if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then 
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -50,16 +50,15 @@ deleteVehicle _logic;
 		params ["_results", "_smugglerMarkerName"];
 		_results params ["_isroaming", "_isdetectable", "_isprotectable", "_isspawning", "_detectdevice", "_protectdevice", "_spawnobjects", "_spawnobjectsdelay", "_dmg_on_teleport", "_noseizure"];
 
-		if (_isdetectable != true) then {_detectdevice = ""};
-		if (_isprotectable != true) then {_protectdevice = ""};
-		if (_isspawning == true) then {_spawnobjects = "[]"} else 
-		{
+		if !(_isdetectable) then {_detectdevice = ""};
+		if !(_isprotectable) then {_protectdevice = ""};
+		if !(_isspawning) then {_spawnobjects = "[]"} else {
 			_spawnobjects = _spawnobjects splitString ",";
 		};
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "..\scripts\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

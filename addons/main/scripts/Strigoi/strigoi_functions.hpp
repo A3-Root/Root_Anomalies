@@ -11,7 +11,7 @@ fnc_find_target = {
 fnc_strig_drain ={
 	private ["_list_unit_range_casp"];
 	_list_unit_range_casp = _this # 0;
-	{_x setFatigue ((getfatigue _x) + 0.1)} forEach _list_unit_range_casp;
+	{_x setFatigue ((getFatigue _x) + 0.1)} forEach _list_unit_range_casp;
 };
 
 fnc_avoid_casp ={
@@ -42,7 +42,7 @@ fnc_attk_strigoi = {
 					[_tgt_casp, _damage_strig, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_casp];	
 				} else 
 				{ 
-					_x setdamage ((damage _tgt_casp) + _damage_strig);
+					_x setDamage ((damage _tgt_casp) + _damage_strig);
 				};
 			};
 		} else {
@@ -55,7 +55,7 @@ fnc_attk_strigoi = {
 
 fnc_hide_strig = {
 	_this setVariable ["vizibil",false,true];
-	[_this getVariable "_cap_casper",["03_tip_casp",1000]] remoteExec ["say3d"];
+	[_this getVariable "_cap_casper",["03_tip_casp",1000]] remoteExec ["say3D"];
 	_this enableSimulationGlobal false; _this hideObjectGlobal true;
 };
 
@@ -69,7 +69,7 @@ fnc_show_strig = {
 	_strigoi setVariable ["vizibil",true,true];
 	[[_strigoi],"\Root_Anomalies\Root_Strigoi\AL_strigoi\strigoi_sfx.sqf"] remoteExec ["execVM",0];
 	_strigoi enableSimulationGlobal true; _strigoi hideObjectGlobal false; {_strigoi reveal _x} forEach (_strigoi nearEntities [["CAManBase"],100]);
-	[_strigoi getVariable "_cap_casper",["03_tip_casp",1000]] remoteExec ["say3d"];
+	[_strigoi getVariable "_cap_casper",["03_tip_casp",1000]] remoteExec ["say3D"];
 };
 
 fnc_salt_strig_1 = {
@@ -77,30 +77,30 @@ fnc_salt_strig_1 = {
 	private "_unghi_fugarit";
 	_umbla_casper setPos (_obj_de_agatat getPos [2,_obj_de_agatat getRelDir _poz_tgt]);
 	_salt_sunet=["01_salt","02_salt","03_salt"] call BIS_fnc_selectRandom; 
-	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3d"];
-	_strigoi setVelocityTransformation [getPosASL _strigoi,getposasl _umbla_casper, velocity _strigoi,velocity _umbla_casper,[0,0,0],[0,0,0],[0,0,1],[0,0,2],0.3];
-	_strigoi attachto [_umbla_casper,[0,0,(getPos _obj_de_agatat select 2) + _pot_poz/4]];
-	_strigoi setdir (_strigoi getRelDir _poz_tgt);
+	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
+	_strigoi setVelocityTransformation [getPosASL _strigoi,getPosASL _umbla_casper, velocity _strigoi,velocity _umbla_casper,[0,0,0],[0,0,0],[0,0,1],[0,0,2],0.3];
+	_strigoi attachTo [_umbla_casper,[0,0,(getPos _obj_de_agatat select 2) + _pot_poz/4]];
+	_strigoi setDir (_strigoi getRelDir _poz_tgt);
 	_tipat_casp= selectRandom ["01_tip_casp","NoSound","02_tip_casp","03_tip_casp","NoSound","04_tip_casp","05_tip_casp","06_tip_casp","07_tip_casp","NoSound"];
-	[_cap_casper,[_tipat_casp,500]] remoteExec ["say3d"];
+	[_cap_casper,[_tipat_casp,500]] remoteExec ["say3D"];
 };
 
 fnc_salt_strig_2 ={
 	params ["_strigoi","_tgt_casp","_umbla_casper","_obj_de_agatat","_cap_casper"];
 	private ["_jump_dir"];
-	_jump_dir = (getposasl _strigoi vectorFromTo getposasl _tgt_casp) vectorMultiply 10;
+	_jump_dir = (getPosASL _strigoi vectorFromTo getPosASL _tgt_casp) vectorMultiply 10;
 	_salt_sunet= selectRandom ["01_salt","02_salt","03_salt"]; 
-	_strigoi attachto [_umbla_casper,[0,0,((boundingCenter _obj_de_agatat) select 2)*2]];
-	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3d"];
+	_strigoi attachTo [_umbla_casper,[0,0,((boundingCenter _obj_de_agatat) select 2)*2]];
+	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
 	detach _strigoi;
-	_strigoi setvelocity [_jump_dir # 0,_jump_dir # 1,3];
+	_strigoi setVelocity [_jump_dir # 0,_jump_dir # 1,3];
 };
 
 fnc_jump_ground ={
 	params ["_strigoi","_tgt_casp","_cap_casper"];
 	private ["_jump_dir"];
-	_jump_dir = (getposasl _strigoi vectorFromTo getposasl _tgt_casp) vectorMultiply 15;
+	_jump_dir = (getPosASL _strigoi vectorFromTo getPosASL _tgt_casp) vectorMultiply 15;
 	_salt_sunet= selectRandom ["01_salt","02_salt","03_salt"]; 
-	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3d"];
-	_strigoi setvelocity [_jump_dir # 0,_jump_dir # 1,round (5+random 15)];
+	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
+	_strigoi setVelocity [_jump_dir # 0,_jump_dir # 1,round (5+random 15)];
 };

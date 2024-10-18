@@ -2,7 +2,7 @@
 // MODIFIED BY ROOT 
 
 /*
-null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI,EMP_enabled] execvm "AL_twins\twins.sqf"
+null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI,EMP_enabled] execVM "AL_twins\twins.sqf"
 
 object_anomaly 		- string, object name you want to work as anomaly, use this as value if you run the script from the init field of the object
 tracking_distance	- number, maximum distance between within which a player must be in order to be chased by anomaly
@@ -14,10 +14,10 @@ EMP_enabled			- boolean, if is true an EMP will be emitted when Twins is killed
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -43,18 +43,15 @@ deleteVehicle _logic;
 		_results params ["_anomaly_obj", "_heart_obj", "_tracking_dist", "_issparks", "_damage_range", "_isai", "_isemp", "_isseizure"];
 		private ["_heart_obj", "_twins_obj"];
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") > 0) then 
-		{
+		if !(getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") > 0) then {
 			_heart_obj = "B_UAV_06_F";
 		};
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") > 0) then 
-		{
+		if !(getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") > 0) then {
 			_twins_obj = "Land_HighVoltageTower_large_F";
 		};
 
-		if (_tracking_dist < _damage_range) then
-		{
+		if (_tracking_dist < _damage_range) then {
 			_tracking_dist = _damage_range + 20;
 		};
 
@@ -62,7 +59,7 @@ deleteVehicle _logic;
 		
 		_twins_obj = _anomaly_obj createVehicle _objpos;
 
-		[[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure], "\Root_Anomalies\Root_Twins\AL_twins\twins_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure], "..\scripts\twins_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

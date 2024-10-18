@@ -6,7 +6,7 @@ cutText ["","WHITE OUT",1]; titleCut ["","WHITE IN",1];
 _effect_tip = ["blur","colorinv","chrom","colorcor"] call BIS_fnc_selectRandom;
 enableCamShake true;
 addCamShake [3+random 7,3,13+random 33];
-playsound "puls";
+playSound "puls";
 
 switch (_effect_tip) do 
 {
@@ -22,27 +22,26 @@ switch (_effect_tip) do
 				};
 	case "colorinv": 
 				{
-				0 = ["ColorInversion", 2500, [0, 1, 0]] spawn 
-				{
-					params ["_name", "_priority", "_effect", "_handle"];
-					while {
-						_handle = ppEffectCreate [_name, _priority];
-						_handle < 0
-					} do {
-						_priority = _priority + 1;
+					["ColorInversion", 2500, [0, 1, 0]] spawn {
+						params ["_name", "_priority", "_effect", "_handle"];
+						while {
+							_handle = ppEffectCreate [_name, _priority];
+							_handle < 0
+						} do {
+							_priority = _priority + 1;
+						};
+						_handle ppEffectEnable true;
+						_handle ppEffectAdjust _effect;
+						_handle ppEffectCommit 5;
+						waitUntil {ppEffectCommitted _handle};
+						uiSleep 3; 
+						_handle ppEffectEnable false;
+						ppEffectDestroy _handle;
 					};
-					_handle ppEffectEnable true;
-					_handle ppEffectAdjust _effect;
-					_handle ppEffectCommit 5;
-					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3; 
-					_handle ppEffectEnable false;
-					ppEffectDestroy _handle;
-				};
 				};				
 	case "chrom": 
 				{
-				0 = ["ChromAberration", 200, [0.93, 0.86, true]] spawn {
+					["ChromAberration", 200, [0.93, 0.86, true]] spawn {
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
 						_handle = ppEffectCreate [_name, _priority];
@@ -61,7 +60,7 @@ switch (_effect_tip) do
 				};								
 	case "colorcor": 
 				{
-				0 = ["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0],[1.8, 1.8, 0.3, -5],[0.2, 0.59, 0.11, -1.83]]] spawn 
+					["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0],[1.8, 1.8, 0.3, -5],[0.2, 0.59, 0.11, -1.83]]] spawn 
 				{
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {

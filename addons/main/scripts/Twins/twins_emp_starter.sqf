@@ -7,25 +7,25 @@ private ["_hndl", "_range_lit", "_brit", "_light_emp", "_ripple", "_blast", "_ba
 
 _AOE = _tracking_p;
 
-_bangsound= "#particlesource" createVehicleLocal getposatl _spark_move;
-_bangsound say3d ["earthquake_02",3500];
+_bangsound= "#particlesource" createVehicleLocal getPosATL _spark_move;
+_bangsound say3D ["earthquake_02",3500];
 
 
 
-_blast = "#particlesource" createVehicleLocal getposatl _spark_move;
+_blast = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _blast setParticleCircle [0, [0, 0, 0]];
 _blast setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
 _blast setParticleParams [["\A3\data_f\koule", 1, 0, 1], "", "SpaceObject", 1,0.5,[0,0,0],[0,0,1],3,10,7.9,0,[0,225],[[0.1, 0.1, 0.1, 0.1], [0.1,0.1, 0.1, 0]], [1], 1, 0, "", "", _spark_move];
 _blast setDropInterval 50;
 
-_ripple = "#particlesource" createVehicleLocal getposatl _spark_move;
+_ripple = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _ripple setParticleCircle [0,[0,0,0]];
 _ripple setParticleRandom [0,[0.25,0.25,0],[0.175,0.175,0],0,0.25,[0,0,0,0.1],0,0];
 //_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [30,1000,1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _obj_emp];
 _ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
-_light_emp = "#lightpoint" createVehiclelocal getposatl _spark_move; 
+_light_emp = "#lightpoint" createVehicleLocal getPosATL _spark_move; 
 _light_emp lightAttachObject [_spark_move, [0,0,3]];
 _light_emp setLightAmbient [0.1,0.1,1];  
 _light_emp setLightColor [0.1,0.1,1];
@@ -73,7 +73,7 @@ _vehicle = _x;
 _vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
 {
 	_vehicle setHitPointDamage [_x, 1];
-} foreach _vichitpoints;
+} forEach _vichitpoints;
 */
 {
 _x setHitPointDamage ["hitturret",1]; 

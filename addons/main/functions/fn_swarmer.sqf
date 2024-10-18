@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /*
-[object_name, territory_radius, throwable_class_name, damage_inflicted] execvm "\Root_Anomalies\Root_Swarmer\AL_swarmer\swarmer_main.sqf";
+[object_name, territory_radius, throwable_class_name, damage_inflicted] execVM "\Root_Anomalies\Root_Swarmer\AL_swarmer\swarmer_main.sqf";
 
 object_name			 - string, the name of the object you use as start location for SWARMER
 territory_radius	 - number, radius of territory in meters
@@ -10,10 +10,10 @@ damage_inflicted	 - number, the amount of damage SWARMER inflicts with his attac
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -35,23 +35,19 @@ deleteVehicle _logic;
 		_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
 		private _swarmerhive = "Land_GarbageBags_F";
 
-		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then 
-		{
+		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then {
 			_swarmerhive = _swarmerobject createVehicle _swarmerloc;
-		} else 
-		{
+		} else {
 			_swarmerhive = "Land_GarbageBags_F" createVehicle _swarmerloc;
 		};
 
-		if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then 
-		{
+		if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then {
 			_pesticideobject = _pesticideobject;
-		} else 
-		{
+		} else {
 			if !(_nopesticide) then { _pesticideobject = "SmokeShellGreen"; };
 		};
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_swarmer_territory < 75) then {
             	_swarmer_territory = 75;
         	};
@@ -59,7 +55,7 @@ deleteVehicle _logic;
 
 		["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "\Root_Anomalies\Root_Swarmer\AL_swarmer\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "..\scripts\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

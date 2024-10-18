@@ -2,17 +2,17 @@
 // MODIFIED BY ROOT
 
 /*
-null = [marker_name]execvm "AL_screamer\screamer.sqf"
+null = [marker_name]execVM "AL_screamer\screamer.sqf"
 
 marker_name	- string, name of the marker where you want to place the anomaly
 */
 
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -49,14 +49,14 @@ deleteVehicle _logic;
             _screamer_hostiles = ["WEST", "EAST", "RESISTANCE", "CIVILIAN"];
         };
 
-		if (_isaidmg == true) then {
+		if (_isaidmg) then {
 			if (_screamer_spawn_side isEqualTo []) then {
-            	_screamer_spawn_side = EAST;
+            	_screamer_spawn_side = east;
 			} else {
 				_screamer_spawn_side = _screamer_spawn_side select 0;
 			};
 		} else {
-			_screamer_spawn_side = EAST;
+			_screamer_spawn_side = east;
 		};
 		
 		if (_screamer_atk_radius > (_screamer_territory / 2)) then {
@@ -69,7 +69,7 @@ deleteVehicle _logic;
 		
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health], "\Root_Anomalies\Root_Screamer\AL_screamer\screamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health], "..\scripts\screamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

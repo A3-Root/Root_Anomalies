@@ -2,14 +2,14 @@
 name = "Root's Anomalies";
 author = "Root";
 // https://community.bistudio.com/wiki/ImageToPAA
-picture = "\x\zeus_additions\addons\main\ui\logo_zeus_additions.paa";
-logo = "\x\zeus_additions\addons\main\ui\logo_zeus_additions.paa";
-logoOver = "\x\zeus_additions\addons\main\ui\logo_zeus_additions.paa";
-logoSmall = "\x\zeus_additions\addons\main\ui\logo_zeus_additions.paa";
-tooltip = "Zeus Additions";
-tooltipOwned = "Zeus Additions";
-action = "https://github.com/johnb432/Zeus-Additions";
+picture = "\z\root_anomalies\addons\main\data\logo_ca.paa";
+logo = "\z\root_anomalies\addons\main\data\logo_ca.paa";
+logoOver = "\z\root_anomalies\addons\main\data\logo_ca.paa";
+logoSmall = "\z\root_anomalies\addons\main\data\logo_ca.paa";
+tooltip = "Root's Anomalies";
+tooltipOwned = "Root's Anomalies";
+action = "https://github.com/A3-Root/Root_Anomalies";
 actionName = "Github";
-overview = "A small mod that adds Zeus modules. Made by johnb43.";
+overview = "Zeus Addon based on Anomalies showcase by Aliascartoons. Imported, modified, maintained and published by Root.";
 hidePicture = 0;
 hideName = 0;

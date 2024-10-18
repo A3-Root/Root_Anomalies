@@ -22,6 +22,7 @@ class CfgPatches {
 			"zen_custom_modules"
 		};
 		weapons[] = {};
+		requiredVersion = REQUIRED_VERSION;
 	};
 };
 
@@ -33,7 +34,7 @@ class CfgFactionClasses {
 };
 
 class CfgFunctions {
-	class ROOT {
+	class Root {
 		tag="Root_Anomalies";
 		class Anomalies {
 			file="\Root_Anomalies\functions";	
@@ -53,6 +54,7 @@ class CfgFunctions {
 
 class CfgVehicles {
 	class zen_modules_moduleBase;
+
 	class Burper_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Burper";
@@ -62,6 +64,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Burper";
 	};
+
 	class Farmer_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Farmer";
@@ -71,6 +74,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Farmer";
 	};
+
 	class Flamer_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Flamer";
@@ -80,6 +84,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Flamer";
 	};
+
 	class Screamer_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Screamer";
@@ -89,6 +94,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Screamer";
 	};
+
 	class Smuggler_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Smuggler";
@@ -98,6 +104,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Smuggler";
 	};
+
 	class Steamer_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Steamer";
@@ -107,6 +114,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Steamer";
 	};
+
 	class Strigoi_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Strigoi";
@@ -116,6 +124,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Strigoi";
 	};
+
 	class Swarmer_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Swarmer";
@@ -125,6 +134,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Swarmer";
 	};
+
 	class Twins_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Twins";
@@ -134,6 +144,7 @@ class CfgVehicles {
 		category = "ROOT_ANOMALIES";
 		function = "Root_fnc_Twins";
 	};
+	
 	class Worm_Module: zen_modules_moduleBase {
 		author = "Root";
 		_generalMacro = "Worm_Module";
@@ -157,139 +168,139 @@ class Extended_PostInit_EventHandlers {
 class CfgSounds {
 	class bones_drop {
 		name = "bones_drop";
-		sound[] = {"\Root_Anomalies\sounds\bones_drop.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\bones_drop.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class blood_splash {
 		name = "blood_splash";
-		sound[] = {"\Root_Anomalies\sounds\blood_splash.ogg", db+35, 1};
+		sound[] = {"\Root_Anomalies\sounds\blood_splash.ogg", "db+35", 1};
 		titles[] = {};
 	};
 	class 01_blast {
 		name = "01_blast";
-		sound[] = {"\Root_Anomalies\sounds\01_blast.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_blast.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class 02_blast {
 		name = "02_blast";
-		sound[] = {"\Root_Anomalies\sounds\02_blast.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_blast.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class 03_blast {
 		name = "03_blast";
-		sound[] = {"\Root_Anomalies\sounds\03_blast.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_blast.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	
 	class 01_blast_mediu {
 		name = "01_blast_mediu";
-		sound[] = {"\Root_Anomalies\sounds\01_blast.ogg", db+40, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_blast.ogg", "db+40", 1};
 		titles[] = {};
 	};
 	class 02_blast_mediu {
 		name = "02_blast_mediu";
-		sound[] = {"\Root_Anomalies\sounds\02_blast.ogg", db+40, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_blast.ogg", "db+40", 1};
 		titles[] = {};
 	};
 	class 03_blast_mediu {
 		name = "03_blast_mediu";
-		sound[] = {"\Root_Anomalies\sounds\03_blast.ogg", db+40, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_blast.ogg", "db+40", 1};
 		titles[] = {};
 	};
 	
 	class 01_far_blast {
 		name = "01_far_blast";
-		sound[] = {"\Root_Anomalies\sounds\01_far_blast.ogg", db+15, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_far_blast.ogg", "db+15", 1};
 		titles[] = {};
 	};	
 	class 02_far_blast {
 		name = "02_far_blast";
-		sound[] = {"\Root_Anomalies\sounds\02_far_blast.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_far_blast.ogg", "db+20", 1};
 		titles[] = {};
 	};	
 	class 03_far_blast {
 		name = "03_far_blast";
-		sound[] = {"\Root_Anomalies\sounds\03_far_blast.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_far_blast.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class vortex {
 		name = "vortex";
-		sound[] = {"\Root_Anomalies\sounds\vortex.ogg", db+40, 1};
+		sound[] = {"\Root_Anomalies\sounds\vortex.ogg", "db+40", 1};
 		titles[] = {};
 	};
 	class strigat_1 {
 		name = "strigat_1";
-		sound[] = {"\Root_Anomalies\sounds\strigat_1.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_1.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_2 {
 		name = "strigat_2";
-		sound[] = {"\Root_Anomalies\sounds\strigat_2.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_2.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_3 {
 		name = "strigat_3";
-		sound[] = {"\Root_Anomalies\sounds\strigat_3.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_3.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_4 {
 		name = "strigat_4";
-		sound[] = {"\Root_Anomalies\sounds\strigat_4.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_4.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_5 {
 		name = "strigat_5";
-		sound[] = {"\Root_Anomalies\sounds\strigat_5.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_5.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_6 {
 		name = "strigat_6";
-		sound[] = {"\Root_Anomalies\sounds\strigat_6.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_6.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_7 {
 		name = "strigat_7";
-		sound[] = {"\Root_Anomalies\sounds\strigat_7.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_7.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_8 {
 		name = "strigat_8";
-		sound[] = {"\Root_Anomalies\sounds\strigat_8.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_8.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_9 {
 		name = "strigat_9";
-		sound[] = {"\Root_Anomalies\sounds\strigat_9.ogg",db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_9.ogg","db+20", 1};
 		titles[] = {};
 	};
 	class strigat_91 {
 		name = "strigat_91";
-		sound[] = {"\Root_Anomalies\sounds\strigat_91.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_91.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class strigat_92 {
 		name = "strigat_92";
-		sound[] = {"\Root_Anomalies\sounds\strigat_92.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat_92.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class bodyfall_metal_3 {
 		name = "bodyfall_metal_3";
-		sound[] = {"\Root_Anomalies\sounds\bodyfall_metal_3.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\bodyfall_metal_3.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class bodyfall_wood_1 {
 		name = "bodyfall_wood_1";
-		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_1.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_1.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class bodyfall_wood_2 {
 		name = "bodyfall_wood_2";
-		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_2.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_2.ogg", "db+20", 1};
 		titles[] = {};
 	};	
 	class bodyfall_wood_3 {
 		name = "bodyfall_wood_3";
-		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_3.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\bodyfall_wood_3.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class device_puls {
@@ -299,82 +310,82 @@ class CfgSounds {
 	};
 	class puls_bass {
 		name = "puls_bass";
-		sound[] = {"\Root_Anomalies\sounds\puls_bass.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\puls_bass.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class charge_b {
 		name = "charge_b";
-		sound[] = {"\Root_Anomalies\sounds\charge_b.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\charge_b.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class explozie_3 {
 		name = "explozie_3";
-		sound[] = {"\Root_Anomalies\sounds\explozie_3.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\explozie_3.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class eko {
 		name = "eko";
-		sound[] = {"\Root_Anomalies\sounds\eko.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\eko.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class pietre {
 		name = "pietre";
-		sound[] = {"\Root_Anomalies\sounds\pietre.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\pietre.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_1 {
 		name = "punch_1";
-		sound[] = {"\Root_Anomalies\sounds\punch_1.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_1.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_2 {
 		name = "punch_2";
-		sound[] = {"\Root_Anomalies\sounds\punch_2.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_2.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_3 {
 		name = "punch_3";
-		sound[] = {"\Root_Anomalies\sounds\punch_3.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_3.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_4 {
 		name = "punch_4";
-		sound[] = {"\Root_Anomalies\sounds\punch_4.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_4.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_5 {
 		name = "punch_5";
-		sound[] = {"\Root_Anomalies\sounds\punch_5.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_5.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_6 {
 		name = "punch_6";
-		sound[] = {"\Root_Anomalies\sounds\punch_6.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_6.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class punch_7 {
 		name = "punch_7";
-		sound[] = {"\Root_Anomalies\sounds\punch_7.ogg", db+1, 1.0};
+		sound[] = {"\Root_Anomalies\sounds\punch_7.ogg", "db+1", 1.0};
 		titles[] = {0, ""};	
 	};
 	class flamer_voice {
 		name = "flamer_voice";
-		sound[] = {"\Root_Anomalies\sounds\flamer_voice.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\flamer_voice.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 04_blast {
 		name = "04_blast";
-		sound[] = {"\Root_Anomalies\sounds\04_blast.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\04_blast.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class 05_blast {
 		name = "05_blast";
-		sound[] = {"\Root_Anomalies\sounds\05_blast.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\05_blast.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class 06_blast {
 		name = "06_blast";
-		sound[] = {"\Root_Anomalies\sounds\06_blast.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\06_blast.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class furnal {
@@ -389,7 +400,7 @@ class CfgSounds {
 	};
 	class close_bomb {
 		name = "close_bomb";
-		sound[] = {"\Root_Anomalies\sounds\close_bomb.ogg",db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\close_bomb.ogg","db+30", 1};
 		titles[] = {};
 	};
 	class eko_sharp {
@@ -429,27 +440,27 @@ class CfgSounds {
 	};
 	class miscare_screamer {
 		name = "miscare_screamer";
-		sound[] = {"\Root_Anomalies\sounds\miscare_screamer.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\miscare_screamer.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class scream {
 		name = "scream";
-		sound[] = {"\Root_Anomalies\sounds\scream.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\scream.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class ecou {
 		name = "ecou";
-		sound[] = {"\Root_Anomalies\sounds\ecou.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\ecou.ogg", "db+20", 1};
 		titles[] = {};
 	};		
 	class stones_scream {
 		name = "stones_scream";
-		sound[] = {"\Root_Anomalies\sounds\stones_scream.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\stones_scream.ogg", "db+20", 1};
 		titles[] = {};
 	};	
 	class teleport_screamer {
 		name = "teleport_screamer";
-		sound[] = {"\Root_Anomalies\sounds\teleport_screamer.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\teleport_screamer.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class earthquakes {
@@ -459,32 +470,32 @@ class CfgSounds {
 	};
 	class telep_01 {
 		name = "telep_01";
-		sound[] = {"\Root_Anomalies\sounds\telep_01.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\telep_01.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class telep_02 {
 		name = "telep_02";
-		sound[] = {"\Root_Anomalies\sounds\telep_02.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\telep_02.ogg", "db+5", 1};
 		titles[] = {};
 	};	
 	class telep_03 {
 		name = "telep_03";
-		sound[] = {"\Root_Anomalies\sounds\telep_03.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\telep_03.ogg", "db+5", 1};
 		titles[] = {};
 	};	
 	class telep_04 {
 		name = "telep_04";
-		sound[] = {"\Root_Anomalies\sounds\telep_04.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\telep_04.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class telep_05 {
 		name = "telep_05";
-		sound[] = {"\Root_Anomalies\sounds\telep_05.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\telep_05.ogg", "db+5", 1};
 		titles[] = {};
 	};		
 	class tremor {
 		name = "tremor";
-		sound[] = {"\Root_Anomalies\sounds\tremor.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\tremor.ogg", "db+5", 1};
 		titles[] = {};
 	};		
 	class rafala_smug_01 {
@@ -519,152 +530,152 @@ class CfgSounds {
 	};	
 	class zoomin {
 		name = "zoomin";
-		sound[] = {"\Root_Anomalies\sounds\zoomin.ogg", db+25, 1};
+		sound[] = {"\Root_Anomalies\sounds\zoomin.ogg", "db+25", 1};
 		titles[] = {};
 	};
 	class tele_message {
 		name = "tele_message";
-		sound[] = {"\Root_Anomalies\sounds\tele_message.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\tele_message.ogg", "db+30", 1};
 		titles[] = {};
 	};	
 	class halu_1 {
 		name = "halu_1";
-		sound[] = {"\Root_Anomalies\sounds\halu_1.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_1.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_2 {
 		name = "halu_2";
-		sound[] = {"\Root_Anomalies\sounds\halu_2.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_2.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_3 {
 		name = "halu_3";
-		sound[] = {"\Root_Anomalies\sounds\halu_3.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_3.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_4 {
 		name = "halu_4";
-		sound[] = {"\Root_Anomalies\sounds\halu_4.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_4.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_5 {
 		name = "halu_5";
-		sound[] = {"\Root_Anomalies\sounds\halu_5.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_5.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_6 {
 		name = "halu_6";
-		sound[] = {"\Root_Anomalies\sounds\halu_6.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_6.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_7 {
 		name = "halu_7";
-		sound[] = {"\Root_Anomalies\sounds\halu_7.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_7.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_8 {
 		name = "halu_8";
-		sound[] = {"\Root_Anomalies\sounds\halu_8.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_8.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_9 {
 		name = "halu_9";
-		sound[] = {"\Root_Anomalies\sounds\halu_9.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_9.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_91 {
 		name = "halu_91";
-		sound[] = {"\Root_Anomalies\sounds\halu_91.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_91.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_92 {
 		name = "halu_92";
-		sound[] = {"\Root_Anomalies\sounds\halu_92.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_92.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_93 {
 		name = "halu_93";
-		sound[] = {"\Root_Anomalies\sounds\halu_93.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_93.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_94 {
 		name = "halu_94";
-		sound[] = {"\Root_Anomalies\sounds\halu_94.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_94.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_95 {
 		name = "halu_95";
-		sound[] = {"\Root_Anomalies\sounds\halu_95.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_95.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_96 {
 		name = "halu_96";
-		sound[] = {"\Root_Anomalies\sounds\halu_96.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_96.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_97 {
 		name = "halu_97";
-		sound[] = {"\Root_Anomalies\sounds\halu_97.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_97.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_98 {
 		name = "halu_98";
-		sound[] = {"\Root_Anomalies\sounds\halu_98.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_98.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_99 {
 		name = "halu_99";
-		sound[] = {"\Root_Anomalies\sounds\halu_99.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_99.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_991 {
 		name = "halu_991";
-		sound[] = {"\Root_Anomalies\sounds\halu_991.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_991.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_992 {
 		name = "halu_992";
-		sound[] = {"\Root_Anomalies\sounds\halu_992.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_992.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_993 {
 		name = "halu_993";
-		sound[] = {"\Root_Anomalies\sounds\halu_993.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_993.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_994 {
 		name = "halu_994";
-		sound[] = {"\Root_Anomalies\sounds\halu_994.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_994.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_995 {
 		name = "halu_995";
-		sound[] = {"\Root_Anomalies\sounds\halu_995.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_995.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_996 {
 		name = "halu_996";
-		sound[] = {"\Root_Anomalies\sounds\halu_996.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_996.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_997 {
 		name = "halu_997";
-		sound[] = {"\Root_Anomalies\sounds\halu_997.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_997.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_998 {
 		name = "halu_998";
-		sound[] = {"\Root_Anomalies\sounds\halu_998.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_998.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_999 {
 		name = "halu_999";
-		sound[] = {"\Root_Anomalies\sounds\halu_999.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_999.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class halu_9999 {
 		name = "halu_9999";
-		sound[] = {"\Root_Anomalies\sounds\halu_9999.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\halu_9999.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class explozie_2 {
@@ -679,22 +690,22 @@ class CfgSounds {
 	};
 	class gheizer_4 {
 		name = "gheizer_4";
-		sound[] = {"\Root_Anomalies\sounds\gheizer_4.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\gheizer_4.ogg", "db+5", 1};
 		titles[] = {1, ""};
 	};	
 	class gheizer_3 {
 		name = "gheizer_3";
-		sound[] = {"\Root_Anomalies\sounds\gheizer_3.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\gheizer_3.ogg", "db+5", 1};
 		titles[] = {1, ""};
 	};		
 	class gheizer_2 {
 		name = "gheizer_2";
-		sound[] = {"\Root_Anomalies\sounds\gheizer_2.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\gheizer_2.ogg", "db+5", 1};
 		titles[] = {1, ""};
 	};		
 	class gheizer_1 {
 		name = "gheizer_1";
-		sound[] = {"\Root_Anomalies\sounds\gheizer_1.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\gheizer_1.ogg", "db+5", 1};
 		titles[] = {1, ""};
 	};
 	class al_boil {
@@ -724,17 +735,17 @@ class CfgSounds {
 	};
 	class drops_01 {
 		name = "drops_01";
-		sound[] = {"\Root_Anomalies\sounds\drops_01.ogg",db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\drops_01.ogg","db+5", 1};
 		titles[] = {1, ""};
 	};
 	class drops_02 {
 		name = "drops_02";
-		sound[] = {"\Root_Anomalies\sounds\drops_02.ogg",db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\drops_02.ogg","db+5", 1};
 		titles[] = {1, ""};
 	};
 	class drops_03 {
 		name = "drops_03";
-		sound[] = {"\Root_Anomalies\sounds\drops_03.ogg",db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\drops_03.ogg","db+5", 1};
 		titles[] = {1, ""};
 	};
 	class debris {
@@ -794,102 +805,102 @@ class CfgSounds {
 	};
 	class casp_voice {
 		name = "casp_voice";
-		sound[] = {"\Root_Anomalies\sounds\casp_voice.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\casp_voice.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 01_salt {
 		name = "01_salt";
-		sound[] = {"\Root_Anomalies\sounds\01_salt.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_salt.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class 02_salt {
 		name = "02_salt";
-		sound[] = {"\Root_Anomalies\sounds\02_salt.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_salt.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class 03_salt {
 		name = "03_salt";
-		sound[] = {"\Root_Anomalies\sounds\03_salt.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_salt.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class 01_tip_casp {
 		name = "01_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\01_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 02_tip_casp {
 		name = "02_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\02_tip_casp.ogg", db+0.8, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_tip_casp.ogg", "db+0.8", 1};
 		titles[] = {};
 	};
 	class 03_tip_casp {
 		name = "03_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\03_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 04_tip_casp {
 		name = "04_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\04_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\04_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 05_tip_casp {
 		name = "05_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\05_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\05_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 06_tip_casp {
 		name = "06_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\06_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\06_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class 07_tip_casp {
 		name = "07_tip_casp";
-		sound[] = {"\Root_Anomalies\sounds\07_tip_casp.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\07_tip_casp.ogg", "db+5", 1};
 		titles[] = {};
 	};	
 	class 01_tease {
 		name = "01_tease";
-		sound[] = {"\Root_Anomalies\sounds\01_tease.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_tease.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class 02_tease {
 		name = "02_tease";
-		sound[] = {"\Root_Anomalies\sounds\02_tease.ogg", db+0.9, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_tease.ogg", "db+0.9", 1};
 		titles[] = {};
 	};
 	class 03_tease {
 		name = "03_tease";
-		sound[] = {"\Root_Anomalies\sounds\03_tease.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_tease.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class 04_tease {
 		name = "04_tease";
-		sound[] = {"\Root_Anomalies\sounds\04_tease.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\04_tease.ogg", "db+1", 1};
 		titles[] = {};
 	};	
 	class 01_atk_bg {
 		name = "01_atk_bg";
-		sound[] = {"\Root_Anomalies\sounds\01_atk_bg.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\01_atk_bg.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class 02_atk {
 		name = "02_atk";
-		sound[] = {"\Root_Anomalies\sounds\02_atk.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\02_atk.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class 03_atk {
 		name = "03_atk";
-		sound[] = {"\Root_Anomalies\sounds\03_atk.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\03_atk.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class 04_atk {
 		name = "04_atk";
-		sound[] = {"\Root_Anomalies\sounds\04_atk.ogg", db+1, 1};
+		sound[] = {"\Root_Anomalies\sounds\04_atk.ogg", "db+1", 1};
 		titles[] = {};
 	};
 	class puls {
 		name = "puls";
-		sound[] = {"\Root_Anomalies\sounds\puls.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\puls.ogg", "db+10", 1};
 		titles[] = {};
 	};
 	class roi_02 {
@@ -954,72 +965,72 @@ class CfgSounds {
 	};
 	class spark1 {
 		name = "spark1";
-		sound[] = {"\Root_Anomalies\sounds\spark1.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark1.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class spark11 {
 		name = "spark11";
-		sound[] = {"\Root_Anomalies\sounds\spark11.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark11.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class spark2 {
 		name = "spark2";
-		sound[] = {"\Root_Anomalies\sounds\spark2.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark2.ogg", "db+30", 1};
 		titles[] = {};
 	};		
 	class spark22 {
 		name = "spark22";
-		sound[] = {"\Root_Anomalies\sounds\spark22.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark22.ogg", "db+30", 1};
 		titles[] = {};
 	};	
 	class spark3 {
 		name = "spark3";
-		sound[] = {"\Root_Anomalies\sounds\spark3.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark3.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class spark4 {
 		name = "spark4";
-		sound[] = {"\Root_Anomalies\sounds\spark4.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark4.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class spark5 {
 		name = "spark5";
-		sound[] = {"\Root_Anomalies\sounds\spark5.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\spark5.ogg", "db+30", 1};
 		titles[] = {};
 	};	
 	class metalic1 {
 		name = "metalic1";
-		sound[] = {"\Root_Anomalies\sounds\metalic1.ogg", db+25, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic1.ogg", "db+25", 1};
 		titles[] = {};
 	};
 	class metalic2 {
 		name = "metalic2";
-		sound[] = {"\Root_Anomalies\sounds\metalic2.ogg", db+25, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic2.ogg", "db+25", 1};
 		titles[] = {};
 	};
 	class metalic3 {
 		name = "metalic3";
-		sound[] = {"\Root_Anomalies\sounds\metalic3.ogg", db+35, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic3.ogg", "db+35", 1};
 		titles[] = {};
 	};
 	class metalic4 {
 		name = "metalic4";
-		sound[] = {"\Root_Anomalies\sounds\metalic4.ogg", db+35, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic4.ogg", "db+35", 1};
 		titles[] = {};
 	};
 	class metalic5 {
 		name = "metalic5";
-		sound[] = {"\Root_Anomalies\sounds\metalic5.ogg", db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic5.ogg", "db+20", 1};
 		titles[] = {};
 	};
 	class metalic6 {
 		name = "metalic6";
-		sound[] = {"\Root_Anomalies\sounds\metalic6.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic6.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class metalic7 {
 		name = "metalic7";
-		sound[] = {"\Root_Anomalies\sounds\metalic7.ogg", db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\metalic7.ogg", "db+30", 1};
 		titles[] = {};
 	};
 	class sound_twin {
@@ -1049,12 +1060,12 @@ class CfgSounds {
 	};
 	class idle_01 {
 		name = "idle_01";
-		sound[] = {"\Root_Anomalies\sounds\idle_01.ogg", db+5, 1};
+		sound[] = {"\Root_Anomalies\sounds\idle_01.ogg", "db+5", 1};
 		titles[] = {};
 	};
 	class idle_02 {
 		name = "idle_02";
-		sound[] = {"\Root_Anomalies\sounds\idle_02.ogg", db+10, 1};
+		sound[] = {"\Root_Anomalies\sounds\idle_02.ogg", "db+10", 1};
 		titles[] = {};
 	};	
 	class post_impact_01 {
@@ -1079,22 +1090,22 @@ class CfgSounds {
 	};
 	class impact_30	{
 		name = "impact_30";
-		sound[] = {"\Root_Anomalies\sounds\impact_30.ogg",db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\impact_30.ogg","db+30", 1};
 		titles[] = {};
 	};	
 	class impact_27 {
 		name = "impact_27";
-		sound[] = {"\Root_Anomalies\sounds\impact_27.ogg",db+30, 1};
+		sound[] = {"\Root_Anomalies\sounds\impact_27.ogg","db+30", 1};
 		titles[] = {};
 	};
 	class salt_05 {
 		name = "salt_05";
-		sound[] = {"\Root_Anomalies\sounds\salt_05.ogg",db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\salt_05.ogg","db+20", 1};
 		titles[] = {};
 	};
 	class salt_08 {
 		name = "salt_08";
-		sound[] = {"\Root_Anomalies\sounds\salt_08.ogg",db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\salt_08.ogg","db+20", 1};
 		titles[] = {};
 	};
 	class move_01 {
@@ -1174,12 +1185,12 @@ class CfgSounds {
 	};
 	class bump {
 		name = "bump";
-		sound[] = {"\Root_Anomalies\sounds\bump.ogg",db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\bump.ogg","db+20", 1};
 		titles[] = {};
 	};
 	class strigat {
 		name = "strigat";
-		sound[] = {"\Root_Anomalies\sounds\strigat.ogg",db+20, 1};
+		sound[] = {"\Root_Anomalies\sounds\strigat.ogg","db+20", 1};
 		titles[] = {};
 	};
 };

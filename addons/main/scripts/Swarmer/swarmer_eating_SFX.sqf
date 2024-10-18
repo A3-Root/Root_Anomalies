@@ -30,9 +30,9 @@ params ["_splash_point","_hives"];
 if (!alive _hives) exitWith {};
 
 _pct_unit=["spine3","leftshoulder","leftforearmroll","leftleg","leftfoot","leftupleg","rightshoulder","rightforearmroll","rightupleg","rightleg","rightfoot","pelvis","neck","leftforearm", "rightforearm"];
-_fire_obj_unit = [];{_part_fire = "Land_HelipadEmpty_F" createVehiclelocal [0,0,0]; _part_fire attachTo [_splash_point,[0,0,0],_x];_fire_obj_unit pushBack _part_fire;} forEach _pct_unit;
-{[_x] spawn fnc_blood} foreach _fire_obj_unit;
-(_fire_obj_unit # 0) say3D ["eating",300]; _splash_point say3d ["strigat_92",300];
+_fire_obj_unit = [];{_part_fire = "Land_HelipadEmpty_F" createVehicleLocal [0,0,0]; _part_fire attachTo [_splash_point,[0,0,0],_x];_fire_obj_unit pushBack _part_fire;} forEach _pct_unit;
+{[_x] spawn fnc_blood} forEach _fire_obj_unit;
+(_fire_obj_unit # 0) say3D ["eating",300]; _splash_point say3D ["strigat_92",300];
 
 if (!alive _splash_point) then {[_splash_point] call fnc_meat};
 uiSleep 13;

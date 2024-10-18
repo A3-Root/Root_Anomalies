@@ -1,6 +1,9 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 
+
+if (!hasInterface) exitWith {};
+
 fnc_effecte_princ_smug = {
 	private ["_obj_princ_effect","_bule_smugg","_fct_lit","_dust_smug","_sursa_princ_center","_brit_burp","_b_col_burp","_g_col_burp","_r_col_burp","_sp_dist_smug","_spot_lit"];
 	_obj_princ_effect 	= _this select 0;
@@ -108,9 +111,17 @@ fnc_sec_effect_smug = {
 	};
 };
 
-fnc_check_detector_smug = {if ((headgear _this == detect_smug) or (goggles _this ==detect_smug) or (uniform _this ==detect_smug) or (vest _this ==detect_smug) or (Backpack _this ==detect_smug) or (detect_smug in (assigneditems _this  + items _this ))) then {true} else {false}};
+fnc_check_detector_smug = {
+	private _hasItem = [_this, detect_smug] call BIS_fnc_hasItem;
+	if (_hasItem) then {
+		diag_log format ["Smuggler Item Check - Entity has Item: %1 - Returning True", _hasItem];
+		true;
+	} else {
+		diag_log format ["Smuggler Item Check - Entity has Item: %1 - Returning False", _hasItem];
+		false;
+	};
+};
 
-if (!hasInterface) exitwith {};
 
 _obj_sursa_smugg = _this select 0;
 _sursa_core		 = _this select 1;
@@ -119,7 +130,7 @@ waitUntil {!isNil{_sursa_core getVariable "activeaza"}};
 
 if (detect_smug!="") then 
 {
-	while {!isnull _obj_sursa_smugg} do 
+	while {!isNull _obj_sursa_smugg} do 
 	{
 		waitUntil {uiSleep 5; /* uiSleep 10; */ player distance _obj_sursa_smugg < 1000};
 		_sursa_core setVariable ["activeaza",true,true];
@@ -134,7 +145,7 @@ if (detect_smug!="") then
 } else 
 	{
 		player_chk_det = true;
-		while {!isnull _obj_sursa_smugg} do 
+		while {!isNull _obj_sursa_smugg} do 
 		{
 			waitUntil {uiSleep 5; /* uiSleep 10; */ player distance _obj_sursa_smugg < 1000}; 
 			_sursa_core setVariable ["activeaza",true,true];

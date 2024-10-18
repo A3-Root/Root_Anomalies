@@ -2,7 +2,7 @@
 // MODIFIED BY ROOT 
 if (!isServer) exitWith {};
 
-#include "\Root_Anomalies\scripts\Flamer\flamer_functions.hpp"
+#include ".\flamer_functions.hpp"
 
 params ["_poz_orig_sc","_teritoriu","_damage_flamer", "_recharge_delay", "_hp_flamer", "_damage_on_death", "_isaipanic"];
 private ["_poz_orig_sc","_teritoriu","_damage_flamer", "_recharge_delay", "_hp_flamer", "_damage_on_death", "_isaipanic", "_isacefire", "_isacemedical", "_dmg_fire", "_vehicle", "_vichitpoints", "_damage", "_time"];
@@ -30,13 +30,13 @@ _isacemedical = false;
 _dmg_fire = _damage_flamer;
 
 _ck_pl = false;
-while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} foreach allPlayers;uiSleep 5; /* uiSleep 10; */};
+while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} forEach allPlayers;uiSleep 5; /* uiSleep 10; */};
 _flamer = createAgent ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [],0, "NONE"]; _flamer setVariable ["BIS_fnc_animalBehaviour_disable", true]; _flamer setSpeaker "NoVoice"; _flamer disableConversation true; _flamer addRating -10000; _flamer setBehaviour "CARELESS"; _flamer enableFatigue false; _flamer setSkill ["courage", 1]; _flamer setUnitPos "UP"; _flamer disableAI "ALL"; _flamer setMass 7000; {_flamer enableAI _x} forEach ["MOVE","ANIM","TEAMSWITCH","PATH"];
 
 _hp_curr_flamer = 1/_hp_flamer;
 _flamer setVariable ["flamer_dmg_total", 0];
 _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
-_flamer removeAllEventHandlers "hit";
+_flamer removeAllEventHandlers "Hit";
 
 _flamer addEventHandler ["Hit", {
     _unit=_this#0;
@@ -49,28 +49,28 @@ _flamer addEventHandler ["Hit", {
     [[_unit], "\Root_Anomalies\scripts\Flamer\flamer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
-_flamer removeAllEventHandlers "Handledamage";
+_flamer removeAllEventHandlers "HandleDamage";
 
-_flamer addEventHandler ["Handledamage", {0}];
+_flamer addEventHandler ["HandleDamage", {0}];
 
 _flamer addEventHandler ["Killed", {
-    (_this select 0) hideObjectglobal true;
-    (_this select 1) addrating 2000
+    (_this select 0) hideObjectGlobal true;
+    (_this select 1) addRating 2000
 }];
 
 _flamer setAnimSpeedCoef 1.2;
-_cap_flamer = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _cap_flamer attachto [_flamer, [0,0,0.2],"neck"]; _flamer setVariable ["_cap_flamer", _cap_flamer, true];
+_cap_flamer = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _cap_flamer attachTo [_flamer, [0,0,0.2],"neck"]; _flamer setVariable ["_cap_flamer", _cap_flamer, true];
 
 for "_i" from 0 to 5 do {
-    _flamer setobjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
+    _flamer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
 };
 for "_i" from 0 to 5 do {
-    _flamer setobjecttextureGlobal [_i, "\Root_Anomalies\scripts\Flamer\03_flesh.jpg"];
+    _flamer setObjectTextureGlobal [_i, "\Root_Anomalies\scripts\Flamer\03_flesh.jpg"];
 };
 _flamer setVariable ["atk",false];
 _flamer call fnc_hide_flamer;
 _list_unit_range_flamer = [];
-[_flamer, _damage_on_death] execvm "\Root_Anomalies\scripts\Flamer\flamer_end.sqf";
+[_flamer, _damage_on_death] execVM "\Root_Anomalies\scripts\Flamer\flamer_end.sqf";
 
 
 
@@ -106,11 +106,11 @@ while {alive _flamer} do
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else 
 					{
-						_x setdamage ((damage _x) + 0.03);
+						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -120,7 +120,7 @@ while {alive _flamer} do
 					{
 						_damage = random(0.3);
 						_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-					} foreach _vichitpoints;
+					} forEach _vichitpoints;
 				};
 			};
 		} forEach (_nearflamer-[_flamer]); 
@@ -148,11 +148,11 @@ while {alive _flamer} do
 							[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 						} else 
 						{
-							_x setdamage ((damage _x) + 0.03);
+							_x setDamage ((damage _x) + 0.03);
 						};
 					};
-					_tip = selectrandom ["04","burned","02","03"];
-					[_x,[_tip,200]] remoteExec ["say3d"];
+					_tip = selectRandom ["04","burned","02","03"];
+					[_x,[_tip,200]] remoteExec ["say3D"];
 				} else
 				{
 					if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -162,10 +162,10 @@ while {alive _flamer} do
 						{
 							_damage = random(0.3);
 							_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-						} foreach _vichitpoints;
+						} forEach _vichitpoints;
 					};
 				};
-			} forEach (_nearflamer-[_flamer]); [[_flamer],"\Root_Anomalies\scripts\Flamer\flamer_jump_SFX.sqf"] remoteExec ["execvm"]; [_flamer,_tgt_flamer,_cap_flamer,_damage_flamer] spawn fnc_jump_flamer};
+			} forEach (_nearflamer-[_flamer]); [[_flamer],"\Root_Anomalies\scripts\Flamer\flamer_jump_SFX.sqf"] remoteExec ["execVM"]; [_flamer,_tgt_flamer,_cap_flamer,_damage_flamer] spawn fnc_jump_flamer};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosASL _flamer) nearEntities [["CAManBase","LandVehicle"],5];
 		{
@@ -184,11 +184,11 @@ while {alive _flamer} do
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else 
 					{
-						_x setdamage ((damage _x) + 0.03);
+						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -198,12 +198,12 @@ while {alive _flamer} do
 					{
 						_damage = random(0.3);
 						_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-					} foreach _vichitpoints;
+					} forEach _vichitpoints;
 				};
 			};
 		} forEach (_nearflamer-[_flamer]); 
 		if ((_flamer distance _tgt_flamer <15)&&!(_flamer getVariable "atk")) then 
-		{_flamer setVariable ["atk",true]; [_flamer,_tgt_flamer,_damage_flamer] spawn fnc_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\Root_Anomalies\scripts\Flamer\flamer_atk_SFX.sqf"] remoteExec ["execvm"]};
+		{_flamer setVariable ["atk",true]; [_flamer,_tgt_flamer,_damage_flamer] spawn fnc_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\Root_Anomalies\scripts\Flamer\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosASL _flamer) nearEntities [["CAManBase","LandVehicle"],5];
 		{
@@ -222,11 +222,11 @@ while {alive _flamer} do
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else 
 					{
-						_x setdamage ((damage _x) + 0.03);
+						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -236,7 +236,7 @@ while {alive _flamer} do
 					{
 						_damage = random(0.3);
 						_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-					} foreach _vichitpoints;
+					} forEach _vichitpoints;
 				};
 			};
 		} forEach (_nearflamer-[_flamer]); 
@@ -259,11 +259,11 @@ while {alive _flamer} do
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else 
 					{
-						_x setdamage ((damage _x) + 0.03);
+						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -273,7 +273,7 @@ while {alive _flamer} do
 					{
 						_damage = random(0.3);
 						_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-					} foreach _vichitpoints;
+					} forEach _vichitpoints;
 				};
 			};
 		} forEach (_nearflamer-[_flamer]); 

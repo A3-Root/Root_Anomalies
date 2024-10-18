@@ -6,11 +6,11 @@ params ["_farmer","_damage_farmer"];
 enableCamShake true;
 
 _farmer setAnimSpeedCoef 0.1;
-_farmer switchmove "ChopperLight_L_Out_H";
+_farmer switchMove "ChopperLight_L_Out_H";
 _farmer setVelocity [0,0,3];
 uiSleep 0.4;
 _farmer setAnimSpeedCoef 1.8; 
-_farmer switchmove "AmovPercMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon";
+_farmer switchMove "AmovPercMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon";
 uiSleep 0.2;
 
 playSound3D ["\Root_Anomalies\sounds\explozie_3.ogg", "", false, position _farmer, 20, 5, 0];
@@ -38,7 +38,7 @@ _persistent_dust setParticleParams [["\A3\data_f\cl_basic",1,0,1],"","Billboard"
 _persistent_dust setDropInterval 0.01;
 [_persistent_dust] spawn {params ["_de_sters"]; uiSleep 1; deleteVehicle _de_sters};
 
-_farmer say3d ["pietre",5000];
+_farmer say3D ["pietre",5000];
 for "_i" from 1 to 20 do {
 	_burst setParticleCircle [_i,[0,0,0]];
 	_bolovani setParticleCircle [_i,[0,0,0]];
@@ -48,9 +48,9 @@ for "_i" from 1 to 20 do {
 					_pp = linearConversion [0,100,_i,5,0,true];
 					[player,1] call BIS_fnc_dirtEffect;
 					addCamShake [_pp,2,30];
-					player allowdamage true;
-					_jump_dir = (getposasl _farmer vectorFromTo getposasl player) vectorMultiply 3;
-					player setvelocity [_jump_dir # 0,_jump_dir # 1,3];
+					player allowDamage true;
+					_jump_dir = (getPosASL _farmer vectorFromTo getPosASL player) vectorMultiply 3;
+					player setVelocity [_jump_dir # 0,_jump_dir # 1,3];
 					_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
 					_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 					if !( player isKindOf "VirtualCurator_F") then { 
@@ -59,13 +59,13 @@ for "_i" from 1 to 20 do {
 							[player, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 						} else 
 						{ 
-							player setdamage ((damage player) + _damage_farmer);
+							player setDamage ((damage player) + _damage_farmer);
 						};
 					};
 				};
 	uiSleep 0.05;
 };
-player allowdamage true;
+player allowDamage true;
 if ((player distance _farmer)<20) then
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -76,14 +76,14 @@ if ((player distance _farmer)<20) then
 				[player, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 			} else 
 			{ 
-				player setdamage ((damage player) + _damage_farmer);
+				player setDamage ((damage player) + _damage_farmer);
 			};
 			};
 	};
-deletevehicle _bolovani;
-deletevehicle _burst;
-deletevehicle _blast_wave;
+deleteVehicle _bolovani;
+deleteVehicle _burst;
+deleteVehicle _blast_wave;
 uiSleep 1;
-_farmer switchmove "";
-playSound3D ["\Root_Anomalies\sounds\eko.ogg", "", false, [getpos _farmer select 0,getpos _farmer select 1,100], 20, 5, 0];
+_farmer switchMove "";
+playSound3D ["\Root_Anomalies\sounds\eko.ogg", "", false, [getPos _farmer select 0,getPos _farmer select 1,100], 20, 5, 0];
 

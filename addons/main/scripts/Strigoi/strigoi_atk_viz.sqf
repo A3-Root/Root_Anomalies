@@ -11,7 +11,7 @@ _noseize	= _this select 2;
 
 // if (_noseize == true) exitWith {};
 
-_flow = (getposasl _tgt_casp vectorFromTo getposasl _strigoi) vectorMultiply 10;
+_flow = (getPosASL _tgt_casp vectorFromTo getPosASL _strigoi) vectorMultiply 10;
 
 _en_field = "#particlesource" createVehicleLocal (getPosASL _tgt_casp);
 _en_field setParticleCircle [0,[0,0,0]];

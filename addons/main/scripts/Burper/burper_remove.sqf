@@ -5,7 +5,7 @@
 
 Inbound
 
-[_object_anom_burp, _anti_burper_device, _killrange] execvm "\Root_Anomalies\scripts\Burper\burper_remove.sqf";
+[_object_anom_burp, _anti_burper_device, _killrange] execVM "burper_remove.sqf";
 
 */
 
@@ -26,18 +26,18 @@ while {(alive _object_anom_burp) && (_task_time < 7)} do {
 	_device_anti_burp = nearestObjects [position _object_anom_burp, [anti_burper], _kill_range, false];
 	if (count _device_anti_burp > 0) then {
 		_task_time = _task_time + 1;
-		[[_object_anom_burp], "\Root_Anomalies\scripts\Burper\burper_disable.sqf"] remoteExec ["execVM"]
+		[[_object_anom_burp], "burper_disable.sqf"] remoteExec ["execVM"]
 	} else {
 		_task_time = 0;
 	};
 	uiSleep 5;
 };
 
-[[_object_anom_burp], "\Root_Anomalies\scripts\Burper\burper_blast.sqf"] remoteExec ["execVM"];
-["charge_b"] remoteExec ["playsound"];
+[[_object_anom_burp], "burper_blast.sqf"] remoteExec ["execVM"];
+["charge_b"] remoteExec ["playSound"];
 _object_anom_burp setVariable ["burper_activ", false, true];
 uiSleep 1;
 deleteVehicle _object_anom_burp;
 {_x setDamage 1} forEach _device_anti_burp;
 uiSleep 1.5;
-["puls_bass"] remoteExec ["playsound"];
+["puls_bass"] remoteExec ["playSound"];

@@ -14,8 +14,8 @@ fnc_avoid_worm ={
             _op_dir=_reldir-180+_fct
         };
         _avoid_poz = [getPosATL _x, 20+random 50, _op_dir] call BIS_fnc_relPos;
-        _x domove _avoid_poz;
-        _x setskill ["commanding", 1];
+        _x doMove _avoid_poz;
+        _x setSkill ["commanding", 1];
     } forEach _chased_units;
 };
 
@@ -28,7 +28,7 @@ fnc_vic_dmg = {
 	{
 		_damage = random(_worm_dmg);
 		_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-	} foreach _vichitpoints;
+	} forEach _vichitpoints;
 	_vehicle setHitPointDamage ["HitLight",1]; 
 	_vehicle setHitPointDamage ["#light_l",1];
 	_vehicle setHitPointDamage ["#light_r",1];
@@ -45,7 +45,7 @@ fnc_vic_dmg = {
 	_vehicle setHitPointDamage ["light_r2",1];
 };
 
-if (!isServer) exitwith {};
+if (!isServer) exitWith {};
 
 params ["_poz_worm", "_damage_worm", "_territory", "_isaipanic", "_wormdiffuser"];
 private ["_press_implicit_x", "_press_implicit_y", "_isacemedical"];
@@ -61,18 +61,18 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 
 uiSleep 2;
 
-_cap	= createvehicle ["land_CanOpener_F", getmarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
-_coada	= createvehicle ["land_CanOpener_F", getmarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
-_coada_01= createvehicle ["land_CanOpener_F", getmarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_cap	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_coada	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_coada_01= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
 
 _cap setVariable ["isWorm",true,true];
 
 wormkiller = _wormdiffuser; publicVariable "wormkiller";
 
-_coada attachto [_cap, [0, -1, 1]];
-_coada_01 attachto [_coada, [0, -1, 1]];
-[_coada, true] remoteExec ["hideObjectglobal", 0, true];
-[_coada_01, true] remoteExec ["hideObjectglobal", 0, true];
+_coada attachTo [_cap, [0, -1, 1]];
+_coada_01 attachTo [_coada, [0, -1, 1]];
+[_coada, true] remoteExec ["hideObjectGlobal", 0, true];
+[_coada_01, true] remoteExec ["hideObjectGlobal", 0, true];
 
 _hide_me = true;
 while {_hide_me} do {
@@ -108,7 +108,7 @@ while {_hide_me} do {
         [[_cap, _coada, _coada_01], "\Root_Anomalies\Root_Worm\AL_worm\worm_effect.sqf"] remoteExec ["execVM", 0, true];
         [[_cap, _coada], "\Root_Anomalies\Root_Worm\AL_worm\worm_attack.sqf"] remoteExec ["execVM", 0];
         _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
-        _cap setvelocity [_press_implicit_x * 5, _press_implicit_y * 5, 20 + random 10];
+        _cap setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 20 + random 10];
         uiSleep 1;
         [_coada, ["strigat", 1000]] remoteExec ["say3D"];
     };
@@ -156,21 +156,21 @@ while {!isNull _cap} do {
                 _press_implicit_y = 1+_press_implicit_x;
             };
             _worm_salt = ["salt_08", "salt_05"] call BIS_fnc_selectRandom;
-            _cap setvelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+            _cap setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
             [_coada, [_worm_salt, 500]] remoteExec ["say3D"];
             uiSleep 0.5;
             waitUntil {
                 (getPosATL _cap select 2) < 1
             };
             [[_cap, _coada], "\Root_Anomalies\Root_Worm\AL_worm\worm_attack.sqf"] remoteExec ["execVM", 0];
-            _nearobj_wrom = nearestobjects [getPosATL _cap, [], 15];
+            _nearobj_wrom = nearestObjects [getPosATL _cap, [], 15];
             {
                 if ((_x!=_cap)&&(_x!=_coada)&&(_x!=_coada_01)&&!(surfaceIsWater getPos _x)) then {
                     if (_x isKindOf "LandVehicle") then {
-                        _x setvelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
                         [_x, _damage_worm] call fnc_vic_dmg;
                     } else {
-                        _x setvelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                         _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
                         if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then 
@@ -180,7 +180,7 @@ while {!isNull _cap} do {
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x]; 
                             } else 
                             {
-                                _x setdamage ((damage _x) + _damage_worm);
+                                _x setDamage ((damage _x) + _damage_worm);
                             }
                         };
                     };
@@ -225,7 +225,7 @@ while {!isNull _cap} do {
                 _press_implicit_y = 1+_press_implicit_x;
             };
             [_coada, [_sunet_deplas, 500]] remoteExec ["say3D"];
-            _cap setvelocity [_press_implicit_x*_fct_move, _press_implicit_y*_fct_move, 5+random 5];
+            _cap setVelocity [_press_implicit_x*_fct_move, _press_implicit_y*_fct_move, 5+random 5];
             uiSleep 2;
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         };

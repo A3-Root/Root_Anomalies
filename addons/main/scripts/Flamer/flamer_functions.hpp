@@ -36,11 +36,11 @@ fnc_attk_flamer = {
 			_isacefire = true;
 		};
 	};
-	_shoot_dir = (getposasl _flamer vectorFromTo getposasl _tgt_casp) vectorMultiply 15;
-	[_flamer getVariable "_cap_flamer",["foc_initial",500]] remoteExec ["say3d"];
+	_shoot_dir = (getPosASL _flamer vectorFromTo getPosASL _tgt_casp) vectorMultiply 15;
+	[_flamer getVariable "_cap_flamer",["foc_initial",500]] remoteExec ["say3D"];
 	[[_flamer,_shoot_dir],"\Root_Anomalies\scripts\Flamer\flamer_plasma_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep 0.5;
-	_tip = selectrandom ["04","burned","02","03"];
+	_tip = selectRandom ["04","burned","02","03"];
 	_nearflamer = (ASLToAGL getPosASL _flamer) nearEntities ["CAManBase",5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
@@ -58,11 +58,11 @@ fnc_attk_flamer = {
 					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else 
 				{
-					_x setdamage ((damage _x) + _damage_flamer);
+					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
-			_tip = selectrandom ["04","burned","02","03"];
-			[_x,[_tip,200]] remoteExec ["say3d"];
+			_tip = selectRandom ["04","burned","02","03"];
+			[_x,[_tip,200]] remoteExec ["say3D"];
 		} else
 		{
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -72,7 +72,7 @@ fnc_attk_flamer = {
 				{
 					_damage = random(_damage_flamer);
 					_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-				} foreach _vichitpoints;
+				} forEach _vichitpoints;
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
@@ -83,7 +83,7 @@ fnc_attk_flamer = {
 
 fnc_hide_flamer = {
 	_this setVariable ["vizibil",false,true];
-	[_this getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3d"];
+	[_this getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
 	_this enableSimulationGlobal false; _this hideObjectGlobal true;
 };
 
@@ -96,7 +96,7 @@ fnc_show_flamer = {
 	// NEW ADDITIONS
 	[[_flamer,_damage_flamer,_teritoriu],"\Root_Anomalies\scripts\Flamer\flamer_sfx.sqf"] remoteExec ["execVM",0];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase"],100]);
-	[_flamer getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3d"];
+	[_flamer getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
 };
 
 fnc_jump_flamer = {
@@ -119,11 +119,11 @@ fnc_jump_flamer = {
 			_isacefire = true;
 		};
 	};
-	_jump_dir = (getposasl _flamer vectorFromTo getposasl _tgt_casp) vectorMultiply round (10+random 10);
+	_jump_dir = (getPosASL _flamer vectorFromTo getPosASL _tgt_casp) vectorMultiply round (10+random 10);
 	_salt_sunet= selectRandom ["01_blast","02_blast","03_blast"]; 
 	_obj_veg = nearestTerrainObjects [position _flamer,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
 	_nearvik = nearestObjects [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],20,false];
-	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3d"];
+	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3D"];
 	_nearflamer = (ASLToAGL getPosASL _flamer) nearEntities ["CAManBase",5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
@@ -141,11 +141,11 @@ fnc_jump_flamer = {
 					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else 
 				{
-					_x setdamage ((damage _x) + _damage_flamer);
+					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
-			_tip = selectrandom ["04","burned","02","03"];
-			[_x,[_tip,200]] remoteExec ["say3d"];
+			_tip = selectRandom ["04","burned","02","03"];
+			[_x,[_tip,200]] remoteExec ["say3D"];
 		} else
 		{
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -155,11 +155,11 @@ fnc_jump_flamer = {
 				{
 					_damage = random(_damage_flamer);
 					_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-				} foreach _vichitpoints;
+				} forEach _vichitpoints;
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
-	_flamer setvelocity [_jump_dir # 0,_jump_dir # 1,round (10+random 15)];
-	{_x setDamage [1,false]; _x hideObjectGlobal true} foreach _obj_veg;
+	_flamer setVelocity [_jump_dir # 0,_jump_dir # 1,round (10+random 15)];
+	{_x setDamage [1,false]; _x hideObjectGlobal true} forEach _obj_veg;
 	{_x setDamage (damage _x + 0.10)} forEach _nearvik;
 };

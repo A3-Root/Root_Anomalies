@@ -51,7 +51,7 @@ _dirt_dust setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1
 _dirt_dust setDropInterval 0.005;
 
 uiSleep 1;
-if ((player distance _emit)<100) then {playsound "earthquakes"};
+if ((player distance _emit)<100) then {playSound "earthquakes"};
 
 uiSleep 2;
 deleteVehicle _blur_sonic;

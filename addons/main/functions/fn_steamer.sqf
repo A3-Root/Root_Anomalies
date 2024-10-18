@@ -11,10 +11,10 @@ recharge_delay		- number,  delay in seconds between Streamer's attacks
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -41,7 +41,7 @@ deleteVehicle _logic;
 		params ["_results", "_steamerMarkerName"];
 		_results params ["_territory_override", "_steamer_territory", "_steamer_damage", "_steamer_recharge", "_dmg_on_death", "_travelpath"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_steamer_territory < 75) then {
             	_steamer_territory = 75;
         	};
@@ -49,7 +49,7 @@ deleteVehicle _logic;
 		
 		["Steamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "..\scripts\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

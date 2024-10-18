@@ -16,15 +16,15 @@ if (typeOf player != "VirtualCurator_F") then {
 		[player, _damage_strig, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 	} else 
 	{ 
-		player setdamage ((damage player) + _damage_strig);
+		player setDamage ((damage player) + _damage_strig);
 	};
 	};
 
-playsound "puls";
+playSound "puls";
 
-if (_noseize == true) exitWith {};
+if (_noseize) exitWith {};
 
-0 = ["DynamicBlur", 400, [10]] spawn 
+["DynamicBlur", 400, [10]] spawn 
 {
 	params ["_name", "_priority", "_effect", "_handle"];
 	while {
@@ -46,7 +46,7 @@ if (_noseize == true) exitWith {};
 	ppEffectDestroy _handle;
 };
 				
-0 = ["ColorInversion", 2500, [0.53, 0.66, 0.94]] spawn 
+["ColorInversion", 2500, [0.53, 0.66, 0.94]] spawn 
 {
 	params ["_name", "_priority", "_effect", "_handle"];
 	while {
@@ -65,4 +65,4 @@ if (_noseize == true) exitWith {};
 
 uiSleep 4;
 
-playsound "tiuit";
+playSound "tiuit";

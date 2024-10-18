@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /*
-[marker, territory_radius, damage_inflicted, health_points] execvm "\Root_Anomalies\scripts\Flamer\flamer_main.sqf";
+[marker, territory_radius, damage_inflicted, health_points] execVM "..\scripts\Flamer\flamer_main.sqf";
 
 marker				- string, name of the marker where you want to place the anomaly
 territory_radius	- number, radius in meters of FLAMERs territory
@@ -10,10 +10,10 @@ health_points		- number, amount of health/hit points FLAMER has
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -45,7 +45,7 @@ deleteVehicle _logic;
 		params ["_results", "_flamerMarkerName"];
 		_results params ["_flamer_hp", "_territory_override", "_flamer_territory", "_flamer_damage", "_isaipanic", "_flamer_recharge", "_damage_on_death"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_flamer_territory < 75) then {
             	_flamer_territory = 75;
         	};
@@ -53,7 +53,7 @@ deleteVehicle _logic;
 		
 		["Flamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 		
-		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "\Root_Anomalies\scripts\Flamer\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "..\scripts\Flamer\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

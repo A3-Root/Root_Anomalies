@@ -5,14 +5,14 @@ fnc_teleportSFX_AI = {
     _unit = _this select 0;
     _ind = 3;
     while {_ind>0} do {
-        _unit hideObjectglobal true;
-        uiSleep 0.2; _unit hideObjectglobal false;uiSleep 0.2;_ind = _ind-1
+        _unit hideObjectGlobal true;
+        uiSleep 0.2; _unit hideObjectGlobal false;uiSleep 0.2;_ind = _ind-1
     };
 };
 
 private ["_noseize"];
 
-if (!isServer) exitwith {};
+if (!isServer) exitWith {};
 _obj_teleporter  = _this select 0;
 _obj_core		 = _this select 1;
 _dmg_on_teleport = _this select 2;
@@ -27,12 +27,12 @@ while {alive _obj_teleporter} do {
     if (protection_smug !="") then {
         if (count _list_teleport>0) then {
             {
-                if ((headgear _x == protection_smug)or(goggles _x==protection_smug)or(uniform _x==protection_smug)or(vest _x==protection_smug)or(backpack _x==protection_smug) or (protection_smug in (assigneditems _x + items _x))) then {} else {
+                if ((headgear _x == protection_smug)or(goggles _x==protection_smug)or(uniform _x==protection_smug)or(vest _x==protection_smug)or(backpack _x==protection_smug) or (protection_smug in (assignedItems _x + items _x))) then {} else {
                     _fresh_spawn = _x getVariable "teleported_in";
-                    if (isnil "_fresh_spawn") then {
+                    if (isNil "_fresh_spawn") then {
                         [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
                         [_x] call fnc_teleportSFX_AI;
-                        if (isplayer _x) then {
+                        if (isPlayer _x) then {
                             [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
                         } else {
                             _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
@@ -45,7 +45,7 @@ while {alive _obj_teleporter} do {
 	                                [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                                 } else 
                                 { 
-	                                _x setdamage ((damage _x) + _dmg_on_teleport);
+	                                _x setDamage ((damage _x) + _dmg_on_teleport);
                                 };
                             } else {
 								_x setDamage (damage _x + _dmg_on_teleport);
@@ -58,10 +58,10 @@ while {alive _obj_teleporter} do {
     } else {
         {
             _fresh_spawn = _x getVariable "teleported_in";
-            if (isnil "_fresh_spawn") then {
+            if (isNil "_fresh_spawn") then {
                 [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
                 [_x] call fnc_teleportSFX_AI;
-                if (isplayer _x) then {
+                if (isPlayer _x) then {
                     [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
                 } else {
                     _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
@@ -74,7 +74,7 @@ while {alive _obj_teleporter} do {
 	                        [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                         } else 
                         { 
-	                        _x setdamage ((damage _x) + _dmg_on_teleport);
+	                        _x setDamage ((damage _x) + _dmg_on_teleport);
                         };
 
                     } else {
@@ -89,7 +89,7 @@ while {alive _obj_teleporter} do {
     if (count _list_vek_teleport>0) then {
         {
             _fresh_spawn = _x getVariable "teleported_in";
-            if (isnil "_fresh_spawn") then {
+            if (isNil "_fresh_spawn") then {
                 [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
                 [_x] call fnc_teleportSFX_AI;
                 _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;

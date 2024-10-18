@@ -17,7 +17,7 @@ while {alive _gren} do
 				_x setDamage 1; 
 				[[_x],"\Root_Anomalies\Root_Swarmer\AL_swarmer\swarmer_dead_SFX.sqf"] remoteExec ["execVM"];
 			};
-		} foreach _ck_hiv;
+		} forEach _ck_hiv;
 	};
 	uiSleep 2;
 }

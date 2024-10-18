@@ -9,11 +9,11 @@ fnc_travel_steamer = {
 	params ["_steamer_dud","_tgt_steamer"];
 	if (!hasInterface) exitWith {};
 	_rag = "Land_PenBlack_F" createVehicle [getPosASL _steamer_dud # 0,getPosASL _steamer_dud # 1,3000];
-	_jump_dir = (getposasl _steamer_dud vectorFromTo getposasl _tgt_steamer) vectorMultiply 20;
-	_rag setvelocity [_jump_dir # 0,_jump_dir # 1,5];
+	_jump_dir = (getPosASL _steamer_dud vectorFromTo getPosASL _tgt_steamer) vectorMultiply 20;
+	_rag setVelocity [_jump_dir # 0,_jump_dir # 1,5];
 	[[_rag],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_travel_SFX.sqf"] remoteExec ["execVM"];;
 	uiSleep 1;
-	deletevehicle _rag;
+	deleteVehicle _rag;
 };
 
 
@@ -23,9 +23,9 @@ params ["_orig_poz","_teritoriu","_damage_steamer","_recharge", "_dmg_on_death",
 private ["_orig_poz","_teritoriu","_damage_steamer","_recharge", "_dmg_on_death", "_damage", "_vehicle", "_vichitpoints", "_travelpath"];
 
 _ck_pl = false;
-while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1500) then {_ck_pl = true}} foreach allPlayers;uiSleep 10};
+while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1500) then {_ck_pl = true}} forEach allPlayers;uiSleep 10};
 _steamer_dud = createAgent ["O_Soldier_VR_F",getMarkerPos _orig_poz, [],0, "NONE"]; _steamer_dud hideObjectGlobal true; _steamer_dud enableSimulationGlobal false;
-[[_steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_voice.sqf"] remoteExec ["execvm",0,true];
+[[_steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_voice.sqf"] remoteExec ["execVM",0,true];
 _list_unit_range_steamer = [];
 while {alive _steamer_dud} do 
 {
@@ -37,7 +37,7 @@ while {alive _steamer_dud} do
 		if (_travelpath) then { [_steamer_dud, _tgt_steamer] call fnc_travel_steamer; };
 		_burst_poz= (ASLToAGL getPosASL _tgt_steamer);
 		_blow_units = _burst_poz nearEntities [["CAManBase", "LandVehicle"],6];
-		_crater_bool = selectrandom [false,true,false,false];
+		_crater_bool = selectRandom [false,true,false,false];
 		[[getPosATL _tgt_steamer,_crater_bool],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_burst_SFX.sqf"] remoteExec ["execVM"];
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -47,19 +47,19 @@ while {alive _steamer_dud} do
 				[_x, _damage_steamer, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 			} else 
 			{ 
-				_x setdamage ((damage _x) + _damage_steamer);
+				_x setDamage ((damage _x) + _damage_steamer);
 			};
 
 			if (_x isKindOf "LandVehicle") then 
 			{
-				_x setvelocity [25, 25, 25];
+				_x setVelocity [25, 25, 25];
 				_vehicle = _x;
 				_damage = random[0, _damage_steamer, 1];
 				_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
 				{
 					_damage = random[0, _damage_steamer, 1];
 					_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-				} foreach _vichitpoints;
+				} forEach _vichitpoints;
 				_vehicle setHitPointDamage ["HitLight",1]; 
 				_vehicle setHitPointDamage ["#light_l",1];
 				_vehicle setHitPointDamage ["#light_r",1];
@@ -76,7 +76,7 @@ while {alive _steamer_dud} do
 				_vehicle setHitPointDamage ["light_r2",1];
 			};
 
-			if (isplayer _x) then {[[_burst_poz,_x], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"] remoteExec ["execvm",_x]} else {[_burst_poz,_x] execvm "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"};
+			if (isPlayer _x) then {[[_burst_poz,_x], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"] remoteExec ["execVM",_x]} else {[_burst_poz,_x] execVM "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"};
 		} forEach (_blow_units-[_steamer_dud]);
 		{[_x] call fnc_avoid_steamer} forEach _list_unit_range_steamer;
 		uiSleep (4+round (random _recharge));
@@ -89,9 +89,9 @@ while {alive _steamer_dud} do
 waitUntil {!alive _steamer_dud};
 [[getPosATL _steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_end.sqf"] remoteExec ["execVM"];
 _obj_veg = nearestTerrainObjects [position _steamer_dud,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
-{_x setDamage [1,true]} foreach _obj_veg;
+{_x setDamage [1,true]} forEach _obj_veg;
 _obj_build = nearestObjects [position _steamer_dud,["BUILDING","HOUSE","CHURCH","CHAPEL","FUELSTATION","HOSPITAL","RUIN","BUNKER","Land_fs_roof_F","Land_TTowerBig_2_F","Land_TTowerBig_1_F","Lamps_base_F","PowerLines_base_F","PowerLines_Small_base_F","Land_LampStreet_small_F","CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
-{_x setDamage [1,false]} foreach _obj_build;
+{_x setDamage [1,false]} forEach _obj_build;
 _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 {
 	_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -102,11 +102,11 @@ _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 			[_x, _dmg_on_death, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 		} else 
 		{ 
-			_x setdamage ((damage _x) + _dmg_on_death);
+			_x setDamage ((damage _x) + _dmg_on_death);
 		}; 
 	};
-} foreach _obj_man;
+} forEach _obj_man;
 _vik_list = nearestObjects [position _steamer_dud,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
-{_x setDamage ((damage _x) + random[0, _damage_steamer, 1])} foreach _vik_list;
+{_x setDamage ((damage _x) + random[0, _damage_steamer, 1])} forEach _vik_list;
 uiSleep 10;
 deleteVehicle _steamer_dud;

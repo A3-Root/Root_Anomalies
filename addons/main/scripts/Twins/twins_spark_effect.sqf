@@ -8,7 +8,7 @@ _paz_emit = _this select 1;
 //_repeat	  = _this select 2;
 
 _sparky_sun = ["spark1","spark11","spark2","spark22","spark5","spark4"] call BIS_fnc_selectRandom;
-//[_obj_emit,[_sparky_sun,300]] remoteExec ["say3d"];
+//[_obj_emit,[_sparky_sun,300]] remoteExec ["say3D"];
 
 _spark_type = ["white","orange"] call BIS_fnc_selectRandom;
 //if (_repeat=="spark3") then {_spark_type=="white"};

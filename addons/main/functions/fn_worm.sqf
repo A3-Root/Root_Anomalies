@@ -8,7 +8,7 @@
 ================================================================================================================================
 WORM Parameters =======================
 ================================================================================================================================
-null = [marker_name]execvm "AL_worm\worm.sqf"
+null = [marker_name]execVM "AL_worm\worm.sqf"
 
 marker_name	- string, name of the marker where you want to place the anomaly
 
@@ -16,10 +16,10 @@ marker_name	- string, name of the marker where you want to place the anomaly
 	
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -46,7 +46,7 @@ deleteVehicle _logic;
 		params ["_results", "_wormmarkerName"];
 		_results params ["_override_territory", "_worm_territory", "_isaipanic", "_wormdiffuser", "_worm_damage"];
 
-		if ((_override_territory != true) && (_worm_territory < 200)) then {
+		if (!(_override_territory) && (_worm_territory < 200)) then {
 			_worm_territory = 200;
 		};
 
@@ -60,7 +60,7 @@ deleteVehicle _logic;
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser], "\Root_Anomalies\Root_Worm\AL_worm\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser], "..\scripts\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

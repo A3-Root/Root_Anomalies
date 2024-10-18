@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT
 /*
-[marker_namer, territory, damage_inflicted, recharge_delay, health_points] execVM "\Root_Anomalies\scripts\Farmer\init_farmer.sqf";
+[marker_namer, territory, damage_inflicted, recharge_delay, health_points] execVM "..\scripts\Farmer\init_farmer.sqf";
 marker_namer		- string, name of the marker where you want the anomaly to spawn
 territory			- number, radius in meters of Farmer's territory
 damage_inflicted	- number, amount of damage inflicted by Farmer's shock wave
@@ -10,10 +10,10 @@ health_points		- number, amount of health farmer has
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -44,7 +44,7 @@ deleteVehicle _logic;
     params ["_results", "_farmerMarkerName"];
     _results params ["_farmer_hp", "_territory_override", "_farmer_territory", "_isaipanic", "_farmer_damage", "_farmer_recharge"];
     
-    if (_territory_override != true) then {
+    if !(_territory_override) then {
         if (_farmer_territory < 75) then {
             _farmer_territory = 75;
         };
@@ -52,7 +52,7 @@ deleteVehicle _logic;
 
     ["Farmer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "\Root_Anomalies\scripts\Farmer\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "..\scripts\Farmer\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 },{
     ["Aborted"] call zen_common_fnc_showMessage;
     playSound "FD_Start_F";
