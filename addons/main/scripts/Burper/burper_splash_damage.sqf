@@ -16,7 +16,7 @@ uiSleep 0.1;
 _meat_pieces = "#particlesource" createVehicleLocal (getPosATL _splash_point);
 _meat_pieces setParticleCircle [0, [0, 0, 0]];
 _meat_pieces setParticleRandom [0, [0.25, 0.25, 0.25], [9, 9, 10], 0, 1.5, [0, 0, 0, 0.1], 0, 0];
-_meat_pieces setParticleParams [["\A3\data_f\ParticleEffects\Universal\Meat_ca.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 0.75], 0, 19, 7.9, 0.1, [2, 2, 2], [[1, 0.1, 0.1, 1], [1, 0.25, 0.25, 0.5], [1, 0.5, 0.5, 0]], [0.08], 1, 0, "", "", _splash_point,0,true,0.25,[[0,0,0,0]]];
+_meat_pieces setParticleParams [["\A3\data_f\ParticleEffects\Universal\Meat_ca.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 0.75], 0, 19, 7.9, 0.1, [2, 2, 2], [[1, 0.1, 0.1, 1], [1, 0.25, 0.25, 0.5], [1, 0.5, 0.5, 0]], [0.08], 1, 0, "", "", _splash_point, 0, true, 0.25, [[0, 0, 0, 0]]];
 _meat_pieces setDropInterval 0.005;
 
 uiSleep 0.2;

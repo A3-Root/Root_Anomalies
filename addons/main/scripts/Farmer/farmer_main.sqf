@@ -3,15 +3,15 @@
 
 if (!isServer) exitWith {};
 
-#include ".\farmer_functions.hpp"
+#include "farmer_functions.hpp"
 
 private ["_pozitie_noua", "_tgt_farmer", "_list_unit_range_farm"];
 params ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_isaipanic"];
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimstring;
-explozie = "\Root_Anomalies\sounds\punch_7.ogg";
-pietre = "\Root_Anomalies\sounds\pietre.ogg";
-travel_ground = "\Root_Anomalies\sounds\travel_ground.ogg";
-eko = "\Root_Anomalies\sounds\eko.ogg";
+explozie = "..\sounds\punch_7.ogg";
+pietre = "..\sounds\pietre.ogg";
+travel_ground = "..\sounds\travel_ground.ogg";
+eko = "..\sounds\eko.ogg";
 publicVariable "explozie";
 publicVariable "pietre";
 publicVariable "travel_ground";
@@ -48,7 +48,7 @@ _farmer addEventHandler ["Hit", {
     _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
-    [[_unit], "\Root_Anomalies\scripts\Farmer\farmer_splash_hit.sqf"] remoteExec ["execVM"]
+    [[_unit], "farmer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
 _farmer removeAllEventHandlers "HandleDamage";
@@ -149,6 +149,6 @@ while {alive _farmer} do {
     _farmer setUnitPos "UP";
 };
 
-playSound3D ["\Root_Anomalies\sounds\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 100], 20, 5, 0];
+playSound3D ["..\sounds\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 100], 20, 5, 0];
 
 deleteVehicle _farmer;

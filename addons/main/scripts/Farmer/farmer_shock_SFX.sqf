@@ -13,7 +13,7 @@ _farmer setAnimSpeedCoef 1.8;
 _farmer switchMove "AmovPercMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon";
 uiSleep 0.2;
 
-playSound3D ["\Root_Anomalies\sounds\explozie_3.ogg", "", false, position _farmer, 20, 5, 0];
+playSound3D ["..\sounds\explozie_3.ogg", "", false, position _farmer, 20, 5, 0];
 
 
 _burst = "#particlesource" createVehicleLocal getPosATL _farmer;
@@ -85,5 +85,5 @@ deleteVehicle _burst;
 deleteVehicle _blast_wave;
 uiSleep 1;
 _farmer switchMove "";
-playSound3D ["\Root_Anomalies\sounds\eko.ogg", "", false, [getPos _farmer select 0,getPos _farmer select 1,100], 20, 5, 0];
+playSound3D ["..\sounds\eko.ogg", "", false, [getPos _farmer select 0,getPos _farmer select 1,100], 20, 5, 0];
 
