@@ -18,46 +18,50 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
 
-params ["_logic"];
 
-private _swarmerloc = getPosATL _logic;
-deleteVehicle _logic;
 
-["Swarmer Anomaly Settings", [
-	["EDIT", ["Swarmer Hive Object", "Classname of the object used to spawn the Swarmer."], ["Land_GarbageBags_F"]], 
-	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Swarmer will be overriden from 75m."], false],
-	["SLIDER:RADIUS", ["Swarmer Territory", "Radius in meters of the Swarmer's territory."], [1, 1000, 75, 0, _swarmerloc, [7, 120, 32, 1]]], 
-	["TOOLBOX:YESNO", ["Disable Pesticide", "If true, Pesticide will be disabled and the Swarmer cannot be killed conventionally."], false],
-	["EDIT", ["Pesticide", "Classname of the THROWABLE OBJECT (Grenades, Smokes, etc.) used to kill the Swarmer."], ["SmokeShellGreen"]], 
-	["SLIDER:PERCENT", ["Swarmer Damage", "Percentage amount of damage the Swarmer does to his target."], [0.01, 1, 0.6, 2]]
-	], {
-		params ["_results", "_swarmerloc"];
-		_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
-		private _swarmerhive = "Land_GarbageBags_F";
+["Root's Anomalies", "Swarmer Anomaly", {
 
-		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then {
-			_swarmerhive = _swarmerobject createVehicle _swarmerloc;
-		} else {
-			_swarmerhive = "Land_GarbageBags_F" createVehicle _swarmerloc;
-		};
+	params ["_logic"];
 
-		if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then {
-			_pesticideobject = _pesticideobject;
-		} else {
-			if !(_nopesticide) then { _pesticideobject = "SmokeShellGreen"; };
-		};
+	private _swarmerloc = getPosATL _logic;
+	deleteVehicle _logic;
 
-		if !(_territory_override) then {
-        	if (_swarmer_territory < 75) then {
-            	_swarmer_territory = 75;
-        	};
-    	};
+	["Swarmer Anomaly Settings", [
+		["EDIT", ["Swarmer Hive Object", "Classname of the object used to spawn the Swarmer."], ["Land_GarbageBags_F"]], 
+		["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Swarmer will be overriden from 75m."], false],
+		["SLIDER:RADIUS", ["Swarmer Territory", "Radius in meters of the Swarmer's territory."], [1, 1000, 75, 0, _swarmerloc, [7, 120, 32, 1]]], 
+		["TOOLBOX:YESNO", ["Disable Pesticide", "If true, Pesticide will be disabled and the Swarmer cannot be killed conventionally."], false],
+		["EDIT", ["Pesticide", "Classname of the THROWABLE OBJECT (Grenades, Smokes, etc.) used to kill the Swarmer."], ["SmokeShellGreen"]], 
+		["SLIDER:PERCENT", ["Swarmer Damage", "Percentage amount of damage the Swarmer does to his target."], [0.01, 1, 0.6, 2]]
+		], {
+			params ["_results", "_swarmerloc"];
+			_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
+			private _swarmerhive = "Land_GarbageBags_F";
 
-		["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
+			if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then {
+				_swarmerhive = _swarmerobject createVehicle _swarmerloc;
+			} else {
+				_swarmerhive = "Land_GarbageBags_F" createVehicle _swarmerloc;
+			};
 
-		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "..\scripts\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
-	}, {
-		["Aborted"] call zen_common_fnc_showMessage;
-		playSound "FD_Start_F";
-	}, _swarmerloc] call zen_dialog_fnc_create;
+			if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then {
+				_pesticideobject = _pesticideobject;
+			} else {
+				if !(_nopesticide) then { _pesticideobject = "SmokeShellGreen"; };
+			};
 
+			if !(_territory_override) then {
+				if (_swarmer_territory < 75) then {
+					_swarmer_territory = 75;
+				};
+			};
+
+			["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
+
+			[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "..\scripts\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		}, {
+			["Aborted"] call zen_common_fnc_showMessage;
+			playSound "FD_Start_F";
+		}, _swarmerloc] call zen_dialog_fnc_create;
+}, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;
