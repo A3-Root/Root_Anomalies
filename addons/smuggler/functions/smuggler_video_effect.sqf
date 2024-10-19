@@ -22,7 +22,7 @@ switch (_effect_tip) do
 				};
 	case "colorinv": 
 				{
-				0 = ["ColorInversion", 2500, [0, 1, 0]] spawn 
+				["ColorInversion", 2500, [0, 1, 0]] spawn 
 				{
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
@@ -42,7 +42,7 @@ switch (_effect_tip) do
 				};				
 	case "chrom": 
 				{
-				0 = ["ChromAberration", 200, [0.93, 0.86, true]] spawn {
+				["ChromAberration", 200, [0.93, 0.86, true]] spawn {
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
 						_handle = ppEffectCreate [_name, _priority];
@@ -61,7 +61,7 @@ switch (_effect_tip) do
 				};								
 	case "colorcor": 
 				{
-				0 = ["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0],[1.8, 1.8, 0.3, -5],[0.2, 0.59, 0.11, -1.83]]] spawn 
+				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0],[1.8, 1.8, 0.3, -5],[0.2, 0.59, 0.11, -1.83]]] spawn 
 				{
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {

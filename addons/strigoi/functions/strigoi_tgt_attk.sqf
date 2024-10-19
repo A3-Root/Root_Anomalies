@@ -22,7 +22,7 @@ if (typeOf player != "VirtualCurator_F") then {
 
 playSound "puls";
 
-if (_noseize == true) exitWith {};
+if (_noseize) exitWith {};
 
 ["DynamicBlur", 400, [10]] spawn 
 {

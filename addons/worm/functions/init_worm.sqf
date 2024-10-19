@@ -46,7 +46,7 @@ deleteVehicle _logic;
 		params ["_results", "_wormmarkerName"];
 		_results params ["_override_territory", "_worm_territory", "_isaipanic", "_wormdiffuser", "_worm_damage"];
 
-		if ((_override_territory != true) && (_worm_territory < 200)) then {
+		if (!(_override_territory) && (_worm_territory < 200)) then {
 			_worm_territory = 200;
 		};
 

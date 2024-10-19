@@ -108,7 +108,15 @@ fnc_sec_effect_smug = {
 	};
 };
 
-fnc_check_detector_smug = {if ((headgear _this == detect_smug) or (goggles _this ==detect_smug) or (uniform _this ==detect_smug) or (vest _this ==detect_smug) or (backpack _this ==detect_smug) or (detect_smug in (assignedItems _this  + items _this ))) then {true} else {false}};
+fnc_check_detector_smug = {
+	if ([_this, detect_smug] call BIS_fnc_hasItem) then {
+		_hasItemOrNot = true;
+		true;
+	} else {
+		_hasItemOrNot = false;
+		false
+	}
+};
 
 if (!hasInterface) exitWith {};
 

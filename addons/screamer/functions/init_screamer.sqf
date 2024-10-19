@@ -49,7 +49,7 @@ deleteVehicle _logic;
             _screamer_hostiles = ["west", "east", "RESISTANCE", "civilian"];
         };
 
-		if (_isaidmg == true) then {
+		if (_isaidmg) then {
 			if (_screamer_spawn_side isEqualTo []) then {
             	_screamer_spawn_side = east;
 			} else {

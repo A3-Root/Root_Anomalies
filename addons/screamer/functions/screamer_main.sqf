@@ -120,7 +120,7 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 _screamer_targets = ["CAManBase", "LandVehicle"];
 _screamer_dmgs = ["Man"];
 
-if (_isvicdmg == true) then
+if (_isvicdmg) then
 {
 	_screamer_targets = ["CAManBase", "LandVehicle"];
 	_screamer_dmgs = ["Man", "LandVehicle", "Air"];
@@ -144,7 +144,7 @@ if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then
 };
 
 
-if (_isaidmg == true) then 
+if (_isaidmg) then 
 {
 	_grp = createGroup _screamer_spawn;
 	if (_isalivevic) then 
@@ -386,7 +386,7 @@ while {alive _entitate} do
 			_press_implicit_x = linearConversion [0, 90,_dir_blast, -1, 0, true];
 			_press_implicit_y = 1+_press_implicit_x;
 		};
-		if (_isaipanic == true) then { [_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer; };
+		if (_isaipanic) then { [_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer; };
 		scream_on=true;
 
 
@@ -410,7 +410,7 @@ while {alive _entitate} do
 				}; 
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
-			if (_isvicdmg == true) then 
+			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
@@ -441,7 +441,7 @@ while {alive _entitate} do
 				};
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
-			if (_isvicdmg == true) then 
+			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
@@ -472,7 +472,7 @@ while {alive _entitate} do
 				};
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
-			if (_isvicdmg == true) then 
+			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
