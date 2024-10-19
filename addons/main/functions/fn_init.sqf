@@ -9,6 +9,8 @@ if (!hasInterface) exitWith {};
 
 ["Root's Anomalies", "Burper Anomaly", {
 	params ["_posASL", "_attachedObject"];
+	[_posASL, _attachedObject] execVM "z\root_anomalies\addons\main\functions\fn_burper.sqf";
+	/*
 
 	if (isNil "BURPER_markerIndex") then { BURPER_markerIndex = 0 };
 
@@ -56,12 +58,13 @@ if (!hasInterface) exitWith {};
 			["Aborted"] call zen_common_fnc_showMessage;
 			playSound "FD_Start_F";
 		}, _burperMarkerName] call zen_dialog_fnc_create;
+		*/
 }, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;
 
 
 
 
-
+/*
 
 ["Root's Anomalies", "Farmer Anomaly", {
 
@@ -578,3 +581,8 @@ if (!hasInterface) exitWith {};
 			playSound "FD_Start_F";
 		}, _wormmarkerName] call zen_dialog_fnc_create;
 }, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;
+
+
+
+
+*/

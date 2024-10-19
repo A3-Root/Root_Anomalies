@@ -18,7 +18,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
 
-["Root's Anomalies", "Farmer Anomaly", {
+// ["Root's Anomalies", "Farmer Anomaly", {
 
     params ["_posASL", "_attachedObject"];
 
@@ -59,4 +59,4 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
         ["Aborted"] call zen_common_fnc_showMessage;
         playSound "FD_Start_F";
     }, _farmerMarkerName] call zen_dialog_fnc_create;
-}, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;
+// }, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;

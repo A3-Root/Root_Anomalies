@@ -24,7 +24,7 @@ class CfgPatches {
 class CfgFactionClasses
 {
 	class NO_CATEGORY;
-	class ROOT_ANOMALIES: NO_CATEGORY
+	class ROOTANOMALIES: NO_CATEGORY
 	{
 		displayName="Root's Anomalies";
 	};
@@ -35,10 +35,11 @@ class CfgFunctions
 {
 	class ROOT
 	{
-		class Anomalies
+		class ANOMALIES
 		{
 			file = "z\root_anomalies\addons\main\functions";
-			class init {postint = 1;}
+			class init {postint = 1;};
+			class burper{};
 		};
 	};
 };

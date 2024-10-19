@@ -21,7 +21,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
 
-["Root's Anomalies", "Burper Anomaly", {
+// ["Root's Anomalies", "Burper Anomaly", {
 	params ["_posASL", "_attachedObject"];
 
 	if (isNil "BURPER_markerIndex") then { BURPER_markerIndex = 0 };
@@ -65,9 +65,9 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 			["Burper Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-			[[_burperMarkerName, _isroaming, _detectdevice, _protectdevice, _killdevice, _burper_territory, _isvehicle, _killswitch_range, _isaipanic], "..\scripts\Burper\burper_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+			[[_burperMarkerName, _isroaming, _detectdevice, _protectdevice, _killdevice, _burper_territory, _isvehicle, _killswitch_range, _isaipanic], "z\root_anomalies\addons\main\scripts\Burper\burper_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 		}, {
 			["Aborted"] call zen_common_fnc_showMessage;
 			playSound "FD_Start_F";
 		}, _burperMarkerName] call zen_dialog_fnc_create;
-}, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;
+// }, "\a3\modules_f\data\portraitmodule_ca.paa"] call zen_custom_modules_fnc_register;

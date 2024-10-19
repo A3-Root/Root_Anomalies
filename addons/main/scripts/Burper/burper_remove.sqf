@@ -26,14 +26,14 @@ while {(alive _object_anom_burp) && (_task_time < 7)} do {
 	_device_anti_burp = nearestObjects [position _object_anom_burp, [anti_burper], _kill_range, false];
 	if (count _device_anti_burp > 0) then {
 		_task_time = _task_time + 1;
-		[[_object_anom_burp], "burper_disable.sqf"] remoteExec ["execVM"]
+		[[_object_anom_burp], "z\root_anomalies\addons\main\scripts\Burper\burper_disable.sqf"] remoteExec ["execVM"]
 	} else {
 		_task_time = 0;
 	};
 	uiSleep 5;
 };
 
-[[_object_anom_burp], "burper_blast.sqf"] remoteExec ["execVM"];
+[[_object_anom_burp], "z\root_anomalies\addons\main\scripts\Burper\burper_blast.sqf"] remoteExec ["execVM"];
 ["charge_b"] remoteExec ["playSound"];
 _object_anom_burp setVariable ["burper_activ", false, true];
 uiSleep 1;
