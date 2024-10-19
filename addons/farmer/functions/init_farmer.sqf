@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT
 /*
-[marker_namer, territory, damage_inflicted, recharge_delay, health_points] execVM "\Root_Anomalies\Root_Farmer\AL_farmer\init_farmer.sqf";
+[marker_namer, territory, damage_inflicted, recharge_delay, health_points] execVM "\z\root_anomalies\addons\farmer\functions\init_farmer.sqf";
 marker_namer		- string, name of the marker where you want the anomaly to spawn
 territory			- number, radius in meters of Farmer's territory
 damage_inflicted	- number, amount of damage inflicted by Farmer's shock wave
@@ -52,7 +52,7 @@ deleteVehicle _logic;
 
     ["Farmer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "\Root_Anomalies\Root_Farmer\AL_farmer\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "\z\root_anomalies\addons\farmer\functions\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 },{
     ["Aborted"] call zen_common_fnc_showMessage;
     playSound "FD_Start_F";

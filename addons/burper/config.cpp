@@ -1,7 +1,12 @@
 class CfgPatches {
 	class Root_Burper_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Burper_Module"};
 		weapons[] = {};
 		author = "Root";

@@ -1,16 +1,16 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
-#include "\Root_Anomalies\Root_Farmer\AL_farmer\farmer_functions.hpp"
+#include "..\farmer_functions.hpp"
 private ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_pozitie_noua", "_tgt_farmer", "_list_unit_range_farm", "_isaipanic"];
 
 if (!isServer) exitwith {};
 
 params ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_isaipanic"];
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimstring;
-explozie = "\Root_Anomalies\Root_Farmer\sound\punch_7.ogg";
-pietre = "\Root_Anomalies\Root_Farmer\sound\pietre.ogg";
-travel_ground = "\Root_Anomalies\Root_Farmer\sound\travel_ground.ogg";
-eko = "\Root_Anomalies\Root_Farmer\sound\eko.ogg";
+explozie = "\z\root_anomalies\addons\main\sounds\punch_7.ogg";
+pietre = "\z\root_anomalies\addons\main\sounds\pietre.ogg";
+travel_ground = "\z\root_anomalies\addons\main\sounds\travel_ground.ogg";
+eko = "\z\root_anomalies\addons\main\sounds\eko.ogg";
 publicVariable "explozie";
 publicVariable "pietre";
 publicVariable "travel_ground";
@@ -23,7 +23,7 @@ while {!_ck_pl} do {
             _ck_pl = true
         }
     } forEach allplayers;
-    sleep 5; // sleep 10;
+    uiSleep 5; // uiSleep 10;
 };
 
 _farmer = createAgent ["C_Soldier_VR_F", getmarkerPos _marker_farmer, [], 0, "NONE"];
@@ -47,7 +47,7 @@ _farmer addEventHandler ["Hit", {
     _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
-    [[_unit], "\Root_Anomalies\Root_Farmer\AL_farmer\farmer_splash_hit.sqf"] remoteExec ["execVM"]
+    [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
 _farmer removeAllEventHandlers "Handledamage";
@@ -85,7 +85,7 @@ while {alive _farmer} do {
                 _ck_pl = true
             }
         } forEach allplayers;
-        sleep 5; // sleep 30
+        uiSleep 5; // uiSleep 30
     };
     _list_unit_range_farm = [_farmer, _territory] call fnc_find_target_farm;
     _tgt_farmer = selectRandom (_list_unit_range_farm select {
@@ -113,11 +113,11 @@ while {alive _farmer} do {
                     [_farmer, _x] spawn fnc_avoid_farmer
                 } forEach _list_unit_range_farm;
             };
-            sleep 1;
+            uiSleep 1;
         };
         _farmer setunitPos "UP";
         if ((_farmer distance _tgt_farmer)<20) then {
-            sleep 1;
+            uiSleep 1;
             [_farmer, _damage_inflicted] call fnc_attk_farmer;
             if (_isaipanic) then 
             {
@@ -125,9 +125,9 @@ while {alive _farmer} do {
                     [_farmer, _x] spawn fnc_avoid_farmer
                 } forEach _list_unit_range_farm;
             };
-            sleep _recharge_delay;
+            uiSleep _recharge_delay;
         } else {
-            sleep 1+random 2;
+            uiSleep 1+random 2;
             _farmer call fnc_hide_farmer
         };
         _farmer setunitPos "UP";
@@ -141,13 +141,13 @@ while {alive _farmer} do {
         };
     };
     _farmer setunitPos "UP";
-    sleep 1;
+    uiSleep 1;
     _farmer call fnc_hide_farmer;
     	_farmer enableSimulationGlobal false;
     _list_unit_range_farm =[];
     _farmer setunitPos "UP";
 };
 
-playSound3D ["\Root_Anomalies\Root_Farmer\sound\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 100], 20, 5, 0];
+playSound3D ["\z\root_anomalies\addons\main\sounds\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 100], 20, 5, 0];
 
 deletevehicle _farmer;

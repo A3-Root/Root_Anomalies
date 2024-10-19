@@ -1,10 +1,20 @@
 class CfgPatches {
 	class Root_Steamer_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Steamer_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors[] = {
+			"Root",
+			"Aliascartoons"
+		};
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
@@ -15,15 +25,6 @@ class CfgFunctions {
 		};
 	};
 };
-
-
-class CfgFactionClasses {
-	class NO_CATEGORY;
-	class ROOT_ANOMALIES : NO_CATEGORY {
-		displayName = "Root's Anomalies";
-	};
-};
-
 
 class CfgVehicles {
 	class zen_modules_moduleBase;

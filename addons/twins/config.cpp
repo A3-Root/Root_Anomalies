@@ -1,17 +1,27 @@
 class CfgPatches {
 	class Root_Twins_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Twins_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors[] = {
+			"Root",
+			"Aliascartoons"
+		};
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
 class CfgFunctions {
 	class Root {
 		class RootTwinsCategory {
-			class Twins {file = "\Root_Anomalies\Root_Twins\AL_twins\init_twins.sqf";};
+			class Twins {file = "\z\root_anomalies\addons\twins\functions\init_twins.sqf";};
 		};
 	};
 };

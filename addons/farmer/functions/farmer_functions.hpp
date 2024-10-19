@@ -1,5 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
+
+
 fnc_find_target_farm = {
 	private ["_neartargets","_teritoriu"];
 	params ["_farmer","_teritoriu"];
@@ -12,7 +14,7 @@ fnc_hide_farmer = {
 	_this switchmove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_this setVariable ["vizibil",false,true];
 	[_this,["pietre",1000]] remoteExec ["say3d"];
-	[[_this],"\Root_Anomalies\Root_Farmer\AL_farmer\farmer_teleport.sqf"] remoteExec ["execVM",0];
+	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
 	_this hideObjectGlobal true;
 };
 
@@ -23,12 +25,12 @@ fnc_show_farmer = {
 	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil",true,true];
 	[_farmer,["punch_7",1000]] remoteExec ["say3d"];
 	_farmer hideObjectGlobal false;
-	[[_farmer],"\Root_Anomalies\Root_Farmer\AL_farmer\farmer_teleport.sqf"] remoteExec ["execVM",0];
+	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
 	_farmer setAnimSpeedCoef 0.8; 
 	_farmer switchmove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_farmer setunitPos "UP";
-	sleep 1;
-	playSound3D ["\Root_Anomalies\Root_Farmer\sound\eko.ogg", "", false, [getpos _farmer select 0,getpos _farmer select 1,1000], 20, 5, 0];
+	uiSleep 1;
+	playSound3D ["\z\root_anomalies\addons\main\sounds\eko.ogg", "", false, [getpos _farmer select 0,getpos _farmer select 1,1000], 20, 5, 0];
 };
 
 fnc_avoid_farmer = {
@@ -43,9 +45,9 @@ fnc_attk_farmer = {
 	private ["_farmer","_damage_farmer", "_vehicle", "_damage", "_vichitpoints"];
 	params ["_farmer","_damage_farmer"];
 	_farmer setunitPos "UP";
-	[[_farmer,_damage_farmer],"\Root_Anomalies\Root_Farmer\AL_farmer\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
+	[[_farmer,_damage_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
 
-	sleep 1.2;
+	uiSleep 1.2;
 	{	
 		if !(isPlayer _x) then 
 		{
@@ -103,8 +105,8 @@ fnc_travel_farmer = {
 	_rag = "Land_PenBlack_F" createVehicle [getPosASL _farmer # 0,getPosASL _farmer # 1,3000];
 	_jump_dir = (getposasl _farmer vectorFromTo getposasl _tgt_farmer) vectorMultiply 20;
 	_rag setvelocity [_jump_dir # 0,_jump_dir # 1,5];
-	[[_rag],"\Root_Anomalies\Root_Farmer\AL_farmer\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
-	sleep round (2+random 2);
+	[[_rag],"\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
+	uiSleep round (2+random 2);
 	_farmer setvariable ["pozitie_noua",getpos _rag];
 	deletevehicle _rag;
 };

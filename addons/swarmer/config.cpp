@@ -1,37 +1,37 @@
 class CfgPatches {
 	class Root_Swarmer_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Swarmer_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors[] = {
+			"Root",
+			"Aliascartoons"
+		};
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
 class CfgFunctions {
 	class Root {
 		class RootSwarmerCategory {
-			class Swarmer {file = "\Root_Anomalies\Root_Swarmer\AL_swarmer\init_swarmer.sqf";};
+			class Swarmer {file = "\z\root_anomalies\addons\swarmer\functions\init_swarmer.sqf";};
 		};
 	};
 };
 
-
 class Extended_PostInit_EventHandlers {
 	class RootPostInitSwarmer {
-		init = "call compile preprocessFileLineNumbers '\Root_Anomalies\Root_Swarmer\AL_swarmer\postinit_swarmer.sqf'";
+		init = "call compile preprocessFileLineNumbers '\z\root_anomalies\addons\swarmer\functions\postinit_swarmer.sqf'";
 		disableModuload = 1;
 	};
 };
-
-
-class CfgFactionClasses {
-	class NO_CATEGORY;
-	class ROOT_ANOMALIES : NO_CATEGORY {
-		displayName = "Root's Anomalies";
-	};
-};
-
 
 class CfgVehicles {
 	class zen_modules_moduleBase;

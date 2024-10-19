@@ -1,10 +1,20 @@
 class CfgPatches {
 	class Root_Farmer_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Farmer_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors[] = {
+			"Root",
+			"Aliascartoons"
+		};
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 

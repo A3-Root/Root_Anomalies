@@ -1,29 +1,30 @@
 class CfgPatches {
 	class Root_Strigoi_Anomaly {
 		addonRootClass = "Root_Anomalies";
-		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
+		requiredAddons[] = {
+			"A3_Modules_F_Curator",
+			"cba_main",
+			"zen_custom_modules",
+			"Root_Anomalies"
+		};
 		units[] = {"Strigoi_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors[] = {
+			"Root",
+			"Aliascartoons"
+		};
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
 class CfgFunctions {
 	class Root {
 		class RootStrigoiCategory {
-			class Strigoi {file = "\Root_Anomalies\Root_Strigoi\AL_strigoi\init_strigoi.sqf";};
+			class Strigoi {file = "\z\root_anomalies\addons\strigoi\functions\init_strigoi.sqf";};
 		};
 	};
 };
-
-
-class CfgFactionClasses {
-	class NO_CATEGORY;
-	class ROOT_ANOMALIES : NO_CATEGORY {
-		displayName = "Root's Anomalies";
-	};
-};
-
 
 class CfgVehicles {
 	class zen_modules_moduleBase;
