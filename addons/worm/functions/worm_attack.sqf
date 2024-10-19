@@ -29,15 +29,15 @@ _bolovani_blast setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3
 _bolovani_blast setDropInterval 0.007;
 
 uiSleep 0.25;
-deletevehicle _bolovani_blast;
-_crater_impact = createVehicle ["CraterLong",[getpos _head_worm select 0,getpos _head_worm select 1,0],[],0,"CAN_COLLIDE"];
+deleteVehicle _bolovani_blast;
+_crater_impact = createVehicle ["CraterLong",[getPos _head_worm select 0,getPos _head_worm select 1,0],[],0,"CAN_COLLIDE"];
 _crater_impact setDir (random 360);
 uiSleep 0.5;
-deletevehicle _blast_dust;
+deleteVehicle _blast_dust;
 
 if (player distance _head_worm < 1500) then {
 _after_effect = ["post_impact_01","post_impact_02","post_impact_03","post_impact_04"] call BIS_fnc_selectRandom;
 playsound _after_effect;
 };
 uiSleep 60; /* uiSleep 300; */
-deletevehicle _crater_impact;
+deleteVehicle _crater_impact;

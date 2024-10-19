@@ -18,10 +18,10 @@ teleport_protect- classname of the object you want to function as protection to 
 // if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then 
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };

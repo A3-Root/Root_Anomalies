@@ -22,4 +22,5 @@ exclude = [
     "*.psd",
     "*.txt",
     ".vscode/**/*",
+    "*.git",
 ]

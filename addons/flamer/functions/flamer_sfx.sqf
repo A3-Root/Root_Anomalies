@@ -92,7 +92,7 @@ while {(_flamer getVariable "vizibil")and(alive _flamer)} do
 					[player, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
 				} else 
 				{
-					player setdamage ((damage player) + _damage_flamer);
+					player setDamage ((damage player) + _damage_flamer);
 				};
 			};
 		};

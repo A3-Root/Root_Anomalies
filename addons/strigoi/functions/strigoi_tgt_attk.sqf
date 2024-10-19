@@ -16,7 +16,7 @@ if (typeOf player != "VirtualCurator_F") then {
 		[player, _damage_strig, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 	} else 
 	{ 
-		player setdamage ((damage player) + _damage_strig);
+		player setDamage ((damage player) + _damage_strig);
 	};
 	};
 

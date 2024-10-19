@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 
-if (!hasinterface) exitWith {};
+if (!hasInterface) exitWith {};
 
 waitUntil {time > 0};
 
@@ -69,7 +69,7 @@ while {alive _electromagnetic_anom} do
 			[player, random(0.33), _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 		} else 
 		{ 
-			player setdamage ((damage player) + random(0.33));
+			player setDamage ((damage player) + random(0.33));
 		};
 		uiSleep 5;
 		_play_sunet = true;

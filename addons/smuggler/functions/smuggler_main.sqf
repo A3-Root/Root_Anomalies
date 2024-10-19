@@ -1,6 +1,6 @@
 // by ALIAS
 
-if (!isServer) exitwith {};
+if (!isServer) exitWith {};
 
 private ["_marker_sursa_smugg", "_mobile_anomaly", "_device_detector", "_spawn_classname", "_delay_between_spawn", "_teleport_protect", "_dmg_on_teleport", "_noseize"];
 
@@ -13,8 +13,8 @@ _teleport_protect	= _this select 5;
 _dmg_on_teleport    = _this select 6;
 _noseize            = _this select 7;
 
-_sursa_smugg = createVehicle ["Land_HelipadEmpty_F", [getmarkerpos _marker_sursa_smugg select 0,getmarkerpos _marker_sursa_smugg select 1,2], [], 0, "CAN_COLLIDE"];
-_sursa_smugg_core = createVehicle ["Land_HelipadEmpty_F", [getmarkerpos _marker_sursa_smugg select 0,getmarkerpos _marker_sursa_smugg select 1,2], [], 0, "CAN_COLLIDE"];
+_sursa_smugg = createVehicle ["Land_HelipadEmpty_F", [getMarkerPos _marker_sursa_smugg select 0,getMarkerPos _marker_sursa_smugg select 1,2], [], 0, "CAN_COLLIDE"];
+_sursa_smugg_core = createVehicle ["Land_HelipadEmpty_F", [getMarkerPos _marker_sursa_smugg select 0,getMarkerPos _marker_sursa_smugg select 1,2], [], 0, "CAN_COLLIDE"];
 _sursa_smugg_core attachTo [_sursa_smugg,[0,0,0]];
 
 protection_smug = _teleport_protect; publicVariable "protection_smug";
@@ -34,7 +34,7 @@ if (_device_detector !="") then
 
 if (count _spawn_classname >0) then 
 { 
-	if(_delay_between_spawn <=0) exitwith {hint "The delay between spawns must be bigger than 0"}; 
+	if(_delay_between_spawn <=0) exitWith {hint "The delay between spawns must be bigger than 0"}; 
 	spawn_delay_smugg=_delay_between_spawn; publicVariable"spawn_delay_smugg"; 
 	null=[_spawn_classname,_sursa_smugg_core] execvm "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_spawn.sqf"
 };
@@ -43,7 +43,7 @@ if (_mobile_anomaly) then
 {
 	while {!isNull _sursa_smugg} do 
 	{
-		_poz_ini_smug = getposatl _sursa_smugg;
+		_poz_ini_smug = getPosATL _sursa_smugg;
 		_new_poz = [_poz_ini_smug,0.01,0.3,1,0,-1,0] call BIS_fnc_findSafePos;
 		_sursa_smugg setPos [_new_poz select 0,_new_poz select 1, _poz_ini_smug select 2];
 		uiSleep 3+random 30;

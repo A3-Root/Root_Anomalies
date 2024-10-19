@@ -5,7 +5,7 @@ if (!hasInterface) exitWith {};
 
 params ["_flamer"];
 
-_burn_grnd = "Crater" createVehiclelocal [getPosASL _flamer select 0,getPosASL _flamer select 1,0];
+_burn_grnd = "Crater" createVehiclelocal [getPosATL _flamer select 0,getPosATL _flamer select 1,0];
 _burn_grnd say3D ["furnal",300];
 enableCamShake true;
 _blast_dust = "#particlesource" createVehicleLocal (getPosATL _flamer);

@@ -110,7 +110,7 @@ fnc_sec_effect_smug = {
 
 fnc_check_detector_smug = {if ((headgear _this == detect_smug) or (goggles _this ==detect_smug) or (uniform _this ==detect_smug) or (vest _this ==detect_smug) or (Backpack _this ==detect_smug) or (detect_smug in (assigneditems _this  + items _this ))) then {true} else {false}};
 
-if (!hasInterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 _obj_sursa_smugg = _this select 0;
 _sursa_core		 = _this select 1;

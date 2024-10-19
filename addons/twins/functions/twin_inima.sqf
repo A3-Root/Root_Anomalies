@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 
-if (!hasinterface) exitWith {};
+if (!hasInterface) exitWith {};
 
 _inima = _this select 0;
 _unghi = 0;

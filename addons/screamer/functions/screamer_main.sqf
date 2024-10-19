@@ -14,12 +14,12 @@ fnc_avoid_screamer ={
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
 		_fct = [30,-30] call BIS_fnc_selectRandom;
 		if (_reldir<180) then {_op_dir=_reldir+180 +_fct} else {_op_dir=_reldir-180+_fct};
-		_avoid_poz = [getposATL _x,30+random 10, _op_dir] call BIS_fnc_relPos;
+		_avoid_poz = [getPosATL _x,30+random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
 		_x setSkill ["commanding", 1];
 		};
 		};
-	} foreach _chased_units;
+	} forEach _chased_units;
 };
 
 fnc_hitpoint_damage = {
@@ -33,7 +33,7 @@ fnc_hitpoint_damage = {
 		{
 			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 			_damage = random(_damage);
-		} foreach _vichitpoints;
+		} forEach _vichitpoints;
 		_vehicle setHitPointDamage ["HitLight",1]; 
 		_vehicle setHitPointDamage ["#light_l",1];
 		_vehicle setHitPointDamage ["#light_r",1];
@@ -53,7 +53,7 @@ fnc_hitpoint_damage = {
 		{
 			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 			_damage = random(_damage);
-		} foreach _vichitpoints;
+		} forEach _vichitpoints;
 		_vehicle setHitPointDamage ["HitLight",1]; 
 		_vehicle setHitPointDamage ["#light_l",1];
 		_vehicle setHitPointDamage ["#light_r",1];
@@ -149,11 +149,11 @@ if (_isaidmg == true) then
 	_grp = createGroup _screamer_spawn;
 	if (_isalivevic) then 
 	{
-		_entitate = _grp createUnit [_anomaly_vic, getmarkerpos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 	} else 
 	{
-		_entitate = _grp createUnit ["O_Soldier_VR_F",getmarkerpos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
 		Removevest _entitate;
@@ -165,11 +165,11 @@ if (_isaidmg == true) then
 	_grp = createGroup CIVILIAN;
 	if (_isalivevic) then 
 	{
-		_entitate = _grp createUnit [_anomaly_vic, getmarkerpos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 	} else 
 	{
-		_entitate = _grp createUnit ["O_Soldier_VR_F",getmarkerpos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
 		Removevest _entitate;
@@ -246,7 +246,7 @@ if (_isalivevic) then
 
 	_entitate addEventHandler ["Killed", {
 		(_this select 0) hideObjectglobal true;
-		(_this select 1) addrating 2000
+		(_this select 1) addRating 2000
 	}];
 } else 
 {
@@ -271,7 +271,7 @@ if (_isalivevic) then
 
 	_screamer_anomally addEventHandler ["Killed", {
 		(_this select 0) hideObjectglobal true;
-		(_this select 1) addrating 2000
+		(_this select 1) addRating 2000
 	}];
 };
 
@@ -335,7 +335,7 @@ while {alive _entitate} do
 						if((_bob_pos_2 distance _unit > (_screamer_radius/5)) && (_bob_pos_2 distance _unit < (_screamer_radius/2))) then {
 							_units_range_2 = _units_range_2 + [_unit]; }; };
 						};
-		} foreach _overallunits;
+		} forEach _overallunits;
 		if !((_units_range_1 find _entitate) == -1) then {_units_range_1 = _units_range_1 - [_entitate]};
 		if !((_units_range_2 find _entitate) == -1) then {_units_range_2 = _units_range_2 - [_entitate]};
 		if !((_units_range_3 find _entitate) == -1) then {_units_range_3 = _units_range_3 - [_entitate]};
@@ -395,7 +395,7 @@ while {alive _entitate} do
 			_speed = 10;
 			_temp_mass = getMass _x;
 			_x setMass 3;
-			_x setvelocity [(_press_implicit_x * _al_pressure) / 2, (_press_implicit_y * _al_pressure) / 2, (_vel select 2) + (random [3, 5, 8])];
+			_x setVelocity [(_press_implicit_x * _al_pressure) / 2, (_press_implicit_y * _al_pressure) / 2, (_vel select 2) + (random [3, 5, 8])];
 			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
 			_x addTorque (_x vectorModelToWorld [2, 2, 2]);
 			_random_close = random[0, _damage_screamer_close, 1];
@@ -406,7 +406,7 @@ while {alive _entitate} do
 					[_x, _damage_screamer_close, _bodyPart, "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else 
 				{ 
-					_x setdamage ((damage _x) + _damage_screamer_close);
+					_x setDamage ((damage _x) + _damage_screamer_close);
 				}; 
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
@@ -415,18 +415,18 @@ while {alive _entitate} do
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
 					[_x, _random_close] call fnc_hitpoint_damage;
-					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosASL _x, 3, 1, 150];
+					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};
 			_x setMass _temp_mass;
-		} foreach _units_range_1;
+		} forEach _units_range_1;
 		uiSleep 0.1;
 		{
 			_vel = velocity _x;
 			_speed = 5;
 			_temp_mass = getMass _x;
 			_x setMass 2;
-			_x setvelocity [(_press_implicit_x * _al_pressure) / 4, (_press_implicit_y * _al_pressure) / 4, (_vel select 2) + (random [3, 5, 8])];
+			_x setVelocity [(_press_implicit_x * _al_pressure) / 4, (_press_implicit_y * _al_pressure) / 4, (_vel select 2) + (random [3, 5, 8])];
 			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
 			_x addTorque (_x vectorModelToWorld [1, 1, 1]);
 			_random_medium = random[0, (_damage_screamer_medium/2), _damage_screamer_medium];
@@ -437,7 +437,7 @@ while {alive _entitate} do
 					[_x, _damage_screamer_medium, _bodyPart, "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else 
 				{ 
-					_x setdamage ((damage _x) + _damage_screamer_medium);
+					_x setDamage ((damage _x) + _damage_screamer_medium);
 				};
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
@@ -446,18 +446,18 @@ while {alive _entitate} do
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
 					[_x, _random_medium] call fnc_hitpoint_damage;
-					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosASL _x, 3, 1, 150];
+					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};
 			_x setMass _temp_mass;
-		} foreach _units_range_2;
+		} forEach _units_range_2;
 		uiSleep 0.2;
 		{
 			_vel = velocity _x;
 			_speed = 2;
 			_temp_mass = getMass _x;
 			_x setMass 1;
-			_x setvelocity [(_press_implicit_x * _al_pressure) / 6, (_press_implicit_y * _al_pressure) / 6, (_vel select 2) + (random [3, 5, 8])];
+			_x setVelocity [(_press_implicit_x * _al_pressure) / 6, (_press_implicit_y * _al_pressure) / 6, (_vel select 2) + (random [3, 5, 8])];
 			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
 			_x addTorque (_x vectorModelToWorld [0.5, 0.5, 0.5]);
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.1,0.6,0.45,0.3,0.6,0.45];
@@ -468,7 +468,7 @@ while {alive _entitate} do
 					[_x, _damage_screamer_far, "Body", "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else 
 				{ 
-					_x setdamage ((damage _x) + _damage_screamer_far);
+					_x setDamage ((damage _x) + _damage_screamer_far);
 				};
 			};
 			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0; };
@@ -477,11 +477,11 @@ while {alive _entitate} do
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
 				{
 					[_x, _random_far] call fnc_hitpoint_damage;
-					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosASL _x, 3, 1, 150];
+					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};
 			_x setMass _temp_mass;
-		} foreach _units_range_3;
+		} forEach _units_range_3;
 		_wave_obj setVelocity [_press_implicit_x*_al_pressure,_press_implicit_y*_al_pressure,0];
 		
 		uiSleep 1;

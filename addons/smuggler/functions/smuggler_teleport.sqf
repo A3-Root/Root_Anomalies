@@ -12,7 +12,7 @@ fnc_teleportSFX_AI = {
 
 private ["_noseize"];
 
-if (!isServer) exitwith {};
+if (!isServer) exitWith {};
 _obj_teleporter  = _this select 0;
 _obj_core		 = _this select 1;
 _dmg_on_teleport = _this select 2;
@@ -45,7 +45,7 @@ while {alive _obj_teleporter} do {
 	                                [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                                 } else 
                                 { 
-	                                _x setdamage ((damage _x) + _dmg_on_teleport);
+	                                _x setDamage ((damage _x) + _dmg_on_teleport);
                                 };
                             } else {
 								_x setDamage (damage _x + _dmg_on_teleport);
@@ -74,7 +74,7 @@ while {alive _obj_teleporter} do {
 	                        [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                         } else 
                         { 
-	                        _x setdamage ((damage _x) + _dmg_on_teleport);
+	                        _x setDamage ((damage _x) + _dmg_on_teleport);
                         };
 
                     } else {

@@ -1,6 +1,6 @@
 // by ALIAS
 
-if (!hasInterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 params ["_ballx","_shoot_dir"];
 
