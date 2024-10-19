@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project name="root">
+    <Package name="main">
+        <Key ID="STR_root_main_URL">
+            <English>https://github.com/A3-Root/Root_Anomalies</English>
+            <German>https://github.com/A3-Root/Root_Anomalies</German>
+        </Key>
+    </Package>
+</Project>

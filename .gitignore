@@ -2,3 +2,6 @@ releases/*
 keys/*
 *.biprivatekey
 .hemttout
+*.bisign
+.vscode/settings.json
+*.cache
