@@ -16,7 +16,7 @@ class CfgPatches {
 			"Aliascartoons"
 		};
 		url = "https://github.com/A3-Root/Root_Anomalies";
-		requiredVersion = 0.01;
+		requiredVersion = 2.18;
 	};
 };
 

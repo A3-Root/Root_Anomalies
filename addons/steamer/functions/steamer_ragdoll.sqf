@@ -17,7 +17,7 @@ _rag setMass 1e10;
 _rag setVelocityModelSpace [_dir_blo # 0,_dir_blo # 1,_al_pressure];
 uiSleep 0.01;
 detach _rag;
-0 = [_rag,_unit] spawn {
+[_rag,_unit] spawn {
 	params ['_rag','_tgt'];
 	uiSleep 0.5;
 	deleteVehicle _rag;
