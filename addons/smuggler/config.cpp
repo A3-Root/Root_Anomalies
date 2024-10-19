@@ -22,7 +22,7 @@ class CfgPatches {
 class CfgFunctions {
 	class Root {
 		class RootSmugglerCategory {
-			class Smuggler {file = "\Root_Anomalies\Root_Smuggler\AL_smuggler\init_smuggler.sqf";};
+			class Smuggler {file = "\z\root_anomalies\addons\smuggler\functions\init_smuggler.sqf";};
 		};
 	};
 };

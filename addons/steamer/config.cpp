@@ -22,7 +22,7 @@ class CfgPatches {
 class CfgFunctions {
 	class Root {
 		class RootSteamerCategory {
-			class Steamer {file = "\Root_Anomalies\Root_Steamer\AL_steamer\init_steamer.sqf";};
+			class Steamer {file = "\z\root_anomalies\addons\steamer\functions\init_steamer.sqf";};
 		};
 	};
 };

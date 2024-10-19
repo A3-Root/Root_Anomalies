@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /* 
-null = [marker, mobile_anomaly, device_detector, spawn_classname, delay_between_spawn, teleport_protect] execVM "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_main.sqf";
+null = [marker, mobile_anomaly, device_detector, spawn_classname, delay_between_spawn, teleport_protect] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf";
 
 
 marker			- string, name for the marker where you want to place the anomaly
@@ -59,7 +59,7 @@ deleteVehicle _logic;
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

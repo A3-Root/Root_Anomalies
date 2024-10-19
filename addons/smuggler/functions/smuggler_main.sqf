@@ -22,21 +22,21 @@ detect_smug = _device_detector; publicVariable "detect_smug";
 
 if (_device_detector !="") then 
 {
-	null= [_sursa_smugg] execVM "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_ai_avoid_smugg.sqf"
+	null= [_sursa_smugg] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg.sqf"
 } else 
 {
-	null= [_sursa_smugg] execVM "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_ai_avoid_smugg_visible.sqf"
+	null= [_sursa_smugg] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg_visible.sqf"
 };
 
-[[_sursa_smugg,_sursa_smugg_core],"\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_sfx.sqf"] remoteExec ["execVM",0,true];
+[[_sursa_smugg,_sursa_smugg_core],"\z\root_anomalies\addons\smuggler\functions\smuggler_sfx.sqf"] remoteExec ["execVM",0,true];
 
-[[_sursa_smugg,_sursa_smugg_core, _dmg_on_teleport, _noseize],"\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_teleport.sqf"] remoteExec ["execVM",0,true];
+[[_sursa_smugg,_sursa_smugg_core, _dmg_on_teleport, _noseize],"\z\root_anomalies\addons\smuggler\functions\smuggler_teleport.sqf"] remoteExec ["execVM",0,true];
 
 if (count _spawn_classname >0) then 
 { 
 	if(_delay_between_spawn <=0) exitWith {hint "The delay between spawns must be bigger than 0"}; 
 	spawn_delay_smugg=_delay_between_spawn; publicVariable "spawn_delay_smugg"; 
-	null=[_spawn_classname,_sursa_smugg_core] execVM "\Root_Anomalies\Root_Smuggler\AL_smuggler\smuggler_spawn.sqf"
+	null=[_spawn_classname,_sursa_smugg_core] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_spawn.sqf"
 };
 
 if (_mobile_anomaly) then 

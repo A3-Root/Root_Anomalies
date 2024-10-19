@@ -23,7 +23,7 @@ _task_time = 0;
 _object_anom_burp setVariable ["burper_activ", true, true];
 
 while {(alive _object_anom_burp) && (_task_time < 7)} do {
-	_device_anti_burp = nearestObject [position _object_anom_burp, [anti_burper], _kill_range, false];
+	_device_anti_burp = nearestObjects [position _object_anom_burp, [anti_burper], _kill_range, false];
 	if (count _device_anti_burp > 0) then {
 		_task_time = _task_time + 1;
 		[[_object_anom_burp], "\z\root_anomalies\addons\burper\functions\burper_disable.sqf"] remoteExec ["execVM"]

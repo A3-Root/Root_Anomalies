@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /*
-[marker_namer, territory, damage_inflicted, recharge_delay] execVM "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_main.sqf";
+[marker_namer, territory, damage_inflicted, recharge_delay] execVM "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf";
 
 
 marker_namer		- string,  name of the marker where you want the anomaly to spawn
@@ -49,7 +49,7 @@ deleteVehicle _logic;
 		
 		["Steamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";
