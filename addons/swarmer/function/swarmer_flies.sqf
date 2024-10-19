@@ -4,7 +4,7 @@
 if ((!alive swarmer_public)or(player distance swarmer_public > 1000)) exitWith {};
 
 if (isNil{swarmer_public getVariable "tgt"}) then 
-{flow_back = (_this vectorFromTo [(getPosATL swarmer_public # 0)+random (selectrandom [1,-1]),(getPosATL swarmer_public # 1)+random (selectrandom [1,-1]),random 2])}
+{flow_back = (_this vectorFromTo [(getPosATL swarmer_public # 0)+random (selectRandom [1,-1]),(getPosATL swarmer_public # 1)+random (selectRandom [1,-1]),random 2])}
 else {
 	if (atak_swarmer) then {
 		_tgt_sw = swarmer_public getVariable "tgt";

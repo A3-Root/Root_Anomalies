@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /*
-[marker, territory_radius, damage_inflicted, health_points] execvm "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf";
+[marker, territory_radius, damage_inflicted, health_points] execVM "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf";
 
 marker				- string, name of the marker where you want to place the anomaly
 territory_radius	- number, radius in meters of FLAMERs territory
@@ -45,7 +45,7 @@ deleteVehicle _logic;
 		params ["_results", "_flamerMarkerName"];
 		_results params ["_flamer_hp", "_territory_override", "_flamer_territory", "_flamer_damage", "_isaipanic", "_flamer_recharge", "_damage_on_death"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_flamer_territory < 75) then {
             	_flamer_territory = 75;
         	};

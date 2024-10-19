@@ -22,7 +22,7 @@ _blur_pos = getPos _blur_sonic;
 _blur_surround_pos = [(_blur_pos select 0) + random [-25, 0, 25], (_blur_pos select 1) + random [-25, 0, 25], (_blur_pos select 2) + random [1, 3, 5]];
 
 uiSleep 1;
-playsound "earthquakes";
+playSound "earthquakes";
 
 uiSleep 3;
 deton = "Bomb_03_F" createVehicle _blur_pos;

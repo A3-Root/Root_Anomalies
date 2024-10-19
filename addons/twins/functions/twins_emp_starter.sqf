@@ -8,7 +8,7 @@ private ["_hndl", "_range_lit", "_brit", "_light_emp", "_ripple", "_blast", "_ba
 _AOE = _tracking_p;
 
 _bangsound= "#particlesource" createVehicleLocal getPosATL _spark_move;
-_bangsound say3d ["earthquake_02",3500];
+_bangsound say3D ["earthquake_02",3500];
 
 
 
@@ -25,7 +25,7 @@ _ripple setParticleRandom [0,[0.25,0.25,0],[0.175,0.175,0],0,0.25,[0,0,0,0.1],0,
 _ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
-_light_emp = "#lightpoint" createVehiclelocal getPosATL _spark_move; 
+_light_emp = "#lightpoint" createVehicleLocal getPosATL _spark_move; 
 _light_emp lightAttachObject [_spark_move, [0,0,3]];
 _light_emp setLightAmbient [0.1,0.1,1];  
 _light_emp setLightColor [0.1,0.1,1];
@@ -98,7 +98,7 @@ _x setVariable ["A3TI_Disable", true];
 _x disableAI "LIGHTS"; 
 _x setPilotLight false;  
 _x setCollisionLight false;
-} forEach (nearestObjects [_spark_move, [
+} forEach (nearestObject [_spark_move, [
 "Car",
 "Motorcycle",
 "UAV",
@@ -161,7 +161,7 @@ _e_static setParticleParams [["\A3\data_f\blesk1", 1, 0, 1], "", "SpaceObject", 
 _e_static setDropInterval 0.025;
 uiSleep 0.5;
 deleteVehicle _e_static;
-} forEach (nearestObjects [_spark_move, [
+} forEach (nearestObject [_spark_move, [
 "Car",
 "Motorcycle",
 "UAV",
@@ -249,7 +249,7 @@ if (_spark_type=="orange") then
 _scantei_spark say3D _spark_sound;
 uiSleep 0.4 + (random 0.7);
 deleteVehicle _scantei_spark;
-} forEach (nearestObjects [_spark_move, [
+} forEach (nearestObject [_spark_move, [
 "Lamps_base_F", //These are all the lights' base classes
 "PowerLines_base_F",
 "PowerLines_Small_base_F"
@@ -626,7 +626,7 @@ _binos = [
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
 
 uiSleep 0.5;
 {							
@@ -641,7 +641,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
 
 uiSleep 0.5;
 {							
@@ -656,7 +656,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
 
 
 uiSleep 0.5;
@@ -672,7 +672,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
 
 
 
@@ -772,7 +772,7 @@ _x removePrimaryWeaponItem "OPTRE_M7_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Flashlight";
 _x removePrimaryWeaponItem "OPTRE_DMR_Light"																								
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
 
 
 

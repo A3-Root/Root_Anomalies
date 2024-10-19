@@ -156,13 +156,13 @@ if (_isaidmg == true) then
 		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
-		Removevest _entitate;
+		removeVest _entitate;
 		removeHeadgear _entitate;
 	};
-	_entitate setcaptive false; 
+	_entitate setCaptive false; 
 } else
 {
-	_grp = createGroup CIVILIAN;
+	_grp = createGroup civilian;
 	if (_isalivevic) then 
 	{
 		_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0,"NONE"];
@@ -172,10 +172,10 @@ if (_isaidmg == true) then
 		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
-		Removevest _entitate;
+		removeVest _entitate;
 		removeHeadgear _entitate;
 	};
-	_entitate setcaptive true; 
+	_entitate setCaptive true; 
 	[_entitate, true] remoteExec ["hideObjectGlobal",0,true];
 };
 
@@ -183,7 +183,7 @@ _entitate setSpeaker "NoVoice";
 _entitate disableConversation true;
 _entitate addRating -10000;
 
-RemoveAllItems _entitate;
+removeAllItems _entitate;
 removeAllWeapons _entitate;
 _entitate unassignItem "NVGoggles";
 _entitate removeItem "NVGoggles";
@@ -228,7 +228,7 @@ if (_isalivevic) then
 	_current_screamer_hp = 1/_screamer_health;
 	_entitate setVariable ["al_dam_total", 0];
 	_entitate setVariable ["al_dam_incr", _current_screamer_hp];
-	_entitate removeAllEventHandlers "hit";
+	_entitate removeAllEventHandlers "Hit";
 
 	_entitate addEventHandler ["Hit", {
 		_unit=_this#0;
@@ -238,14 +238,14 @@ if (_isalivevic) then
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
 	}];
 
-	_entitate removeAllEventHandlers "Handledamage";
+	_entitate removeAllEventHandlers "HandleDamage";
 
-	_entitate addEventHandler ["Handledamage", {
+	_entitate addEventHandler ["HandleDamage", {
 		0
 	}];
 
 	_entitate addEventHandler ["Killed", {
-		(_this select 0) hideObjectglobal true;
+		(_this select 0) hideObjectGlobal true;
 		(_this select 1) addRating 2000
 	}];
 } else 
@@ -253,7 +253,7 @@ if (_isalivevic) then
 	_current_screamer_hp = 1/_screamer_health;
 	_screamer_anomally setVariable ["al_dam_total", 0];
 	_screamer_anomally setVariable ["al_dam_incr", _current_screamer_hp];
-	_screamer_anomally removeAllEventHandlers "hit";
+	_screamer_anomally removeAllEventHandlers "Hit";
 
 	_screamer_anomally addEventHandler ["Hit", {
 		_unit=_this#0;
@@ -263,14 +263,14 @@ if (_isalivevic) then
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
 	}];
 
-	_screamer_anomally removeAllEventHandlers "Handledamage";
+	_screamer_anomally removeAllEventHandlers "HandleDamage";
 
-	_screamer_anomally addEventHandler ["Handledamage", {
+	_screamer_anomally addEventHandler ["HandleDamage", {
 		0
 	}];
 
 	_screamer_anomally addEventHandler ["Killed", {
-		(_this select 0) hideObjectglobal true;
+		(_this select 0) hideObjectGlobal true;
 		(_this select 1) addRating 2000
 	}];
 };
@@ -297,18 +297,18 @@ while {alive _entitate} do
 			_wave_obj = createVehicle ["Land_Battery_F", position _entitate, [], 0, "CAN_COLLIDE"]; 
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
-			[_entitate,["miscare_screamer",300]] remoteExec ["say3d"];
+			[_entitate,["miscare_screamer",300]] remoteExec ["say3D"];
 		} else 
 		{
 			_wave_obj = createVehicle ["Land_Battery_F", position _screamer_anomally, [], 0, "CAN_COLLIDE"]; 
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
-			[_screamer_anomally,["miscare_screamer",300]] remoteExec ["say3d"];
+			[_screamer_anomally,["miscare_screamer",300]] remoteExec ["say3D"];
 		};
 		uiSleep 5;
 
 		_entitate lookAt _poz;
-		dostop _entitate;
+		doStop _entitate;
 		uiSleep 1;
 
 		if (_isalivevic) then 
@@ -322,7 +322,7 @@ while {alive _entitate} do
 		_bob_pos_1 = (position _bob1);
 		_bob_pos_2 = (position _bob2);
 		_bob_pos_3 = (position _bob3);
-		_overallunits = nearestObjects [_anomally_pos,_screamer_dmgs,_screamer_radius];
+		_overallunits = nearestObject [_anomally_pos,_screamer_dmgs,_screamer_radius];
 		_units_range_1 = [];
 		_units_range_2 = [];
 		_units_range_3 = [];
@@ -354,13 +354,13 @@ while {alive _entitate} do
 		//effect
 		if (_isalivevic) then 
 		{
-			if (alive _entitate) then {[[_wave_obj,_entitate],"\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execvm"]};
+			if (alive _entitate) then {[[_wave_obj,_entitate],"\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execVM"]};
 		} else 
 		{
-			if (alive _entitate) then {[[_wave_obj,_screamer_anomally],"\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execvm"]};
+			if (alive _entitate) then {[[_wave_obj,_screamer_anomally],"\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execVM"]};
 		};
 		
-		_dir_blast = getdir _entitate;
+		_dir_blast = getDir _entitate;
 
 		_al_pressure = 90;
 
@@ -497,13 +497,13 @@ uiSleep 5;
 
 if (_isalivevic) then 
 {
-	[[_entitate],"\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execvm"];
+	[[_entitate],"\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
 	uiSleep 4;
 	deleteVehicle _entitate;
 } else
 {
 	deleteVehicle _entitate;
-	[[_screamer_anomally],"\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execvm"];
+	[[_screamer_anomally],"\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
 	uiSleep 4;
 	deleteVehicle _screamer_anomally;
 };

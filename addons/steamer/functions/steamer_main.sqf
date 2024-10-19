@@ -25,7 +25,7 @@ private ["_orig_poz","_teritoriu","_damage_steamer","_recharge", "_dmg_on_death"
 _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1500) then {_ck_pl = true}} forEach allPlayers;uiSleep 10};
 _steamer_dud = createAgent ["O_Soldier_VR_F",getMarkerPos _orig_poz, [],0, "NONE"]; _steamer_dud hideObjectGlobal true; _steamer_dud enableSimulationGlobal false;
-[[_steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_voice.sqf"] remoteExec ["execvm",0,true];
+[[_steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_voice.sqf"] remoteExec ["execVM",0,true];
 _list_unit_range_steamer = [];
 while {alive _steamer_dud} do 
 {
@@ -37,7 +37,7 @@ while {alive _steamer_dud} do
 		if (_travelpath) then { [_steamer_dud, _tgt_steamer] call fnc_travel_steamer; };
 		_burst_poz= (ASLToAGL getPosATL _tgt_steamer);
 		_blow_units = _burst_poz nearEntities [["CAManBase", "LandVehicle"],6];
-		_crater_bool = selectrandom [false,true,false,false];
+		_crater_bool = selectRandom [false,true,false,false];
 		[[getPosATL _tgt_steamer,_crater_bool],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_burst_SFX.sqf"] remoteExec ["execVM"];
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -76,7 +76,7 @@ while {alive _steamer_dud} do
 				_vehicle setHitPointDamage ["light_r2",1];
 			};
 
-			if (isplayer _x) then {[[_burst_poz,_x], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"] remoteExec ["execvm",_x]} else {[_burst_poz,_x] execvm "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"};
+			if (isPlayer _x) then {[[_burst_poz,_x], "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"] remoteExec ["execVM",_x]} else {[_burst_poz,_x] execVM "\Root_Anomalies\Root_Steamer\AL_steamer\steamer_ragdoll.sqf"};
 		} forEach (_blow_units-[_steamer_dud]);
 		{[_x] call fnc_avoid_steamer} forEach _list_unit_range_steamer;
 		uiSleep (4+round (random _recharge));
@@ -90,7 +90,7 @@ waitUntil {!alive _steamer_dud};
 [[getPosATL _steamer_dud],"\Root_Anomalies\Root_Steamer\AL_steamer\steamer_end.sqf"] remoteExec ["execVM"];
 _obj_veg = nearestTerrainObjects [position _steamer_dud,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
 {_x setDamage [1,true]} forEach _obj_veg;
-_obj_build = nearestObjects [position _steamer_dud,["BUILDING","HOUSE","CHURCH","CHAPEL","FUELSTATION","HOSPITAL","RUIN","BUNKER","Land_fs_roof_F","Land_TTowerBig_2_F","Land_TTowerBig_1_F","Lamps_base_F","PowerLines_base_F","PowerLines_Small_base_F","Land_LampStreet_small_F","CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
+_obj_build = nearestObject [position _steamer_dud,["BUILDING","HOUSE","CHURCH","CHAPEL","FUELSTATION","HOSPITAL","RUIN","BUNKER","Land_fs_roof_F","Land_TTowerBig_2_F","Land_TTowerBig_1_F","Lamps_base_F","PowerLines_base_F","PowerLines_Small_base_F","Land_LampStreet_small_F","CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
 {_x setDamage [1,false]} forEach _obj_build;
 _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 {
@@ -106,7 +106,7 @@ _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 		}; 
 	};
 } forEach _obj_man;
-_vik_list = nearestObjects [position _steamer_dud,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
+_vik_list = nearestObject [position _steamer_dud,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
 {_x setDamage ((damage _x) + random[0, _damage_steamer, 1])} forEach _vik_list;
 uiSleep 10;
 deleteVehicle _steamer_dud;

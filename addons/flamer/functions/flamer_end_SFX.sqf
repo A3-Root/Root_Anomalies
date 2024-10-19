@@ -4,7 +4,7 @@
 if (!hasInterface) exitWith {};
 params ["_flamer"];
 _poz_final = getPosATL _flamer;
-_part_surs = "Land_HelipadEmpty_F" createVehiclelocal _poz_final;
+_part_surs = "Land_HelipadEmpty_F" createVehicleLocal _poz_final;
 
 enableCamShake true;
 
@@ -89,7 +89,7 @@ if (player distance _part_surs < 100) then
 	};
 	addCamShake [5,3,10]
 };
-if (player distance _part_surs < 10) then {playsound "burned"; addCamShake [5,2,5];call BIS_fnc_flamesEffect; [10] call BIS_fnc_bloodEffect;call BIS_fnc_indicateBleeding};
+if (player distance _part_surs < 10) then {playSound "burned"; addCamShake [5,2,5];call BIS_fnc_flamesEffect; [10] call BIS_fnc_bloodEffect;call BIS_fnc_indicateBleeding};
 uiSleep 0.1;
 _alias_local_fog = "#particlesource" createVehicleLocal (getPos _part_surs); 
 _alias_local_fog setParticleCircle [50,[0,0,0]];

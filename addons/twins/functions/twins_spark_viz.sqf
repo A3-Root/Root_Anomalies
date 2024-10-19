@@ -61,7 +61,7 @@ while {alive _electromagnetic_anom} do
 	if (_play_sunet) then 
 	{
 		_play_sunet = false;
-		playsound "sound_twin";
+		playSound "sound_twin";
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 		if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
@@ -83,7 +83,7 @@ while {alive _obj_emit} do
 	waitUntil {(player distance _obj_emit) < 1500};
 	if (typeOf player != "VirtualCurator_F") then {
 	_dir_rel = [player, _obj_emit] call BIS_fnc_dirTo;
-	_cam_dir = [0,0,0] getdir getCameraViewDirection player;
+	_cam_dir = [0,0,0] getDir getCameraViewDirection player;
 
 	if ((abs(_dir_rel - _cam_dir) <= 46) or (abs(_dir_rel - _cam_dir) >= 314)) then 
 	{

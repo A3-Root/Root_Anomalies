@@ -50,9 +50,9 @@ deleteVehicle _logic;
 		params ["_results", "_smugglerMarkerName"];
 		_results params ["_isroaming", "_isdetectable", "_isprotectable", "_isspawning", "_detectdevice", "_protectdevice", "_spawnobjects", "_spawnobjectsdelay", "_dmg_on_teleport", "_noseizure"];
 
-		if (_isdetectable != true) then {_detectdevice = ""};
-		if (_isprotectable != true) then {_protectdevice = ""};
-		if (_isspawning == true) then {_spawnobjects = "[]"} else 
+		if !(_isdetectable) then {_detectdevice = ""};
+		if !(_isprotectable) then {_protectdevice = ""};
+		if (_isspawning) then {_spawnobjects = "[]"} else 
 		{
 			_spawnobjects = _spawnobjects splitString ",";
 		};

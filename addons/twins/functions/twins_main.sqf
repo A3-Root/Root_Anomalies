@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 
-//null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI] execvm "AL_twins\sparky.sqf"
+//null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI] execVM "AL_twins\sparky.sqf"
 
 if (!isServer) exitWith {};
 
@@ -12,12 +12,12 @@ private ["_track_dist","_poz_spark", "_isseige"];
 _heart_twin = _twin_heart createVehicle [0,0,0];
 _heart_twin attachTo [_spark_obj,[-0.5,0,1.5]];
 
-[[_heart_twin],"\z\root_anomalies\addons\twins\functions\twins_inima.sqf"] remoteExec ["execvm",0];
+[[_heart_twin],"\z\root_anomalies\addons\twins\functions\twins_inima.sqf"] remoteExec ["execVM",0];
 
 if (_spark_effect) then {_poz_spark = createVehicle ["Sign_Sphere10cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];[_poz_spark, true] remoteExec ["hideObjectGlobal",0,true]};
-if (_effect_on_AI) then {[[_spark_obj,_damage_range],"\z\root_anomalies\addons\twins\functions\twins_damage_AI.sqf"] remoteExec ["execvm",0];};
+if (_effect_on_AI) then {[[_spark_obj,_damage_range],"\z\root_anomalies\addons\twins\functions\twins_damage_AI.sqf"] remoteExec ["execVM",0];};
 _pauza = 5;
-[[_spark_obj,_damage_range,_isseige],"\z\root_anomalies\addons\twins\functions\twins_spark_viz.sqf"] remoteExec ["execvm",0,true];
+[[_spark_obj,_damage_range,_isseige],"\z\root_anomalies\addons\twins\functions\twins_spark_viz.sqf"] remoteExec ["execVM",0,true];
 
 _spark_obj setVariable ["vizibil", 0, true];
 
@@ -68,7 +68,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 	// EMP effect
 	if (_EMP_enabled) then 
 	{
-		[_spark_move, _isseige, _tracking_p] execvm "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";
+		[_spark_move, _isseige, _tracking_p] execVM "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";
 		uiSleep 2;
 	};
 	deleteVehicle _spark_move;
@@ -93,7 +93,7 @@ if (_spark_effect) then
 		{
 			//_spark_obj setDamage 0.9;		uiSleep 0.1;		_spark_obj setDamage 0;
 			_pauza_intre_sclipiri = 0.1+ (random 2);
-			[[_poz_spark,_pauza_intre_sclipiri],"\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execvm"];
+			[[_poz_spark,_pauza_intre_sclipiri],"\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;
 			//_spark_obj setDamage 0.9;
 			_nr=_nr+1;

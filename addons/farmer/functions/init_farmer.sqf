@@ -44,7 +44,7 @@ deleteVehicle _logic;
     params ["_results", "_farmerMarkerName"];
     _results params ["_farmer_hp", "_territory_override", "_farmer_territory", "_isaipanic", "_farmer_damage", "_farmer_recharge"];
     
-    if (_territory_override != true) then {
+    if !(_territory_override) then {
         if (_farmer_territory < 75) then {
             _farmer_territory = 75;
         };

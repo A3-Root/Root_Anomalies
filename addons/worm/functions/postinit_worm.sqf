@@ -8,7 +8,7 @@
 		private ["_worm_throwable", "_shooter"];
 		_worm_throwable = _this select 6; 
 		_shooter = _this select 0; 
-		[_worm_throwable] execvm "\z\root_anomalies\addons\worm\functions\worm_kill_detect.sqf";
+		[_worm_throwable] execVM "\z\root_anomalies\addons\worm\functions\worm_kill_detect.sqf";
 	}];
 };
 

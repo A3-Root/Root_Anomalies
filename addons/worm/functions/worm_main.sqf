@@ -14,7 +14,7 @@ fnc_avoid_worm ={
             _op_dir=_reldir-180+_fct
         };
         _avoid_poz = [getPosATL _x, 20+random 50, _op_dir] call BIS_fnc_relPos;
-        _x domove _avoid_poz;
+        _x doMove _avoid_poz;
         _x setSkill ["commanding", 1];
     } forEach _chased_units;
 };
@@ -61,18 +61,18 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 
 uiSleep 2;
 
-_cap	= createvehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
-_coada	= createvehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
-_coada_01= createvehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_cap	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_coada	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
+_coada_01= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
 
 _cap setVariable ["isWorm",true,true];
 
 wormkiller = _wormdiffuser; publicVariable "wormkiller";
 
-_coada attachto [_cap, [0, -1, 1]];
-_coada_01 attachto [_coada, [0, -1, 1]];
-[_coada, true] remoteExec ["hideObjectglobal", 0, true];
-[_coada_01, true] remoteExec ["hideObjectglobal", 0, true];
+_coada attachTo [_cap, [0, -1, 1]];
+_coada_01 attachTo [_coada, [0, -1, 1]];
+[_coada, true] remoteExec ["hideObjectGlobal", 0, true];
+[_coada_01, true] remoteExec ["hideObjectGlobal", 0, true];
 
 _hide_me = true;
 while {_hide_me} do {
@@ -163,7 +163,7 @@ while {!isNull _cap} do {
                 (getPosATL _cap select 2) < 1
             };
             [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
-            _nearobj_wrom = nearestobjects [getPosATL _cap, [], 15];
+            _nearobj_wrom = nearestObject [getPosATL _cap, [], 15];
             {
                 if ((_x!=_cap)&&(_x!=_coada)&&(_x!=_coada_01)&&!(surfaceIsWater getPos _x)) then {
                     if (_x isKindOf "LandVehicle") then {

@@ -5,7 +5,7 @@ if (!hasInterface) exitWith {};
 
 params ["_tgt_poz","_crater_bool"];
 
-_blow_poz = "CraterLong_small" createVehiclelocal [_tgt_poz # 0,_tgt_poz # 1,-0.5]; _blow_poz hideObjectGlobal true; _blow_poz setdir round (random 360);
+_blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz # 0,_tgt_poz # 1,-0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
 _blow_poz setVectorUp surfaceNormal getPosATL _blow_poz;
 enableCamShake true;
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
@@ -26,7 +26,7 @@ _pp = linearConversion [0,100,player distance _blow_poz,5,0,true];
 addCamShake [_pp,2,30];
 uiSleep 0.5;
 
-_jet = selectrandom ["gheizer_4","gheizer_3","gheizer_2","gheizer_1"];
+_jet = selectRandom ["gheizer_4","gheizer_3","gheizer_2","gheizer_1"];
 _blow_poz say3D ["gheizer_1",400];
 
 _blast = "#particlesource" createVehicleLocal (getPos _blow_poz);
@@ -59,9 +59,9 @@ _poz_eko = getPos _blow_poz;
 		uiSleep 1;
 		playSound3D ["\z\root_anomalies\addons\main\sounds\eko_01.ogg", "", false, [_blow_poz # 0, _blow_poz # 1, 500], 7, 5, 0];
 	};
-_dropsX = selectrandom ["drops_01","drops_02","drops_03"];
+_dropsX = selectRandom ["drops_01","drops_02","drops_03"];
 uiSleep 3.3;
-_drops = "#particlesource" createVehiclelocal (getPos _blow_poz);
+_drops = "#particlesource" createVehicleLocal (getPos _blow_poz);
 _drops setParticleCircle [3.5,[0,0,0]];
 _drops setParticleRandom [0.1,[3,3,0],[0,0,0],3,0.1,[0,0,0,0.1],0,0];
 _drops setParticleParams [["\A3\data_f\kouleSvetlo", 1, 0, 1], "", "Billboard", 1, 0.2, [0, 0, 0], [0, 0, 0.15], 11, 12, 7.9, 0.075, [0.3,2,1], [[1,1,1,0.3],[1,1,1,0.1],[1,1,1,0]],[1],1,0, "", "",_blow_poz,0,true];

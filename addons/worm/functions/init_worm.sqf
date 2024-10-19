@@ -8,7 +8,7 @@
 ================================================================================================================================
 WORM Parameters =======================
 ================================================================================================================================
-null = [marker_name]execvm "AL_worm\worm.sqf"
+null = [marker_name]execVM "AL_worm\worm.sqf"
 
 marker_name	- string, name of the marker where you want to place the anomaly
 

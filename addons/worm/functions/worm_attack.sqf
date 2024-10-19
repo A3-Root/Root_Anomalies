@@ -37,7 +37,7 @@ deleteVehicle _blast_dust;
 
 if (player distance _head_worm < 1500) then {
 _after_effect = ["post_impact_01","post_impact_02","post_impact_03","post_impact_04"] call BIS_fnc_selectRandom;
-playsound _after_effect;
+playSound _after_effect;
 };
 uiSleep 60; /* uiSleep 300; */
 deleteVehicle _crater_impact;

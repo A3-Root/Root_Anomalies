@@ -36,8 +36,3 @@ class CfgVehicles {
 		displayName = "Strigoi Anomaly";
 	};
 };
-
-
-
-
-

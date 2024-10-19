@@ -39,10 +39,10 @@ FLAMER_attk_flamer = {
 		};
 	};
 	_shoot_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
-	[_flamer getVariable "_cap_flamer",["foc_initial",500]] remoteExec ["say3d"];
+	[_flamer getVariable "_cap_flamer",["foc_initial",500]] remoteExec ["say3D"];
 	[[_flamer,_shoot_dir],"\z\root_anomalies\addons\flamer\functions\flamer_plasma_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep 0.5;
-	_tip = selectrandom ["04","burned","02","03"];
+	_tip = selectRandom ["04","burned","02","03"];
 	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
@@ -63,8 +63,8 @@ FLAMER_attk_flamer = {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
-			_tip = selectrandom ["04","burned","02","03"];
-			[_x,[_tip,200]] remoteExec ["say3d"];
+			_tip = selectRandom ["04","burned","02","03"];
+			[_x,[_tip,200]] remoteExec ["say3D"];
 		} else
 		{
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -78,14 +78,14 @@ FLAMER_attk_flamer = {
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
-	_nearvik = nearestObjects [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],7,false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
+	_nearvik = nearestObject [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],7,false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
 	uiSleep 4;
 	_flamer setVariable ["atk",false];
 };
 
 FLAMER_hide_flamer = {
 	_this setVariable ["vizibil",false,true];
-	[_this getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3d"];
+	[_this getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
 	_this enableSimulationGlobal false; _this hideObjectGlobal true;
 };
 
@@ -98,7 +98,7 @@ FLAMER_show_flamer = {
 	// NEW ADDITIONS
 	[[_flamer,_damage_flamer,_teritoriu],"\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM",0];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase"],100]);
-	[_flamer getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3d"];
+	[_flamer getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
 };
 
 FLAMER_jump_flamer = {
@@ -124,8 +124,8 @@ FLAMER_jump_flamer = {
 	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10+random 10);
 	_salt_sunet= selectRandom ["01_blast","02_blast","03_blast"]; 
 	_obj_veg = nearestTerrainObjects [position _flamer,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
-	_nearvik = nearestObjects [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],20,false];
-	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3d"];
+	_nearvik = nearestObject [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],20,false];
+	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3D"];
 	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
@@ -146,8 +146,8 @@ FLAMER_jump_flamer = {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
-			_tip = selectrandom ["04","burned","02","03"];
-			[_x,[_tip,200]] remoteExec ["say3d"];
+			_tip = selectRandom ["04","burned","02","03"];
+			[_x,[_tip,200]] remoteExec ["say3D"];
 		} else
 		{
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -198,7 +198,7 @@ _flamer = createAgent ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [],0, "NONE"]
 _hp_curr_flamer = 1/_hp_flamer;
 _flamer setVariable ["flamer_dmg_total", 0];
 _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
-_flamer removeAllEventHandlers "hit";
+_flamer removeAllEventHandlers "Hit";
 
 _flamer addEventHandler ["Hit", {
     _unit=_this#0;
@@ -211,28 +211,28 @@ _flamer addEventHandler ["Hit", {
     [[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
-_flamer removeAllEventHandlers "Handledamage";
+_flamer removeAllEventHandlers "HandleDamage";
 
-_flamer addEventHandler ["Handledamage", {0}];
+_flamer addEventHandler ["HandleDamage", {0}];
 
 _flamer addEventHandler ["Killed", {
-    (_this select 0) hideObjectglobal true;
+    (_this select 0) hideObjectGlobal true;
     (_this select 1) addRating 2000
 }];
 
 _flamer setAnimSpeedCoef 1.2;
-_cap_flamer = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _cap_flamer attachto [_flamer, [0,0,0.2],"neck"]; _flamer setVariable ["_cap_flamer", _cap_flamer, true];
+_cap_flamer = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _cap_flamer attachTo [_flamer, [0,0,0.2],"neck"]; _flamer setVariable ["_cap_flamer", _cap_flamer, true];
 
 for "_i" from 0 to 5 do {
-    _flamer setobjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
+    _flamer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
 };
 for "_i" from 0 to 5 do {
-    _flamer setobjecttextureGlobal [_i, "\z\root_anomalies\addons\flamer\images\03_flesh.jpg"];
+    _flamer setObjectTextureGlobal [_i, "\z\root_anomalies\addons\flamer\images\03_flesh.jpg"];
 };
 _flamer setVariable ["atk",false];
 _flamer call FLAMER_hide_flamer;
 _list_unit_range_flamer = [];
-[_flamer, _damage_on_death] execvm "\z\root_anomalies\addons\flamer\functions\flamer_end.sqf";
+[_flamer, _damage_on_death] execVM "\z\root_anomalies\addons\flamer\functions\flamer_end.sqf";
 
 
 
@@ -271,8 +271,8 @@ while {alive _flamer} do
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -313,8 +313,8 @@ while {alive _flamer} do
 							_x setDamage ((damage _x) + 0.03);
 						};
 					};
-					_tip = selectrandom ["04","burned","02","03"];
-					[_x,[_tip,200]] remoteExec ["say3d"];
+					_tip = selectRandom ["04","burned","02","03"];
+					[_x,[_tip,200]] remoteExec ["say3D"];
 				} else
 				{
 					if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -327,7 +327,7 @@ while {alive _flamer} do
 						} forEach _vichitpoints;
 					};
 				};
-			} forEach (_nearflamer-[_flamer]); [[_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf"] remoteExec ["execvm"]; [_flamer,_tgt_flamer,_cap_flamer,_damage_flamer] spawn FLAMER_jump_flamer};
+			} forEach (_nearflamer-[_flamer]); [[_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf"] remoteExec ["execVM"]; [_flamer,_tgt_flamer,_cap_flamer,_damage_flamer] spawn FLAMER_jump_flamer};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase","LandVehicle"],5];
 		{
@@ -349,8 +349,8 @@ while {alive _flamer} do
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -365,7 +365,7 @@ while {alive _flamer} do
 			};
 		} forEach (_nearflamer-[_flamer]); 
 		if ((_flamer distance _tgt_flamer <15)&&!(_flamer getVariable "atk")) then 
-		{_flamer setVariable ["atk",true]; [_flamer,_tgt_flamer,_damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execvm"]};
+		{_flamer setVariable ["atk",true]; [_flamer,_tgt_flamer,_damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase","LandVehicle"],5];
 		{
@@ -387,8 +387,8 @@ while {alive _flamer} do
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
@@ -424,8 +424,8 @@ while {alive _flamer} do
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
-				_tip = selectrandom ["04","burned","02","03"];
-				[_x,[_tip,200]] remoteExec ["say3d"];
+				_tip = selectRandom ["04","burned","02","03"];
+				[_x,[_tip,200]] remoteExec ["say3D"];
 			} else
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {

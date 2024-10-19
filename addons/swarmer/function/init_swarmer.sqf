@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 /*
-[object_name, territory_radius, throwable_class_name, damage_inflicted] execvm "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf";
+[object_name, territory_radius, throwable_class_name, damage_inflicted] execVM "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf";
 
 object_name			 - string, the name of the object you use as start location for SWARMER
 territory_radius	 - number, radius of territory in meters
@@ -51,7 +51,7 @@ deleteVehicle _logic;
 			if !(_nopesticide) then { _pesticideobject = "SmokeShellGreen"; };
 		};
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_swarmer_territory < 75) then {
             	_swarmer_territory = 75;
         	};

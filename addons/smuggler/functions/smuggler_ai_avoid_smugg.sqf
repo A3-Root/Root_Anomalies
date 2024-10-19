@@ -12,7 +12,7 @@ _list_ai_in_range = (position _obj_teleporter) nearEntities ["Man",50];
 if (count _list_ai_in_range>0) then 
 {
 	{
-	if ((local _x) and ((headgear _x == detect_smug)or(goggles _x==detect_smug)or(uniform _x==detect_smug)or(vest _x==detect_smug)or(Backpack _x==detect_smug) or (detect_smug in (assigneditems _x + items _x)))) then
+	if ((local _x) and ((headgear _x == detect_smug)or(goggles _x==detect_smug)or(uniform _x==detect_smug)or(vest _x==detect_smug)or(backpack _x==detect_smug) or (detect_smug in (assignedItems _x + items _x)))) then
 	{
 		_reldir = [_x, getPos _obj_teleporter] call BIS_fnc_dirTo;
 		_fct = [30,-30] call BIS_fnc_selectRandom;

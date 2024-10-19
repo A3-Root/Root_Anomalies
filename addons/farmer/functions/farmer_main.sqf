@@ -28,7 +28,7 @@ FARMER_hide_farmer = {
 	_this setAnimSpeedCoef 0.8;
 	_this switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_this setVariable ["vizibil",false,true];
-	[_this,["pietre",1000]] remoteExec ["say3d"];
+	[_this,["pietre",1000]] remoteExec ["say3D"];
 	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
 	_this hideObjectGlobal true;
 };
@@ -38,7 +38,7 @@ FARMER_show_farmer = {
 	params ["_farmer","_poz_orig_sc"];
 	_pos_farmer = [_poz_orig_sc,0,10,3,0,20,0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
 	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil",true,true];
-	[_farmer,["punch_7",1000]] remoteExec ["say3d"];
+	[_farmer,["punch_7",1000]] remoteExec ["say3D"];
 	_farmer hideObjectGlobal false;
 	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
 	_farmer setAnimSpeedCoef 0.8; 
@@ -139,7 +139,7 @@ _farmer setSkill ["courage", 1];_farmer setUnitPos "UP"; _farmer disableAI "ALL"
 _hp_curr_farmer = 1/_health_points;
 _farmer setVariable ["al_dam_total", 0];
 _farmer setVariable ["al_dam_incr", _hp_curr_farmer];
-_farmer removeAllEventHandlers "hit";
+_farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
     _unit=_this#0;
@@ -149,27 +149,27 @@ _farmer addEventHandler ["Hit", {
     [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
-_farmer removeAllEventHandlers "Handledamage";
+_farmer removeAllEventHandlers "HandleDamage";
 
-_farmer addEventHandler ["Handledamage", {
+_farmer addEventHandler ["HandleDamage", {
     0
 }];
 
 _farmer addEventHandler ["Killed", {
-    (_this select 0) hideObjectglobal true;
+    (_this select 0) hideObjectGlobal true;
     (_this select 1) addRating 2000
 }];
 
 for "_i" from 0 to 5 do {
-    _farmer setobjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"]
+    _farmer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"]
 };
 
 for "_i" from 0 to 5 do {
-    _farmer setobjecttextureGlobal [_i, "#(argb, 8, 8, 3)color(0, 0.5, 0, 0.5)"]
+    _farmer setObjectTextureGlobal [_i, "#(argb, 8, 8, 3)color(0, 0.5, 0, 0.5)"]
 };
 
 for "_i" from 0 to 5 do {
-    _farmer setobjecttextureGlobal [_i, "a3\structures_f_mark\training\data\shootingmat_01_opfor_co.paa"]
+    _farmer setObjectTextureGlobal [_i, "a3\structures_f_mark\training\data\shootingmat_01_opfor_co.paa"]
 };
 
 _farmer call FARMER_hide_farmer;
@@ -209,7 +209,7 @@ while {alive _farmer} do {
 
 
     while {
-        (!isnil "_tgt_farmer")&&{
+        (!isNil "_tgt_farmer")&&{
             (alive _farmer)&&((_farmer distance getMarkerPos _marker_farmer) < _territory)
         }
     } do
@@ -252,7 +252,7 @@ while {alive _farmer} do {
         _farmer setUnitPos "UP";
         if ((!alive _tgt_farmer)or(_tgt_farmer distance getMarkerPos _marker_farmer > _territory)) then {
             _list_unit_range_farm = [_farmer, _territory] call FARMER_find_target;
-            if !(count _list_unit_range_farm isEqualto 0) then {
+            if !(count _list_unit_range_farm isEqualTo 0) then {
                 _tgt_farmer = selectRandom (_list_unit_range_farm select { (typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") });
             } else {
                 _tgt_farmer = nil

@@ -2,7 +2,7 @@
 // MODIFIED BY ROOT
 
 /*
-null = [marker_name]execvm "AL_screamer\screamer.sqf"
+null = [marker_name]execVM "AL_screamer\screamer.sqf"
 
 marker_name	- string, name of the marker where you want to place the anomaly
 */
@@ -29,7 +29,7 @@ private _radiuspos = getPosATL _logic;
 deleteVehicle _logic;
 
 ["Screamer Anomaly Settings", [
-	["SIDES", ["Screamer Side", "Specifies the side the Screamer will spawn as. If multiple selected, only the first side is chosen as spawn. Defaults to CIVILIAN. Only required when 'AI Engage' is active."], []],
+	["SIDES", ["Screamer Side", "Specifies the side the Screamer will spawn as. If multiple selected, only the first side is chosen as spawn. Defaults to civilian. Only required when 'AI Engage' is active."], []],
 	["SIDES", ["Screamer Targets", "Specifies the side(s) the Screamer will consider hostile. If none are selected, it will attack everyone and everything."], []],
 	["EDIT", ["Screamer Model", "Classname of the object used as the Anomaly."], ["Land_AncientStatue_01_F"]],
 	["SLIDER", ["Screamer Health", "Percentage amount of health the Screamer has."], [10, 5000, 400, 0]],
@@ -46,17 +46,17 @@ deleteVehicle _logic;
 		_results params ["_screamer_spawn_side", "_screamer_hostiles", "_screamer_model", "_screamer_health", "_screamer_territory", "_screamer_atk_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_screamer_damage_close", "_screamer_damage_medium", "_screamer_damage_far"];
 
 		if (_screamer_hostiles isEqualTo []) then {
-            _screamer_hostiles = ["WEST", "EAST", "RESISTANCE", "CIVILIAN"];
+            _screamer_hostiles = ["west", "east", "RESISTANCE", "civilian"];
         };
 
 		if (_isaidmg == true) then {
 			if (_screamer_spawn_side isEqualTo []) then {
-            	_screamer_spawn_side = EAST;
+            	_screamer_spawn_side = east;
 			} else {
 				_screamer_spawn_side = _screamer_spawn_side select 0;
 			};
 		} else {
-			_screamer_spawn_side = EAST;
+			_screamer_spawn_side = east;
 		};
 		
 		if (_screamer_atk_radius > (_screamer_territory / 2)) then {

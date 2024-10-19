@@ -39,7 +39,7 @@ _persistent_dust setParticleParams [["\A3\data_f\cl_basic",1,0,1],"","Billboard"
 _persistent_dust setDropInterval 0.01;
 [_persistent_dust] spawn {params ["_de_sters"]; uiSleep 1; deleteVehicle _de_sters};
 
-_farmer say3d ["pietre",5000];
+_farmer say3D ["pietre",5000];
 for "_i" from 1 to 20 do {
 	_burst setParticleCircle [_i,[0,0,0]];
 	_bolovani setParticleCircle [_i,[0,0,0]];
@@ -49,7 +49,7 @@ for "_i" from 1 to 20 do {
 					_pp = linearConversion [0,100,_i,5,0,true];
 					[player,1] call BIS_fnc_dirtEffect;
 					addCamShake [_pp,2,30];
-					player allowdamage true;
+					player allowDamage true;
 					_jump_dir = (getPosATL _farmer vectorFromTo getPosATL player) vectorMultiply 3;
 					player setVelocity [_jump_dir # 0,_jump_dir # 1,3];
 					_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -66,7 +66,7 @@ for "_i" from 1 to 20 do {
 				};
 	uiSleep 0.05;
 };
-player allowdamage true;
+player allowDamage true;
 if ((player distance _farmer)<20) then
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];

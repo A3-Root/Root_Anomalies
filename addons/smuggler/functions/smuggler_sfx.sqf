@@ -108,7 +108,7 @@ fnc_sec_effect_smug = {
 	};
 };
 
-fnc_check_detector_smug = {if ((headgear _this == detect_smug) or (goggles _this ==detect_smug) or (uniform _this ==detect_smug) or (vest _this ==detect_smug) or (Backpack _this ==detect_smug) or (detect_smug in (assigneditems _this  + items _this ))) then {true} else {false}};
+fnc_check_detector_smug = {if ((headgear _this == detect_smug) or (goggles _this ==detect_smug) or (uniform _this ==detect_smug) or (vest _this ==detect_smug) or (backpack _this ==detect_smug) or (detect_smug in (assignedItems _this  + items _this ))) then {true} else {false}};
 
 if (!hasInterface) exitWith {};
 
@@ -119,7 +119,7 @@ waitUntil {!isNil{_sursa_core getVariable "activeaza"}};
 
 if (detect_smug!="") then 
 {
-	while {!isnull _obj_sursa_smugg} do 
+	while {!isNull _obj_sursa_smugg} do 
 	{
 		waitUntil {uiSleep 5; /* uiSleep 10; */ player distance _obj_sursa_smugg < 1000};
 		_sursa_core setVariable ["activeaza",true,true];
@@ -134,7 +134,7 @@ if (detect_smug!="") then
 } else 
 	{
 		player_chk_det = true;
-		while {!isnull _obj_sursa_smugg} do 
+		while {!isNull _obj_sursa_smugg} do 
 		{
 			waitUntil {uiSleep 5; /* uiSleep 10; */ player distance _obj_sursa_smugg < 1000}; 
 			_sursa_core setVariable ["activeaza",true,true];

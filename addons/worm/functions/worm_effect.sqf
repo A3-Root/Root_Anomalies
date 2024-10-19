@@ -11,14 +11,14 @@ _voce_idle = _this select 2;
 
 [_voce_idle] spawn {
 	_tail_voice = _this select 0;
-	while {!isnull _tail_voice} do 
+	while {!isNull _tail_voice} do 
 	{
 	_tail_voice say3D ["idle_02", 500];
 	uiSleep 7.5;
 	};
 };
 
-while {!isnull _head_worm} do 
+while {!isNull _head_worm} do 
 {
 if (sunOrMoon==0) then 
 {

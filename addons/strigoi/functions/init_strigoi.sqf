@@ -7,7 +7,7 @@
 ================================================================================================================================
 STRIGOI Parameters =======================
 ================================================================================================================================
-[_marker_name, _territory, _day_activ, _inflicted_damage, _hp_strigoi] execvm "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"
+[_marker_name, _territory, _day_activ, _inflicted_damage, _hp_strigoi] execVM "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"
 
 _marker_name		- string, name of the marker where you want to place the anomaly
 _territory			- number, meters, strigoi will move and be active only within boundaries of his territory
@@ -50,7 +50,7 @@ deleteVehicle _logic;
 		params ["_results", "_strigoiMarkerName"];
 		_results params ["_strigoi_hp", "_territory_override", "_strigoi_territory", "_strigoi_damage", "_isaipanic", "_isnightonly", "_noseizure"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_strigoi_territory < 75) then {
             	_strigoi_territory = 75;
         	};

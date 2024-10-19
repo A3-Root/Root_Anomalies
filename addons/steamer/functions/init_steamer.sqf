@@ -41,7 +41,7 @@ deleteVehicle _logic;
 		params ["_results", "_steamerMarkerName"];
 		_results params ["_territory_override", "_steamer_territory", "_steamer_damage", "_steamer_recharge", "_dmg_on_death", "_travelpath"];
 
-		if (_territory_override != true) then {
+		if !(_territory_override) then {
         	if (_steamer_territory < 75) then {
             	_steamer_territory = 75;
         	};

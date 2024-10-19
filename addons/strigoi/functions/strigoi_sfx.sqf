@@ -52,7 +52,7 @@ _comp_obj_casp = [];
 player setSpeaker "NoVoice";
 
 waitUntil {uiSleep 5; player distance _strigoi <1000};
-_strigoi spawn {while {alive _this} do {if (_this getVariable "vizibil") then {[_this,["casp_voice", 100]] remoteExec ["say3d"]}; uiSleep 20; /* uiSleep 30 + random 20*/}};
+_strigoi spawn {while {alive _this} do {if (_this getVariable "vizibil") then {[_this,["casp_voice", 100]] remoteExec ["say3D"]}; uiSleep 20; /* uiSleep 30 + random 20*/}};
 
 _pct_casper=["spine3","leftshoulder","leftforearmroll","leftleg","leftfoot","leftupleg","rightshoulder","rightforearmroll","rightupleg","rightleg","rightfoot","pelvis","neck","leftforearm", "rightforearm"];
 {_part_surs = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _comp_obj_casp pushBack _part_surs; _part_surs attachTo [_strigoi, [0,0,0],_x]} forEach _pct_casper;
