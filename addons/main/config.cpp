@@ -38,7 +38,17 @@ class CfgFunctions
 		class Anomalies
 		{
 			file = "z\root_anomalies\addons\main\functions";
-			class init {postint = 1;}
+			class init {postInit = 1; file = "z\root_anomalies\addons\main\functions\fn_init.sqf";};
+			class Burper {file = "z\root_anomalies\addons\main\functions\fn_burper.sqf";};
+			class Farmer {file = "z\root_anomalies\addons\main\functions\fn_farmer.sqf";};
+			class Flamer {file = "z\root_anomalies\addons\main\functions\fn_flamer.sqf";};
+			class Screamer {file = "z\root_anomalies\addons\main\functions\fn_screamer.sqf";};
+			class Smuggler {file = "z\root_anomalies\addons\main\functions\fn_smuggler.sqf";};
+			class Steamer {file = "z\root_anomalies\addons\main\functions\fn_steamer.sqf";};
+			class Strigoi {file = "z\root_anomalies\addons\main\functions\fn_strigoi.sqf";};
+			class Swarmer {file = "z\root_anomalies\addons\main\functions\fn_swarmer.sqf";};
+			class Twins {file = "z\root_anomalies\addons\main\functions\fn_twins.sqf";};
+			class Worm {file = "z\root_anomalies\addons\main\functions\fn_worm.sqf";};
 		};
 	};
 };
