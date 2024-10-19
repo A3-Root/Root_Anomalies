@@ -16,6 +16,7 @@ include = [
     "logo_co.paa",
     "logo_ca.paa",
     "logo_co.png",
+    "./include",
 ]
 exclude = [
     "*.psd",

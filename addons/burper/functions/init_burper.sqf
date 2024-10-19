@@ -13,10 +13,10 @@ anti_burper_device	- string, class name of the object which will act as a Burper
 */
 
 // Only run on player machines
-if (!hasinterface) exitwith {};
+if (!hasInterface) exitWith {};
 
 // If ZEN is not loaded, do not start script
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitwith
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
 };
@@ -51,9 +51,9 @@ deleteVehicle _logic;
 		params ["_results", "_burperMarkerName"];
 		_results params ["_burper_territory", "_isvehicle", "_isroaming", "_isdetectable", "_isprotectable", "_iskillable", "_isaipanic", "_killswitch_range", "_detectdevice", "_protectdevice", "_killdevice"];
 
-		if (_isdetectable != true) then {_detectdevice = ""};
-		if (_isprotectable != true) then {_protectdevice = ""};
-		if (_iskillable != true) then {_killdevice = "NO-KILL-DEVICE-CONFIGURED"; _killswitch_range = 1};
+		if !(_isdetectable) then {_detectdevice = ""};
+		if !(_isprotectable) then {_protectdevice = ""};
+		if !(_iskillable) then {_killdevice = "NO-KILL-DEVICE-CONFIGURED"; _killswitch_range = 1};
 		if (_killswitch_range < _burper_territory) then {
 			if (_killdevice isKindOf "LandVehicle") then {
 				if ((_killswitch_range + _burper_territory) > (2 * _burper_territory)) then { _killswitch_range = 1.5 * _burper_territory; };
@@ -64,7 +64,7 @@ deleteVehicle _logic;
 
 		["Burper Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_burperMarkerName, _isroaming, _detectdevice, _protectdevice, _killdevice, _burper_territory, _isvehicle, _killswitch_range, _isaipanic], "\Root_Anomalies\Root_Burper\AL_burper\burper_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_burperMarkerName, _isroaming, _detectdevice, _protectdevice, _killdevice, _burper_territory, _isvehicle, _killswitch_range, _isaipanic], "\z\root_anomalies\addons\burper\functions\burper_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

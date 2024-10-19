@@ -5,20 +5,19 @@ class CfgPatches {
 		units[] = {"Burper_Module"};
 		weapons[] = {};
 		author = "Root";
-		authors = {
+		authors[] = {
 			"Root",
 			"Aliascartoons"
-		}
+		};
 		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
 class CfgFunctions {
 	class Root {
-		class RootBurperCategory
-		{
+		class RootBurperCategory {
 			file = "functions";
-			class Burper {file = "\z\Root_Anomalies\addons\burper\fn_burper.sqf";};
+			class Burper {file = "\z\Root_Anomalies\addons\burper\functions\init_burper.sqf";};
 		};
 	};
 };

@@ -11,10 +11,10 @@ class CfgPatches {
 		};
 		weapons[] = {};
 		author = "Root";
-		authors = {
+		authors[] = {
 			"Root",
 			"Aliascartoons"
-		}
+		};
 		url = "https://github.com/A3-Root/Root_Anomalies";
 		requiredVersion = REQUIRED_VERSION;
 	};
