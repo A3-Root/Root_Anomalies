@@ -322,7 +322,7 @@ while {alive _entitate} do
 		_bob_pos_1 = (position _bob1);
 		_bob_pos_2 = (position _bob2);
 		_bob_pos_3 = (position _bob3);
-		_overallunits = nearestObject [_anomally_pos,_screamer_dmgs,_screamer_radius];
+		_overallunits = nearestObjects [_anomally_pos,_screamer_dmgs,_screamer_radius];
 		_units_range_1 = [];
 		_units_range_2 = [];
 		_units_range_3 = [];

@@ -163,7 +163,7 @@ while {!isNull _cap} do {
                 (getPosATL _cap select 2) < 1
             };
             [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
-            _nearobj_wrom = nearestObject [getPosATL _cap, [], 15];
+            _nearobj_wrom = nearestObjects [getPosATL _cap, [], 15];
             {
                 if ((_x!=_cap)&&(_x!=_coada)&&(_x!=_coada_01)&&!(surfaceIsWater getPos _x)) then {
                     if (_x isKindOf "LandVehicle") then {

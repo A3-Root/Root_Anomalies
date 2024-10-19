@@ -90,7 +90,7 @@ waitUntil {!alive _steamer_dud};
 [[getPosATL _steamer_dud],"\z\root_anomalies\addons\steamer\functions\steamer_end.sqf"] remoteExec ["execVM"];
 _obj_veg = nearestTerrainObjects [position _steamer_dud,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
 {_x setDamage [1,true]} forEach _obj_veg;
-_obj_build = nearestObject [position _steamer_dud,["BUILDING","HOUSE","CHURCH","CHAPEL","FUELSTATION","HOSPITAL","RUIN","BUNKER","Land_fs_roof_F","Land_TTowerBig_2_F","Land_TTowerBig_1_F","Lamps_base_F","PowerLines_base_F","PowerLines_Small_base_F","Land_LampStreet_small_F","CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
+_obj_build = nearestObjects [position _steamer_dud,["BUILDING","HOUSE","CHURCH","CHAPEL","FUELSTATION","HOSPITAL","RUIN","BUNKER","Land_fs_roof_F","Land_TTowerBig_2_F","Land_TTowerBig_1_F","Lamps_base_F","PowerLines_base_F","PowerLines_Small_base_F","Land_LampStreet_small_F","CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
 {_x setDamage [1,false]} forEach _obj_build;
 _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 {
@@ -106,7 +106,7 @@ _obj_man = _steamer_dud nearEntities ["CAManBase",20];
 		}; 
 	};
 } forEach _obj_man;
-_vik_list = nearestObject [position _steamer_dud,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
+_vik_list = nearestObjects [position _steamer_dud,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air","Ship"],20,false];
 {_x setDamage ((damage _x) + random[0, _damage_steamer, 1])} forEach _vik_list;
 uiSleep 10;
 deleteVehicle _steamer_dud;

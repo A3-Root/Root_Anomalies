@@ -139,6 +139,7 @@ if (detection_smugg) then {
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0,getPosATL _work_obj select 1,1], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
+		uiSleep 0.1;
 		_burper_obj_sec hideObjectGlobal true;
 		
 		[_work_obj,_burper_obj_sec] spawn {
@@ -177,7 +178,8 @@ if (detection_smugg) then {
 		waitUntil {uiSleep 2; (player distance _work_obj) <1500};
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0,getPosATL _work_obj select 1,0], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
-		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];	
+		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
+		uiSleep 0.1;	
 		
 		[_work_obj,_burper_obj_sec] spawn {
 			_work_obj_princ		= _this select 0;

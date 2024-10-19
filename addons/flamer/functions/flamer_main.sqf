@@ -78,7 +78,7 @@ FLAMER_attk_flamer = {
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
-	_nearvik = nearestObject [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],7,false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
+	_nearvik = nearestObjects [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],7,false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
 	uiSleep 4;
 	_flamer setVariable ["atk",false];
 };
@@ -124,7 +124,7 @@ FLAMER_jump_flamer = {
 	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10+random 10);
 	_salt_sunet= selectRandom ["01_blast","02_blast","03_blast"]; 
 	_obj_veg = nearestTerrainObjects [position _flamer,["TREE","SMALL TREE","BUSH","FOREST BORDER","FOREST TRIANGLE","FOREST SQUARE","FOREST"],20,false];
-	_nearvik = nearestObject [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],20,false];
+	_nearvik = nearestObjects [position _flamer,["CAR","TANK","PLANE","HELICOPTER","Motorcycle","Air"],20,false];
 	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3D"];
 	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",5];
 	{
@@ -225,9 +225,11 @@ _cap_flamer = "Land_HelipadEmpty_F" createVehicle [0,0,0]; _cap_flamer attachTo 
 
 for "_i" from 0 to 5 do {
     _flamer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
+	uiSleep 0.1;
 };
 for "_i" from 0 to 5 do {
     _flamer setObjectTextureGlobal [_i, "\z\root_anomalies\addons\flamer\images\03_flesh.jpg"];
+	uiSleep 0.1;
 };
 _flamer setVariable ["atk",false];
 _flamer call FLAMER_hide_flamer;

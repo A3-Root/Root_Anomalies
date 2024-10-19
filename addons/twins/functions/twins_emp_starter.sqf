@@ -98,7 +98,7 @@ _x setVariable ["A3TI_Disable", true];
 _x disableAI "LIGHTS"; 
 _x setPilotLight false;  
 _x setCollisionLight false;
-} forEach (nearestObject [_spark_move, [
+} forEach (nearestObjects [_spark_move, [
 "Car",
 "Motorcycle",
 "UAV",
@@ -161,7 +161,7 @@ _e_static setParticleParams [["\A3\data_f\blesk1", 1, 0, 1], "", "SpaceObject", 
 _e_static setDropInterval 0.025;
 uiSleep 0.5;
 deleteVehicle _e_static;
-} forEach (nearestObject [_spark_move, [
+} forEach (nearestObjects [_spark_move, [
 "Car",
 "Motorcycle",
 "UAV",
@@ -249,7 +249,7 @@ if (_spark_type=="orange") then
 _scantei_spark say3D _spark_sound;
 uiSleep 0.4 + (random 0.7);
 deleteVehicle _scantei_spark;
-} forEach (nearestObject [_spark_move, [
+} forEach (nearestObjects [_spark_move, [
 "Lamps_base_F", //These are all the lights' base classes
 "PowerLines_base_F",
 "PowerLines_Small_base_F"
@@ -626,7 +626,7 @@ _binos = [
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
 
 uiSleep 0.5;
 {							
@@ -641,7 +641,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
 
 uiSleep 0.5;
 {							
@@ -656,7 +656,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
 
 
 uiSleep 0.5;
@@ -672,7 +672,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
 
 
 
@@ -772,7 +772,7 @@ _x removePrimaryWeaponItem "OPTRE_M7_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Flashlight";
 _x removePrimaryWeaponItem "OPTRE_DMR_Light"																								
-} forEach (nearestObject [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
 
 
 
