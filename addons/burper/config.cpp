@@ -2,9 +2,14 @@ class CfgPatches {
 	class Root_Burper_Anomaly {
 		addonRootClass = "Root_Anomalies";
 		requiredAddons[] = {"A3_Modules_F_Curator","cba_main","Root_Anomalies"};
-		requiredVersion = 0.1;
 		units[] = {"Burper_Module"};
 		weapons[] = {};
+		author = "Root";
+		authors = {
+			"Root",
+			"Aliascartoons"
+		}
+		url = "https://github.com/A3-Root/Root_Anomalies";
 	};
 };
 
@@ -13,7 +18,7 @@ class CfgFunctions {
 		class RootBurperCategory
 		{
 			file = "functions";
-			class Burper {file = "\Root_Anomalies\Root_Burper\AL_burper\init_burper.sqf";};
+			class Burper {file = "\z\Root_Anomalies\addons\burper\fn_burper.sqf";};
 		};
 	};
 };

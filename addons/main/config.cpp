@@ -3,7 +3,6 @@
 class CfgPatches {
 	class ROOT_Anomalies {
 		name = "Root's Anomalies";
-		author = "Root";
 		units[] = {};
 		requiredAddons[] = {
 			"A3_Modules_F_Curator", 
@@ -11,6 +10,12 @@ class CfgPatches {
 			"zen_custom_modules"
 		};
 		weapons[] = {};
+		author = "Root";
+		authors = {
+			"Root",
+			"Aliascartoons"
+		}
+		url = "https://github.com/A3-Root/Root_Anomalies";
 		requiredVersion = REQUIRED_VERSION;
 	};
 };
