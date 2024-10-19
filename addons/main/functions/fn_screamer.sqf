@@ -21,16 +21,16 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Screamer Anomaly", {
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
 	if (isNil "SCREAMER_markerIndex") then { SCREAMER_markerIndex = 0 };
 	_screamermarkerName = format ["SCREAMER_%1", SCREAMER_markerIndex];
 	SCREAMER_markerIndex = SCREAMER_markerIndex + 1;
-	_screamermarker = createMarker [_screamermarkerName, _logic];
+	_screamermarker = createMarker [_screamermarkerName, _posASL];
 
-	private _radiuspos = getPosATL _logic;
+	private _radiuspos = ASLToATL _posASL;
 
-	deleteVehicle _logic;
+	
 
 	["Screamer Anomaly Settings", [
 		["SIDES", ["Screamer Side", "Specifies the side the Screamer will spawn as. If multiple selected, only the first side is chosen as spawn. Defaults to CIVILIAN. Only required when 'AI Engage' is active."], []],

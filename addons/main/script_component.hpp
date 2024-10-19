@@ -15,4 +15,3 @@
 #endif
 
 #include "script_macros.hpp"
-

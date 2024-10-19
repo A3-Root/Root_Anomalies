@@ -19,9 +19,9 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 };
 
 ["Root's Anomalies", "Flamer Anomaly", {
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
-	private _pos = getPosATL _logic;
+	private _pos = ASLToATL _posASL;
 
 	if (isNil "FLAMER_markerindex") then {
 		FLAMER_markerindex = 0
@@ -32,7 +32,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 	_flamerMarker = createMarker [_flamerMarkerName, _pos];
 
-	deleteVehicle _logic;
+	
 
 	["Flamer Anomaly Settings", [
 		["SLIDER", ["Flamer Health", "Amount of damage the Flamer takes before being killed."], [10, 5000, 400, 0]], 

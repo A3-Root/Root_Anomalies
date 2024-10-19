@@ -32,16 +32,16 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Strigoi Anomaly", {
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
-	private _radiuspos = getPosATL _logic;
+	private _radiuspos = ASLToATL _posASL;
 
 	if (isNil "STRIGOI_markerIndex") then { STRIGOI_markerIndex = 0 };
 
 	_strigoiMarkerName = format ["STRIGOI_%1", STRIGOI_markerIndex];
 	STRIGOI_markerIndex = STRIGOI_markerIndex + 1;
-	_strigoimarker = createMarker [_strigoiMarkerName, _logic];
-	deleteVehicle _logic;
+	_strigoimarker = createMarker [_strigoiMarkerName, _posASL];
+	
 
 
 	["Strigoi Anomaly Settings", [

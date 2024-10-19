@@ -22,10 +22,10 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Swarmer Anomaly", {
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
-	private _swarmerloc = getPosATL _logic;
-	deleteVehicle _logic;
+	private _swarmerloc = ASLToATL _posASL;
+	
 
 	["Swarmer Anomaly Settings", [
 		["EDIT", ["Swarmer Hive Object", "Classname of the object used to spawn the Swarmer."], ["Land_GarbageBags_F"]], 

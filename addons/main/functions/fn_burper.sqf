@@ -22,18 +22,18 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 };
 
 ["Root's Anomalies", "Burper Anomaly", {
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
 	if (isNil "BURPER_markerIndex") then { BURPER_markerIndex = 0 };
 
 	_burperMarkerName = format ["BURPER_%1", BURPER_markerIndex];
 	BURPER_markerIndex = BURPER_markerIndex + 1;
-	_burpermarker = createMarker [_burperMarkerName, _logic];
+	_burpermarker = createMarker [_burperMarkerName, _posASL];
 
-	private _radiuspos = getPosATL _logic;
-	private _devicepos = getPosATL _logic;
+	private _radiuspos = ASLToATL _posASL;
+	private _devicepos = ASLToATL _posASL;
 
-	deleteVehicle _logic;
+	
 
 
 	["Burper Anomaly Settings", [

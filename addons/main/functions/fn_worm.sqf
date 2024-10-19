@@ -29,16 +29,16 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 ["Root's Anomalies", "Worm Anomaly", {
 
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
 	if (isNil "WORM_markerIndex") then { WORM_markerIndex = 0 };
 	_wormmarkerName = format ["WORM_%1", WORM_markerIndex];
 	WORM_markerIndex = WORM_markerIndex + 1;
-	_wormmarker = createMarker [_wormmarkerName, _logic];
+	_wormmarker = createMarker [_wormmarkerName, _posASL];
 
-	private _radiuspos = getPosATL _logic;
+	private _radiuspos = ASLToATL _posASL;
 
-	deleteVehicle _logic;
+	
 
 
 	["Worm Anomaly Settings", [

@@ -32,14 +32,14 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Smuggler Anomaly", {
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
 	if (isNil "SMUGGLER_markerIndex") then { SMUGGLER_markerIndex = 0 };
 
 	_smugglerMarkerName = format ["SMUGGLER_%1", SMUGGLER_markerIndex];
 	SMUGGLER_markerIndex = SMUGGLER_markerIndex + 1;
-	_smugglermarker = createMarker [_smugglerMarkerName, _logic];
-	deleteVehicle _logic;
+	_smugglermarker = createMarker [_smugglerMarkerName, _posASL];
+	
 
 	["Smuggler Anomaly Settings", [
 		["TOOLBOX:YESNO", ["Enable Roaming Smuggler", "If true, the Smuggler to teleport to random position every 30 seconds around the marker area."], false],

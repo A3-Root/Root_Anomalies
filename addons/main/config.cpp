@@ -14,20 +14,42 @@ class CfgPatches {
 			"A3_Modules_F_Curator", 
 			"cba_main", 
 			"zen_custom_modules",
-			"zen_modules"
 		};
 		requiredVersion = REQUIRED_VERSION;
-		skipWhenMissingDependencies = 1;
+		version = 4.0.0;
+		versionStr = "4.0.0";
+	};
+};
+
+class CfgFactionClasses
+{
+	class NO_CATEGORY;
+	class ROOT_ANOMALIES: NO_CATEGORY
+	{
+		displayName="Root's Anomalies";
+	};
+};
+
+
+class CfgFunctions
+{
+	class ROOT
+	{
+		class Anomalies
+		{
+			file = "z\root_anomalies\addons\main\functions";
+			class init {postint = 1;}
+		};
 	};
 };
 
 class Extended_PostInit_EventHandlers {
 	class RootPostInitSwarmer 	{
-		init = "call compile preprocessFileLineNumbers '\z\root_anomalies\addons\main\scripts\Swarmer\postinit_swarmer.sqf'";
+		init = "call compile preprocessFileLineNumbers 'z\root_anomalies\addons\main\scripts\Swarmer\postinit_swarmer.sqf'";
 		disableModuload = 1;
 	};
 	class RootPostInitWorm 	{
-		init = "call compile preprocessFileLineNumbers 'scripts\Worm\postinit_worm.sqf'";
+		init = "call compile preprocessFileLineNumbers 'z\root_anomalies\addons\main\scripts\Worm\postinit_worm.sqf'";
 		disableModuload = 1;
 	};
 };

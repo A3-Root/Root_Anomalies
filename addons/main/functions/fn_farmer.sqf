@@ -20,9 +20,9 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Farmer Anomaly", {
 
-    params ["_logic"];
+    params ["_posASL", "_attachedObject"];
 
-    private _pos = getPosATL _logic;
+    private _pos = ASLToATL _posASL;
 
     if (isNil "FARMER_markerindex") then {
         FARMER_markerindex = 0
@@ -33,7 +33,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
     _farmerMarker = createMarker [_farmerMarkerName, _pos];
 
-    deleteVehicle _logic;
+    
 
     ["Farmer Anomaly Settings", [
         ["SLIDER", ["Farmer Health", "Amount of damage the Farmer takes before being killed."], [10, 5000, 400, 0]],

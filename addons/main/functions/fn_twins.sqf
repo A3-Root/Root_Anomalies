@@ -28,12 +28,12 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 ["Root's Anomalies", "Twins Anomaly", {
 
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
-	private _trackpos = getPosATL _logic;
-	private _killpos = getPosATL _logic;
-	private _objpos = getPosATL _logic;
-	deleteVehicle _logic;
+	private _trackpos = ASLToATL _posASL;
+	private _killpos = ASLToATL _posASL;
+	private _objpos = ASLToATL _posASL;
+	
 
 	["Twins Anomaly Settings", [
 		["EDIT", ["Twins Object", "Classname of the object used as the Twins."], ["Land_HighVoltageTower_large_F"]],

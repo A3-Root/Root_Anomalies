@@ -25,16 +25,16 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 ["Root's Anomalies", "Steamer Anomaly", {
 
-	params ["_logic"];
+	params ["_posASL", "_attachedObject"];
 
-	private _radiuspos = getPosATL _logic;
+	private _radiuspos = ASLToATL _posASL;
 
 	if (isNil "STEAMER_markerIndex") then { STEAMER_markerIndex = 0 };
 
 	_steamerMarkerName = format ["STEAMER_%1",  STEAMER_markerIndex];
 	STEAMER_markerIndex = STEAMER_markerIndex + 1;
-	_steamermarker = createMarker [_steamerMarkerName,  _logic];
-	deleteVehicle _logic;
+	_steamermarker = createMarker [_steamerMarkerName,  _posASL];
+	
 
 	["Steamer Anomaly Settings", [
 		["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Steamer will be overriden from 75m."], false],
