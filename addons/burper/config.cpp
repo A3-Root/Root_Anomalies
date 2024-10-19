@@ -22,13 +22,6 @@ class CfgFunctions {
 	};
 };
 
-class CfgFactionClasses {
-	class NO_CATEGORY;
-	class ROOT_ANOMALIES : NO_CATEGORY {
-		displayName = "Root's Anomalies";
-	};
-};
-
 class CfgVehicles {
 	class zen_modules_moduleBase;
 	class Burper_Module: zen_modules_moduleBase {

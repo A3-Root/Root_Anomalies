@@ -12,15 +12,8 @@ class CfgFunctions {
 	class Root {
 		class RootFarmerCategory
 		{
-			class Farmer {file = "\Root_Anomalies\Root_Farmer\AL_farmer\init_farmer.sqf";};
+			class Farmer {file = "\z\root_anomalies\addons\farmer\functions\init_farmer.sqf";};
 		};
-	};
-};
-
-class CfgFactionClasses {
-	class NO_CATEGORY;
-	class ROOT_ANOMALIES : NO_CATEGORY {
-		displayName = "Root's Anomalies";
 	};
 };
 

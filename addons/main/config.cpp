@@ -20,6 +20,13 @@ class CfgPatches {
 	};
 };
 
+class CfgFactionClasses {
+	class NO_CATEGORY;
+	class ROOT_ANOMALIES : NO_CATEGORY {
+		displayName = "Root's Anomalies";
+	};
+};
+
 class CfgSounds {
 	class bones_drop {
 		name = "bones_drop";
