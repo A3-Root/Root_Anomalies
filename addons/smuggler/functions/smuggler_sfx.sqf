@@ -50,7 +50,7 @@ fnc_effecte_princ_smug = {
 
 	while {(player distance _obj_sursa_smugg < 1000) && player_chk_det} do 
 	{
-		_fct_lit = [1,-1] call BIS_fnc_selectRandom;
+		_fct_lit = [1, -1] call BIS_fnc_selectRandom;
 		uiSleep 0.5+ random 1;
 		_spot_lit lightAttachObject [_sursa_princ_center, [0.5+random _fct_lit, 0.5+random _fct_lit, 1]];
 		_r_col_burp=random 1;
@@ -92,13 +92,13 @@ fnc_sec_effect_smug = {
 
 		_suck_frunze = "#particlesource" createVehicleLocal (getPosATL _obj_sec_effect);
 		_suck_frunze setParticleCircle [5, [0, 0, 0]];
-		_suck_frunze setParticleRandom [0.1, [6, 6, 0], [-7,-7, 0.5], 0.25, 0.5, [0, 0, 0, 1], 1, 0.5];
+		_suck_frunze setParticleRandom [0.1, [6, 6, 0], [-7, -7, 0.5], 0.25, 0.5, [0, 0, 0, 1], 1, 0.5];
 		_suck_frunze setParticleParams [["\A3\data_f\ParticleEffects\Hit_Leaves\Leaves_Green.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 2], 1, 12, 7.9, 1, [3, 3, 3], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [1], 1, 0.5, "", "", _obj_sec_effect, random 360, true, 0.3];
 		_suck_frunze setDropInterval 0.01;
 
 		_suck_dust = "#particlesource" createVehicleLocal (getPosATL _obj_sec_effect);
-		_suck_dust setParticleCircle [6, [-3,-3, 0]];
-		_suck_dust setParticleRandom [0.5, [2, 2, 0], [-7,-7, 0], 3, 0.5, [0, 0, 0, 1], 1, 0.5];
+		_suck_dust setParticleCircle [6, [-3, -3, 0]];
+		_suck_dust setParticleRandom [0.5, [2, 2, 0], [-7, -7, 0], 3, 0.5, [0, 0, 0, 1], 1, 0.5];
 		_suck_dust setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 2, [0, 0, 0], [0, 0, 0.1], 0, 10, 7.9, 0, [3, 5, 10], [[0.3, 0.27, 0.15, 0], [0.3, 0.27, 0.15, 0.05], [0.3, 0.27, 0.15, 0]], [0.08], 1, 0, "", "", _obj_sec_effect];
 		_suck_dust setDropInterval 0.01;
 		uiSleep 1;

@@ -20,14 +20,14 @@ _pamant setDropInterval 0.2;
 [_pamant] spawn {_de_sters = _this select 0; uiSleep 0.5; deleteVehicle _de_sters};
 
 _blast_wave = "#particlesource" createVehicleLocal (getPos _crater);
-_blast_wave setParticleCircle [0, [-0.2,-0.2, 0]];
+_blast_wave setParticleCircle [0, [-0.2, -0.2, 0]];
 _blast_wave setParticleRandom [0.1, [0.3, 0.3, 0.5], [0.2, 0.2, 0.5], 0, 0.1, [0, 0, 0, 0.1], 1, 0];
 _blast_wave setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 5, [0, 0, 0.3], [0, 0, 2], 5, 10, 7, 1, [5, 10], [[0.05, 0.04, 0.03, 1], [0.05, 0.04, 0.03, 0]], [1], 1, 0, "", "", _crater];
 _blast_wave setDropInterval 0.1;
 [_blast_wave] spawn {_de_sters = _this select 0; uiSleep 0.5; deleteVehicle _de_sters};
 
 _bolovani = "#particlesource" createVehicleLocal (getPos _crater);
-_bolovani setParticleCircle [1, [-5,-5, 0]];
+_bolovani setParticleCircle [1, [-5, -5, 0]];
 _bolovani setParticleRandom [0.1, [1, 1, 0], [5, 5, 5], 0, 0.2, [0, 0, 0, 1], 1, 0];
 _bolovani setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 10], 2, 200, 5, 3, [0.5, 0.5, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 0]], [1], 1, 0, "", "", _crater, round (random 360), true, 0.1];
 _bolovani setDropInterval 0.05;	

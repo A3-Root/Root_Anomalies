@@ -51,7 +51,7 @@ FARMER_show_farmer = {
 FARMER_avoid_farmer = {
 	params ["_strig", "_chased"];
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [25, round ((_strig getDir _chased) + (random 33)*(selectRandom [1,-1]))];
+	_relPos = _chased getPos [25, round ((_strig getDir _chased) + (random 33)*(selectRandom [1, -1]))];
 	_chased doMove _relPos;	_chased setSkill ["commanding", 1];
 };
 

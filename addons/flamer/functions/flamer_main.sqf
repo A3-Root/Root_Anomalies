@@ -13,7 +13,7 @@ FLAMER_avoid_flamer = {
 	params ["_flamer", "_chased"];
 	private ["_flamer", "_chased"];
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [30, (_flamer getDir _chased) + (random 33)*(selectRandom [1,-1])];
+	_relPos = _chased getPos [30, (_flamer getDir _chased) + (random 33)*(selectRandom [1, -1])];
 	_chased doMove _relPos;
 	_chased setSkill ["commanding", 1];
 };

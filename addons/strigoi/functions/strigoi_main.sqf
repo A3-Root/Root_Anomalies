@@ -23,7 +23,7 @@ STRIGOI_avoid_casp ={
 	_strig = _this select 0;
 	_chased = _this select 1;
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [10, (_strig getDir _chased) + (random 33)*(selectRandom [1,-1])];
+	_relPos = _chased getPos [10, (_strig getDir _chased) + (random 33)*(selectRandom [1, -1])];
 	_chased doMove _relPos;
 	_chased setSkill ["commanding", 1];
 };

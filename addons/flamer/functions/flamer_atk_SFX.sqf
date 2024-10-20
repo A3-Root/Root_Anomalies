@@ -9,8 +9,8 @@ _burn_grnd = "Land_HelipadEmpty_F" createVehicleLocal [getPosATL _flamer select 
 _burn_grnd say3D ["furnal", 300];
 enableCamShake true;
 _blast_dust = "#particlesource" createVehicleLocal (getPosATL _flamer);
-_blast_dust setParticleCircle [3, [-3,-3, 0]];
-_blast_dust setParticleRandom [0.5, [2, 2, 0], [-7,-7, 0], 5, 1, [0, 0, 0, 1], 1, 0.5];
+_blast_dust setParticleCircle [3, [-3, -3, 0]];
+_blast_dust setParticleRandom [0.5, [2, 2, 0], [-7, -7, 0], 5, 1, [0, 0, 0, 1], 1, 0.5];
 _blast_dust setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d", 8, 0, 40, 1], "", "Billboard", 1, 2, [0, 0, 0], [0, 0, 0.1], 0, 10, 7.9, 0, [1, 10], [[0.3, 0.27, 0.15, 0.3], [0.3, 0.27, 0.15, 0]], [0.5], 1, 0.5, "", "", _flamer, 0, true];
 _blast_dust setDropInterval 0.01;
 _flama = "#particlesource" createVehicleLocal (getPosATL _flamer);

@@ -5,7 +5,7 @@ if (!hasInterface) exitWith {};
 
 params ["_tgt_poz", "_crater_bool"];
 
-_blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz select 0, _tgt_poz select 1,-0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
+_blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz select 0, _tgt_poz select 1, -0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
 _blow_poz setVectorUp surfaceNormal getPosATL _blow_poz;
 enableCamShake true;
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
@@ -17,7 +17,7 @@ _eko = selectRandom [eko_01, eko_02];
 
 playSound3D ["\z\root_anomalies\addons\main\sounds\explozie_3.ogg", "", false, [getPos _blow_poz select 0, getPos _blow_poz select 1, 1], 7, 5, 0];
 _bolovani = "#particlesource" createVehicleLocal (getPos _blow_poz);
-_bolovani setParticleCircle [0.5, [-3,-3, 0]];
+_bolovani setParticleCircle [0.5, [-3, -3, 0]];
 _bolovani setParticleRandom [0.1, [0.3, 0.3, 0], [5, 5, 50], 0, 0.2, [0, 0, 0, 0.1], 1, 0];
 _bolovani setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [2, 2, 20], 2, 200, 5, 3, [0.5, 0.5, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [1], 1, 0, "", "", _blow_poz, round (random 360), true, 0.1];
 _bolovani setDropInterval 0.01;	
@@ -37,8 +37,8 @@ _blast setDropInterval 0.05;
 [_blast] spawn {params ["_sterg"]; uiSleep 0.5; deleteVehicle _sterg};
 
 _wave = "#particlesource" createVehicleLocal (getPos _blow_poz);
-_wave setParticleCircle [0.5, [-3,-3, 0]];
-_wave setParticleRandom [0.1, [0.1, 0.1, 0.1], [-7,-7, 0], 5, 0.1, [0, 0, 0, 0.1], 1, 0];
+_wave setParticleCircle [0.5, [-3, -3, 0]];
+_wave setParticleRandom [0.1, [0.1, 0.1, 0.1], [-7, -7, 0], 5, 0.1, [0, 0, 0, 0.1], 1, 0];
 _wave setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 1, [0, 0, 0], [0, 0, 0.1], 5, 10, 7.9, 0, [3, 3, 3], [[1, 1, 1, 0.1], [1, 1, 1, 0.2], [1, 1, 1, 0]], [0.5], 1, 0, "", "", _blow_poz];
 _wave setDropInterval 0.002;
 [_wave] spawn {params ["_sterg"]; uiSleep 0.5; deleteVehicle _sterg};

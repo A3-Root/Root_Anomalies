@@ -24,7 +24,7 @@ _li_exp setLightColor[1, 0.2, 0.1];
 _scantei = "#particlesource" createVehicleLocal getPosATL _part_surs;
 _scantei setParticleCircle [2, [40, 40, 50]];
 _scantei setParticleRandom [1, [0.5, 0.5, 0.5], [30, 30, 20], 0, 0.1, [0, 0, 0, 0.1], 1, 0];
-_scantei setParticleParams [["\A3\data_f\cl_exp", 1, 0, 1], "", "Billboard", 1, 3, [0, 0, 1], [0, 0, 0], 0, 300, 10, 15, [0.3, 0.1], [[1, 1, 1, 1], [1, 1, 1, 1]], [1], 1, 0, "", "", _part_surs, 0, false,-1, [[1, 0.1, 0, 1]]];
+_scantei setParticleParams [["\A3\data_f\cl_exp", 1, 0, 1], "", "Billboard", 1, 3, [0, 0, 1], [0, 0, 0], 0, 300, 10, 15, [0.3, 0.1], [[1, 1, 1, 1], [1, 1, 1, 1]], [1], 1, 0, "", "", _part_surs, 0, false, -1, [[1, 0.1, 0, 1]]];
 _scantei setDropInterval 0.01;	
 [_scantei] spawn {_de_sters = _this select 0; uiSleep 0.5;	deleteVehicle _de_sters};
 
@@ -44,14 +44,14 @@ _vapori_bmb setDropInterval 500;
 uiSleep 0.1;
 _wave = "#particlesource" createVehicleLocal getPosATL _part_surs;
 _wave setParticleCircle [3, [20, 20, 0]];
-_wave setParticleRandom [0.1, [3, 3, 0], [-10,-10, 0], 0, 0.1, [0, 0, 0, 0.1], 0, 0];
+_wave setParticleRandom [0.1, [3, 3, 0], [-10, -10, 0], 0, 0.1, [0, 0, 0, 0.1], 0, 0];
 _wave setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d", 8, 0, 40, 1], "", "Billboard", 1, 2, [0, 0, 0], [0, 0, 0], 0, 17, 13, 0, [10, 30], [[0, 0, 0, 0.5], [0, 0, 0, 0]], [1], 0, 0, "", "", _part_surs];
 _wave setDropInterval 0.005;
 [_wave] spawn {_de_sters = _this select 0; uiSleep 0.2; deleteVehicle _de_sters};
 uiSleep 0.1;
 
 _palarie = "#particlesource" createVehicleLocal getPos _part_surs;
-_palarie setParticleCircle [2, [-0.5,-0.5, 0]];
+_palarie setParticleCircle [2, [-0.5, -0.5, 0]];
 _palarie setParticleRandom [0.5, [1, 1, 0.3], [0.3, 0.3, 0], 0, 0.1, [0, 0, 0, 0.1], 1, 0];
 _palarie setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16, 3, 112, 0], "", "Billboard", 1, 3, [0, 0, 0], [0, 0, 6], 0, 15, 7.9, 0, [2, 5], [[1, 1, 1, 1], [0, 0, 0, 0]], [0.1], 1, 0, "", "", _part_surs, 45];
 _palarie setDropInterval 0.001;

@@ -12,7 +12,7 @@ fnc_avoid_screamer ={
 		if (_x != _danger_close) then 
 		{
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
-		_fct = [30,-30] call BIS_fnc_selectRandom;
+		_fct = [30, -30] call BIS_fnc_selectRandom;
 		if (_reldir<180) then {_op_dir=_reldir+180 +_fct} else {_op_dir=_reldir-180+_fct};
 		_avoid_poz = [getPosATL _x, 30+random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
@@ -28,7 +28,7 @@ fnc_hitpoint_damage = {
 	_damage = _this select 1;
 	if (_vehicle isKindOf "Air") then {
 		_vehicle addTorque (_vehicle vectorModelToWorld [10, 10, 10]);
-		_vehicle setVelocity [25,-10,-10];
+		_vehicle setVelocity [25, -10, -10];
 		_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
 		{
 			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
@@ -202,7 +202,7 @@ if (!_isalivevic) then
 		_screamer_anomally = createVehicle ["Land_AncientStatue_01_F", [0, 0, 0], [], 0, "CAN_COLLIDE"];
 	};
 	_screamer_anomally attachTo [_entitate, [0, 0.5, 0.5], "spine3"];
-	_screamer_anomally setVectorDirAndUp [[0,-1, 0], [0, 0, 1]];
+	_screamer_anomally setVectorDirAndUp [[0, -1, 0], [0, 0, 1]];
 	_screamer_anomally setMass 1;
 	_bob1 attachTo [_screamer_anomally, [0, -6, 0.5]];
 	_bob2 attachTo [_screamer_anomally, [0, -19, 0.5]];
@@ -339,7 +339,7 @@ while {alive _entitate} do
 				
 		uiSleep 1;
 
-		_wave_obj attachTo [_entitate, [0,-1, 1.5]];
+		_wave_obj attachTo [_entitate, [0, -1, 1.5]];
 		detach _wave_obj;
 
 		if (_isalivevic) then 

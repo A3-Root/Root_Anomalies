@@ -50,7 +50,7 @@ _poz_5 = [];
 
 switch (_floor_dice) do 
 {
-	case 0: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 0: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
@@ -64,7 +64,7 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 1: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 1: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
@@ -78,7 +78,7 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 2: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 2: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			[_unit_check, _poz_2, _noseizeer] call fn_teleport;
 			uiSleep 0.3;
@@ -93,7 +93,7 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 3: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 3: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			[_unit_check, _poz_2, _noseizeer] call fn_teleport;			
 			[_unit_check, _poz_3, _noseizeer] call fn_teleport;
@@ -109,7 +109,7 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 4: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 4: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			[_unit_check, _poz_2, _noseizeer] call fn_teleport;			
 			[_unit_check, _poz_3, _noseizeer] call fn_teleport;		
@@ -126,7 +126,7 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 5: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_5 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
+	case 5: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos; _poz_5 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			[_unit_check, _poz_2, _noseizeer] call fn_teleport;			
 			[_unit_check, _poz_3, _noseizeer] call fn_teleport;		

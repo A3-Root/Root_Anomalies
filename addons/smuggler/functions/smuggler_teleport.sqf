@@ -27,7 +27,7 @@ while {alive _obj_teleporter} do {
     if (protection_smug != "") then {
         if (count _list_teleport>0) then {
             {
-                if ((headgear _x == protection_smug)or(goggles _x==protection_smug)or(uniform _x==protection_smug)or(vest _x==protection_smug)or(backpack _x==protection_smug) or (protection_smug in (assignedItems _x + items _x))) then {} else {
+                if ((headgear _x == protection_smug)or(goggles _x== protection_smug)or(uniform _x== protection_smug)or(vest _x== protection_smug)or(backpack _x== protection_smug) or (protection_smug in (assignedItems _x + items _x))) then {} else {
                     _fresh_spawn = _x getVariable "teleported_in";
                     if (isNil "_fresh_spawn") then {
                         [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
