@@ -6,7 +6,7 @@ if (!isServer) exitWith {};
 
 
 STRIGOI_find_target = {
-	private ["_neartargets","_teritoriu"];
+	private ["_neartargets", "_teritoriu"];
 	_strigoi = _this select 0;
 	_teritoriu = _this select 1;
 	_neartargets = (ASLToAGL getPosATL _strigoi) nearEntities ["CAManBase",_teritoriu];
@@ -29,7 +29,7 @@ STRIGOI_avoid_casp ={
 };
 
 STRIGOI_attk_strig = {
-	private ["_strigoi","_tgt_casp","_damage_strig", "_noseize"];
+	private ["_strigoi", "_tgt_casp", "_damage_strig", "_noseize"];
 	_strigoi		= _this select 0;
 	_tgt_casp		= _this select 1;
 	_damage_strig	= _this select 2;
@@ -65,7 +65,7 @@ STRIGOI_hide_strig = {
 };
 
 STRIGOI_show_strig = {
-	private ["_strigoi","_poz_orig_sc","_pos_strig","_teritoriu"];
+	private ["_strigoi", "_poz_orig_sc", "_pos_strig", "_teritoriu"];
 	_strigoi= _this select 0;
 	_poz_orig_sc= _this select 1;
 	_teritoriu= _this select 2;
@@ -78,23 +78,23 @@ STRIGOI_show_strig = {
 };
 
 STRIGOI_salt_1 = {
-	params ["_strigoi","_poz_tgt","_umbla_casper","_obj_de_agatat","_cap_casper","_pot_poz"];
+	params ["_strigoi", "_poz_tgt", "_umbla_casper", "_obj_de_agatat", "_cap_casper", "_pot_poz"];
 	private "_unghi_fugarit";
 	_umbla_casper setPos (_obj_de_agatat getPos [2,_obj_de_agatat getRelDir _poz_tgt]);
-	_salt_sunet=["01_salt","02_salt","03_salt"] call BIS_fnc_selectRandom; 
+	_salt_sunet=["01_salt", "02_salt", "03_salt"] call BIS_fnc_selectRandom; 
 	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
 	_strigoi setVelocityTransformation [getPosATL _strigoi,getPosATL _umbla_casper, velocity _strigoi,velocity _umbla_casper,[0,0,0],[0,0,0],[0,0,1],[0,0,2],0.3];
 	_strigoi attachTo [_umbla_casper,[0,0,(getPos _obj_de_agatat select 2) + _pot_poz/4]];
 	_strigoi setDir (_strigoi getRelDir _poz_tgt);
-	_tipat_casp= selectRandom ["01_tip_casp","NoSound","02_tip_casp","03_tip_casp","NoSound","04_tip_casp","05_tip_casp","06_tip_casp","07_tip_casp","NoSound"];
+	_tipat_casp= selectRandom ["01_tip_casp", "NoSound", "02_tip_casp", "03_tip_casp", "NoSound", "04_tip_casp", "05_tip_casp", "06_tip_casp", "07_tip_casp", "NoSound"];
 	[_cap_casper,[_tipat_casp,500]] remoteExec ["say3D"];
 };
 
 STRIGOI_salt_2 ={
-	params ["_strigoi","_tgt_casp","_umbla_casper","_obj_de_agatat","_cap_casper"];
+	params ["_strigoi", "_tgt_casp", "_umbla_casper", "_obj_de_agatat", "_cap_casper"];
 	private ["_jump_dir"];
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 10;
-	_salt_sunet= selectRandom ["01_salt","02_salt","03_salt"]; 
+	_salt_sunet= selectRandom ["01_salt", "02_salt", "03_salt"]; 
 	_strigoi attachTo [_umbla_casper,[0,0,((boundingCenter _obj_de_agatat) select 2)*2]];
 	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
 	detach _strigoi;
@@ -102,16 +102,16 @@ STRIGOI_salt_2 ={
 };
 
 STRIGOI_jump_ground ={
-	params ["_strigoi","_tgt_casp","_cap_casper"];
+	params ["_strigoi", "_tgt_casp", "_cap_casper"];
 	private ["_jump_dir"];
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
-	_salt_sunet= selectRandom ["01_salt","02_salt","03_salt"]; 
+	_salt_sunet= selectRandom ["01_salt", "02_salt", "03_salt"]; 
 	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
 	_strigoi setVelocity [_jump_dir select 0,_jump_dir select 1,round (5+random 15)];
 };
 
 params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic"];
-private ["_hp_incr","_hp_curr_strig","_pos_strig","_anomalie_dedus","_gasit","_obj_de_agatat","_pot_poz","_press_implicit_x","_press_implicit_y","_fct_mult","_vert_vit","_inaltime_salt","_distanta_salt","_dur_zbor","_umbla_casper","_strigoi","_tgt_casp"];
+private ["_hp_incr", "_hp_curr_strig", "_pos_strig", "_anomalie_dedus", "_gasit", "_obj_de_agatat", "_pot_poz", "_press_implicit_x", "_press_implicit_y", "_fct_mult", "_vert_vit", "_inaltime_salt", "_distanta_salt", "_dur_zbor", "_umbla_casper", "_strigoi", "_tgt_casp"];
 
 [] spawn {
 	if (isNil "allPlayers_on") then 
@@ -137,7 +137,7 @@ _strigoi setSpeaker "NoVoice"; _strigoi disableConversation true;
 _strigoi addRating -10000; _strigoi setBehaviour "CARELESS";
 _strigoi enableFatigue false; _strigoi setSkill ["courage", 1];
 _strigoi setUnitPos "UP"; _strigoi disableAI "ALL"; _strigoi setMass 7000;
-{_strigoi enableAI _x} forEach ["MOVE","ANIM","TEAMSWITCH","PATH"];
+{_strigoi enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];
 
 
 
@@ -150,7 +150,7 @@ _strigoi removeAllEventHandlers "Hit";
 _strigoi addEventHandler ["Hit", {[[_this select 0],"\z\root_anomalies\addons\strigoi\functions\strigoi_splash_hit.sqf"] remoteExec ["execVM"]}];
 _strigoi addEventHandler ["Killed", {(_this select 0) hideObjectGlobal true; (_this select 1) addRating 2000}];
 _strigoi removeAllEventHandlers "HandleDamage";
-_strigoi addEventhandler ["HandleDamage",{params ["_unit","_damage","_bullet"];	_unit = _this select 0;	_bullet =_this select 4; _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr");	_unit setVariable ["al_dam_total",_curr_dam,true];
+_strigoi addEventhandler ["HandleDamage",{params ["_unit", "_damage", "_bullet"];	_unit = _this select 0;	_bullet =_this select 4; _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr");	_unit setVariable ["al_dam_total",_curr_dam,true];
 if ((_bullet=="") or ((_unit getVariable "al_dam_total")<1)) then {0}else{1}}];
 */
 
@@ -209,7 +209,7 @@ while {alive _strigoi} do
 		uiSleep 1;
 		if (_strigoi distance _tgt_casp <40) then 
 		{
-			_atk_sun = selectRandom ["01_atk_bg","02_atk","03_atk","04_atk"];
+			_atk_sun = selectRandom ["01_atk_bg", "02_atk", "03_atk", "04_atk"];
 			[_strigoi,[_atk_sun,400]] remoteExec ["say3D"];
 			[_strigoi,_tgt_casp,_damage_strig,_noseize] call STRIGOI_attk_strig;
 			uiSleep 1;

@@ -9,7 +9,7 @@ roi_mor = "\z\root_anomalies\addons\main\sounds\roi_mort.ogg";
 _roi_SFX = "#particlesource" createVehicleLocal (getPos _stup);
 _roi_SFX setParticleCircle [0,[0.1,0.1,0]];
 _roi_SFX setParticleRandom [0,[1,1,1],[-0.1,-0.1,0.5],0,0.2,[0,0,0,1],0.5,0.5];
-_roi_SFX setParticleParams [["\A3\animals_f\fly.p3d",1,0,1,1],"","SpaceObject",1,30,[0,0,3],[0.1,0.1,1],0,10.5,7.9,0,[5,10,10],[[1,1,1,1],[1,1,1,1],[1,1,1,1]],[1],0.5,0.5,"","",_stup,0,true,0];
+_roi_SFX setParticleParams [["\A3\animals_f\fly.p3d",1,0,1,1],"", "SpaceObject",1,30,[0,0,3],[0.1,0.1,1],0,10.5,7.9,0,[5,10,10],[[1,1,1,1],[1,1,1,1],[1,1,1,1]],[1],0.5,0.5,"", "",_stup,0,true,0];
 _roi_SFX setDropInterval 0.05;
 _hive_poz = getPosATL _stup;
 playSound3D ["\z\root_anomalies\addons\main\sounds\roi_mort.ogg", "", false, [_hive_poz select 0, _hive_poz select 1, 10], 5, 5, 1];

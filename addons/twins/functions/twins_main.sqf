@@ -7,7 +7,7 @@ if (!isServer) exitWith {};
 
 params ["_spark_obj", "_track_dist", "_spark_effect", "_damage_range", "_effect_on_AI", "_EMP_enabled", "_twin_heart", "_isseige"];
 
-private ["_track_dist","_poz_spark", "_isseige"];
+private ["_track_dist", "_poz_spark", "_isseige"];
 
 _heart_twin = _twin_heart createVehicle [0,0,0];
 _heart_twin attachTo [_spark_obj,[-0.5,0,1.5]];
@@ -79,7 +79,7 @@ if (_spark_effect) then
 {
 	while {alive _spark_obj} do 
 	{
-		_spark_poz_rel =["st","dr","ct"] call BIS_fnc_selectRandom;
+		_spark_poz_rel =["st", "dr", "ct"] call BIS_fnc_selectRandom;
 		if (_spark_poz_rel=="st") then {_poz_spark attachTo [_spark_obj,[-12,0,12.35]]};
 		if (_spark_poz_rel=="dr") then {_poz_spark attachTo [_spark_obj,[11.5,0,12.35]]};
 		if (_spark_poz_rel=="ct") then {_poz_spark attachTo [_spark_obj,[-0.3,0,12.2]]};

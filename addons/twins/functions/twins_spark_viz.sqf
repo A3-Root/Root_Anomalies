@@ -19,7 +19,7 @@ _electromagnetic_anom 	= _this select 0;
 _dist_damage_w			= _this select 1;
 _isseize			= _this select 2;
 
-private ["_aberat","_dist_damage_w"];
+private ["_aberat", "_dist_damage_w"];
 _play_sunet = true;
 
 while {alive _electromagnetic_anom} do 
@@ -90,7 +90,7 @@ while {alive _obj_emit} do
 		if (_viz_fct<1) then {_viz_fct = _viz_fct +1;_total_viz = _obj_emit getVariable "vizibil";_total_viz=_total_viz+1;_obj_emit setVariable ["vizibil", _total_viz, true];};
 	} else 
 		{
-			_main_obj_sun = ["metalic1","metalic2","metalic3","metalic4","metalic5"] call BIS_fnc_selectRandom;
+			_main_obj_sun = ["metalic1", "metalic2", "metalic3", "metalic4", "metalic5"] call BIS_fnc_selectRandom;
 			if ((_sun_ini!=_main_obj_sun) and (_token>12)) then {_obj_emit say3D [_main_obj_sun, 1500];_token=0};
 			_token= _token+0.2;
 			_sun_ini = _main_obj_sun;

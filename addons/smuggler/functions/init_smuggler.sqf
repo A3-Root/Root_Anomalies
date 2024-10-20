@@ -54,7 +54,7 @@ deleteVehicle _logic;
 		if !(_isprotectable) then {_protectdevice = ""};
 		if (_isspawning) then {_spawnobjects = "[]"} else 
 		{
-			_spawnobjects = _spawnobjects splitString ",";
+			_spawnobjects = _spawnobjects splitString ", ";
 		};
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;

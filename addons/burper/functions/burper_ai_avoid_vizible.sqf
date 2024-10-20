@@ -1,7 +1,7 @@
 // ORIGINALLY CREATED BY ALIAS
 // MODIFIED BY ROOT 
 
-private ["_avoid_poz","_op_dir","_reldir"];
+private ["_avoid_poz", "_op_dir", "_reldir"];
 
 //if (!isServer) exitWith {};
 

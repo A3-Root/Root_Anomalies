@@ -10,7 +10,7 @@ _AI_dam_range	= _this select 1;
 while {alive _electr_viz} do 
 {
 	_AI_units = [];
-	_AI_units= (position _electr_viz) nearEntities [["CAManBase","LandVehicle"], _AI_dam_range];	
+	_AI_units= (position _electr_viz) nearEntities [["CAManBase", "LandVehicle"], _AI_dam_range];	
 	//hint str _AI_units;
 	_pos_run = [getPosATL _electr_viz,1000,random 360] call BIS_fnc_relPos;
 	

@@ -9,7 +9,7 @@ Inbound
 
 if (!isServer) exitWith {};
 
-private ["_markern","_nm","_object_anom_burp","_markerstr"];
+private ["_markern", "_nm", "_object_anom_burp", "_markerstr"];
 
 params ["_marker_anom_burp", "_mobile_anomaly", "_device_detector", "_damage_protect", "_anti_burper_device", "_burper_radius", "_vehicle_allowed", "_killrange", "_isaipanic"];
 

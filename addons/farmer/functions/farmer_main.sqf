@@ -19,7 +19,7 @@ _ck_pl = false;
 
 FARMER_find_target = {
 	private "_neartargets";
-	params ["_farmer","_teritoriu"];
+	params ["_farmer", "_teritoriu"];
 	_neartargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"],_teritoriu];
 	_neartargets - [_farmer];
 };
@@ -34,8 +34,8 @@ FARMER_hide_farmer = {
 };
 
 FARMER_show_farmer = {
-	private ["_pos_farmer","_teritoriu","_blow_poz"];
-	params ["_farmer","_poz_orig_sc"];
+	private ["_pos_farmer", "_teritoriu", "_blow_poz"];
+	params ["_farmer", "_poz_orig_sc"];
 	_pos_farmer = [_poz_orig_sc,0,10,3,0,20,0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
 	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil",true,true];
 	[_farmer,["punch_7",1000]] remoteExec ["say3D"];
@@ -49,7 +49,7 @@ FARMER_show_farmer = {
 };
 
 FARMER_avoid_farmer = {
-	params ["_strig","_chased"];
+	params ["_strig", "_chased"];
 	if (isPlayer _chased) exitWith {};
 	_relPos = _chased getPos [25, round ((_strig getDir _chased) + (random 33)*(selectRandom [1,-1]))];
 	_chased doMove _relPos;	_chased setSkill ["commanding", 1];
@@ -57,7 +57,7 @@ FARMER_avoid_farmer = {
 
 FARMER_attk_farmer = {
 	private ["_vehicle", "_damage", "_vichitpoints"];
-	params ["_farmer","_damage_farmer"];
+	params ["_farmer", "_damage_farmer"];
 	_farmer setUnitPos "UP";
 	[[_farmer,_damage_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
 
@@ -104,7 +104,7 @@ FARMER_attk_farmer = {
 };
 
 FARMER_travel_farmer = {
-	params ["_farmer","_tgt_farmer"];
+	params ["_farmer", "_tgt_farmer"];
 	_farmer setUnitPos "DOWN";
 	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0,getPosATL _farmer select 1,3000];
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
