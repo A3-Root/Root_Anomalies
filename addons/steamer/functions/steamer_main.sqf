@@ -30,11 +30,11 @@ _list_unit_range_steamer = [];
 while {alive _steamer_dud} do 
 {
 	while {count _list_unit_range_steamer isEqualTo 0} do {_list_unit_range_steamer = [_steamer_dud, _teritoriu] call fnc_find_target_steamer; uiSleep 10};
-	_tgt_steamer = selectRandom ( _list_unit_range_steamer select { typeOf _x != "VirtualCurator_F" });
+	_tgt_steamer = selectRandom ( _list_unit_range_steamer select {typeOf _x != "VirtualCurator_F" });
 	uiSleep 5;
 	while {(!isNil "_tgt_steamer") && (alive _steamer_dud)} do 
 	{
-		if (_travelpath) then { [_steamer_dud, _tgt_steamer] call fnc_travel_steamer;};
+		if (_travelpath) then {[_steamer_dud, _tgt_steamer] call fnc_travel_steamer;};
 		_burst_poz= (ASLToAGL getPosATL _tgt_steamer);
 		_blow_units = _burst_poz nearEntities [["CAManBase", "LandVehicle"], 6];
 		_crater_bool = selectRandom [false, true, false, false];
@@ -46,7 +46,7 @@ while {alive _steamer_dud} do
 			{
 				[_x, _damage_steamer, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 			} else 
-			{ 
+			{
 				_x setDamage ((damage _x) + _damage_steamer);
 			};
 
@@ -101,7 +101,7 @@ _obj_man = _steamer_dud nearEntities ["CAManBase", 20];
 		{
 			[_x, _dmg_on_death, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 		} else 
-		{ 
+		{
 			_x setDamage ((damage _x) + _dmg_on_death);
 		};
 	};

@@ -23,7 +23,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 params ["_logic"];
 
-if (isNil "BURPER_markerIndex") then { BURPER_markerIndex = 0 };
+if (isNil "BURPER_markerIndex") then {BURPER_markerIndex = 0 };
 
 _burperMarkerName = format ["BURPER_%1", BURPER_markerIndex];
 BURPER_markerIndex = BURPER_markerIndex + 1;
@@ -56,7 +56,7 @@ deleteVehicle _logic;
 		if !(_iskillable) then {_killdevice = "NO-KILL-DEVICE-CONFIGURED"; _killswitch_range = 1};
 		if (_killswitch_range < _burper_territory) then {
 			if (_killdevice isKindOf "LandVehicle") then {
-				if ((_killswitch_range + _burper_territory) > (2 * _burper_territory)) then { _killswitch_range = 1.5 * _burper_territory;};
+				if ((_killswitch_range + _burper_territory) > (2 * _burper_territory)) then {_killswitch_range = 1.5 * _burper_territory;};
 			} else {
 				_killswitch_range = _killswitch_range + 5;
 			};

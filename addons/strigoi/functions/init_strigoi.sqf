@@ -28,7 +28,7 @@ params ["_logic"];
 
 private _radiuspos = getPosATL _logic;
 
-if (isNil "STRIGOI_markerIndex") then { STRIGOI_markerIndex = 0 };
+if (isNil "STRIGOI_markerIndex") then {STRIGOI_markerIndex = 0 };
 
 _strigoiMarkerName = format ["STRIGOI_%1", STRIGOI_markerIndex];
 STRIGOI_markerIndex = STRIGOI_markerIndex + 1;

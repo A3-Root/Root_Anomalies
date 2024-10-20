@@ -31,7 +31,7 @@ if (_device_detector != "") then
 [[_sursa_smugg, _sursa_smugg_core, _dmg_on_teleport, _noseize], "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport.sqf"] remoteExec ["execVM", 0, true];
 
 if (count _spawn_classname > 0) then 
-{ 
+{
 	if(_delay_between_spawn <= 0) exitWith {hint "The delay between spawns must be bigger than 0"};
 	spawn_delay_smugg= _delay_between_spawn; publicVariable "spawn_delay_smugg";
 	null= [_spawn_classname, _sursa_smugg_core] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_spawn.sqf"

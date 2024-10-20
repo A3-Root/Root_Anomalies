@@ -19,9 +19,6 @@ if (_device_detector != "") then {
 	if (_isaipanic) then {
 		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
 	};
-	if (_isaipanic) then {
-		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
-	};
 } else {
 	detection_smugg = false; publicVariable "detection_smugg";
 	if (_isaipanic) then {

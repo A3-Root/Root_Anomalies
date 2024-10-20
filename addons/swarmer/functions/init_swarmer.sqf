@@ -48,7 +48,7 @@ deleteVehicle _logic;
 			_pesticideobject = _pesticideobject;
 		} else 
 		{
-			if !(_nopesticide) then { _pesticideobject = "SmokeShellGreen";};
+			if !(_nopesticide) then {_pesticideobject = "SmokeShellGreen";};
 		};
 
 		if !(_territory_override) then {

@@ -54,12 +54,12 @@ for "_i" from 1 to 20 do {
 					player setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
 					_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 					_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-					if !( player isKindOf "VirtualCurator_F") then { 
+					if !( player isKindOf "VirtualCurator_F") then {
 						if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 						{
 							[player, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 						} else 
-						{ 
+						{
 							player setDamage ((damage player) + _damage_farmer);
 						};
 					};
@@ -71,12 +71,12 @@ if ((player distance _farmer) < 20) then
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-		if !(player isKindOf "VirtualCurator_F") then { 
+		if !(player isKindOf "VirtualCurator_F") then {
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
 				[player, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 			} else 
-			{ 
+			{
 				player setDamage ((damage player) + _damage_farmer);
 			};
 			};

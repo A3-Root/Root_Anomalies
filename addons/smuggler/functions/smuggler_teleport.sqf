@@ -44,7 +44,7 @@ while {alive _obj_teleporter} do {
                                 {
 	                                [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                                 } else 
-                                { 
+                                {
 	                                _x setDamage ((damage _x) + _dmg_on_teleport);
                                 };
                             } else {
@@ -73,7 +73,7 @@ while {alive _obj_teleporter} do {
                         {
 	                        [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
                         } else 
-                        { 
+                        {
 	                        _x setDamage ((damage _x) + _dmg_on_teleport);
                         };
 

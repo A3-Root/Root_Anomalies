@@ -66,7 +66,7 @@ while {alive _electromagnetic_anom} do
 		{
 			[player, random(0.33), _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", player];	
 		} else 
-		{ 
+		{
 			player setDamage ((damage player) + random(0.33));
 		};
 		uiSleep 5;

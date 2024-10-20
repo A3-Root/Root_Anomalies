@@ -19,7 +19,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 params ["_logic"];
 
-if (isNil "SCREAMER_markerIndex") then { SCREAMER_markerIndex = 0 };
+if (isNil "SCREAMER_markerIndex") then {SCREAMER_markerIndex = 0 };
 _screamermarkerName = format ["SCREAMER_%1", SCREAMER_markerIndex];
 SCREAMER_markerIndex = SCREAMER_markerIndex + 1;
 _screamermarker = createMarker [_screamermarkerName, _logic];

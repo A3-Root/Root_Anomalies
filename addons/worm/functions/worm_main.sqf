@@ -127,11 +127,11 @@ uiSleep 1;
 while {!isNull _cap} do {
     _tgt_worm = [];
     _list_ai_in_range_worm = (position _cap) nearEntities [["CAManBase", "LandVehicle"], _territory];
-    _list_ai_in_range_worm select { (typeOf _x != "VirtualCurator_F") };
+    _list_ai_in_range_worm select {(typeOf _x != "VirtualCurator_F") };
     _tgt_worm = selectRandom _list_ai_in_range_worm;
     if (count _list_ai_in_range_worm > 0) then {
         if ((_tgt_worm distance _cap < 15) && !(surfaceIsWater getPos _tgt_worm)) then {
-            if (_isaipanic) then { [_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
             if (_dir_move <= 90) then {
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, 1, true];
@@ -176,7 +176,7 @@ while {!isNull _cap} do {
                         if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then 
                         {
                             if(_isacemedical) then 
-                            { 
+                            {
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
                             } else 
                             {
@@ -187,7 +187,7 @@ while {!isNull _cap} do {
                 };
             } forEach _nearobj_wrom;
             uiSleep 1;
-            if (_isaipanic) then { [_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
             if (((getPosATL _cap select 2) < 0) || ((getPosATL _cap select 2) > 2)) then {
                 _cap setPos ([getPos _cap, 0.5, 50, 10, 0, 1, 0] call BIS_fnc_findSafePos)
             };
@@ -197,7 +197,7 @@ while {!isNull _cap} do {
         
         if ((!isNull _tgt_worm) && (_tgt_worm distance _cap > 15) && !(surfaceIsWater getPos _tgt_worm)) then {
             _sunet_deplas= ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
-            if (_isaipanic) then { [_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
             _fct_move = 8 + random 8;
             _fct = [10 + random - 35, 10 + random 45] call BIS_fnc_selectRandom;
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;

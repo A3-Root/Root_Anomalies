@@ -71,7 +71,7 @@ FARMER_attk_farmer = {
 				_x setVelocity [_jump_dir select 0, _jump_dir select 1, 9];
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 					[_x, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
-				} else { 
+				} else {
 					_x setDamage ((damage _x) + _damage_farmer);
 				};
 			};
@@ -256,7 +256,7 @@ while {alive _farmer} do {
         if ((!alive _tgt_farmer) || (_tgt_farmer distance getMarkerPos _marker_farmer > _territory)) then {
             _list_unit_range_farm = [_farmer, _territory] call FARMER_find_target;
             if !(count _list_unit_range_farm isEqualTo 0) then {
-                _tgt_farmer = selectRandom (_list_unit_range_farm select { (typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") });
+                _tgt_farmer = selectRandom (_list_unit_range_farm select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") });
             } else {
                 _tgt_farmer = nil
             };

@@ -41,12 +41,12 @@ STRIGOI_attk_strig = {
 		if (_tgt_casp isKindOf "Man") then {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (typeOf _tgt_casp != "VirtualCurator_F") then { 
+			if (typeOf _tgt_casp != "VirtualCurator_F") then {
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 				{
 					[_tgt_casp, _damage_strig, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_casp];	
 				} else 
-				{ 
+				{
 					_x setDamage ((damage _tgt_casp) + _damage_strig);
 				};
 			};
@@ -185,13 +185,13 @@ _list_unit_range_casp = [];
 while {alive _strigoi} do 
 {
 	while {count _list_unit_range_casp isEqualTo 0} do {_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target; uiSleep 10};
-	_tgt_casp = selectRandom ( _list_unit_range_casp select { (typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") } );
+	_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") } );
 	[_strigoi, getMarkerPos _poz_orig_sc, _teritoriu] call STRIGOI_show_strig;
 	while {(!isNil "_tgt_casp") && {(alive _strigoi) && ((_strigoi distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do 
 	{
 		[_list_unit_range_casp] call STRIGOI_strig_drain;
 		_strigoi moveTo AGLToASL (_tgt_casp getRelPos[10, 180]);
-		if (_isaipanic) then { [_strigoi, _tgt_casp] call STRIGOI_avoid_casp;};
+		if (_isaipanic) then {[_strigoi, _tgt_casp] call STRIGOI_avoid_casp;};
 		uiSleep 1;
 		if (_strigoi distance _tgt_casp < 40) then 
 		{
@@ -229,7 +229,7 @@ while {alive _strigoi} do
 		if ((!alive _tgt_casp) || (_tgt_casp distance getMarkerPos _poz_orig_sc > _teritoriu)) then 
 		{
 			_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target;
-			if !(count _list_unit_range_casp isEqualTo 0) then {_tgt_casp = selectRandom ( _list_unit_range_casp select { (typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") })} else {_tgt_casp = nil};
+			if !(count _list_unit_range_casp isEqualTo 0) then {_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") })} else {_tgt_casp = nil};
 		};
 		uiSleep 1;
 	};

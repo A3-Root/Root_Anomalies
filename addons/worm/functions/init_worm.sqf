@@ -24,7 +24,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 params ["_logic"];
 
-if (isNil "WORM_markerIndex") then { WORM_markerIndex = 0 };
+if (isNil "WORM_markerIndex") then {WORM_markerIndex = 0 };
 _wormmarkerName = format ["WORM_%1", WORM_markerIndex];
 WORM_markerIndex = WORM_markerIndex + 1;
 _wormmarker = createMarker [_wormmarkerName, _logic];

@@ -246,7 +246,7 @@ _list_unit_range_flamer = [];
 while {alive _flamer} do 
 {
 	while {count _list_unit_range_flamer isEqualTo 0} do {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; uiSleep 5;};
-	_tgt_flamer = selectRandom (_list_unit_range_flamer select { typeOf _x != "VirtualCurator_F" });
+	_tgt_flamer = selectRandom (_list_unit_range_flamer select {typeOf _x != "VirtualCurator_F" });
 	[_flamer, getMarkerPos _poz_orig_sc, _teritoriu, _damage_flamer] call FLAMER_show_flamer;
 	while {(!isNil "_tgt_flamer") && {(alive _flamer) && ((_flamer distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do 
 	{
@@ -288,9 +288,9 @@ while {alive _flamer} do
 			};
 		} forEach (_nearflamer - [_flamer]);
 		if (selectRandom [true, false, true, true, false]) then 
-		{ 
+		{
 			_flamer moveTo AGLToASL (_tgt_flamer getRelPos[10, 180]);
-			if (_isaipanic) then { [_flamer, _tgt_flamer] call FLAMER_avoid_flamer;};
+			if (_isaipanic) then {[_flamer, _tgt_flamer] call FLAMER_avoid_flamer;};
 		}
 		else 
 		{

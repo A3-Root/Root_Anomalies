@@ -16,7 +16,7 @@ while {alive _wormkillerobj} do
 				uiSleep 4;
 				deleteVehicle _x;
 			};
-			if (typeOf _x == "land_CanOpener_F") then { deleteVehicle _x;};
+			if (typeOf _x == "land_CanOpener_F") then {deleteVehicle _x;};
 		} forEach _near_worm;
 	};
 	uiSleep 2;

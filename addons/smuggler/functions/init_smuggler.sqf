@@ -25,7 +25,7 @@ if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 
 params ["_logic"];
 
-if (isNil "SMUGGLER_markerIndex") then { SMUGGLER_markerIndex = 0 };
+if (isNil "SMUGGLER_markerIndex") then {SMUGGLER_markerIndex = 0 };
 
 _smugglerMarkerName = format ["SMUGGLER_%1", SMUGGLER_markerIndex];
 SMUGGLER_markerIndex = SMUGGLER_markerIndex + 1;

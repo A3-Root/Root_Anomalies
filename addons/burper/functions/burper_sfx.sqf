@@ -105,15 +105,7 @@ fnc_anim_burp = {
 };
 
 fnc_check_detector = {
-	if (
-	(typeOf _this  == "VirtualCurator_F") or
-	(headgear _this  == detectiv_tool) or
-	(goggles _this == detectiv_tool) or
-	(uniform _this == detectiv_tool) or
-	(vest _this == detectiv_tool) or
-	(backpack _this == detectiv_tool) or
-	(detectiv_tool in (assignedItems _this  + items _this))
-	) then {
+	if ((typeOf _this  == "VirtualCurator_F") or ([_this, _detectiv_tool] call BIS_fnc_hasItem)) then {
 		_this setVariable ["has_detector", true, true];
 		ciclu_compli = 2;
 	} else {

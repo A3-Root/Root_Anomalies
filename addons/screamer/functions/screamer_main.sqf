@@ -95,7 +95,7 @@ _time = 3 + diag_tickTime;
 
 _vichitpoints = [];
 
-waitUntil { diag_tickTime > _time };
+waitUntil {diag_tickTime > _time };
 
 _isalivevic = false;
 _valid_statue = false;
@@ -121,10 +121,10 @@ if (_isvicdmg) then
 if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then 
 {
 	if (_anomaly_vic isKindOf "Man") then 
-	{ 
+	{
 		_isalivevic = true;
 	} else 
-	{ 
+	{
 		_isalivevic = false;
 		_valid_statue = true;
 	};
@@ -280,11 +280,11 @@ while {alive _entitate} do
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
 		if (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
 
-		_pot_tgt = ((_entitate nearEntities [_screamer_targets, _screamer_territory]) select { ((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
+		_pot_tgt = ((_entitate nearEntities [_screamer_targets, _screamer_territory]) select {((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
 		_poz = getPosATL _pot_tgt;
 
 		if (_isalivevic) then 
-		{ 
+		{
 			_wave_obj = createVehicle ["Land_Battery_F", position _entitate, [], 0, "CAN_COLLIDE"];
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
@@ -320,9 +320,9 @@ while {alive _entitate} do
 		{
    		_unit = _x;
    		if(_bob_pos_3 distance _unit > (_screamer_radius / 2)) then {
-			_units_range_3 = _units_range_3 + [_unit];} else { 
-				if(_bob_pos_1 distance _unit < (_screamer_radius / 5)) then { 
-					_units_range_1 = _units_range_1 + [_unit];} else { 
+			_units_range_3 = _units_range_3 + [_unit];} else {
+				if(_bob_pos_1 distance _unit < (_screamer_radius / 5)) then {
+					_units_range_1 = _units_range_1 + [_unit];} else {
 						if((_bob_pos_2 distance _unit > (_screamer_radius / 5)) && (_bob_pos_2 distance _unit < (_screamer_radius / 2))) then {
 							_units_range_2 = _units_range_2 + [_unit];};};
 						};
@@ -376,7 +376,7 @@ while {alive _entitate} do
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, -1, 0, true];
 			_press_implicit_y = 1 + _press_implicit_x;
 		};
-		if (_isaipanic) then { [_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer;};
+		if (_isaipanic) then {[_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer;};
 		scream_on= true;
 
 
@@ -390,16 +390,16 @@ while {alive _entitate} do
 			_x addTorque (_x vectorModelToWorld [2, 2, 2]);
 			_random_close = random[0, _damage_screamer_close, 1];
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
-			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then { 
+			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then {
 				if(!isNil "ace_arsenal_fnc_openBox") then 
 				{
 					[_x, _damage_screamer_close, _bodyPart, "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else 
-				{ 
+				{
 					_x setDamage ((damage _x) + _damage_screamer_close);
 				};
 			};
-			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0;};
+			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
@@ -421,16 +421,16 @@ while {alive _entitate} do
 			_x addTorque (_x vectorModelToWorld [1, 1, 1]);
 			_random_medium = random[0, (_damage_screamer_medium / 2), _damage_screamer_medium];
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.2, 0.7, 0.55, 0.4, 0.7, 0.55];
-			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then { 
+			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then {
 				if(!isNil "ace_arsenal_fnc_openBox") then 
 				{
 					[_x, _damage_screamer_medium, _bodyPart, "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else 
-				{ 
+				{
 					_x setDamage ((damage _x) + _damage_screamer_medium);
 				};
 			};
-			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0;};
+			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
@@ -452,16 +452,16 @@ while {alive _entitate} do
 			_x addTorque (_x vectorModelToWorld [0.5, 0.5, 0.5]);
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.1, 0.6, 0.45, 0.3, 0.6, 0.45];
 			_random_far = random[0, (_damage_screamer_far / 3), _damage_screamer_far];
-			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then { 
+			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then {
 				if(!isNil "ace_arsenal_fnc_openBox") then 
 				{
 					[_x, _damage_screamer_far, "Body", "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else 
-				{ 
+				{
 					_x setDamage ((damage _x) + _damage_screamer_far);
 				};
 			};
-			if (typeOf _x == "VirtualCurator_F") then { _x setDamage 0;};
+			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then 
 			{
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then
