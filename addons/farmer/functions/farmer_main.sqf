@@ -161,17 +161,17 @@ _farmer addEventHandler ["Killed", {
 }];
 
 for "_i" from 0 to 5 do {
-    _farmer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"]
+    _farmer setObjectMaterialGlobal [_i, "\a3\data_f\default.rvmat"];
     uiSleep 0.1;
 };
 
 for "_i" from 0 to 5 do {
-    _farmer setObjectTextureGlobal [_i, "#(rgb,8,8,3)color(0,0.5,0,0.5)"]
+    _farmer setObjectTextureGlobal [_i, "#(rgb,8,8,3)color(0,0.5,0,0.5)"];
     uiSleep 0.1;
 };
 
 for "_i" from 0 to 5 do {
-    _farmer setObjectTextureGlobal [_i, "a3\structures_f_mark\training\data\shootingmat_01_opfor_co.paa"]
+    _farmer setObjectTextureGlobal [_i, "a3\structures_f_mark\training\data\shootingmat_01_opfor_co.paa"];
     uiSleep 0.1;
 };
 

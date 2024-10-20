@@ -56,7 +56,7 @@ while {alive _mobile_s} do
 				if (alive _mobile_s) then {
 				[[_tgt_hiv,_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
 				_amountOfDamage = _dmg_un;
-				_type_of_damage = selectRandom ["bite", "bullet", "explosive", "falling", "grenade", "punch", "ropeburn", "shell", "stab", "unknown"];
+				_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
 				_bodyPart = selectRandom ["head","body","hand_l","hand_r","leg_l","leg_r"];
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 				{
