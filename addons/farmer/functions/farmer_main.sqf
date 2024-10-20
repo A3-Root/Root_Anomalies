@@ -20,7 +20,7 @@ _ck_pl = false;
 FARMER_find_target = {
 	private "_neartargets";
 	params ["_farmer", "_teritoriu"];
-	_neartargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"],_teritoriu];
+	_neartargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], _teritoriu];
 	_neartargets - [_farmer];
 };
 
@@ -28,19 +28,19 @@ FARMER_hide_farmer = {
 	_this setAnimSpeedCoef 0.8;
 	_this switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_this setVariable ["vizibil", false, true];
-	[_this,["pietre", 1000]] remoteExec ["say3D"];
-	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
+	[_this, ["pietre", 1000]] remoteExec ["say3D"];
+	[[_this], "\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
 	_this hideObjectGlobal true;
 };
 
 FARMER_show_farmer = {
 	private ["_pos_farmer", "_teritoriu", "_blow_poz"];
 	params ["_farmer", "_poz_orig_sc"];
-	_pos_farmer = [_poz_orig_sc, 0, 10, 3, 0, 20, 0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
+	_pos_farmer = [_poz_orig_sc, 0, 10, 3, 0, 20, 0, [], _poz_orig_sc] call BIS_fnc_findSafePos;
 	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil", true, true];
-	[_farmer,["punch_7", 1000]] remoteExec ["say3D"];
+	[_farmer, ["punch_7", 1000]] remoteExec ["say3D"];
 	_farmer hideObjectGlobal false;
-	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
+	[[_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
 	_farmer setAnimSpeedCoef 0.8;
 	_farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_farmer setUnitPos "UP";
@@ -59,7 +59,7 @@ FARMER_attk_farmer = {
 	private ["_vehicle", "_damage", "_vichitpoints"];
 	params ["_farmer", "_damage_farmer"];
 	_farmer setUnitPos "UP";
-	[[_farmer,_damage_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
+	[[_farmer, _damage_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
 
 	uiSleep 1.2;
 	{	
@@ -68,7 +68,7 @@ FARMER_attk_farmer = {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
-				_x setVelocity [_jump_dir select 0,_jump_dir select 1, 9];
+				_x setVelocity [_jump_dir select 0, _jump_dir select 1, 9];
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 					[_x, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else { 
@@ -76,7 +76,7 @@ FARMER_attk_farmer = {
 				};
 			};
 			if (_x isKindOf "LandVehicle") then {
-				_x setVelocity [_jump_dir select 0,_jump_dir select 1, 3];
+				_x setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
 				_vehicle = _x;
 				_damage = random[0, _damage_farmer, 1];
 				_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
@@ -108,8 +108,8 @@ FARMER_travel_farmer = {
 	_farmer setUnitPos "DOWN";
 	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, getPosATL _farmer select 1, 3000];
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
-	_rag setVelocity [_jump_dir select 0,_jump_dir select 1, 5];
-	[[_rag],"\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
+	_rag setVelocity [_jump_dir select 0, _jump_dir select 1, 5];
+	[[_rag], "\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep round (2+random 2);
 	_farmer setVariable ["pozitie_noua", getPos _rag];
 	deleteVehicle _rag;

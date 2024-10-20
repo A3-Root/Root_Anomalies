@@ -17,7 +17,7 @@ fnc_burp_sfx_primar = {
 	_source_burp = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_princ);
 	_source_burp setParticleCircle [0, [0, 0, 0]];
 	_source_burp setParticleRandom [0, [0.25, 0.25, 0], [5, 5, 5], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
-	_source_burp setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.3, [0, 0, 2], [0, 0, 0], 17, 10, 7.9, 0.007, [4, 0.5], [[0, 0, 0, 1],[0, 0, 0, 1]], [0.08], 1, 0, "", "", _obj_sfx_princ];
+	_source_burp setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.3, [0, 0, 2], [0, 0, 0], 17, 10, 7.9, 0.007, [4, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _obj_sfx_princ];
 	_source_burp setDropInterval 0.01;
 	_spot_lit = "#lightpoint" createVehicle (getPosATL _obj_sfx_princ);
 	_spot_lit lightAttachObject [_obj_sfx_princ, [0.1, 0.1, 3]];
@@ -30,8 +30,8 @@ fnc_burp_sfx_primar = {
 		_g_col_burp = random 1;
 		_b_col_burp = random 1;
 		_brit_burp = 10 + random 30;
-		_spot_lit setLightColor [_r_col_burp,_g_col_burp, _b_col_burp];
-		_spot_lit setLightAmbient [_g_col_burp,_r_col_burp, _b_col_burp];
+		_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
+		_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 		_spot_lit setLightDayLight true;
 		uiSleep 0.5;
 		_spot_lit setLightBrightness _brit_burp;
@@ -137,15 +137,15 @@ if (detection_smugg) then {
 		uiSleep 1;
 		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 1], [], 0, "CAN_COLLIDE"];
-		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
+		_burper_obj_sec setObjectMaterial [0, "A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
 		uiSleep 0.1;
 		_burper_obj_sec hideObjectGlobal true;
 		
-		[_work_obj,_burper_obj_sec] spawn {
+		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_sp		= _this select 0;
 			_burper_obj_sec_sp	= _this select 1;
-			[_work_obj_sp,_burper_obj_sec_sp] call fnc_burp_sfx_secundar
+			[_work_obj_sp, _burper_obj_sec_sp] call fnc_burp_sfx_secundar
 		};	
 		
 		[_work_obj] spawn {
@@ -160,13 +160,13 @@ if (detection_smugg) then {
 		waitUntil {ciclu_simplu!=ciclu_compli};
 
 		_burper_obj_sec hideObjectGlobal false;
-		[_work_obj,_burper_obj_sec] spawn {
+		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_princ		= _this select 0;
 			_work_obj_sec_sfx	= _this select 1;
-			[_work_obj_princ,_work_obj_sec_sfx] call fnc_burp_sfx_primar
+			[_work_obj_princ, _work_obj_sec_sfx] call fnc_burp_sfx_primar
 		};
 		
-		[_burper_obj_sec,_work_obj] call fnc_anim_burp;
+		[_burper_obj_sec, _work_obj] call fnc_anim_burp;
 		deleteVehicle _burper_obj_sec;
 		ciclu_compli = 3;
 		uiSleep 1;
@@ -177,21 +177,21 @@ if (detection_smugg) then {
 	while {alive _work_obj} do {
 		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 0], [], 0, "CAN_COLLIDE"];
-		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
+		_burper_obj_sec setObjectMaterial [0, "A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
 		uiSleep 0.1;	
 		
-		[_work_obj,_burper_obj_sec] spawn {
+		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_princ		= _this select 0;
 			_work_obj_sec_sfx	= _this select 1;
-			[_work_obj_princ,_work_obj_sec_sfx] call fnc_burp_sfx_primar
+			[_work_obj_princ, _work_obj_sec_sfx] call fnc_burp_sfx_primar
 		};
-		[_work_obj,_burper_obj_sec] spawn {
+		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_sp		= _this select 0;
 			_burper_obj_sec_sp	= _this select 1;
-			[_work_obj_sp,_burper_obj_sec_sp] call fnc_burp_sfx_secundar
+			[_work_obj_sp, _burper_obj_sec_sp] call fnc_burp_sfx_secundar
 		};
-		[_burper_obj_sec,_work_obj] call fnc_anim_burp;
+		[_burper_obj_sec, _work_obj] call fnc_anim_burp;
 		deleteVehicle _burper_obj_sec;
 	};
 };

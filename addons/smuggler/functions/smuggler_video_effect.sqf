@@ -61,7 +61,7 @@ switch (_effect_tip) do
 				};								
 	case "colorcor": 
 				{
-				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0],[1.8, 1.8, 0.3, -5],[0.2, 0.59, 0.11, -1.83]]] spawn 
+				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn 
 				{
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {

@@ -13,7 +13,7 @@ _sun_ini= "none";
 
 _token = 13;
 
-[_obj_emit,_dist_damage,_isseize] spawn 
+[_obj_emit, _dist_damage, _isseize] spawn 
 {
 _electromagnetic_anom 	= _this select 0;
 _dist_damage_w			= _this select 1;
@@ -28,7 +28,7 @@ while {alive _electromagnetic_anom} do
 
 	if (typeOf player != "VirtualCurator_F") then {
 	
-	[_electromagnetic_anom,_dist_damage_w,_isseize] spawn 
+	[_electromagnetic_anom, _dist_damage_w, _isseize] spawn 
 	{
 		_electr_viz = _this select 0;
 		_dist_dam_w	= _this select 1;

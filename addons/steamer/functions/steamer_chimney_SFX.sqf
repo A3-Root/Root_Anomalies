@@ -12,10 +12,10 @@ while {!isNull _horn} do
 {
 	waitUntil {uiSleep 10; player distance _horn < 1500};
 	_emanatie = "#particlesource" createVehicleLocal (getPos _horn);
-	_emanatie setParticleCircle [0,[0, 0, 0]];
-	_emanatie setParticleRandom [2,[0.1, 0.1, 1],[0, 0, 0], 2, 0.5,[0, 0, 0, 0.1], 1, 0];
-	_par_sfx = selectRandom [[["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 4+round(random 4),[0, 0, 0],[0, 0, 0.3], 5, 10, 7.9, random 0.1,[0.3, 0.5, 2],[[1, 1, 1, 0],[1, 1, 1, 0.5],[1, 1, 1, 0]],[0.8], 0.5, 0,"", "", _horn],
-	[["\A3\data_f\ParticleEffects\Universal\Universal", 16, 7, 48, 1], "", "Billboard", 1, 4+round(random 4),[0, 0, 0],[0, 0, 0.2], 5, 10, 7.9, random 0.1,[0.2, 0.5, 2],[[1, 1, 1, 0.1],[1, 1, 1, 0.3],[1, 1, 1, 0]],[0.5], 0.5, 0,"", "", _horn]];
+	_emanatie setParticleCircle [0, [0, 0, 0]];
+	_emanatie setParticleRandom [2, [0.1, 0.1, 1], [0, 0, 0], 2, 0.5, [0, 0, 0, 0.1], 1, 0];
+	_par_sfx = selectRandom [[["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 4+round(random 4), [0, 0, 0], [0, 0, 0.3], 5, 10, 7.9, random 0.1, [0.3, 0.5, 2], [[1, 1, 1, 0], [1, 1, 1, 0.5], [1, 1, 1, 0]], [0.8], 0.5, 0, "", "", _horn],
+	[["\A3\data_f\ParticleEffects\Universal\Universal", 16, 7, 48, 1], "", "Billboard", 1, 4+round(random 4), [0, 0, 0], [0, 0, 0.2], 5, 10, 7.9, random 0.1, [0.2, 0.5, 2], [[1, 1, 1, 0.1], [1, 1, 1, 0.3], [1, 1, 1, 0]], [0.5], 0.5, 0, "", "", _horn]];
 	_emanatie setParticleParams _par_sfx;
 	_emanatie setDropInterval 0.1;
 	_vapori = selectRandom ["vapori_01", "vapori_02", "vapori_03"];

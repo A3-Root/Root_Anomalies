@@ -15,12 +15,12 @@ _bangsound say3D ["earthquake_02", 3500];
 _blast = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _blast setParticleCircle [0, [0, 0, 0]];
 _blast setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
-_blast setParticleParams [["\A3\data_f\koule", 1, 0, 1], "", "SpaceObject", 1, 0.5,[0, 0, 0],[0, 0, 1], 3, 10, 7.9, 0,[0, 225],[[0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0]], [1], 1, 0, "", "", _spark_move];
+_blast setParticleParams [["\A3\data_f\koule", 1, 0, 1], "", "SpaceObject", 1, 0.5, [0, 0, 0], [0, 0, 1], 3, 10, 7.9, 0, [0, 225], [[0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0]], [1], 1, 0, "", "", _spark_move];
 _blast setDropInterval 50;
 
 _ripple = "#particlesource" createVehicleLocal getPosATL _spark_move;
-_ripple setParticleCircle [0,[0, 0, 0]];
-_ripple setParticleRandom [0,[0.25, 0.25, 0],[0.175, 0.175, 0], 0, 0.25,[0, 0, 0, 0.1], 0, 0];
+_ripple setParticleCircle [0, [0, 0, 0]];
+_ripple setParticleRandom [0, [0.25, 0.25, 0], [0.175, 0.175, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
 _ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0], 0, 10, 7.9, 0, [5, 0, 250, 500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
@@ -227,13 +227,13 @@ if (_spark_type== "orange") then
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];
-	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 15, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3,[[0, 0, 0, 0]]];
+	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0, _spark_poz_rel], [0, 0, 0], 0, 15, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3, [[0, 0, 0, 0]]];
 	_scantei_spark setDropInterval _drop;
 } else
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.05, 0.05, 0.1], [5, 5, 3], 0, 0.0025, [0, 0, 0, 0], 0, 0];
-	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3,[[0, 0, 0, 0]]];
+	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0, _spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3, [[0, 0, 0, 0]]];
 	_scantei_spark setDropInterval 0.001;
 };
 _scantei_spark say3D _spark_sound;

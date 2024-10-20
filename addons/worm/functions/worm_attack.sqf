@@ -19,18 +19,18 @@ _blast_dust setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard"
 _blast_dust setDropInterval 0.002;	
 
 _dist_worm = player distance _head_worm;
-_shake_power = linearConversion [0, 1000,_dist_worm, 5, 0, true];
+_shake_power = linearConversion [0, 1000, _dist_worm, 5, 0, true];
 addCamShake [_shake_power, 4, 13+(random 33)];
 
 _bolovani_blast = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 _bolovani_blast setParticleCircle [2, [0, 0, 0]];
 _bolovani_blast setParticleRandom [1, [0.25, 0.25, 0], [10, 10, 15], 0.5, 0.25, [0, 0, 0, 0.1], 0, 0];
-_bolovani_blast setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 13], 3, 20, 7.9, 0.0001, [.6, .6, .6], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.3,[[0, 0, 0, 0]]];
+_bolovani_blast setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 13], 3, 20, 7.9, 0.0001, [.6, .6, .6], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.3, [[0, 0, 0, 0]]];
 _bolovani_blast setDropInterval 0.007;
 
 uiSleep 0.25;
 deleteVehicle _bolovani_blast;
-_crater_impact = createVehicle ["CraterLong", [getPos _head_worm select 0, getPos _head_worm select 1, 0],[], 0,"CAN_COLLIDE"];
+_crater_impact = createVehicle ["CraterLong", [getPos _head_worm select 0, getPos _head_worm select 1, 0], [], 0, "CAN_COLLIDE"];
 _crater_impact setDir (random 360);
 uiSleep 0.5;
 deleteVehicle _blast_dust;

@@ -25,7 +25,7 @@ if (sunOrMoon==0) then
 	_smoke_head = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 	_smoke_head setParticleCircle [0, [0, 0, 0]];
 	_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
-	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1,[[0, 0, 0, 0]]];
+	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1, [[0, 0, 0, 0]]];
 	_smoke_head setDropInterval 0.01;
 
 	_spot_lit = "#lightpoint" createVehicle (getPosATL _head_worm);
@@ -41,8 +41,8 @@ if (sunOrMoon==0) then
 	_r_col_burp=random 1;
 	_g_col_burp=random 1;
 	_b_col_burp=random 1;
-	_spot_lit setLightColor [_r_col_burp,_g_col_burp,_b_col_burp];
-	_spot_lit setLightAmbient [_g_col_burp,_r_col_burp,_b_col_burp];
+	_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
+	_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 	_flick = 1+floor (random 9);
 	_fl_inc = 0;	
 	while {_fl_inc<_flick} do 
@@ -60,7 +60,7 @@ if (sunOrMoon==0) then
 	_smoke_head = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 	_smoke_head setParticleCircle [0, [0, 0, 0]];
 	_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
-	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1,[[0, 0, 0, 0]]];
+	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1, [[0, 0, 0, 0]]];
 	_smoke_head setDropInterval 0.01;
 	while {player distance _head_worm <2000} do	{uiSleep 15;};
 	deleteVehicle _smoke_head;
