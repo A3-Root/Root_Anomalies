@@ -43,16 +43,16 @@ if (sunOrMoon==0) then
 	_b_col_burp=random 1;
 	_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
 	_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
-	_flick = 1+ floor (random 9);
+	_flick = 1 + floor (random 9);
 	_fl_inc = 0;	
 	while {_fl_inc<_flick} do 
 		{
-			_spot_lit setLightBrightness (10+ random 30);
-			_fl_inc = _fl_inc+ 1;
-			uiSleep 0.1+ random 0.2;
+			_spot_lit setLightBrightness (10 + random 30);
+			_fl_inc = _fl_inc + 1;
+			uiSleep 0.1 + random 0.2;
 		};
 	_spot_lit setLightBrightness 0;
-	uiSleep 3+ (random 10);
+	uiSleep 3 + (random 10);
 	};
 	deleteVehicle _smoke_head;
 	deleteVehicle _spot_lit;

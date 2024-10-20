@@ -29,7 +29,7 @@ _blast_wave setDropInterval 0.01;
 
 _bolovani = "#particlesource" createVehicleLocal getPosATL _farmer;
 _bolovani setParticleRandom [0, [0.5, 0.5, 0], [0, 0, 2], 0, 0.5, [0, 0, 0, 1], 1, 0, 90];
-_bolovani setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 0.1, 10, [0, 0, 0], [0, 0, 3], 1, 50+ random 100, 5, 0.1, [1, 0.05], [[0, 0, 0, 1], [0, 0, 0, 1]], [1], 1, 0, "", "", _farmer, 0, true, 0.1];
+_bolovani setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 0.1, 10, [0, 0, 0], [0, 0, 3], 1, 50 + random 100, 5, 0.1, [1, 0.05], [[0, 0, 0, 1], [0, 0, 0, 1]], [1], 1, 0, "", "", _farmer, 0, true, 0.1];
 _bolovani setDropInterval 0.005;
 
 _persistent_dust = "#particlesource" createVehicleLocal getPosATL _farmer;

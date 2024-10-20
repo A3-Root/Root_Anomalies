@@ -50,11 +50,11 @@ _spark_obj setVariable ["vizibil", 0, true];
 				_pos_umbla = [getPosATL _spark_move, _incr, _dir_depl] call BIS_fnc_relPos;
 				_spark_move setPosATL _pos_umbla;
 				_spark_move setDir _dir_depl;
-				_incr=_incr-(15 + floor(random 11));
+				_incr=_incr -(15 + floor(random 11));
 				_allow_move = 0;
 				};
 			};
-			_allow_move = _allow_move+ 3;
+			_allow_move = _allow_move + 3;
 		} else {_allow_move =0};
 	uiSleep 2;
 	};
@@ -77,15 +77,15 @@ if (_spark_effect) then
 		if (_spark_poz_rel== "ct") then {_poz_spark attachTo [_spark_obj, [-0.3, 0, 12.2]]};
 			
 		_spark_obj setDamage 0;
-		_sclipiri = 1+ floor (random 5);
+		_sclipiri = 1 + floor (random 5);
 		uiSleep _pauza;
 		_nr = 0;
 		while {_nr<_sclipiri} do 
 		{
-			_pauza_intre_sclipiri = 0.1+ (random 2);
+			_pauza_intre_sclipiri = 0.1 + (random 2);
 			[[_poz_spark, _pauza_intre_sclipiri], "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;
-			_nr=_nr+ 1;
+			_nr=_nr + 1;
 		};
 	};
 deleteVehicle _poz_spark;

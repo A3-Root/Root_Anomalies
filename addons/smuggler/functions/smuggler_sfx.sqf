@@ -51,20 +51,20 @@ fnc_effecte_princ_smug = {
 	while {(player distance _obj_sursa_smugg < 1000) && player_chk_det} do 
 	{
 		_fct_lit = [1, -1] call BIS_fnc_selectRandom;
-		uiSleep 0.5+ random 1;
-		_spot_lit lightAttachObject [_sursa_princ_center, [0.5+ random _fct_lit, 0.5+ random _fct_lit, 1]];
+		uiSleep 0.5 + random 1;
+		_spot_lit lightAttachObject [_sursa_princ_center, [0.5 + random _fct_lit, 0.5 + random _fct_lit, 1]];
 		_r_col_burp=random 1;
 		_g_col_burp=random 1;
 		_b_col_burp=random 1;
 		_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
 		_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 		
-		_on_fly_brit = round (10+ random 30);
+		_on_fly_brit = round (10 + random 30);
 		_ini_brit = 0;
 		while {_ini_brit<_on_fly_brit} do 
 		{
 			_spot_lit setLightBrightness _ini_brit;
-			_ini_brit = _ini_brit+ 1;
+			_ini_brit = _ini_brit + 1;
 			uiSleep 0.1;
 		};
 		while {_ini_brit>0} do 
@@ -73,7 +73,7 @@ fnc_effecte_princ_smug = {
 			_ini_brit = _ini_brit - 1;
 			uiSleep 0.1;
 		};
-		uiSleep 0.5+ random 1;	
+		uiSleep 0.5 + random 1;	
 	};
 	detach _spot_lit; deleteVehicle _spot_lit; deleteVehicle _bule_smugg; deleteVehicle _dust_smug; deleteVehicle _sp_dist_smug; deleteVehicle _center_smug; deleteVehicle _invelis;
 };
@@ -104,7 +104,7 @@ fnc_sec_effect_smug = {
 		uiSleep 1;
 		deleteVehicle _suck_frunze;
 		deleteVehicle _suck_dust;
-		uiSleep round (7+ random 7);
+		uiSleep round (7 + random 7);
 	};
 };
 

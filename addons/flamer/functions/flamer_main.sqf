@@ -13,7 +13,7 @@ FLAMER_avoid_flamer = {
 	params ["_flamer", "_chased"];
 	private ["_flamer", "_chased"];
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [30, (_flamer getDir _chased) + (random 33)*(selectRandom [1, -1])];
+	_relPos = _chased getPos [30, (_flamer getDir _chased) + (random 33) * (selectRandom [1, -1])];
 	_chased doMove _relPos;
 	_chased setSkill ["commanding", 1];
 };
@@ -52,7 +52,7 @@ FLAMER_attk_flamer = {
 			if (_isacefire) then 
 			{
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-				[_x, (_damage_flamer/4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 			} else 
 			{
 				if (_isacemedical) then 
@@ -77,7 +77,7 @@ FLAMER_attk_flamer = {
 				} forEach _vichitpoints;
 			};
 		};
-	} forEach (_nearflamer-[_flamer]);
+	} forEach (_nearflamer -[_flamer]);
 	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 7, false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
 	uiSleep 4;
 	_flamer setVariable ["atk", false];
@@ -92,7 +92,7 @@ FLAMER_hide_flamer = {
 FLAMER_show_flamer = {
 	params ["_flamer", "_poz_orig_sc", "_teritoriu", "_damage_flamer"];
 	private ["_flamer", "_poz_orig_sc", "_pos_strig", "_teritoriu", "_damage_flamer"];
-	_pos_strig = [_poz_orig_sc, 1, _teritoriu/10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
+	_pos_strig = [_poz_orig_sc, 1, _teritoriu / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_flamer setPos _pos_strig;
 	_flamer setVariable ["vizibil", true, true];
 	[[_flamer, _damage_flamer, _teritoriu], "\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
@@ -120,7 +120,7 @@ FLAMER_jump_flamer = {
 			_isacefire = true;
 		};
 	};
-	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10+ random 10);
+	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10 + random 10);
 	_salt_sunet= selectRandom ["01_blast", "02_blast", "03_blast"];
 	_obj_veg = nearestTerrainObjects [position _flamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
 	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 20, false];
@@ -134,7 +134,7 @@ FLAMER_jump_flamer = {
 			if (_isacefire) then 
 			{
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-				[_x, (_damage_flamer/4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 			} else 
 			{
 				if (_isacemedical) then 
@@ -159,8 +159,8 @@ FLAMER_jump_flamer = {
 				} forEach _vichitpoints;
 			};
 		};
-	} forEach (_nearflamer-[_flamer]);
-	_flamer setVelocity [_jump_dir select 0, _jump_dir select 1, round (10+ random 15)];
+	} forEach (_nearflamer -[_flamer]);
+	_flamer setVelocity [_jump_dir select 0, _jump_dir select 1, round (10 + random 15)];
 	{_x setDamage [1, false]; _x hideObjectGlobal true} forEach _obj_veg;
 	{_x setDamage (damage _x + 0.10)} forEach _nearvik;
 };
@@ -286,7 +286,7 @@ while {alive _flamer} do
 					} forEach _vichitpoints;
 				};
 			};
-		} forEach (_nearflamer-[_flamer]);
+		} forEach (_nearflamer -[_flamer]);
 		if (selectRandom [true, false, true, true, false]) then 
 		{ 
 			_flamer moveTo AGLToASL (_tgt_flamer getRelPos[10, 180]);
@@ -328,7 +328,7 @@ while {alive _flamer} do
 						} forEach _vichitpoints;
 					};
 				};
-			} forEach (_nearflamer-[_flamer]); [[_flamer], "\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf"] remoteExec ["execVM"]; [_flamer, _tgt_flamer, _cap_flamer, _damage_flamer] spawn FLAMER_jump_flamer};
+			} forEach (_nearflamer -[_flamer]); [[_flamer], "\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf"] remoteExec ["execVM"]; [_flamer, _tgt_flamer, _cap_flamer, _damage_flamer] spawn FLAMER_jump_flamer};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], 5];
 		{
@@ -364,7 +364,7 @@ while {alive _flamer} do
 					} forEach _vichitpoints;
 				};
 			};
-		} forEach (_nearflamer-[_flamer]);
+		} forEach (_nearflamer -[_flamer]);
 		if ((_flamer distance _tgt_flamer <15)&&!(_flamer getVariable "atk")) then 
 		{_flamer setVariable ["atk", true]; [_flamer, _tgt_flamer, _damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer], "\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
 		uiSleep _recharge_delay;
@@ -402,7 +402,7 @@ while {alive _flamer} do
 					} forEach _vichitpoints;
 				};
 			};
-		} forEach (_nearflamer-[_flamer]);
+		} forEach (_nearflamer -[_flamer]);
 		if ((!alive _tgt_flamer)or(_tgt_flamer distance getMarkerPos _poz_orig_sc > _teritoriu)) then {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; if !(count _list_unit_range_flamer isEqualTo 0) then {_tgt_flamer = selectRandom _list_unit_range_flamer} else {_tgt_flamer = nil}};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], 5];
@@ -439,7 +439,7 @@ while {alive _flamer} do
 					} forEach _vichitpoints;
 				};
 			};
-		} forEach (_nearflamer-[_flamer]);
+		} forEach (_nearflamer -[_flamer]);
 	};
 	_flamer call FLAMER_hide_flamer;
 	_tgt_flamer = nil;

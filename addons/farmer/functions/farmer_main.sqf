@@ -51,7 +51,7 @@ FARMER_show_farmer = {
 FARMER_avoid_farmer = {
 	params ["_strig", "_chased"];
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [25, round ((_strig getDir _chased) + (random 33)*(selectRandom [1, -1]))];
+	_relPos = _chased getPos [25, round ((_strig getDir _chased) + (random 33) * (selectRandom [1, -1]))];
 	_chased doMove _relPos;	_chased setSkill ["commanding", 1];
 };
 
@@ -110,7 +110,7 @@ FARMER_travel_farmer = {
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
 	_rag setVelocity [_jump_dir select 0, _jump_dir select 1, 5];
 	[[_rag], "\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
-	uiSleep round (2+ random 2);
+	uiSleep round (2 + random 2);
 	_farmer setVariable ["pozitie_noua", getPos _rag];
 	deleteVehicle _rag;
 };
@@ -143,7 +143,7 @@ _farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
     _unit=_this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total")+ (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+    _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -249,7 +249,7 @@ while {alive _farmer} do {
             };
             uiSleep _recharge_delay;
         } else {
-            uiSleep 1+ random 2;
+            uiSleep 1 + random 2;
             _farmer call FARMER_hide_farmer
         };
         _farmer setUnitPos "UP";

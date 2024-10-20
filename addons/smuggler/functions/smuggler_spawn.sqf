@@ -37,7 +37,7 @@ while {!isNull _object_anom_core} do {
 			_gigi setPosATL [getPosATL _gigi select 0, getPosATL _gigi select 1, 0.0001];
 			_anim = ["ApanPknlMrunSnonWnonDb", "ApanPknlMrunSnonWnonDf", "ApanPercMrunSnonWnonDf", "ApanPercMsprSnonWnonDfr"] call BIS_fnc_selectRandom;
 			[_gigi, _anim] remoteExec ["switchMove"];
-			_run_poz = [getPosATL _object_anom_core, 100+ random 500, random 360] call BIS_fnc_relPos;
+			_run_poz = [getPosATL _object_anom_core, 100 + random 500, random 360] call BIS_fnc_relPos;
 			uiSleep 3;
 			if (alive _gigi) then {[_gigi, ""] remoteExec ["switchMove"]};
 			_gigi setDamage (damage _gigi + (random 0.15));
@@ -48,7 +48,7 @@ while {!isNull _object_anom_core} do {
 				uiSleep 120;
 				_unit_fresh setVariable ["teleported_in", nil, true];
 			};
-			uiSleep 10+ random spawn_delay_smugg;
+			uiSleep 10 + random spawn_delay_smugg;
 		} else 
 		{
 			_bounce_obj_temp = createVehicle ["Land_CanOpener_F", getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
@@ -66,7 +66,7 @@ while {!isNull _object_anom_core} do {
 			_spawn_obj setPosATL [getPosATL _spawn_obj select 0, getPosATL _spawn_obj select 1, 0.0001];
 			uiSleep 0.1;
 			deleteVehicle _bounce_obj_temp;
-			uiSleep 10+ random spawn_delay_smugg;
+			uiSleep 10 + random spawn_delay_smugg;
 			if ((_spawn_obj distance _object_anom_core < 10) and (local _spawn_obj)) then {deleteVehicle _spawn_obj};
 		};
 	};

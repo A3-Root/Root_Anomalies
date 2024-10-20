@@ -17,7 +17,7 @@ while {alive _electr_viz} do
 		{
 		if (typeOf _x != "VirtualCurator_F") then {
 		_damage_ai = damage _x;
-		_damage_ai=_damage_ai+ 0.1;
+		_damage_ai=_damage_ai + 0.1;
 		_x setDamage _damage_ai;
 		_x doMove _pos_run;
 		_x setSkill ["commanding", 1];

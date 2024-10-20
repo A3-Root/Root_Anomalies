@@ -55,7 +55,7 @@ if !(_isseisore) then
 	while {_brit < 100} do 
 	{
 		_light_emp setLightBrightness _brit;
-		_brit = _brit+ 2;
+		_brit = _brit + 2;
 		uiSleep 0.01;
 	};
 };
@@ -216,11 +216,11 @@ _p1 = _bbr select 0;
 _p2 = _bbr select 1;
 _maxHeight = abs ((_p2 select 2) - (_p1 select 2));
 
-_spark_poz_rel = (_maxHeight/2) - 0.45;
+_spark_poz_rel = (_maxHeight / 2) - 0.45;
 
 _spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
 _spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRandom;
-_drop = 0.001+ (random 0.05);
+_drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _x);
 
 if (_spark_type== "orange") then 

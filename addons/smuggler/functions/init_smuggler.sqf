@@ -11,7 +11,7 @@ device_detector	- classname of the object you want to act as a anomaly detector,
 spawn_classname	- array with the object classnames of the objects you want the anomaly to spawn randomly over time, 
 					if is empty this feature will be ignored
 delay_between_spawns - number, is the delay between spawns in seconds, based on this value a random interval will be generated, the minimum value is set to 30 seconds
-teleport_protect- classname of the object you want to function as protection to teleportation, unit having this item will not be teleported when is in range
+teleport_protect - classname of the object you want to function as protection to teleportation, unit having this item will not be teleported when is in range
 					* if empty no protection will be provided and the units will be teleported every time when in range
 */
 

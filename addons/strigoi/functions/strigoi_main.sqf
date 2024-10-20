@@ -23,7 +23,7 @@ STRIGOI_avoid_casp ={
 	_strig = _this select 0;
 	_chased = _this select 1;
 	if (isPlayer _chased) exitWith {};
-	_relPos = _chased getPos [10, (_strig getDir _chased) + (random 33)*(selectRandom [1, -1])];
+	_relPos = _chased getPos [10, (_strig getDir _chased) + (random 33) * (selectRandom [1, -1])];
 	_chased doMove _relPos;
 	_chased setSkill ["commanding", 1];
 };
@@ -69,7 +69,7 @@ STRIGOI_show_strig = {
 	_strigoi= _this select 0;
 	_poz_orig_sc= _this select 1;
 	_teritoriu= _this select 2;
-	_pos_strig = [_poz_orig_sc, 1, _teritoriu/10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
+	_pos_strig = [_poz_orig_sc, 1, _teritoriu / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_strigoi setPos _pos_strig;
 	_strigoi setVariable ["vizibil", true, true];
 	[[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_sfx.sqf"] remoteExec ["execVM", 0];
@@ -84,7 +84,7 @@ STRIGOI_salt_1 = {
 	_salt_sunet=["01_salt", "02_salt", "03_salt"] call BIS_fnc_selectRandom;
 	[_cap_casper, [_salt_sunet, 200]] remoteExec ["say3D"];
 	_strigoi setVelocityTransformation [getPosATL _strigoi, getPosATL _umbla_casper, velocity _strigoi, velocity _umbla_casper, [0, 0, 0], [0, 0, 0], [0, 0, 1], [0, 0, 2], 0.3];
-	_strigoi attachTo [_umbla_casper, [0, 0, (getPos _obj_de_agatat select 2) + _pot_poz/4]];
+	_strigoi attachTo [_umbla_casper, [0, 0, (getPos _obj_de_agatat select 2) + _pot_poz / 4]];
 	_strigoi setDir (_strigoi getRelDir _poz_tgt);
 	_tipat_casp= selectRandom ["01_tip_casp", "NoSound", "02_tip_casp", "03_tip_casp", "NoSound", "04_tip_casp", "05_tip_casp", "06_tip_casp", "07_tip_casp", "NoSound"];
 	[_cap_casper, [_tipat_casp, 500]] remoteExec ["say3D"];
@@ -95,7 +95,7 @@ STRIGOI_salt_2 ={
 	private ["_jump_dir"];
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 10;
 	_salt_sunet= selectRandom ["01_salt", "02_salt", "03_salt"];
-	_strigoi attachTo [_umbla_casper, [0, 0, ((boundingCenter _obj_de_agatat) select 2)*2]];
+	_strigoi attachTo [_umbla_casper, [0, 0, ((boundingCenter _obj_de_agatat) select 2) * 2]];
 	[_cap_casper, [_salt_sunet, 200]] remoteExec ["say3D"];
 	detach _strigoi;
 	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
@@ -107,7 +107,7 @@ STRIGOI_jump_ground ={
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
 	_salt_sunet= selectRandom ["01_salt", "02_salt", "03_salt"];
 	[_cap_casper, [_salt_sunet, 200]] remoteExec ["say3D"];
-	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, round (5+ random 15)];
+	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, round (5 + random 15)];
 };
 
 params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic"];
@@ -148,7 +148,7 @@ _strigoi removeAllEventHandlers "Hit";
 
 _strigoi addEventHandler ["Hit", {
     _unit=_this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total")+ (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+    _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\strigoi\functions\strigoi_splash_hit.sqf"] remoteExec ["execVM"]
@@ -212,7 +212,7 @@ while {alive _strigoi} do
 					{
 						_unghi_fugarit = _strigoi getRelDir _tgt_casp;
 						_unghi_ancora = _strigoi getRelDir _x;
-						_toleranta = abs(_unghi_fugarit- _unghi_ancora);
+						_toleranta = abs(_unghi_fugarit - _unghi_ancora);
 						_pot_poz = (boundingCenter _x) select 2;
 						if ((_pot_poz>2)and {(_toleranta<60)and(_strigoi distance _x < 20)}) exitWith 
 						{

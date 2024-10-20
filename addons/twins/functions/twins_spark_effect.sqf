@@ -10,7 +10,7 @@ _sparky_sun = ["spark1", "spark11", "spark2", "spark22", "spark5", "spark4"] cal
 
 _spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
 
-_drop = 0.001+ (random 0.05);
+_drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _obj_emit);
 
 if (_spark_type== "orange") then 
