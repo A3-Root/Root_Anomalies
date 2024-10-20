@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 if (!isServer) exitWith {};
 
 FLAMER_find_target = {
@@ -95,7 +95,6 @@ FLAMER_show_flamer = {
 	_pos_strig = [_poz_orig_sc,1,_teritoriu/10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_flamer setPos _pos_strig;
 	_flamer setVariable ["vizibil", true,true];
-	// NEW ADDITIONS
 	[[_flamer,_damage_flamer,_teritoriu],"\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase"],100]);
 	[_flamer getVariable "_cap_flamer", ["foc_initial", 1000]] remoteExec ["say3D"];
@@ -195,13 +194,13 @@ _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} forEach allPlayers;uiSleep 5; /* uiSleep 10; */};
 _flamer = createAgent ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [],0, "NONE"]; _flamer setVariable ["BIS_fnc_animalBehaviour_disable", true]; _flamer setSpeaker "NoVoice"; _flamer disableConversation true; _flamer addRating -10000; _flamer setBehaviour "CARELESS"; _flamer enableFatigue false; _flamer setSkill ["courage", 1]; _flamer setUnitPos "UP"; _flamer disableAI "ALL"; _flamer setMass 7000; {_flamer enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];
 
-_hp_curr_flamer = 1/_hp_flamer;
+_hp_curr_flamer = 1 / _hp_flamer;
 _flamer setVariable ["flamer_dmg_total", 0];
 _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
 _flamer removeAllEventHandlers "Hit";
 
 _flamer addEventHandler ["Hit", {
-    _unit=_this#0;
+    _unit=_this select 0;
     _flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
 	_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
 	if ((_unit getVariable "flamer_dmg_total") > 1) then 

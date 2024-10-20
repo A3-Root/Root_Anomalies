@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT
+
+
 
 fnc_avoid_screamer ={
 	private ["_danger_close", "_op_dir", "_chased_units", "_fct", "_reldir", "_avoid_poz", "_territory", "_targets"];
@@ -100,15 +100,6 @@ waitUntil { diag_tickTime > _time };
 _isalivevic = false;
 _valid_statue = false;
 _scr_obj = "None";
-
-/*
-//_entitate disableAI "FSM";
-//_entitate allowDamage false;
-// damage
-//_entitate addEventHandler ["HandleDamage", {_damage = (_this select 2)/6; _damage}];
-//_entitate addEventHandler ["HandleDamage", {_damage = 0; _damage}];
-*/
-
 
 if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
     diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
@@ -225,13 +216,13 @@ if (!_isalivevic) then
 
 if (_isalivevic) then 
 {
-	_current_screamer_hp = 1/_screamer_health;
+	_current_screamer_hp = 1 / _screamer_health;
 	_entitate setVariable ["al_dam_total", 0];
 	_entitate setVariable ["al_dam_incr", _current_screamer_hp];
 	_entitate removeAllEventHandlers "Hit";
 
 	_entitate addEventHandler ["Hit", {
-		_unit=_this#0;
+		_unit=_this select 0;
 		_curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
 			_unit setDamage 1
 		};
@@ -250,13 +241,13 @@ if (_isalivevic) then
 	}];
 } else 
 {
-	_current_screamer_hp = 1/_screamer_health;
+	_current_screamer_hp = 1 / _screamer_health;
 	_screamer_anomally setVariable ["al_dam_total", 0];
 	_screamer_anomally setVariable ["al_dam_incr", _current_screamer_hp];
 	_screamer_anomally removeAllEventHandlers "Hit";
 
 	_screamer_anomally addEventHandler ["Hit", {
-		_unit=_this#0;
+		_unit=_this select 0;
 		_curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
 			_unit setDamage 1
 		};
@@ -351,7 +342,6 @@ while {alive _entitate} do
 		_wave_obj attachTo [_entitate, [0,-1,1.5]];
 		detach _wave_obj;
 
-		//effect
 		if (_isalivevic) then 
 		{
 			if (alive _entitate) then {[[_wave_obj,_entitate],"\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execVM"]};
@@ -396,7 +386,7 @@ while {alive _entitate} do
 			_temp_mass = getMass _x;
 			_x setMass 3;
 			_x setVelocity [(_press_implicit_x * _al_pressure) / 2, (_press_implicit_y * _al_pressure) / 2, (_vel select 2) + (random [3, 5, 8])];
-			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
+			
 			_x addTorque (_x vectorModelToWorld [2, 2, 2]);
 			_random_close = random[0, _damage_screamer_close, 1];
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
@@ -427,7 +417,7 @@ while {alive _entitate} do
 			_temp_mass = getMass _x;
 			_x setMass 2;
 			_x setVelocity [(_press_implicit_x * _al_pressure) / 4, (_press_implicit_y * _al_pressure) / 4, (_vel select 2) + (random [3, 5, 8])];
-			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
+			
 			_x addTorque (_x vectorModelToWorld [1, 1, 1]);
 			_random_medium = random[0, (_damage_screamer_medium/2), _damage_screamer_medium];
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.2,0.7,0.55,0.4,0.7,0.55];
@@ -458,7 +448,7 @@ while {alive _entitate} do
 			_temp_mass = getMass _x;
 			_x setMass 1;
 			_x setVelocity [(_press_implicit_x * _al_pressure) / 6, (_press_implicit_y * _al_pressure) / 6, (_vel select 2) + (random [3, 5, 8])];
-			// [_x, random[0,5,10],random[0,1,2]] remoteExec ["BIS_fnc_setObjectRotation", _x];
+			
 			_x addTorque (_x vectorModelToWorld [0.5, 0.5, 0.5]);
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.1,0.6,0.45,0.3,0.6,0.45];
 			_random_far = random[0, (_damage_screamer_far/3), _damage_screamer_far];

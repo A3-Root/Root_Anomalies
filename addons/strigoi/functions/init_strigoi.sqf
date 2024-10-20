@@ -1,7 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
-// Tutorial: https://www.youtube.com/user/aliascartoons
 
+ 
 /*
 
 ================================================================================================================================
@@ -17,10 +15,10 @@ _hp_strigoi			- number, strigois health points, as higher it is as resilient wil
 
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

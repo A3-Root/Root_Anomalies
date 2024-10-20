@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 /*
 [object_name, territory_radius, throwable_class_name, damage_inflicted] execVM "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf";
 
@@ -9,10 +9,10 @@ throwable_class_name - string, class name of the throwable item you want to use 
 damage_inflicted	 - number, the amount of damage SWARMER inflicts with his attacks
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

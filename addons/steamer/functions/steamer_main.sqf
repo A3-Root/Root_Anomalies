@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 fnc_find_target_steamer = {params ["_steamer_dud", "_teritoriu"]; private ["_neartargets", "_teritoriu"];	_neartargets = (ASLToAGL getPosATL _steamer_dud) nearEntities ["CAManBase", _teritoriu];	_neartargets - [_steamer_dud]};
 fnc_avoid_steamer = {params ["_chased"];private ["_chased"];if (isPlayer _chased) exitWith {};_relPos = _chased getPos [10+round (random 30),round (random 360)];_chased doMove _relPos;_chased setSkill ["commanding", 1];};

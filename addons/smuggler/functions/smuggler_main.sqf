@@ -1,5 +1,3 @@
-// by ALIAS
-
 if (!isServer) exitWith {};
 
 private ["_marker_sursa_smugg", "_mobile_anomaly", "_device_detector", "_spawn_classname", "_delay_between_spawn", "_teleport_protect", "_dmg_on_teleport", "_noseize"];

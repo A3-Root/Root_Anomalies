@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 params ["_flamer", "_damage_on_death"];
 waitUntil {uiSleep 1; !alive _flamer};

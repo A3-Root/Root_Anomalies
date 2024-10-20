@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT
+
+
 
 fnc_avoid_worm ={
     private ["_danger_close", "_op_dir", "_chased_units", "_fct", "_reldir", "_avoid_poz"];

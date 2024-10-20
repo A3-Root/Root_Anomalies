@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 /*
 [marker, territory_radius, damage_inflicted, health_points] execVM "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf";
 
@@ -9,10 +9,10 @@ damage_inflicted	- number, damage inflicted by FLAMERs main attack
 health_points		- number, amount of health/hit points FLAMER has
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 private ["_farmer", "_damage_farmer"];
 if (!hasInterface) exitWith {};

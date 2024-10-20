@@ -1,7 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
 
-//null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI] execVM "AL_twins\sparky.sqf"
+ 
 
 if (!isServer) exitWith {};
 
@@ -23,7 +21,6 @@ _spark_obj setVariable ["vizibil", 0, true];
 
 [_spark_obj,_track_dist,_damage_range,_heart_twin,_EMP_enabled,_isseige] spawn 
 {
-	//waitUntil{!isNil "vizibil"};
 	_spark_move = _this select 0;
 	_tracking_p	= _this select 1;
 	_dam_range	= _this select 2;
@@ -39,7 +36,6 @@ _spark_obj setVariable ["vizibil", 0, true];
 	
 	while {alive _heart_twin} do 
 	{
-		//_closest_units = (position _spark_move) nearEntities ["Man", _tracking_p];
 		_closest_units = (position _spark_move) nearEntities [["CAManBase", "LandVehicle"], _tracking_p];
 		
 		
@@ -52,7 +48,6 @@ _spark_obj setVariable ["vizibil", 0, true];
 				{
 				_dir_depl = [_closer_un, _spark_move] call BIS_fnc_dirTo;
 				_pos_umbla = [getPosATL _spark_move,_incr,_dir_depl] call BIS_fnc_relPos;
-				//hint str _dir_depl;
 				_spark_move setPosATL _pos_umbla;
 				_spark_move setDir _dir_depl;
 				_incr=_incr-(15 + floor(random 11));
@@ -60,12 +55,9 @@ _spark_obj setVariable ["vizibil", 0, true];
 				};
 			};
 			_allow_move = _allow_move+3;
-			//hint str _allow_move;
 		} else {_allow_move =0};
-	//hint str (_spark_move getVariable "vizibil");
 	uiSleep 2;
 	};
-	// EMP effect
 	if (_EMP_enabled) then 
 	{
 		[_spark_move, _isseige, _tracking_p] execVM "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";
@@ -86,16 +78,13 @@ if (_spark_effect) then
 			
 		_spark_obj setDamage 0;
 		_sclipiri = 1+ floor (random 5);
-		//hint str _sclipiri;
 		uiSleep _pauza;
 		_nr = 0;
 		while {_nr<_sclipiri} do 
 		{
-			//_spark_obj setDamage 0.9;		uiSleep 0.1;		_spark_obj setDamage 0;
 			_pauza_intre_sclipiri = 0.1+ (random 2);
 			[[_poz_spark,_pauza_intre_sclipiri],"\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;
-			//_spark_obj setDamage 0.9;
 			_nr=_nr+1;
 		};
 	};

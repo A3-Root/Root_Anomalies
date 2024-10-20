@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT
+
+
 
 /*
 null = [marker,mobile_anomaly,device_detector,damage_protect,anti_burper_device] execVM "AL_burpy\alias_burper.sqf";
@@ -12,10 +12,10 @@ damage_protect		- string, classname of the object you want to function as protec
 anti_burper_device	- string, class name of the object which will act as a Burper neutralizer, if this item/vehicle is in 10 m range from Burper it will make Burper disappear
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

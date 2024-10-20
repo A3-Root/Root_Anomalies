@@ -1,7 +1,3 @@
-// RAGDOLL inspired by Killzone_Kid *****************************
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
-
 params ["_blowpoz", "_unit"];
 private ["_tip", "_al_pressure"];
 

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 [] spawn {
 	waitUntil {!isNil "wormkiller"};

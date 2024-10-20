@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 fn_teleport = {
 	private ["_unit", "_pozitie", "_noseizee", "_time"];

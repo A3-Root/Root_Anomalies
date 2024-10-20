@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 /* 
 null = [marker, mobile_anomaly, device_detector, spawn_classname, delay_between_spawn, teleport_protect] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf";
 
@@ -15,12 +15,9 @@ teleport_protect- classname of the object you want to function as protection to 
 					* if empty no protection will be provided and the units will be teleported every time when in range
 */
 
-// if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then 
-
-// Only run on player machines
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 if (!hasInterface) exitWith {};
 
@@ -8,8 +8,6 @@ private ["_press_implicit_x", "_press_implicit_y", "_dir_salt", "_fct_z", "_al_p
 _strigoi	= _this select 0;
 _tgt_casp	= _this select 1;
 _noseize	= _this select 2;
-
-// if (_noseize == true) exitWith {};
 
 _flow = (getPosATL _tgt_casp vectorFromTo getPosATL _strigoi) vectorMultiply 10;
 

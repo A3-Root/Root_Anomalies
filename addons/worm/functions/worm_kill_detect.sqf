@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 params ["_wormkill"];
 
 if (typeOf _wormkill == wormkiller) then 

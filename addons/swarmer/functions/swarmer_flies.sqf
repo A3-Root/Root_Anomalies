@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 if ((!alive swarmer_public)or(player distance swarmer_public > 1000)) exitWith {};
 

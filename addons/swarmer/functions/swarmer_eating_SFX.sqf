@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 fnc_blood ={
 	private ["_spot", "_blood_splash"]; 

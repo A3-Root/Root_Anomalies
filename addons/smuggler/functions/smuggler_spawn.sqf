@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 private ["_spawn_obj_class", "_object_anom_core", "_gigi", "_spawn_obj", "_spawn_obj_classname"];
 
 _spawn_obj_class = _this select 0;
@@ -66,7 +66,7 @@ while {!isNull _object_anom_core} do {
 			_spawn_obj setPosATL [getPosATL _spawn_obj select 0,getPosATL _spawn_obj select 1,0.0001];
 			uiSleep 0.1;
 			deleteVehicle _bounce_obj_temp;
-			uiSleep 10+ random spawn_delay_smugg; // delay between spawns
+			uiSleep 10+ random spawn_delay_smugg;
 			if ((_spawn_obj distance _object_anom_core < 10) and (local _spawn_obj)) then {deleteVehicle _spawn_obj};
 		};
 	};

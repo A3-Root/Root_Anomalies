@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 params ["_spark_move", "_isseisore", "_tracking_p"];
 private ["_hndl", "_range_lit", "_brit", "_light_emp", "_ripple", "_blast", "_bangsound", "_isseisore", "_spark_move", "_vehicle", "_vichitpoints", "_tracking_p", "_AOE"];
@@ -21,7 +21,6 @@ _blast setDropInterval 50;
 _ripple = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _ripple setParticleCircle [0,[0,0,0]];
 _ripple setParticleRandom [0,[0.25,0.25,0],[0.175,0.175,0],0,0.25,[0,0,0,0.1],0,0];
-//_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [30,1000,1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _obj_emp];
 _ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
@@ -215,8 +214,8 @@ deleteVehicle _e_static;
 
 
 {
-_x setHit ["light_1_hitpoint", 0.97]; //all possible light hitpoints
-_x setHit ["light_2_hitpoint", 0.97]; //no lights escape this
+_x setHit ["light_1_hitpoint", 0.97]; 
+_x setHit ["light_2_hitpoint", 0.97]; 
 _x setHit ["light_3_hitpoint", 0.97];
 _x setHit ["light_4_hitpoint", 0.97];
 _bbr = boundingBoxReal vehicle _x;
@@ -224,7 +223,6 @@ _p1 = _bbr select 0;
 _p2 = _bbr select 1;
 _maxHeight = abs ((_p2 select 2) - (_p1 select 2));
 
-//_spark_poz_rel = [getPos _lamp select 0,getPos _lamp select 1,_maxHeight-0.5];
 _spark_poz_rel = (_maxHeight/2)-0.45;
 
 _spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
@@ -240,7 +238,6 @@ if (_spark_type== "orange") then
 	_scantei_spark setDropInterval _drop;
 } else
 {
-	//hint "alb";
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.05, 0.05, 0.1], [5, 5, 3], 0, 0.0025, [0, 0, 0, 0], 0, 0];
 	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5,0.5,0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x,0,true,0.3,[[0,0,0,0]]];
@@ -250,7 +247,7 @@ _scantei_spark say3D _spark_sound;
 uiSleep 0.4 + (random 0.7);
 deleteVehicle _scantei_spark;
 } forEach (nearestObjects [_spark_move, [
-"Lamps_base_F", //These are all the lights' base classes
+"Lamps_base_F", 
 "PowerLines_base_F", 
 "PowerLines_Small_base_F"
 ], _AOE]);

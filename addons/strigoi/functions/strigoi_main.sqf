@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 if (!isServer) exitWith {};
 
@@ -142,7 +142,7 @@ _strigoi setUnitPos "UP"; _strigoi disableAI "ALL"; _strigoi setMass 7000;
 
 
 /*
-_hp_curr_strig = 1/_hp_strigoi;
+_hp_curr_strig = 1 / _hp_strigoi;
 _strigoi setVariable ["al_dam_total", _hp_curr_strig,true];
 _strigoi setVariable ["al_dam_incr", _hp_curr_strig,true];
 
@@ -155,13 +155,13 @@ if ((_bullet== "") or ((_unit getVariable "al_dam_total")<1)) then {0}else{1}}];
 */
 
 
-_hp_curr_strig = 1/_hp_strigoi;
+_hp_curr_strig = 1 / _hp_strigoi;
 _strigoi setVariable ["al_dam_total", 0];
 _strigoi setVariable ["al_dam_incr", _hp_curr_strig];
 _strigoi removeAllEventHandlers "Hit";
 
 _strigoi addEventHandler ["Hit", {
-    _unit=_this#0;
+    _unit=_this select 0;
     _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };

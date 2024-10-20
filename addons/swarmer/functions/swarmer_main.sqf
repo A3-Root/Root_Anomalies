@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 fnc_avoid_hive = {params ["_hiver", "_chased"]; if (isPlayer _chased) exitWith {}; _relPos = _chased getPos [50, (_hiver getDir _chased) + (random 33)*(selectRandom [1,-1])]; _chased doMove _relPos; _chased setSkill ["commanding", 1]; };
 fnc_find_target_hiv = {params ["_hiver", "_teritoriu"]; private ["_neartargets", "_teritoriu"]; _neartargets = (ASLToAGL getPosATL _hiver) nearEntities ["CAManBase", _teritoriu]; _neartargets - [_hiver]; };
 fnc_move_swarm = {params ["_mobile_s", "_tgt_hiv"]; private ["_mobile_s", "_tgt_hiv"]; _mobile_s setDir ([_mobile_s,_tgt_hiv] call BIS_fnc_dirTo); _mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0,7,0]); };
@@ -28,7 +28,6 @@ _mobile_s setUnitPos "UP"; _mobile_s disableAI "ALL"; {_mobile_s enableAI _x} fo
 _mobile_s setVariable ["isHive", false,true];
 [[_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_voice.sqf"] remoteExec ["execVM"];
 [[_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf"] remoteExec ["execVM"];
-// [_mobile_s] execVM "\z\root_anomalies\addons\swarmer\functions\swarmer_smoke_detect.sqf";
 swarmer_public = _mobile_s; publicVariable "swarmer_public";
 atak_swarmer = false; publicVariable "atak_swarmer";
 

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 if (!hasInterface) exitWith {};
 
@@ -28,8 +28,6 @@ while {alive _electromagnetic_anom} do
 
 	if (typeOf player != "VirtualCurator_F") then {
 	
-	// _damage_p = damage player;
-
 	[_electromagnetic_anom,_dist_damage_w,_isseize] spawn 
 	{
 		_electr_viz = _this select 0;
@@ -96,6 +94,5 @@ while {alive _obj_emit} do
 			_sun_ini = _main_obj_sun;
 			if (_viz_fct>0) then {_viz_fct = _viz_fct-1;_total_viz = _obj_emit getVariable "vizibil";_total_viz=_total_viz-1;_obj_emit setVariable ["vizibil", _total_viz, true];};
 		};
-		//hint str looking_units; hint str (_obj_emit getVariable "vizibil");
 	uiSleep 0.2; };
 };

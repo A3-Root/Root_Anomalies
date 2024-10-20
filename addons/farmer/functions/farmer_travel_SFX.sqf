@@ -1,8 +1,8 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 if (!hasInterface) exitWith {};
-_project = _this#0;
+_project = _this select 0;
 
 _burst = "#particlesource" createVehicleLocal (getPosATL _project);
 _burst setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16,12,9,0],"", "BillBoard", 1,1,[0,0,0.5],[0,0,2],0,13,0.01,0,[0.5,8],[[0.1,0.1,0.1,1],[0.1,0.1,0.1,0]],[1000],1,0,"", "", _project];

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 fnc_flamer_SFX = {
 	_r = [];
 	_comp_obj_flamer = _this;
@@ -19,7 +19,6 @@ if (!hasInterface) exitWith {};
 
 _flamer = _this select 0;
 _damage_flamer = _this select 1;
-// NEW ADDITIONS
 _territory = _this select 2;
 _comp_obj_casp = [];
 

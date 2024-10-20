@@ -1,9 +1,4 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
-
 private ["_avoid_poz", "_op_dir", "_reldir"];
-
-//if (!isServer) exitWith {};
 
 _obj_teleporter = _this select 0;
 

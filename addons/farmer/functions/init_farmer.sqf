@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT
+
+
 /*
 [marker_namer, territory, damage_inflicted, recharge_delay, health_points] execVM "\z\root_anomalies\addons\farmer\functions\init_farmer.sqf";
 marker_namer		- string, name of the marker where you want the anomaly to spawn
@@ -9,10 +9,10 @@ recharge_time		- number, delay in seconds between Farmer's attacks see line 47 i
 health_points		- number, amount of health farmer has
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

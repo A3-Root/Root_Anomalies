@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 if (!isServer) exitWith {};
 
 private ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_pozitie_noua", "_tgt_farmer", "_list_unit_range_farm", "_isaipanic"];
@@ -122,7 +122,7 @@ while {!_ck_pl} do {
             _ck_pl = true
         }
     } forEach allPlayers;
-    uiSleep 5; // uiSleep 10;
+    uiSleep 5;
 };
 
 _farmer = createAgent ["C_Soldier_VR_F", getMarkerPos _marker_farmer, [], 0, "NONE"];
@@ -136,13 +136,13 @@ _farmer setSkill ["courage", 1];_farmer setUnitPos "UP"; _farmer disableAI "ALL"
     _farmer enableAI _x
 } forEach ["move", "ANIM", "teamSwitch", "PATH"];
 
-_hp_curr_farmer = 1/_health_points;
+_hp_curr_farmer = 1 / _health_points;
 _farmer setVariable ["al_dam_total", 0];
 _farmer setVariable ["al_dam_incr", _hp_curr_farmer];
 _farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
-    _unit=_this#0;
+    _unit=_this select 0;
     _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
@@ -187,7 +187,7 @@ while {alive _farmer} do {
                 _ck_pl = true
             }
         } forEach allPlayers;
-        uiSleep 5; // uiSleep 30
+        uiSleep 5;
     };
 
 

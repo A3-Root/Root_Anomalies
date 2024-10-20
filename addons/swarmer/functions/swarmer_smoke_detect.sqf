@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 params ["_grenade_insect"];
 
 if (typeOf _grenade_insect == insecticid) then 

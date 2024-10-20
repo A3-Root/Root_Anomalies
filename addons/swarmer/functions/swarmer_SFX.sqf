@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 private ["_stup", "_roi_SFX", "_dest_flow", "_life_fct", "_flow_self", "_tgt_hiv", "_praf", "_frunze"];
 

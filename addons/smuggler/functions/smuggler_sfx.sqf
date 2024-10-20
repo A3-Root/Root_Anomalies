@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 fnc_effecte_princ_smug = {
 	private ["_obj_princ_effect", "_bule_smugg", "_fct_lit", "_dust_smug", "_sursa_princ_center", "_brit_burp", "_b_col_burp", "_g_col_burp", "_r_col_burp", "_sp_dist_smug", "_spot_lit"];

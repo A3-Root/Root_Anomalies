@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT
+
+
 fnc_teleportSFX_AI = {
     private ["_unit", "_ind"];
     _unit = _this select 0;

@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 
 /*
 null=[object_anomaly,tracking_distance,electric_sparks,damage_range,effect_on_AI,EMP_enabled] execVM "AL_twins\twins.sqf"
@@ -13,10 +13,10 @@ EMP_enabled			- boolean, if is true an EMP will be emitted when Twins is killed
 
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";

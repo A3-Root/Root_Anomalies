@@ -1,5 +1,5 @@
-// ORIGINALLY CREATED BY ALIAS
-// MODIFIED BY ROOT 
+
+ 
 /*
 [marker_namer, territory, damage_inflicted, recharge_delay] execVM "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf";
 
@@ -10,10 +10,10 @@ damage_inflicted	- number,  amount of damage inflicted by Streamer's burst
 recharge_delay		- number,  delay in seconds between Streamer's attacks
 */
 
-// Only run on player machines
+
 if (!hasInterface) exitWith {};
 
-// If ZEN is not loaded, do not start script
+
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
