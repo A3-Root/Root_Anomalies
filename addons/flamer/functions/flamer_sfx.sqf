@@ -66,9 +66,9 @@ _li_fire setLightColor[1, 0.2, 0.1];
 
 while {(_flamer getVariable "vizibil")and(alive _flamer)} do 
 {
-	_li_fire setLightBrightness 5+(random 1);
-	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15+(random 1)];
-	uiSleep 0.05+(random 0.1);
+	_li_fire setLightBrightness 5+ (random 1);
+	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15+ (random 1)];
+	uiSleep 0.05+ (random 0.1);
 	uiSleep 1;
 	if (player distance _flamer < _territory) then
 	{	

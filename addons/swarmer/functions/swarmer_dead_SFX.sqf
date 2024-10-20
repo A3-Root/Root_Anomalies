@@ -20,7 +20,7 @@ while {_decr >0} do
 {
 	_roi_SFX setDropInterval _drop_var;
 	uiSleep 1;
-	_drop_var = _drop_var+0.05;
-	_decr = _decr-1;
+	_drop_var = _drop_var+ 0.05;
+	_decr = _decr - 1;
 };
 deleteVehicle _roi_SFX;

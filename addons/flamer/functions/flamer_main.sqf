@@ -120,7 +120,7 @@ FLAMER_jump_flamer = {
 			_isacefire = true;
 		};
 	};
-	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10+random 10);
+	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10+ random 10);
 	_salt_sunet= selectRandom ["01_blast", "02_blast", "03_blast"];
 	_obj_veg = nearestTerrainObjects [position _flamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
 	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 20, false];
@@ -160,7 +160,7 @@ FLAMER_jump_flamer = {
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
-	_flamer setVelocity [_jump_dir select 0, _jump_dir select 1, round (10+random 15)];
+	_flamer setVelocity [_jump_dir select 0, _jump_dir select 1, round (10+ random 15)];
 	{_x setDamage [1, false]; _x hideObjectGlobal true} forEach _obj_veg;
 	{_x setDamage (damage _x + 0.10)} forEach _nearvik;
 };

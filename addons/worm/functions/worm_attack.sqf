@@ -20,7 +20,7 @@ _blast_dust setDropInterval 0.002;
 
 _dist_worm = player distance _head_worm;
 _shake_power = linearConversion [0, 1000, _dist_worm, 5, 0, true];
-addCamShake [_shake_power, 4, 13+(random 33)];
+addCamShake [_shake_power, 4, 13+ (random 33)];
 
 _bolovani_blast = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 _bolovani_blast setParticleCircle [2, [0, 0, 0]];

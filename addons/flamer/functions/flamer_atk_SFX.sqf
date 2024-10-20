@@ -20,7 +20,7 @@ _flama setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16,
 _flama setDropInterval 0.02;
 _li_fire = "#lightpoint" createVehicle [getPosATL _flamer select 0, getPosATL _flamer select 1, 3];
 _li_fire setLightUseFlare false;
-_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, round (10+random 5)];
+_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, round (10+ random 5)];
 _li_fire setLightBrightness 10;
 _li_fire setLightDayLight true;	
 _li_fire setLightAmbient[1, 0.2, 0.1];
@@ -33,9 +33,9 @@ while {_bbb>0} do
 {
 	if (player distance _li_fire < 6) then {addCamShake [5, 2, 5]; call BIS_fnc_flamesEffect; [10] call BIS_fnc_bloodEffect; call BIS_fnc_indicateBleeding};
 	_li_fire setLightBrightness _bbb;
-	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15+(random 1)];
+	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15+ (random 1)];
 	uiSleep 2.3;
-	_bbb = _bbb-2;
+	_bbb = _bbb - 2;
 };
 deleteVehicle _li_fire;
 uiSleep 5;

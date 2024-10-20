@@ -1,5 +1,3 @@
-
- 
 _list_units_in_range = "NO-INFANTRY-IN-RANGE";
 
 _object_burp_damage = _this select 0;

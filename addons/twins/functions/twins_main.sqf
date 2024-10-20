@@ -54,7 +54,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 				_allow_move = 0;
 				};
 			};
-			_allow_move = _allow_move+3;
+			_allow_move = _allow_move+ 3;
 		} else {_allow_move =0};
 	uiSleep 2;
 	};
@@ -85,7 +85,7 @@ if (_spark_effect) then
 			_pauza_intre_sclipiri = 0.1+ (random 2);
 			[[_poz_spark, _pauza_intre_sclipiri], "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;
-			_nr=_nr+1;
+			_nr=_nr+ 1;
 		};
 	};
 deleteVehicle _poz_spark;

@@ -2,7 +2,7 @@
  
 
 fnc_find_target_steamer = {params ["_steamer_dud", "_teritoriu"]; private ["_neartargets", "_teritoriu"];	_neartargets = (ASLToAGL getPosATL _steamer_dud) nearEntities ["CAManBase", _teritoriu];	_neartargets - [_steamer_dud]};
-fnc_avoid_steamer = {params ["_chased"]; private ["_chased"]; if (isPlayer _chased) exitWith {}; _relPos = _chased getPos [10+round (random 30), round (random 360)]; _chased doMove _relPos; _chased setSkill ["commanding", 1];};
+fnc_avoid_steamer = {params ["_chased"]; private ["_chased"]; if (isPlayer _chased) exitWith {}; _relPos = _chased getPos [10+ round (random 30), round (random 360)]; _chased doMove _relPos; _chased setSkill ["commanding", 1];};
 
 fnc_travel_steamer = {
 	private ["_steamer_dud", "_tgt_steamer", "_rag", "_jump_dir", "_ground", "_burst"];
@@ -79,7 +79,7 @@ while {alive _steamer_dud} do
 			if (isPlayer _x) then {[[_burst_poz, _x], "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"] remoteExec ["execVM", _x]} else {[_burst_poz, _x] execVM "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"};
 		} forEach (_blow_units-[_steamer_dud]);
 		{[_x] call fnc_avoid_steamer} forEach _list_unit_range_steamer;
-		uiSleep (4+round (random _recharge));
+		uiSleep (4+ round (random _recharge));
 		_list_unit_range_steamer = [_steamer_dud, _teritoriu] call fnc_find_target_steamer;
 		if (count _list_unit_range_steamer >0) then {_tgt_steamer = selectRandom _list_unit_range_steamer} else {_tgt_steamer = nil};
 	};

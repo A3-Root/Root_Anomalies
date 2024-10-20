@@ -108,7 +108,7 @@ _brit = 5;
 while {_brit>0} do 
 {
 	_li_exp setLightBrightness _brit;
-	_brit = _brit-0.1;
+	_brit = _brit - 0.1;
 	uiSleep 0.1;
 };	
 deleteVehicle _li_exp;

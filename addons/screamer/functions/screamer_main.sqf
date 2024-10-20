@@ -13,8 +13,8 @@ fnc_avoid_screamer ={
 		{
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
 		_fct = [30, -30] call BIS_fnc_selectRandom;
-		if (_reldir<180) then {_op_dir=_reldir+180 +_fct} else {_op_dir=_reldir-180+_fct};
-		_avoid_poz = [getPosATL _x, 30+random 10, _op_dir] call BIS_fnc_relPos;
+		if (_reldir<180) then {_op_dir=_reldir+ 180 + _fct} else {_op_dir=_reldir- 180+ _fct};
+		_avoid_poz = [getPosATL _x, 30+ random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
 		_x setSkill ["commanding", 1];
 		};
@@ -223,7 +223,7 @@ if (_isalivevic) then
 
 	_entitate addEventHandler ["Hit", {
 		_unit=_this select 0;
-		_curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+		_curr_dam = (_unit getVariable "al_dam_total")+ (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
 			_unit setDamage 1
 		};
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -248,7 +248,7 @@ if (_isalivevic) then
 
 	_screamer_anomally addEventHandler ["Hit", {
 		_unit=_this select 0;
-		_curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+		_curr_dam = (_unit getVariable "al_dam_total")+ (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
 			_unit setDamage 1
 		};
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -356,25 +356,25 @@ while {alive _entitate} do
 
 		if (_dir_blast<=90) then {
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 0, 1, true];
-			_press_implicit_y = 1-_press_implicit_x;
+			_press_implicit_y = 1- _press_implicit_x;
 		};
 
 		if ((_dir_blast>90)and(_dir_blast<180)) then {
-			_dir_blast = _dir_blast-90;
+			_dir_blast = _dir_blast - 90;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 1, 0, true];
-			_press_implicit_y = _press_implicit_x-1;
+			_press_implicit_y = _press_implicit_x - 1;
 		};
 
 		if ((_dir_blast>180)and(_dir_blast<270)) then {
-			_dir_blast = _dir_blast-180;
+			_dir_blast = _dir_blast - 180;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 0, -1, true];
-			_press_implicit_y = (-1*_press_implicit_x)-1;
+			_press_implicit_y = (-1*_press_implicit_x) - 1;
 		};
 
 		if ((_dir_blast>270)and(_dir_blast<360)) then {
-			_dir_blast = _dir_blast-270;
+			_dir_blast = _dir_blast - 270;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, -1, 0, true];
-			_press_implicit_y = 1+_press_implicit_x;
+			_press_implicit_y = 1+ _press_implicit_x;
 		};
 		if (_isaipanic) then { [_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer;};
 		scream_on=true;

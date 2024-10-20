@@ -37,7 +37,7 @@ while {!isNull _object_anom_core} do {
 			_gigi setPosATL [getPosATL _gigi select 0, getPosATL _gigi select 1, 0.0001];
 			_anim = ["ApanPknlMrunSnonWnonDb", "ApanPknlMrunSnonWnonDf", "ApanPercMrunSnonWnonDf", "ApanPercMsprSnonWnonDfr"] call BIS_fnc_selectRandom;
 			[_gigi, _anim] remoteExec ["switchMove"];
-			_run_poz = [getPosATL _object_anom_core, 100+random 500, random 360] call BIS_fnc_relPos;
+			_run_poz = [getPosATL _object_anom_core, 100+ random 500, random 360] call BIS_fnc_relPos;
 			uiSleep 3;
 			if (alive _gigi) then {[_gigi, ""] remoteExec ["switchMove"]};
 			_gigi setDamage (damage _gigi + (random 0.15));

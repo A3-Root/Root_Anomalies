@@ -107,7 +107,7 @@ STRIGOI_jump_ground ={
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
 	_salt_sunet= selectRandom ["01_salt", "02_salt", "03_salt"];
 	[_cap_casper, [_salt_sunet, 200]] remoteExec ["say3D"];
-	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, round (5+random 15)];
+	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, round (5+ random 15)];
 };
 
 params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic"];
@@ -148,7 +148,7 @@ _strigoi removeAllEventHandlers "Hit";
 
 _strigoi addEventHandler ["Hit", {
     _unit=_this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+    _curr_dam = (_unit getVariable "al_dam_total")+ (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\strigoi\functions\strigoi_splash_hit.sqf"] remoteExec ["execVM"]
@@ -212,7 +212,7 @@ while {alive _strigoi} do
 					{
 						_unghi_fugarit = _strigoi getRelDir _tgt_casp;
 						_unghi_ancora = _strigoi getRelDir _x;
-						_toleranta = abs(_unghi_fugarit-_unghi_ancora);
+						_toleranta = abs(_unghi_fugarit- _unghi_ancora);
 						_pot_poz = (boundingCenter _x) select 2;
 						if ((_pot_poz>2)and {(_toleranta<60)and(_strigoi distance _x < 20)}) exitWith 
 						{

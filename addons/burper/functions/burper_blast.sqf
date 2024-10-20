@@ -1,6 +1,3 @@
-
- 
-
 private ["_obj_neutr"];
 
 if (!hasInterface) exitWith {};

@@ -9,11 +9,11 @@ fnc_avoid_worm ={
         _reldir = [_x, getPos _danger_close] call BIS_fnc_dirto;
         _fct = [30, -30] call BIS_fnc_selectRandom;
         if (_reldir<180) then {
-            _op_dir=_reldir+180 +_fct
+            _op_dir=_reldir+ 180 + _fct
         } else {
-            _op_dir=_reldir-180+_fct
+            _op_dir=_reldir - 180+ _fct
         };
-        _avoid_poz = [getPosATL _x, 20+random 50, _op_dir] call BIS_fnc_relPos;
+        _avoid_poz = [getPosATL _x, 20+ random 50, _op_dir] call BIS_fnc_relPos;
         _x doMove _avoid_poz;
         _x setSkill ["commanding", 1];
     } forEach _chased_units;
@@ -82,28 +82,28 @@ while {_hide_me} do {
         _hide_me = false;
         _tgt_worm = _list_ai_in_range_worm call BIS_fnc_selectRandom;
         _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
-        _dir_move = _dir_move+45;
+        _dir_move = _dir_move+ 45;
         if (_dir_move<=90) then {
             _press_implicit_x = linearConversion [0, 90, _dir_move, 0, 1, true];
-            _press_implicit_y = 1-_press_implicit_x;
+            _press_implicit_y = 1- _press_implicit_x;
         };
         
         if ((_dir_move>90)and(_dir_move<180)) then {
-            _dir_move = _dir_move-90;
+            _dir_move = _dir_move - 90;
             _press_implicit_x = linearConversion [0, 90, _dir_move, 1, 0, true];
-            _press_implicit_y = _press_implicit_x-1;
+            _press_implicit_y = _press_implicit_x - 1;
         };
         
         if ((_dir_move>180)and(_dir_move<270)) then {
-            _dir_move = _dir_move-180;
+            _dir_move = _dir_move - 180;
             _press_implicit_x = linearConversion [0, 90, _dir_move, 0, -1, true];
-            _press_implicit_y = (-1*_press_implicit_x)-1;
+            _press_implicit_y = (-1*_press_implicit_x) - 1;
         };
         
         if ((_dir_move>270)and(_dir_move<360)) then {
-            _dir_move = _dir_move-270;
+            _dir_move = _dir_move - 270;
             _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
-            _press_implicit_y = 1+_press_implicit_x;
+            _press_implicit_y = 1+ _press_implicit_x;
         };
         [[_cap, _coada, _coada_01], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
         [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
@@ -135,28 +135,28 @@ while {!isNull _cap} do {
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
             if (_dir_move<=90) then {
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, 1, true];
-                _press_implicit_y = 1-_press_implicit_x;
+                _press_implicit_y = 1- _press_implicit_x;
             };
             
             if ((_dir_move>90)and(_dir_move<180)) then {
-                _dir_move = _dir_move-90;
+                _dir_move = _dir_move - 90;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 1, 0, true];
-                _press_implicit_y = _press_implicit_x-1;
+                _press_implicit_y = _press_implicit_x - 1;
             };
             
             if ((_dir_move>180)and(_dir_move<270)) then {
-                _dir_move = _dir_move-180;
+                _dir_move = _dir_move - 180;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, -1, true];
-                _press_implicit_y = (-1*_press_implicit_x)-1;
+                _press_implicit_y = (-1*_press_implicit_x) - 1;
             };
             
             if ((_dir_move>270)and(_dir_move<360)) then {
-                _dir_move = _dir_move-270;
+                _dir_move = _dir_move - 270;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
-                _press_implicit_y = 1+_press_implicit_x;
+                _press_implicit_y = 1+ _press_implicit_x;
             };
             _worm_salt = ["salt_08", "salt_05"] call BIS_fnc_selectRandom;
-            _cap setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+            _cap setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+ random 10];
             [_coada, [_worm_salt, 500]] remoteExec ["say3D"];
             uiSleep 0.5;
             waitUntil {
@@ -167,10 +167,10 @@ while {!isNull _cap} do {
             {
                 if ((_x!=_cap)&&(_x!=_coada)&&(_x!=_coada_01)&&!(surfaceIsWater getPos _x)) then {
                     if (_x isKindOf "LandVehicle") then {
-                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+ random 10];
                         [_x, _damage_worm] call fnc_vic_dmg;
                     } else {
-                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+random 10];
+                        _x setVelocity [_press_implicit_x*5, _press_implicit_y*5, 15+ random 10];
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                         _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
                         if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then 
@@ -198,34 +198,34 @@ while {!isNull _cap} do {
         if ((!isNull _tgt_worm)&&(_tgt_worm distance _cap > 15)&&!(surfaceIsWater getPos _tgt_worm)) then {
             _sunet_deplas=["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
             if (_isaipanic) then { [_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
-            _fct_move = 8+random 8;
-            _fct = [+10+random -35, 10+random 45] call BIS_fnc_selectRandom;
+            _fct_move = 8+ random 8;
+            _fct = [10+ random - 35, 10+ random 45] call BIS_fnc_selectRandom;
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
-            _dir_move = _dir_move+_fct;
+            _dir_move = _dir_move+ _fct;
             if (_dir_move<=90) then {
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, 1, true];
-                _press_implicit_y = 1-_press_implicit_x;
+                _press_implicit_y = 1- _press_implicit_x;
             };
             
             if ((_dir_move>90)and(_dir_move<180)) then {
-                _dir_move = _dir_move-90;
+                _dir_move = _dir_move - 90;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 1, 0, true];
-                _press_implicit_y = _press_implicit_x-1;
+                _press_implicit_y = _press_implicit_x - 1;
             };
             
             if ((_dir_move>180)and(_dir_move<270)) then {
-                _dir_move = _dir_move-180;
+                _dir_move = _dir_move - 180;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, -1, true];
-                _press_implicit_y = (-1*_press_implicit_x)-1;
+                _press_implicit_y = (-1*_press_implicit_x) - 1;
             };
             
             if ((_dir_move>270)and(_dir_move<360)) then {
-                _dir_move = _dir_move-270;
+                _dir_move = _dir_move - 270;
                 _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
-                _press_implicit_y = 1+_press_implicit_x;
+                _press_implicit_y = 1+ _press_implicit_x;
             };
             [_coada, [_sunet_deplas, 500]] remoteExec ["say3D"];
-            _cap setVelocity [_press_implicit_x*_fct_move, _press_implicit_y*_fct_move, 5+random 5];
+            _cap setVelocity [_press_implicit_x*_fct_move, _press_implicit_y*_fct_move, 5+ random 5];
             uiSleep 2;
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         };

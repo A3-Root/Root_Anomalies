@@ -1,6 +1,3 @@
-
- 
-
 private ["_avoid_poz", "_op_dir", "_reldir"];
 
 _obj_teleporter = _this select 0;
