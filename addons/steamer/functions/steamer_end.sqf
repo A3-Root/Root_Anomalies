@@ -9,7 +9,7 @@ explozie_end = "\z\root_anomalies\addons\main\sounds\explozie_3.ogg";
 params ["_steamer_poz"];
 
 enableCamShake true;
-playSound3D ["\z\root_anomalies\addons\main\sounds\explozie_3.ogg", "", false, [_steamer_poz # 0, _steamer_poz # 1, 10],7,5,1];
+playSound3D ["\z\root_anomalies\addons\main\sounds\explozie_3.ogg", "", false, [_steamer_poz select 0, _steamer_poz select 1, 10],7,5,1];
 _blast_dust = "#particlesource" createVehicleLocal _steamer_poz;
 _blast_dust setParticleCircle [3,[-5,-5,0]];
 _blast_dust setParticleRandom [0.1,[2,2,0],[-10,-10,0],5,0.1,[0,0,0,0.1],1,0.5];

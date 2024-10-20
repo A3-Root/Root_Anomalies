@@ -18,7 +18,7 @@ if (!hasInterface) exitWith {};
 // If ZEN is not loaded, do not start script
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
 {
-    diag_log "******CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 
 params ["_logic"];

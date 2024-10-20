@@ -44,36 +44,32 @@ while {alive _mobile_s} do
 		_mobile_s setVariable ["tgt",_tgt_hiv,true];
 		{[_mobile_s,_x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
 		_mobile_s disableCollisionWith _tgt_hiv;
-		while {(alive _tgt_hiv)and(_tgt_hiv distance _mobile_s < _radius)} do
-		{
+		while {(alive _tgt_hiv)and(_tgt_hiv distance _mobile_s < _radius)} do {
 			if (_tgt_hiv distance _mobile_s > 10) then {_mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0,7,0])};
 			uiSleep 4;
-			if ((_tgt_hiv distance _mobile_s <= 10) and (alive _mobile_s)) then 
-			{	
+			if ((_tgt_hiv distance _mobile_s <= 10) and (alive _mobile_s)) then {	
 				atak_swarmer = true; publicVariable "atak_swarmer";
 				_mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0,0,0]);
 				_mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0,0,0]);
 				if (alive _mobile_s) then {
-				[[_tgt_hiv,_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
-				_amountOfDamage = _dmg_un;
-				_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
-				_bodyPart = selectRandom ["head","body","hand_l","hand_r","leg_l","leg_r"];
-				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-				{
-					[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];	
-				} else 
-				{ 
-					_tgt_hiv setDamage ((damage _tgt_hiv) + _amountOfDamage);
-				};
+					[[_tgt_hiv,_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
+					_amountOfDamage = _dmg_un;
+					_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+					_bodyPart = selectRandom ["head","body","hand_l","hand_r","leg_l","leg_r"];
+					if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];	
+					} else { 
+						_tgt_hiv setDamage ((damage _tgt_hiv) + _amountOfDamage);
+					};
 				};
 				{[_mobile_s,_x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
-				uiSleep 3;
+				uiSleep 2;
 				atak_swarmer = false; publicVariable "atak_swarmer";
-				_balta_sange = createVehicle [selectRandom["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"],[0,0,0],[],0,"CAN_COLLIDE"]; _balta_sange setDir (round (random 360)); _balta_sange setPosATL [getPosATL _tgt_hiv # 0,getPosATL _tgt_hiv # 1,0]; _balta_sange setVectorUp surfaceNormal getPosATL _balta_sange;
+				_balta_sange = createVehicle [selectRandom["BloodPool_01_Large_New_F","BloodSplatter_01_Large_New_F"],[0,0,0],[],0,"CAN_COLLIDE"]; _balta_sange setDir (round (random 360)); _balta_sange setPosATL [getPosATL _tgt_hiv select 0,getPosATL _tgt_hiv select 1,0]; _balta_sange setVectorUp surfaceNormal getPosATL _balta_sange;
 				_mobile_s setPos (position _balta_sange);
 				_mobile_s stop true;
 				[_balta_sange,["roi_atk_01",300]] remoteExec ["say3D"];
-				uiSleep 5;
+				uiSleep 2;
 				_mobile_s stop false;
 				{[_mobile_s,_x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
 			};
@@ -93,4 +89,4 @@ while {alive _mobile_s} do
 		};
 	} else {_mobile_s setVariable ["isHive",false,true]; atak_swarmer = false; publicVariable "atak_swarmer"; uiSleep 5};
 }:
-uiSleep 30; deleteVehicle _mobile_s;
+uiSleep 10; deleteVehicle _mobile_s;

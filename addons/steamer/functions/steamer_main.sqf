@@ -8,9 +8,9 @@ fnc_travel_steamer = {
 	private ["_steamer_dud","_tgt_steamer", "_rag", "_jump_dir", "_ground", "_burst"];
 	params ["_steamer_dud","_tgt_steamer"];
 	if (!hasInterface) exitWith {};
-	_rag = "Land_PenBlack_F" createVehicle [getPosATL _steamer_dud # 0,getPosATL _steamer_dud # 1,3000];
+	_rag = "Land_PenBlack_F" createVehicle [getPosATL _steamer_dud select 0,getPosATL _steamer_dud select 1,3000];
 	_jump_dir = (getPosATL _steamer_dud vectorFromTo getPosATL _tgt_steamer) vectorMultiply 20;
-	_rag setVelocity [_jump_dir # 0,_jump_dir # 1,5];
+	_rag setVelocity [_jump_dir select 0,_jump_dir select 1,5];
 	[[_rag],"\z\root_anomalies\addons\steamer\functions\steamer_travel_SFX.sqf"] remoteExec ["execVM"];;
 	uiSleep 1;
 	deleteVehicle _rag;

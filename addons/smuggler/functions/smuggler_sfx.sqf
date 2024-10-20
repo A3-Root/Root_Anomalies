@@ -11,32 +11,32 @@ fnc_effecte_princ_smug = {
 	
 	_basic_param = [[0,[0,0,0]],[0,[0,0,0],[0,0,0],0,0,[0,0,0,0],0,0]];
 	_center_smug = "#particlesource" createVehicleLocal (getPosATL _sursa_princ_center);
-	_center_smug setParticleCircle _basic_param # 0;
-	_center_smug setParticleRandom _basic_param # 1;
+	_center_smug setParticleCircle _basic_param select 0;
+	_center_smug setParticleRandom _basic_param select 1;
 	_center_smug setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",8,0,40,1],"","Billboard",1,3,[0,0,0],[0,0,0],7,10,7.9,0,[1,1,1],[[0,0,0,0],[0,0,0,0.8],[0,0,0,0]],[1],0,0,"", "",_sursa_princ_center];
 	_center_smug setDropInterval 1;	
 
 	_invelis = "#particlesource" createVehicleLocal (getPosATL _obj_princ_effect);
-	_invelis setParticleCircle _basic_param # 0;
-	_invelis setParticleRandom _basic_param # 1;
+	_invelis setParticleCircle _basic_param select 0;
+	_invelis setParticleRandom _basic_param select 1;
 	_invelis setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",8,0,40,1],"","Billboard",1,3,[0,0,0],[0,0,0],17,10,7.9,0,[3,3,3],[[1,1,1,0],[1,1,1,0.3],[1,1,1,0]],[1],0,0,"","",_obj_princ_effect];
 	_invelis setDropInterval 1;	
 
 	_bule_smugg = "#particlesource" createVehicleLocal (getPosATL _obj_princ_effect);
-	_bule_smugg setParticleCircle _basic_param # 0;
+	_bule_smugg setParticleCircle _basic_param select 0;
 	_bule_smugg setParticleRandom [0.1,[1,1,1],[0,0,0],0,0.1,[0,0,0,0.1],1,0];
 	_bule_smugg setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1],"","Billboard",1,2,[0,0,0],[0,0,0],17,10,7.9,0,[2,0.5,2],[[0,0,0,0.5],[0,0,0,1],[0,0,0,0]],[1],1,0,"","",_obj_princ_effect];
 	_bule_smugg setDropInterval 0.01;
 
 	_sp_dist_smug = "#particlesource" createVehicleLocal (getPosATL _sursa_princ_center);
-	_sp_dist_smug setParticleCircle _basic_param # 0;
-	_sp_dist_smug setParticleRandom _basic_param # 1;
+	_sp_dist_smug setParticleCircle _basic_param select 0;
+	_sp_dist_smug setParticleRandom _basic_param select 1;
 	_sp_dist_smug setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1],"","Billboard",1,3,[0,0,0],[0,0,0],7,10,7.9,0,[3,0.1,3],[[1,1,1,1],[1,1,1,1],[1,1,1,1]],[1],0,0,"","",_sursa_princ_center];
 	_sp_dist_smug setDropInterval 0.5;	
 
 	_dust_smug = "#particlesource" createVehicleLocal (getPosATL _obj_princ_effect);
-	_dust_smug setParticleCircle _basic_param # 0;
-	_dust_smug setParticleRandom _basic_param # 1;
+	_dust_smug setParticleCircle _basic_param select 0;
+	_dust_smug setParticleRandom _basic_param select 1;
 	_dust_smug setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 1, [0, 0, 0], [0, 0, 0], 15, 10, 7.9, 0.001, [15, 5, 0.1], [[1, 1, 1, 0], [1, 1, 1, 0.05], [0, 0, 0, 0.01]], [0.08], 1, 0, "", "", _obj_princ_effect];
 	_dust_smug setDropInterval 2;
 	

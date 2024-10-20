@@ -7,21 +7,21 @@ if (!isServer) exitWith {};
 
 STRIGOI_find_target = {
 	private ["_neartargets","_teritoriu"];
-	_strigoi = _this # 0;
-	_teritoriu = _this # 1;
+	_strigoi = _this select 0;
+	_teritoriu = _this select 1;
 	_neartargets = (ASLToAGL getPosATL _strigoi) nearEntities ["CAManBase",_teritoriu];
 	_neartargets - [_strigoi];
 };
 
 STRIGOI_strig_drain ={
 	private ["_list_unit_range_casp"];
-	_list_unit_range_casp = _this # 0;
+	_list_unit_range_casp = _this select 0;
 	{_x setFatigue ((getFatigue _x) + 0.1)} forEach _list_unit_range_casp;
 };
 
 STRIGOI_avoid_casp ={
-	_strig = _this # 0;
-	_chased = _this # 1;
+	_strig = _this select 0;
+	_chased = _this select 1;
 	if (isPlayer _chased) exitWith {};
 	_relPos = _chased getPos [10, (_strig getDir _chased) + (random 33)*(selectRandom [1,-1])];
 	_chased doMove _relPos;
@@ -30,10 +30,10 @@ STRIGOI_avoid_casp ={
 
 STRIGOI_attk_strig = {
 	private ["_strigoi","_tgt_casp","_damage_strig", "_noseize"];
-	_strigoi		= _this # 0;
-	_tgt_casp		= _this # 1;
-	_damage_strig	= _this # 2;
-	_noseize	    = _this # 3;
+	_strigoi		= _this select 0;
+	_tgt_casp		= _this select 1;
+	_damage_strig	= _this select 2;
+	_noseize	    = _this select 3;
 	[[_strigoi,_tgt_casp,_noseize],"\z\root_anomalies\addons\strigoi\functions\strigoi_atk_viz.sqf"] remoteExec ["execVM"];
 	if ((isPlayer _tgt_casp) && (typeOf _tgt_casp != "VirtualCurator_F")) then {
 		[[_damage_strig, _noseize],"\z\root_anomalies\addons\strigoi\functions\strigoi_tgt_attk.sqf"] remoteExec ["execVM",_tgt_casp]
@@ -66,9 +66,9 @@ STRIGOI_hide_strig = {
 
 STRIGOI_show_strig = {
 	private ["_strigoi","_poz_orig_sc","_pos_strig","_teritoriu"];
-	_strigoi= _this # 0;
-	_poz_orig_sc= _this # 1;
-	_teritoriu= _this # 2;
+	_strigoi= _this select 0;
+	_poz_orig_sc= _this select 1;
+	_teritoriu= _this select 2;
 	_pos_strig = [_poz_orig_sc,1,_teritoriu/10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_strigoi setPos _pos_strig;
 	_strigoi setVariable ["vizibil",true,true];
@@ -98,7 +98,7 @@ STRIGOI_salt_2 ={
 	_strigoi attachTo [_umbla_casper,[0,0,((boundingCenter _obj_de_agatat) select 2)*2]];
 	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
 	detach _strigoi;
-	_strigoi setVelocity [_jump_dir # 0,_jump_dir # 1,3];
+	_strigoi setVelocity [_jump_dir select 0,_jump_dir select 1,3];
 };
 
 STRIGOI_jump_ground ={
@@ -107,7 +107,7 @@ STRIGOI_jump_ground ={
 	_jump_dir = (getPosATL _strigoi vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
 	_salt_sunet= selectRandom ["01_salt","02_salt","03_salt"]; 
 	[_cap_casper,[_salt_sunet,200]] remoteExec ["say3D"];
-	_strigoi setVelocity [_jump_dir # 0,_jump_dir # 1,round (5+random 15)];
+	_strigoi setVelocity [_jump_dir select 0,_jump_dir select 1,round (5+random 15)];
 };
 
 params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic"];

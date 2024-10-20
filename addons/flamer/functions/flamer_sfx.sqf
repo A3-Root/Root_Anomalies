@@ -17,10 +17,10 @@ fnc_flamer_SFX = {
 private ["_li_fire","_lit","_part_gost","_part_gost_sec","_comp_obj_casp","_tease_voice","_flamer","_dmg_fire", "_isacefire", "_isacemedical"];
 if (!hasInterface) exitWith {};
 
-_flamer = _this # 0;
-_damage_flamer = _this # 1;
+_flamer = _this select 0;
+_damage_flamer = _this select 1;
 // NEW ADDITIONS
-_territory = _this # 2;
+_territory = _this select 2;
 _comp_obj_casp = [];
 
 player setSpeaker "NoVoice";

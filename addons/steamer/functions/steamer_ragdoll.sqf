@@ -10,11 +10,11 @@ _tip = selectRandom ["tip_01","tip_02","tip_03","tip_04","tip_05","tip_05"];
 _dir_blo = (_blowpoz vectorFromTo (_unit getRelPos [30,0])) vectorMultiply _al_pressure;
 _rag = "Land_PenBlack_F" createVehicle [0,0,0];
 _rag attachTo [_unit,[0,0,0],"Spine3"];
-_unit setVelocityModelSpace [_dir_blo # 0,_dir_blo # 1,_al_pressure];
+_unit setVelocityModelSpace [_dir_blo select 0,_dir_blo select 1,_al_pressure];
 uiSleep 0.1;
 _unit allowDamage false;
 _rag setMass 1e10;
-_rag setVelocityModelSpace [_dir_blo # 0,_dir_blo # 1,_al_pressure];
+_rag setVelocityModelSpace [_dir_blo select 0,_dir_blo select 1,_al_pressure];
 uiSleep 0.01;
 detach _rag;
 [_rag,_unit] spawn {

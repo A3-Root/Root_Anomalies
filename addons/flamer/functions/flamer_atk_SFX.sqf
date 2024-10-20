@@ -18,7 +18,7 @@ _flama setParticleCircle [3,[0,0,0]];
 _flama setParticleRandom [1,[2,2,0],[0,0,0],0,0.1,[0,0,0,0],1,0];
 _flama setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal",16,10,32,1],"","Billboard",1,9,[0,0,0],[0,0,0],0,10.07,7.9,0,[2,2,2],[[1,1,1,0],[1,1,1,1],[1,1,1,0]],[0.8],0, 0, "", "", _flamer,0,true];
 _flama setDropInterval 0.02;
-_li_fire = "#lightpoint" createVehicle [getPosATL _flamer # 0,getPosATL _flamer # 1,3];
+_li_fire = "#lightpoint" createVehicle [getPosATL _flamer select 0,getPosATL _flamer select 1,3];
 _li_fire setLightUseFlare false;
 _li_fire setLightAttenuation [0,0,100,0,0.1,round (10+random 5)];
 _li_fire setLightBrightness 10;

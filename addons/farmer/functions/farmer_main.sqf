@@ -68,7 +68,7 @@ FARMER_attk_farmer = {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
-				_x setVelocity [_jump_dir # 0,_jump_dir # 1,9]; 
+				_x setVelocity [_jump_dir select 0,_jump_dir select 1,9]; 
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 					[_x, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else { 
@@ -76,7 +76,7 @@ FARMER_attk_farmer = {
 				}; 
 			};
 			if (_x isKindOf "LandVehicle") then {
-				_x setVelocity [_jump_dir # 0,_jump_dir # 1,3]; 
+				_x setVelocity [_jump_dir select 0,_jump_dir select 1,3]; 
 				_vehicle = _x;
 				_damage = random[0, _damage_farmer, 1];
 				_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
@@ -106,9 +106,9 @@ FARMER_attk_farmer = {
 FARMER_travel_farmer = {
 	params ["_farmer","_tgt_farmer"];
 	_farmer setUnitPos "DOWN";
-	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer # 0,getPosATL _farmer # 1,3000];
+	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0,getPosATL _farmer select 1,3000];
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
-	_rag setVelocity [_jump_dir # 0,_jump_dir # 1,5];
+	_rag setVelocity [_jump_dir select 0,_jump_dir select 1,5];
 	[[_rag],"\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep round (2+random 2);
 	_farmer setVariable ["pozitie_noua",getPos _rag];

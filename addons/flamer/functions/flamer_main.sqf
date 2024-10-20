@@ -161,7 +161,7 @@ FLAMER_jump_flamer = {
 			};
 		};
 	} forEach (_nearflamer-[_flamer]);
-	_flamer setVelocity [_jump_dir # 0,_jump_dir # 1,round (10+random 15)];
+	_flamer setVelocity [_jump_dir select 0,_jump_dir select 1,round (10+random 15)];
 	{_x setDamage [1,false]; _x hideObjectGlobal true} forEach _obj_veg;
 	{_x setDamage (damage _x + 0.10)} forEach _nearvik;
 };

@@ -19,24 +19,24 @@ fnc_spectral = {
 	{
 		_part_gost = "#particlesource" createVehicleLocal (getPosATL _x);
 		_part_gost setParticleCircle [0,[0,0,0]];
-		_part_gost setParticleRandom (_arr # 0);
-		_part_gost setParticleParams (_x call (_arr # 1));
+		_part_gost setParticleRandom (_arr select 0);
+		_part_gost setParticleParams (_x call (_arr select 1));
 		_part_gost setDropInterval 0.05;
 		_r pushBackUnique _part_gost;
 	} forEach _comp_obj_casp;
 
 	[_r, _effectArrays, _comp_obj_casp] spawn 
 	{
-		_part_gost_array = _this # 0;
-		_effectArrays = _this # 1;
-		_comp_obj_casp = _this # 2;
+		_part_gost_array = _this select 0;
+		_effectArrays = _this select 1;
+		_comp_obj_casp = _this select 2;
 		while {!((count _this) isEqualTo 0)} do 
 		{
 			uiSleep 3;
 			_arr = _effectArrays select sunOrMoon;
 			{
-				_x setParticleRandom (_arr # 0);
-				_x setParticleParams ((_comp_obj_casp select (_part_gost_array find _x)) call (_arr # 1));
+				_x setParticleRandom (_arr select 0);
+				_x setParticleParams ((_comp_obj_casp select (_part_gost_array find _x)) call (_arr select 1));
 			} forEach _part_gost_array;
 		};
 	};
@@ -46,7 +46,7 @@ fnc_spectral = {
 private ["_part_gost","_part_gost_sec","_comp_obj_casp","_tease_voice","_strigoi","_final_strigoi", "_noseize"];
 if (!hasInterface) exitWith {};
 
-_strigoi = _this # 0;
+_strigoi = _this select 0;
 _comp_obj_casp = [];
 
 player setSpeaker "NoVoice";

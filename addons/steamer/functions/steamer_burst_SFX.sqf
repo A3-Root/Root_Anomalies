@@ -5,7 +5,7 @@ if (!hasInterface) exitWith {};
 
 params ["_tgt_poz","_crater_bool"];
 
-_blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz # 0,_tgt_poz # 1,-0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
+_blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz select 0,_tgt_poz select 1,-0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
 _blow_poz setVectorUp surfaceNormal getPosATL _blow_poz;
 enableCamShake true;
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
@@ -57,7 +57,7 @@ _poz_eko = getPos _blow_poz;
 	{
 		params ["_eko","_blow_poz"];
 		uiSleep 1;
-		playSound3D ["\z\root_anomalies\addons\main\sounds\eko_01.ogg", "", false, [_blow_poz # 0, _blow_poz # 1, 500], 7, 5, 0];
+		playSound3D ["\z\root_anomalies\addons\main\sounds\eko_01.ogg", "", false, [_blow_poz select 0, _blow_poz select 1, 500], 7, 5, 0];
 	};
 _dropsX = selectRandom ["drops_01","drops_02","drops_03"];
 uiSleep 3.3;
