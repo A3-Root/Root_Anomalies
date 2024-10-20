@@ -29,7 +29,7 @@ uiSleep 0.5;
 deleteVehicle _blast_dust;
 deleteVehicle _flama;
 _bbb = 8;
-while {_bbb>0} do 
+while {_bbb > 0} do 
 {
 	if (player distance _li_fire < 6) then {addCamShake [5, 2, 5]; call BIS_fnc_flamesEffect; [10] call BIS_fnc_bloodEffect; call BIS_fnc_indicateBleeding};
 	_li_fire setLightBrightness _bbb;

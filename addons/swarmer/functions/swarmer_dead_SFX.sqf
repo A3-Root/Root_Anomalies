@@ -16,7 +16,7 @@ playSound3D ["\z\root_anomalies\addons\main\sounds\roi_mort.ogg", "", false, [_h
 uiSleep 5;
 _decr = 10;
 _drop_var = 0.01;
-while {_decr >0} do
+while {_decr > 0} do
 {
 	_roi_SFX setDropInterval _drop_var;
 	uiSleep 1;

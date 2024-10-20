@@ -44,10 +44,10 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then
 	};
 };
 
-waitUntil {uiSleep 5; player distance _flamer <1000};
+waitUntil {uiSleep 5; player distance _flamer < 1000};
 _flamer spawn {while {alive _this} do {if (_this getVariable "vizibil") then {[_this, ["flamer_voice", 100]] remoteExec ["say3D"]}; uiSleep 5 + random 1}};
 
-_pct_flamer=["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
+_pct_flamer= ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
 {_part_surs = "Land_HelipadEmpty_F" createVehicleLocal [0, 0, 0]; _comp_obj_casp pushBack _part_surs; _part_surs attachTo [_flamer, [0, 0, 0], _x]} forEach _pct_flamer;
 _part_array_flamer = _comp_obj_casp call fnc_flamer_SFX;
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _flamer);
@@ -64,7 +64,7 @@ _li_fire setLightDayLight true;
 _li_fire setLightAmbient[1, 0.2, 0.1];
 _li_fire setLightColor[1, 0.2, 0.1];
 
-while {(_flamer getVariable "vizibil")and(alive _flamer)} do 
+while {(_flamer getVariable "vizibil") && (alive _flamer)} do 
 {
 	_li_fire setLightBrightness 5 + (random 1);
 	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15 + (random 1)];

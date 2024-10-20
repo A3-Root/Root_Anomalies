@@ -1,7 +1,7 @@
 
 
 
-fnc_avoid_screamer ={
+fnc_avoid_screamer = {
 	private ["_danger_close", "_op_dir", "_chased_units", "_fct", "_reldir", "_avoid_poz", "_territory", "_targets"];
 	_danger_close = _this select 0;
 	_territory = _this select 1;
@@ -13,7 +13,7 @@ fnc_avoid_screamer ={
 		{
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
 		_fct = [30, -30] call BIS_fnc_selectRandom;
-		if (_reldir<180) then {_op_dir=_reldir + 180 + _fct} else {_op_dir=_reldir - 180 + _fct};
+		if (_reldir < 180) then {_op_dir= _reldir + 180 + _fct} else {_op_dir= _reldir - 180 + _fct};
 		_avoid_poz = [getPosATL _x, 30 + random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
 		_x setSkill ["commanding", 1];
@@ -222,8 +222,8 @@ if (_isalivevic) then
 	_entitate removeAllEventHandlers "Hit";
 
 	_entitate addEventHandler ["Hit", {
-		_unit=_this select 0;
-		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+		_unit= _this select 0;
+		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -247,8 +247,8 @@ if (_isalivevic) then
 	_screamer_anomally removeAllEventHandlers "Hit";
 
 	_screamer_anomally addEventHandler ["Hit", {
-		_unit=_this select 0;
-		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+		_unit= _this select 0;
+		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
 		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -271,14 +271,14 @@ uiSleep 1;
 while {alive _entitate} do
 {
 	_entitate setUnitPos "UP";
-	if  (count (_entitate nearEntities [_screamer_targets, _screamer_territory])>1) then {
+	if  (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
 	_teleport = false;
 	
 	while {!_teleport and (alive _entitate)} do
 	{
 		_entitate setUnitPos "UP";
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
-		if (count (_entitate nearEntities [_screamer_targets, _screamer_territory])<2) then {_teleport=true;};
+		if (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
 
 		_pot_tgt = ((_entitate nearEntities [_screamer_targets, _screamer_territory]) select { ((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
 		_poz = getPosATL _pot_tgt;
@@ -354,30 +354,30 @@ while {alive _entitate} do
 
 		_al_pressure = 90;
 
-		if (_dir_blast<=90) then {
+		if (_dir_blast <= 90) then {
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 0, 1, true];
 			_press_implicit_y = 1 - _press_implicit_x;
 		};
 
-		if ((_dir_blast>90)and(_dir_blast<180)) then {
+		if ((_dir_blast > 90) && (_dir_blast < 180)) then {
 			_dir_blast = _dir_blast - 90;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 1, 0, true];
 			_press_implicit_y = _press_implicit_x - 1;
 		};
 
-		if ((_dir_blast>180)and(_dir_blast<270)) then {
+		if ((_dir_blast > 180) && (_dir_blast < 270)) then {
 			_dir_blast = _dir_blast - 180;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 0, -1, true];
 			_press_implicit_y = (-1 * _press_implicit_x) - 1;
 		};
 
-		if ((_dir_blast>270)and(_dir_blast<360)) then {
+		if ((_dir_blast > 270) && (_dir_blast < 360)) then {
 			_dir_blast = _dir_blast - 270;
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, -1, 0, true];
 			_press_implicit_y = 1 + _press_implicit_x;
 		};
 		if (_isaipanic) then { [_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer;};
-		scream_on=true;
+		scream_on= true;
 
 
 		{
@@ -478,7 +478,7 @@ while {alive _entitate} do
 		deleteVehicle _wave_obj;
 		uiSleep 1;
 
-		scream_on=false;
+		scream_on= false;
 		_units_range = [];
 	};
 };

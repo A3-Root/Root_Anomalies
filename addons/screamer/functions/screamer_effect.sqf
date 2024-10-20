@@ -12,7 +12,7 @@ _emit say3D ["scream", 500];
 _obj_eff say3D ["stones_scream", 500];
 
 enableCamShake true;
-if ((player distance _emit)<150) then 
+if ((player distance _emit) < 150) then 
 {
 	addCamShake [1, 5, 25];
 };
@@ -43,7 +43,7 @@ _dirt_dust setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1
 _dirt_dust setDropInterval 0.005;
 
 uiSleep 1;
-if ((player distance _emit)<100) then {playSound "earthquakes"};
+if ((player distance _emit) < 100) then {playSound "earthquakes"};
 
 uiSleep 2;
 deleteVehicle _blur_sonic;

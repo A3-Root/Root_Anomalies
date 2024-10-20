@@ -52,8 +52,8 @@ fnc_burp_sfx_secundar = {
 	_work_sfx_sec = _this select 0;
 	_obj_sfx_sec = _this select 1;
 	while {((player distance _work_sfx_sec) < 1500) && (ciclu_compli < 3)} do {
-		if ((player distance _work_sfx_sec) <100) then {_sunet_blast = ["01_blast", "02_blast", "03_blast"] call BIS_fnc_selectRandom;enableCamShake true; addCamShake [1, 4, 13 + (random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
-		if ((player distance _work_sfx_sec) >100) then {_far_sunet_blast = ["01_far_blast", "02_far_blast", "03_far_blast"] call BIS_fnc_selectRandom; _work_sfx_sec say3D [_far_sunet_blast, 500]};
+		if ((player distance _work_sfx_sec) < 100) then {_sunet_blast = ["01_blast", "02_blast", "03_blast"] call BIS_fnc_selectRandom;enableCamShake true; addCamShake [1, 4, 13 + (random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
+		if ((player distance _work_sfx_sec) > 100) then {_far_sunet_blast = ["01_far_blast", "02_far_blast", "03_far_blast"] call BIS_fnc_selectRandom; _work_sfx_sec say3D [_far_sunet_blast, 500]};
 		_blast_blurp = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_sec);
 		_blast_blurp setParticleCircle [5, [-3, -3, 0]];
 		_blast_blurp setParticleRandom [2, [6, 6, 0], [-7, -7, 0], 5, 1, [0, 0, 0, 1], 1, 1];
@@ -87,8 +87,8 @@ fnc_anim_burp = {
 	private ["_obj_anim", "_b_dir", "_h_bounce", "_sus", "_chek", "_curr_chek", "_fly_chek", "_work_obj"];
 	_obj_anim = _this select 0;
 	_work_obj = _this select 1;
-	_b_dir=0;
-	_h_bounce=0;
+	_b_dir= 0;
+	_h_bounce= 0;
 	_sus= false;
 	while {
 		((player distance _obj_anim) < 1500) && (ciclu_simplu != ciclu_compli) && (_work_obj getVariable "burper_activ")
@@ -135,7 +135,7 @@ if (detection_smugg) then {
 		ciclu_simplu = 1;
 		ciclu_compli = 1;
 		uiSleep 1;
-		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
+		waitUntil {uiSleep 2;(player distance _work_obj) < 1500};
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 1], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0, "A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
@@ -150,14 +150,14 @@ if (detection_smugg) then {
 		
 		[_work_obj] spawn {
 			_check_player_det_burp = _this select 0;
-			while {((player distance _check_player_det_burp)<1500)} do {
+			while {((player distance _check_player_det_burp) < 1500)} do {
 				player call fnc_check_detector;
 				check_pass = player getVariable "has_detector";
 				uiSleep 3;
 			};
 		};
 		
-		waitUntil {ciclu_simplu!=ciclu_compli};
+		waitUntil {ciclu_simplu != ciclu_compli};
 
 		_burper_obj_sec hideObjectGlobal false;
 		[_work_obj, _burper_obj_sec] spawn {
@@ -175,7 +175,7 @@ if (detection_smugg) then {
 	ciclu_simplu = 1;
 	ciclu_compli = 2;
 	while {alive _work_obj} do {
-		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
+		waitUntil {uiSleep 2;(player distance _work_obj) < 1500};
 		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 0], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0, "A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];

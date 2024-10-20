@@ -4,7 +4,7 @@ fnc_teleportSFX_AI = {
     private ["_unit", "_ind"];
     _unit = _this select 0;
     _ind = 3;
-    while {_ind>0} do {
+    while {_ind > 0} do {
         _unit hideObjectGlobal true;
         uiSleep 0.2; _unit hideObjectGlobal false; uiSleep 0.2; _ind = _ind - 1
     };
@@ -19,15 +19,15 @@ _dmg_on_teleport = _this select 2;
 _noseize       = _this select 3;
 
 
-_list_teleport=[];
-_list_vek_teleport=[];
+_list_teleport= [];
+_list_vek_teleport= [];
 
 while {alive _obj_teleporter} do {
     _list_teleport = (position _obj_teleporter) nearEntities ["CAManBase", 15];
     if (protection_smug != "") then {
-        if (count _list_teleport>0) then {
+        if (count _list_teleport > 0) then {
             {
-                if ((headgear _x == protection_smug)or(goggles _x== protection_smug)or(uniform _x== protection_smug)or(vest _x== protection_smug)or(backpack _x== protection_smug) or (protection_smug in (assignedItems _x + items _x))) then {} else {
+                if ((headgear _x == protection_smug) || (goggles _x == protection_smug) || (uniform _x == protection_smug) || (vest _x == protection_smug) || (backpack _x == protection_smug) or (protection_smug in (assignedItems _x + items _x))) then {} else {
                     _fresh_spawn = _x getVariable "teleported_in";
                     if (isNil "_fresh_spawn") then {
                         [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
@@ -86,7 +86,7 @@ while {alive _obj_teleporter} do {
     };
     
     _list_vek_teleport = (position _obj_teleporter) nearEntities ["landvehicle", 15];
-    if (count _list_vek_teleport>0) then {
+    if (count _list_vek_teleport > 0) then {
         {
             _fresh_spawn = _x getVariable "teleported_in";
             if (isNil "_fresh_spawn") then {
@@ -98,7 +98,7 @@ while {alive _obj_teleporter} do {
             };
         } forEach _list_vek_teleport;
         _list_vek_teleport = [];
-        _list_teleport=[];
+        _list_teleport= [];
     };
     uiSleep 2;
 };

@@ -77,11 +77,11 @@ while {alive _steamer_dud} do
 			};
 
 			if (isPlayer _x) then {[[_burst_poz, _x], "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"] remoteExec ["execVM", _x]} else {[_burst_poz, _x] execVM "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"};
-		} forEach (_blow_units -[_steamer_dud]);
+		} forEach (_blow_units - [_steamer_dud]);
 		{[_x] call fnc_avoid_steamer} forEach _list_unit_range_steamer;
 		uiSleep (4 + round (random _recharge));
 		_list_unit_range_steamer = [_steamer_dud, _teritoriu] call fnc_find_target_steamer;
-		if (count _list_unit_range_steamer >0) then {_tgt_steamer = selectRandom _list_unit_range_steamer} else {_tgt_steamer = nil};
+		if (count _list_unit_range_steamer > 0) then {_tgt_steamer = selectRandom _list_unit_range_steamer} else {_tgt_steamer = nil};
 	};
 	_tgt_steamer = nil;
 	_list_unit_range_steamer = [];

@@ -44,7 +44,7 @@ for "_i" from 1 to 20 do {
 	_burst setParticleCircle [_i, [0, 0, 0]];
 	_bolovani setParticleCircle [_i, [0, 0, 0]];
 	_blast_wave setParticleCircle [_i, [0, 0, 0]];
-	if ((player distance _farmer)<_i) then 
+	if ((player distance _farmer) < _i) then 
 				{
 					_pp = linearConversion [0, 100, _i, 5, 0, true];
 					[player, 1] call BIS_fnc_dirtEffect;
@@ -67,7 +67,7 @@ for "_i" from 1 to 20 do {
 	uiSleep 0.05;
 };
 player allowDamage true;
-if ((player distance _farmer)<20) then
+if ((player distance _farmer) < 20) then
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];

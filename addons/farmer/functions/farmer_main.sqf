@@ -142,8 +142,8 @@ _farmer setVariable ["al_dam_incr", _hp_curr_farmer];
 _farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
-    _unit=_this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
+    _unit= _this select 0;
+    _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -212,13 +212,13 @@ while {alive _farmer} do {
 
 
     while {
-        (!isNil "_tgt_farmer")&&{
-            (alive _farmer)&&((_farmer distance getMarkerPos _marker_farmer) < _territory)
+        (!isNil "_tgt_farmer") &&{
+            (alive _farmer) && ((_farmer distance getMarkerPos _marker_farmer) < _territory)
         }
     } do
     {
         _farmer setDir (_farmer getRelDir _tgt_farmer);
-        if ((_farmer distance _tgt_farmer)>20) then {
+        if ((_farmer distance _tgt_farmer) > 20) then {
             _farmer call FARMER_hide_farmer;
 
 
@@ -238,7 +238,7 @@ while {alive _farmer} do {
             uiSleep 1;
         };
         _farmer setUnitPos "UP";
-        if ((_farmer distance _tgt_farmer)<20) then {
+        if ((_farmer distance _tgt_farmer) < 20) then {
             uiSleep 1;
             [_farmer, _damage_inflicted] call FARMER_attk_farmer;
             if (_isaipanic) then 
@@ -253,7 +253,7 @@ while {alive _farmer} do {
             _farmer call FARMER_hide_farmer
         };
         _farmer setUnitPos "UP";
-        if ((!alive _tgt_farmer)or(_tgt_farmer distance getMarkerPos _marker_farmer > _territory)) then {
+        if ((!alive _tgt_farmer) || (_tgt_farmer distance getMarkerPos _marker_farmer > _territory)) then {
             _list_unit_range_farm = [_farmer, _territory] call FARMER_find_target;
             if !(count _list_unit_range_farm isEqualTo 0) then {
                 _tgt_farmer = selectRandom (_list_unit_range_farm select { (typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") });
@@ -266,7 +266,7 @@ while {alive _farmer} do {
     uiSleep 1;
     _farmer call FARMER_hide_farmer;
     	_farmer enableSimulationGlobal false;
-    _list_unit_range_farm =[];
+    _list_unit_range_farm = [];
     _farmer setUnitPos "UP";
 };
 

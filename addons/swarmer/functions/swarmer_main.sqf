@@ -37,13 +37,13 @@ while {alive _mobile_s} do
 	_mobile_s setVariable ["tgt", nil, true];
 	_list_unit_range_hiv = [_mobile_s, _radius] call fnc_find_target_hiv;
 	_list_unit_range_hiv = _list_unit_range_hiv select { typeOf _x != "VirtualCurator_F" };
-	if (count _list_unit_range_hiv >0) then 
+	if (count _list_unit_range_hiv > 0) then 
 	{
 		_tgt_hiv = selectRandom _list_unit_range_hiv;
 		_mobile_s setVariable ["tgt", _tgt_hiv, true];
 		{[_mobile_s, _x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
 		_mobile_s disableCollisionWith _tgt_hiv;
-		while {(alive _tgt_hiv)and(_tgt_hiv distance _mobile_s < _radius)} do {
+		while {(alive _tgt_hiv) && (_tgt_hiv distance _mobile_s < _radius)} do {
 			if (_tgt_hiv distance _mobile_s > 10) then {_mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0, 7, 0])};
 			uiSleep 4;
 			if ((_tgt_hiv distance _mobile_s <= 10) and (alive _mobile_s)) then {	

@@ -10,7 +10,7 @@ _ground setParticleCircle [2, [0, 0, 0]];
 _ground setParticleRandom [0, [0.2, 0.2, 0], [0, 0, 0], 0, 0.5, [0, 0, 0, 0], 0, 0];
 _ground setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 20, [0, 0, 0], [0, 0, 0.1], 0, 20, 7.9, 0, [1.5, 0.1], [[0, 0, 0, 1], [0, 0, 0, 0]], [1], 0, 0, "", "", _crater, 0, true, 0.1, [[0, 0, 0, 0]]];
 _ground setDropInterval 0.05;
-[_ground] spawn {_de_sters=_this select 0; uiSleep 0.5; deleteVehicle _de_sters};
+[_ground] spawn {_de_sters= _this select 0; uiSleep 0.5; deleteVehicle _de_sters};
 
 _pamant = "#particlesource" createVehicleLocal (getPos _crater);
 _pamant setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16, 12, 9, 0], "", "BillBoard", 1, 3, [0, 0, 1], [0, 0, 10], 0, 50, 0.01, 0, [5, 20], [[0.1, 0.1, 0.1, 1], [0.1, 0.1, 0.1, 0]], [1000], 1, 0, "", "", _crater];

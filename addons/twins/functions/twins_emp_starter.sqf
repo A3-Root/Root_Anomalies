@@ -49,8 +49,8 @@ if !(_isseisore) then
 	_hndl ppEffectCommit 1.5;
 
 
-	_range_lit=0;
-	_brit =0;
+	_range_lit= 0;
+	_brit = 0;
 
 	while {_brit < 100} do 
 	{
@@ -223,7 +223,7 @@ _spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRan
 _drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _x);
 
-if (_spark_type== "orange") then 
+if (_spark_type == "orange") then 
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];

@@ -2,7 +2,7 @@
  
 
 /*
-null=[object_anomaly, tracking_distance, electric_sparks, damage_range, effect_on_AI, EMP_enabled] execVM "AL_twins\twins.sqf"
+null= [object_anomaly, tracking_distance, electric_sparks, damage_range, effect_on_AI, EMP_enabled] execVM "AL_twins\twins.sqf"
 
 object_anomaly 		- string, object name you want to work as anomaly, use this as value if you run the script from the init field of the object
 tracking_distance	- number, maximum distance between within which a player must be in order to be chased by anomaly
