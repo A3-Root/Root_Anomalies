@@ -7,7 +7,7 @@ _obj_teleporter = _this select 0;
 while {alive _obj_teleporter} do 
 {
 
-_list_ai_in_range = (position _obj_teleporter) nearEntities ["Man",80];
+_list_ai_in_range = (position _obj_teleporter) nearEntities ["Man", 80];
 
 if (count _list_ai_in_range>0) then 
 {

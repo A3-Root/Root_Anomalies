@@ -7,7 +7,7 @@ params ["_gren"];
 
 while {alive _gren} do 
 {
-	_ck_hiv = (position _gren) nearEntities ["CAManBase",7];
+	_ck_hiv = (position _gren) nearEntities ["CAManBase", 7];
 	if (count _ck_hiv >0) then 
 	{
 		{

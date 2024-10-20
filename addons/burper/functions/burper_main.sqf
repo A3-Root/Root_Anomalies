@@ -17,12 +17,12 @@ _object_anom_burp = "Land_HelipadEmpty_F" createVehicle [getMarkerPos _marker_an
 _balta_sang = createVehicle ["BloodSplatter_01_Medium_New_F", [getMarkerPos _marker_anom_burp select 0, getMarkerPos _marker_anom_burp select 1, 0], [], random 8, "CAN_COLLIDE"];
 _balta_sang setDir (random 360);
 
-if (_anti_burper_device	!="") then {
+if (_anti_burper_device	!= "") then {
 	anti_burper = _anti_burper_device; publicVariable "anti_burper";
 	[_object_anom_burp, _anti_burper_device, _killrange] execVM "\z\root_anomalies\addons\burper\functions\burper_remove.sqf";
 };
 
-if (_device_detector !="") then {
+if (_device_detector != "") then {
 	detection_smugg = true; publicVariable "detection_smugg";
 	detectiv_tool = _device_detector; publicVariable "detectiv_tool"; 
 	if (_isaipanic) then {

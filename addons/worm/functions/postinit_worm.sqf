@@ -3,7 +3,7 @@
 
 [] spawn {
 	waitUntil {!isNil "wormkiller"};
-    player addEventHandler ["Fired",
+    player addEventHandler ["Fired", 
 	{
 		private ["_worm_throwable", "_shooter"];
 		_worm_throwable = _this select 6; 

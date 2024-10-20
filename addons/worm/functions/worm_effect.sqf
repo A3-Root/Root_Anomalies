@@ -7,7 +7,7 @@ _head_worm = _this select 0;
 _tail_worm = _this select 1;
 _voce_idle = _this select 2;
 
-[_voce_idle, true] remoteExec ["hideObjectGlobal",0,true];
+[_voce_idle, true] remoteExec ["hideObjectGlobal", 0,true];
 
 [_voce_idle] spawn {
 	_tail_voice = _this select 0;

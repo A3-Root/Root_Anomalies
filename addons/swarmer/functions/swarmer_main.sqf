@@ -19,13 +19,13 @@ uiSleep 2;
 insecticid = _hiv_ki; publicVariable "insecticid";
 
 if (!isNil {_st_srv getVariable "activate"}) exitWith {};
-_st_srv setVariable ["activate",true,true];
+_st_srv setVariable ["activate", true,true];
 
 _mobile_s = createAgent ["C_Soldier_VR_F", position _st_srv, [], 0, "NONE"]; _mobile_s hideObjectGlobal true;
 _mobile_s setVariable ["BIS_fnc_animalBehaviour_disable", true]; _mobile_s setSpeaker "NoVoice"; _mobile_s disableConversation true;
 _mobile_s setBehaviour "CARELESS"; _mobile_s allowDamage false; _mobile_s enableFatigue false; _mobile_s setSkill ["courage", 1];
 _mobile_s setUnitPos "UP"; _mobile_s disableAI "ALL"; {_mobile_s enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];_mobile_s setAnimSpeedCoef 1.1;
-_mobile_s setVariable ["isHive",false,true];
+_mobile_s setVariable ["isHive", false,true];
 [[_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_voice.sqf"] remoteExec ["execVM"];
 [[_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf"] remoteExec ["execVM"];
 // [_mobile_s] execVM "\z\root_anomalies\addons\swarmer\functions\swarmer_smoke_detect.sqf";
@@ -34,14 +34,14 @@ atak_swarmer = false; publicVariable "atak_swarmer";
 
 while {alive _mobile_s} do 
 {
-	while {!(_mobile_s getVariable "isHive")} do {{if (_x distance getPos _mobile_s < 1000) then {_mobile_s setVariable ["isHive",true,true]}} forEach allPlayers; uiSleep 10};
-	_mobile_s setVariable ["tgt",nil,true];
+	while {!(_mobile_s getVariable "isHive")} do {{if (_x distance getPos _mobile_s < 1000) then {_mobile_s setVariable ["isHive", true,true]}} forEach allPlayers; uiSleep 10};
+	_mobile_s setVariable ["tgt", nil,true];
 	_list_unit_range_hiv = [_mobile_s,_radius] call fnc_find_target_hiv; 
 	_list_unit_range_hiv = _list_unit_range_hiv select { typeOf _x != "VirtualCurator_F" };
 	if (count _list_unit_range_hiv >0) then 
 	{
 		_tgt_hiv = selectRandom _list_unit_range_hiv;
-		_mobile_s setVariable ["tgt",_tgt_hiv,true];
+		_mobile_s setVariable ["tgt", _tgt_hiv,true];
 		{[_mobile_s,_x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
 		_mobile_s disableCollisionWith _tgt_hiv;
 		while {(alive _tgt_hiv)and(_tgt_hiv distance _mobile_s < _radius)} do {
@@ -68,7 +68,7 @@ while {alive _mobile_s} do
 				_balta_sange = createVehicle [selectRandom["BloodPool_01_Large_New_F", "BloodSplatter_01_Large_New_F"],[0,0,0],[],0,"CAN_COLLIDE"]; _balta_sange setDir (round (random 360)); _balta_sange setPosATL [getPosATL _tgt_hiv select 0,getPosATL _tgt_hiv select 1,0]; _balta_sange setVectorUp surfaceNormal getPosATL _balta_sange;
 				_mobile_s setPos (position _balta_sange);
 				_mobile_s stop true;
-				[_balta_sange,["roi_atk_01",300]] remoteExec ["say3D"];
+				[_balta_sange,["roi_atk_01", 300]] remoteExec ["say3D"];
 				uiSleep 2;
 				_mobile_s stop false;
 				{[_mobile_s,_x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
@@ -81,12 +81,12 @@ while {alive _mobile_s} do
 			_mobile_s stop true;
 			[[_tgt_hiv,_mobile_s],"\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
 			_tgt_hiv hideObjectGlobal true;
-			_oase = createVehicle ["Land_HumanSkeleton_F",getPosATL _tgt_hiv,[],0,"CAN_COLLIDE"]; _oase setDir (round (random 360));
-			_mobile_s setVariable ["tgt",nil,true];
+			_oase = createVehicle ["Land_HumanSkeleton_F", getPosATL _tgt_hiv,[],0,"CAN_COLLIDE"]; _oase setDir (round (random 360));
+			_mobile_s setVariable ["tgt", nil,true];
 			atak_swarmer = false; publicVariable "atak_swarmer";
 			uiSleep 12;
 			_mobile_s stop false;
 		};
-	} else {_mobile_s setVariable ["isHive",false,true]; atak_swarmer = false; publicVariable "atak_swarmer"; uiSleep 5};
+	} else {_mobile_s setVariable ["isHive", false,true]; atak_swarmer = false; publicVariable "atak_swarmer"; uiSleep 5};
 }:
 uiSleep 10; deleteVehicle _mobile_s;

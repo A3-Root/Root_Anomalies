@@ -8,11 +8,11 @@ fnc_spectral = {
 	[
 		[
 			[0.1,[0.1,0.1,0.5],[0,0,0.2],1,0.1,[0,0,0,0],1,0],
-			{[["\A3\data_f\kouleSvetlo",1,0,1],"", "Billboard",1,0.6,[0,0,0],[0,0,0.1],1,10.1,7.9,0.0001,[0.6,0.2,0.01],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "",_this]}
+			{[["\A3\data_f\kouleSvetlo", 1,0,1],"", "Billboard", 1,0.6,[0,0,0],[0,0,0.1],1,10.1,7.9,0.0001,[0.6,0.2,0.01],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "", _this]}
 		],
 		[
 			[0.5,[0,0,0.25],[0.175,0.175,0.1],0,0.25,[0,0,0,0.1],0,0],
-			{[["\A3\data_f\cl_feathers2",1,0,1],"", "SpaceObject",1,0.5,[0,0,0],[0,0,0.1],3,10,7.9,0.0075,[15,15,15],[[1,1,1,0.5],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "",_this]}
+			{[["\A3\data_f\cl_feathers2", 1,0,1],"", "SpaceObject", 1,0.5,[0,0,0],[0,0,0.1],3,10,7.9,0.0075,[15,15,15],[[1,1,1,0.5],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "", _this]}
 		]
 	];
 	_arr = _effectArrays select sunOrMoon;
@@ -63,7 +63,7 @@ _part_gost_array = _comp_obj_casp call fnc_spectral;
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _strigoi);
 _part_gost_sec setParticleCircle [0,[0,0,0]];
 _part_gost_sec setParticleRandom [0,[0.3,0.5,0.5],[0,0,0.1],0,0,[0,0,0,0],0,0];
-_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1],"", "Billboard",1,1,[0,0,0],[0,0,0.2],5,10.1,7.9,0,[3,2,5],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],0,0,"", "",_strigoi];
+_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1],"", "Billboard", 1,1,[0,0,0],[0,0,0.2],5,10.1,7.9,0,[3,2,5],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],0,0,"", "", _strigoi];
 _part_gost_sec setDropInterval 0.05;
 
 waitUntil {uiSleep 2; !(_strigoi getVariable "vizibil")or(!alive _strigoi)};
@@ -73,13 +73,13 @@ deleteVehicle _part_gost_sec;
 _part_gost = "#particlesource" createVehicleLocal (getPosATL _strigoi);
 _part_gost setParticleCircle [0,[0,0,0]];
 _part_gost setParticleRandom [0.1,[0.5,0.5,2],[0,0,0.3],0.1,0.1,[0,0,0,0],0,0];
-_part_gost setParticleParams [["\A3\data_f\kouleSvetlo",1,0,1],"", "SpaceObject",1,1,[0,0,2],[0,0,0],3,10.5,7.9,0,[0.5,0.3,0.01],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "",_strigoi];
+_part_gost setParticleParams [["\A3\data_f\kouleSvetlo", 1,0,1],"", "SpaceObject", 1,1,[0,0,2],[0,0,0],3,10.5,7.9,0,[0.5,0.3,0.01],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],1,0,"", "", _strigoi];
 _part_gost setDropInterval 0.05;
 
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _strigoi);
 _part_gost_sec setParticleCircle [0,[0,0,0]];
 _part_gost_sec setParticleRandom [0,[0.5,0.5,2],[0,0,0.1],0,0,[0,0,0,0],0,0];
-_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1],"", "Billboard",1,1,[0,0,2],[0,0,0.1],5,10.5,7.9,0,[3,2,5],[[1,1,1,0.5],[1,1,1,1],[1,1,1,0]],[1],1,0,"", "",_strigoi];
+_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1],"", "Billboard", 1,1,[0,0,2],[0,0,0.1],5,10.5,7.9,0,[3,2,5],[[1,1,1,0.5],[1,1,1,1],[1,1,1,0]],[1],1,0,"", "", _strigoi];
 _part_gost_sec setDropInterval 0.05;
 
 uiSleep 3; deleteVehicle _part_gost; deleteVehicle _part_gost_sec;

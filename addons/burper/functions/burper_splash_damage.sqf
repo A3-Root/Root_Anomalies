@@ -8,7 +8,7 @@ _splash_point = _this select 0;
 _blood_splash = "#particlesource" createVehicleLocal (getPosATL _splash_point);
 _blood_splash setParticleCircle [0, [0, 0, 0]];
 _blood_splash setParticleRandom [0, [0.25, 0.25, 0], [0.175, 0.175, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
-_blood_splash setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d", 16, 13, 1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0.5], 2, 10, 7.9, 0.075, [1, 3, 7], [[1, 0, 0.1, 1], [1, 0, 0.1, 1],[1, 1, 0.1, 0]], [0.08], 1, 0, "", "",_splash_point];
+_blood_splash setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d", 16, 13, 1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0.5], 2, 10, 7.9, 0.075, [1, 3, 7], [[1, 0, 0.1, 1], [1, 0, 0.1, 1],[1, 1, 0.1, 0]], [0.08], 1, 0, "", "", _splash_point];
 _blood_splash setDropInterval 60;
 
 uiSleep 0.1;

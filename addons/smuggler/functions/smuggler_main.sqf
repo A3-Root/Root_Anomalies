@@ -20,7 +20,7 @@ _sursa_smugg_core attachTo [_sursa_smugg,[0,0,0]];
 protection_smug = _teleport_protect; publicVariable "protection_smug";
 detect_smug = _device_detector; publicVariable "detect_smug";
 
-if (_device_detector !="") then 
+if (_device_detector != "") then 
 {
 	null= [_sursa_smugg] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg.sqf"
 } else 
@@ -28,9 +28,9 @@ if (_device_detector !="") then
 	null= [_sursa_smugg] execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg_visible.sqf"
 };
 
-[[_sursa_smugg,_sursa_smugg_core],"\z\root_anomalies\addons\smuggler\functions\smuggler_sfx.sqf"] remoteExec ["execVM",0,true];
+[[_sursa_smugg,_sursa_smugg_core],"\z\root_anomalies\addons\smuggler\functions\smuggler_sfx.sqf"] remoteExec ["execVM", 0,true];
 
-[[_sursa_smugg,_sursa_smugg_core, _dmg_on_teleport, _noseize],"\z\root_anomalies\addons\smuggler\functions\smuggler_teleport.sqf"] remoteExec ["execVM",0,true];
+[[_sursa_smugg,_sursa_smugg_core, _dmg_on_teleport, _noseize],"\z\root_anomalies\addons\smuggler\functions\smuggler_teleport.sqf"] remoteExec ["execVM", 0,true];
 
 if (count _spawn_classname >0) then 
 { 

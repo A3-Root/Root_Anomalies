@@ -27,9 +27,9 @@ FARMER_find_target = {
 FARMER_hide_farmer = {
 	_this setAnimSpeedCoef 0.8;
 	_this switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
-	_this setVariable ["vizibil",false,true];
-	[_this,["pietre",1000]] remoteExec ["say3D"];
-	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
+	_this setVariable ["vizibil", false,true];
+	[_this,["pietre", 1000]] remoteExec ["say3D"];
+	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
 	_this hideObjectGlobal true;
 };
 
@@ -37,10 +37,10 @@ FARMER_show_farmer = {
 	private ["_pos_farmer", "_teritoriu", "_blow_poz"];
 	params ["_farmer", "_poz_orig_sc"];
 	_pos_farmer = [_poz_orig_sc,0,10,3,0,20,0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
-	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil",true,true];
-	[_farmer,["punch_7",1000]] remoteExec ["say3D"];
+	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil", true,true];
+	[_farmer,["punch_7", 1000]] remoteExec ["say3D"];
 	_farmer hideObjectGlobal false;
-	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM",0];
+	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
 	_farmer setAnimSpeedCoef 0.8; 
 	_farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_farmer setUnitPos "UP";
@@ -84,20 +84,20 @@ FARMER_attk_farmer = {
 					_damage = random[0, _damage_farmer, 1];
 					_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 				} forEach _vichitpoints;
-				_vehicle setHitPointDamage ["HitLight",1]; 
-				_vehicle setHitPointDamage ["#light_l",1];
-				_vehicle setHitPointDamage ["#light_r",1];
-				_vehicle setHitPointDamage ["#light_l_flare",1];
-				_vehicle setHitPointDamage ["#light_r_flare",1];
-				_vehicle setHitPointDamage ["#light_1_hitpoint",1];
-				_vehicle setHitPointDamage ["light_1_hitpoint",1];
-				_vehicle setHitPointDamage ["#light_2_hitpoint",1];
-				_vehicle setHitPointDamage ["light_2_hitpoint",1];
-				_vehicle setHitPointDamage ["light_l",1]; 
-				_vehicle setHitPointDamage ["light_r",1]; 
-				_vehicle setHitPointDamage ["light_l2",1]; 
-				_vehicle setHitPointDamage ["HitBatteries",1]; 
-				_vehicle setHitPointDamage ["light_r2",1];
+				_vehicle setHitPointDamage ["HitLight", 1]; 
+				_vehicle setHitPointDamage ["#light_l", 1];
+				_vehicle setHitPointDamage ["#light_r", 1];
+				_vehicle setHitPointDamage ["#light_l_flare", 1];
+				_vehicle setHitPointDamage ["#light_r_flare", 1];
+				_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
+				_vehicle setHitPointDamage ["light_1_hitpoint", 1];
+				_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
+				_vehicle setHitPointDamage ["light_2_hitpoint", 1];
+				_vehicle setHitPointDamage ["light_l", 1]; 
+				_vehicle setHitPointDamage ["light_r", 1]; 
+				_vehicle setHitPointDamage ["light_l2", 1]; 
+				_vehicle setHitPointDamage ["HitBatteries", 1]; 
+				_vehicle setHitPointDamage ["light_r2", 1];
 			};
 		}
 	} forEach (_farmer nearEntities [["CAManBase", "LandVehicle"],25]);
@@ -111,7 +111,7 @@ FARMER_travel_farmer = {
 	_rag setVelocity [_jump_dir select 0,_jump_dir select 1,5];
 	[[_rag],"\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep round (2+random 2);
-	_farmer setVariable ["pozitie_noua",getPos _rag];
+	_farmer setVariable ["pozitie_noua", getPos _rag];
 	deleteVehicle _rag;
 };
 

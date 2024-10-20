@@ -5,7 +5,7 @@ if (!isServer) exitWith {};
 FLAMER_find_target = {
 	params ["_flamer", "_teritoriu"];
 	private ["_neartargets", "_teritoriu"];
-	_neartargets = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",_teritoriu];
+	_neartargets = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase", _teritoriu];
 	_neartargets - [_flamer]
 };
 
@@ -39,11 +39,11 @@ FLAMER_attk_flamer = {
 		};
 	};
 	_shoot_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
-	[_flamer getVariable "_cap_flamer",["foc_initial",500]] remoteExec ["say3D"];
+	[_flamer getVariable "_cap_flamer", ["foc_initial", 500]] remoteExec ["say3D"];
 	[[_flamer,_shoot_dir],"\z\root_anomalies\addons\flamer\functions\flamer_plasma_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep 0.5;
 	_tip = selectRandom ["04", "burned", "02", "03"];
-	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",5];
+	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase", 5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
@@ -80,12 +80,12 @@ FLAMER_attk_flamer = {
 	} forEach (_nearflamer-[_flamer]);
 	_nearvik = nearestObjects [position _flamer,["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"],7,false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
 	uiSleep 4;
-	_flamer setVariable ["atk",false];
+	_flamer setVariable ["atk", false];
 };
 
 FLAMER_hide_flamer = {
-	_this setVariable ["vizibil",false,true];
-	[_this getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
+	_this setVariable ["vizibil", false,true];
+	[_this getVariable "_cap_flamer", ["foc_initial", 1000]] remoteExec ["say3D"];
 	_this enableSimulationGlobal false; _this hideObjectGlobal true;
 };
 
@@ -94,11 +94,11 @@ FLAMER_show_flamer = {
 	private ["_flamer", "_poz_orig_sc", "_pos_strig", "_teritoriu", "_damage_flamer"];
 	_pos_strig = [_poz_orig_sc,1,_teritoriu/10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_flamer setPos _pos_strig;
-	_flamer setVariable ["vizibil",true,true];
+	_flamer setVariable ["vizibil", true,true];
 	// NEW ADDITIONS
-	[[_flamer,_damage_flamer,_teritoriu],"\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM",0];
+	[[_flamer,_damage_flamer,_teritoriu],"\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase"],100]);
-	[_flamer getVariable "_cap_flamer",["foc_initial",1000]] remoteExec ["say3D"];
+	[_flamer getVariable "_cap_flamer", ["foc_initial", 1000]] remoteExec ["say3D"];
 };
 
 FLAMER_jump_flamer = {
@@ -126,7 +126,7 @@ FLAMER_jump_flamer = {
 	_obj_veg = nearestTerrainObjects [position _flamer,["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"],20,false];
 	_nearvik = nearestObjects [position _flamer,["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"],20,false];
 	[_cap_flamer,[_salt_sunet,200]] remoteExec ["say3D"];
-	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase",5];
+	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities ["CAManBase", 5];
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47,0.69,0.59,0.55,0.61,0.58];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
@@ -193,7 +193,7 @@ _dmg_fire = _damage_flamer;
 
 _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} forEach allPlayers;uiSleep 5; /* uiSleep 10; */};
-_flamer = createAgent ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [],0, "NONE"]; _flamer setVariable ["BIS_fnc_animalBehaviour_disable", true]; _flamer setSpeaker "NoVoice"; _flamer disableConversation true; _flamer addRating -10000; _flamer setBehaviour "CARELESS"; _flamer enableFatigue false; _flamer setSkill ["courage", 1]; _flamer setUnitPos "UP"; _flamer disableAI "ALL"; _flamer setMass 7000; {_flamer enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];
+_flamer = createAgent ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [],0, "NONE"]; _flamer setVariable ["BIS_fnc_animalBehaviour_disable", true]; _flamer setSpeaker "NoVoice"; _flamer disableConversation true; _flamer addRating -10000; _flamer setBehaviour "CARELESS"; _flamer enableFatigue false; _flamer setSkill ["courage", 1]; _flamer setUnitPos "UP"; _flamer disableAI "ALL"; _flamer setMass 7000; {_flamer enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];
 
 _hp_curr_flamer = 1/_hp_flamer;
 _flamer setVariable ["flamer_dmg_total", 0];
@@ -231,7 +231,7 @@ for "_i" from 0 to 5 do {
     _flamer setObjectTextureGlobal [_i, "\z\root_anomalies\addons\flamer\images\03_flesh.jpg"];
 	uiSleep 0.1;
 };
-_flamer setVariable ["atk",false];
+_flamer setVariable ["atk", false];
 _flamer call FLAMER_hide_flamer;
 _list_unit_range_flamer = [];
 [_flamer, _damage_on_death] execVM "\z\root_anomalies\addons\flamer\functions\flamer_end.sqf";
@@ -367,7 +367,7 @@ while {alive _flamer} do
 			};
 		} forEach (_nearflamer-[_flamer]); 
 		if ((_flamer distance _tgt_flamer <15)&&!(_flamer getVariable "atk")) then 
-		{_flamer setVariable ["atk",true]; [_flamer,_tgt_flamer,_damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
+		{_flamer setVariable ["atk", true]; [_flamer,_tgt_flamer,_damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer],"\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"],5];
 		{

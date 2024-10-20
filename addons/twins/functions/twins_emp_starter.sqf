@@ -8,7 +8,7 @@ private ["_hndl", "_range_lit", "_brit", "_light_emp", "_ripple", "_blast", "_ba
 _AOE = _tracking_p;
 
 _bangsound= "#particlesource" createVehicleLocal getPosATL _spark_move;
-_bangsound say3D ["earthquake_02",3500];
+_bangsound say3D ["earthquake_02", 3500];
 
 
 
@@ -21,13 +21,13 @@ _blast setDropInterval 50;
 _ripple = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _ripple setParticleCircle [0,[0,0,0]];
 _ripple setParticleRandom [0,[0.25,0.25,0],[0.175,0.175,0],0,0.25,[0,0,0,0.1],0,0];
-//_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [30,1000,1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _obj_emp];
-_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
+//_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [30,1000,1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _obj_emp];
+_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
 _light_emp = "#lightpoint" createVehicleLocal getPosATL _spark_move; 
 _light_emp lightAttachObject [_spark_move, [0,0,3]];
-_light_emp setLightAmbient [0.1,0.1,1];  
+_light_emp setLightAmbient [0.1,0.1,1];
 _light_emp setLightColor [0.1,0.1,1];
 _light_emp setLightBrightness 10;
 _light_emp setLightUseFlare true; _light_emp setLightFlareSize 10; _light_emp setLightFlareMaxDistance 2000;
@@ -76,75 +76,75 @@ _vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints se
 } forEach _vichitpoints;
 */
 {
-_x setHitPointDamage ["hitturret",1]; 
-_x setHitPointDamage ["hitcomturret",1]; 
-_x setHitPointDamage ["hitcomgun",1];
-_x setHitPointDamage ["HitBatteries",1]; 
-_x setHitPointDamage ["HitLight",1]; 
-_x setHitPointDamage ["#light_l",1];
-_x setHitPointDamage ["#light_r",1];
-_x setHitPointDamage ["#light_l_flare",1];
-_x setHitPointDamage ["#light_r_flare",1];
-_x setHitPointDamage ["light_l",1]; 
-_x setHitPointDamage ["light_r",1]; 
-_x setHitPointDamage ["light_l2",1]; 
-_x setHitPointDamage ["light_r2",1]; 
-_x setHitPointDamage ["hitEngine",1]; 
-_x setHitPointDamage ["HitEngine2",1]; 
-_x setHitPointDamage ["HitAvionics",1];
+_x setHitPointDamage ["hitturret", 1]; 
+_x setHitPointDamage ["hitcomturret", 1]; 
+_x setHitPointDamage ["hitcomgun", 1];
+_x setHitPointDamage ["HitBatteries", 1]; 
+_x setHitPointDamage ["HitLight", 1]; 
+_x setHitPointDamage ["#light_l", 1];
+_x setHitPointDamage ["#light_r", 1];
+_x setHitPointDamage ["#light_l_flare", 1];
+_x setHitPointDamage ["#light_r_flare", 1];
+_x setHitPointDamage ["light_l", 1]; 
+_x setHitPointDamage ["light_r", 1]; 
+_x setHitPointDamage ["light_l2", 1]; 
+_x setHitPointDamage ["light_r2", 1]; 
+_x setHitPointDamage ["hitEngine", 1]; 
+_x setHitPointDamage ["HitEngine2", 1]; 
+_x setHitPointDamage ["HitAvionics", 1];
 _x disableTIEquipment true; 
 _x disableNVGEquipment true;
 _x setVariable ["A3TI_Disable", true];
 _x disableAI "LIGHTS"; 
-_x setPilotLight false;  
+_x setPilotLight false;
 _x setCollisionLight false;
 } forEach (nearestObjects [_spark_move, [
-"Car",
-"Motorcycle",
-"UAV",
-"Tank",
-"Air",
-"Ship",
-"Autonomous",
-"Armored",
+"Car", 
+"Motorcycle", 
+"UAV", 
+"Tank", 
+"Air", 
+"Ship", 
+"Autonomous", 
+"Armored", 
 "B_static_AA_F", 
-"B_static_AT_F",
-"B_T_Static_AA_F",
-"B_T_Static_AT_F",
-"B_T_GMG_01_F",
-"B_T_HMG_01_F",
-"B_T_Mortar_01_F",
-"B_HMG_01_high_F",
-"B_HMG_01_A_F",
-"B_GMG_01_F",
-"B_GMG_01_high_F",
-"B_GMG_01_A_F",
-"B_Mortar_01_F",
-"B_G_Mortar_01_F",
-"B_Static_Designator_01_F",
-"B_AAA_System_01_F",
-"B_SAM_System_01_F",
-"B_SAM_System_02_F",
-"O_HMG_01_F",
-"O_HMG_01_high_F",
-"O_HMG_01_A_F",
-"O_GMG_01_F",
-"O_GMG_01_high_F",
-"O_GMG_01_A_F",
-"O_Mortar_01_F",
-"O_G_Mortar_01_F",
-"O_static_AA_F",
-"O_static_AT_F",
-"O_Static_Designator_02_F",
-"I_HMG_01_F",
-"I_HMG_01_high_F",
-"I_HMG_01_A_F",
-"I_GMG_01_F",
-"I_GMG_01_high_F",
-"I_GMG_01_A_F",
-"I_Mortar_01_F",
-"I_G_Mortar_01_F",
-"I_static_AA_F",
+"B_static_AT_F", 
+"B_T_Static_AA_F", 
+"B_T_Static_AT_F", 
+"B_T_GMG_01_F", 
+"B_T_HMG_01_F", 
+"B_T_Mortar_01_F", 
+"B_HMG_01_high_F", 
+"B_HMG_01_A_F", 
+"B_GMG_01_F", 
+"B_GMG_01_high_F", 
+"B_GMG_01_A_F", 
+"B_Mortar_01_F", 
+"B_G_Mortar_01_F", 
+"B_Static_Designator_01_F", 
+"B_AAA_System_01_F", 
+"B_SAM_System_01_F", 
+"B_SAM_System_02_F", 
+"O_HMG_01_F", 
+"O_HMG_01_high_F", 
+"O_HMG_01_A_F", 
+"O_GMG_01_F", 
+"O_GMG_01_high_F", 
+"O_GMG_01_A_F", 
+"O_Mortar_01_F", 
+"O_G_Mortar_01_F", 
+"O_static_AA_F", 
+"O_static_AT_F", 
+"O_Static_Designator_02_F", 
+"I_HMG_01_F", 
+"I_HMG_01_high_F", 
+"I_HMG_01_A_F", 
+"I_GMG_01_F", 
+"I_GMG_01_high_F", 
+"I_GMG_01_A_F", 
+"I_Mortar_01_F", 
+"I_G_Mortar_01_F", 
+"I_static_AA_F", 
 "I_static_AT_F"
 ], _AOE]); 
 
@@ -162,52 +162,52 @@ _e_static setDropInterval 0.025;
 uiSleep 0.5;
 deleteVehicle _e_static;
 } forEach (nearestObjects [_spark_move, [
-"Car",
-"Motorcycle",
-"UAV",
-"Tank",
-"Air",
-"Ship",
-"Autonomous",
-"Armored",
+"Car", 
+"Motorcycle", 
+"UAV", 
+"Tank", 
+"Air", 
+"Ship", 
+"Autonomous", 
+"Armored", 
 "B_static_AA_F", 
-"B_static_AT_F",
-"B_T_Static_AA_F",
-"B_T_Static_AT_F",
-"B_T_GMG_01_F",
-"B_T_HMG_01_F",
-"B_T_Mortar_01_F",
-"B_HMG_01_high_F",
-"B_HMG_01_A_F",
-"B_GMG_01_F",
-"B_GMG_01_high_F",
-"B_GMG_01_A_F",
-"B_Mortar_01_F",
-"B_G_Mortar_01_F",
-"B_Static_Designator_01_F",
-"B_AAA_System_01_F",
-"B_SAM_System_01_F",
-"B_SAM_System_02_F",
-"O_HMG_01_F",
-"O_HMG_01_high_F",
-"O_HMG_01_A_F",
-"O_GMG_01_F",
-"O_GMG_01_high_F",
-"O_GMG_01_A_F",
-"O_Mortar_01_F",
-"O_G_Mortar_01_F",
-"O_static_AA_F",
-"O_static_AT_F",
-"O_Static_Designator_02_F",
-"I_HMG_01_F",
-"I_HMG_01_high_F",
-"I_HMG_01_A_F",
-"I_GMG_01_F",
-"I_GMG_01_high_F",
-"I_GMG_01_A_F",
-"I_Mortar_01_F",
-"I_G_Mortar_01_F",
-"I_static_AA_F",
+"B_static_AT_F", 
+"B_T_Static_AA_F", 
+"B_T_Static_AT_F", 
+"B_T_GMG_01_F", 
+"B_T_HMG_01_F", 
+"B_T_Mortar_01_F", 
+"B_HMG_01_high_F", 
+"B_HMG_01_A_F", 
+"B_GMG_01_F", 
+"B_GMG_01_high_F", 
+"B_GMG_01_A_F", 
+"B_Mortar_01_F", 
+"B_G_Mortar_01_F", 
+"B_Static_Designator_01_F", 
+"B_AAA_System_01_F", 
+"B_SAM_System_01_F", 
+"B_SAM_System_02_F", 
+"O_HMG_01_F", 
+"O_HMG_01_high_F", 
+"O_HMG_01_A_F", 
+"O_GMG_01_F", 
+"O_GMG_01_high_F", 
+"O_GMG_01_A_F", 
+"O_Mortar_01_F", 
+"O_G_Mortar_01_F", 
+"O_static_AA_F", 
+"O_static_AT_F", 
+"O_Static_Designator_02_F", 
+"I_HMG_01_F", 
+"I_HMG_01_high_F", 
+"I_HMG_01_A_F", 
+"I_GMG_01_F", 
+"I_GMG_01_high_F", 
+"I_GMG_01_A_F", 
+"I_Mortar_01_F", 
+"I_G_Mortar_01_F", 
+"I_static_AA_F", 
 "I_static_AT_F"
 ], _AOE]); 
 
@@ -232,7 +232,7 @@ _spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRan
 _drop = 0.001+(random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _x);
 
-if (_spark_type=="orange") then 
+if (_spark_type== "orange") then 
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];
@@ -251,7 +251,7 @@ uiSleep 0.4 + (random 0.7);
 deleteVehicle _scantei_spark;
 } forEach (nearestObjects [_spark_move, [
 "Lamps_base_F", //These are all the lights' base classes
-"PowerLines_base_F",
+"PowerLines_base_F", 
 "PowerLines_Small_base_F"
 ], _AOE]);
 

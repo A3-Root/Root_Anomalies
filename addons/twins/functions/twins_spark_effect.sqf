@@ -11,12 +11,12 @@ _sparky_sun = ["spark1", "spark11", "spark2", "spark22", "spark5", "spark4"] cal
 //[_obj_emit,[_sparky_sun,300]] remoteExec ["say3D"];
 
 _spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
-//if (_repeat=="spark3") then {_spark_type=="white"};
+//if (_repeat== "spark3") then {_spark_type== "white"};
 
 _drop = 0.001+(random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _obj_emit);
 
-if (_spark_type=="orange") then 
+if (_spark_type== "orange") then 
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [2, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];

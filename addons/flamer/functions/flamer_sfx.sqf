@@ -7,7 +7,7 @@ fnc_flamer_SFX = {
 		_part_gost = "#particlesource" createVehicleLocal (getPosATL _x);
 		_part_gost setParticleCircle [0,[0,0,0]];
 		_part_gost setParticleRandom [0.1,[0.1,0.1,0.5],[0,0,0.2],1,0.1,[0,0,0,0],1,0];
-		_part_gost setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d",16,15,10,1],"", "Billboard",1,0.3,[0,0,0],[0,0,0],15,7,7.9,1,[0.5,0.5,0.1],[[1,1,1,1],[1,1,1,1],[1,1,1,0]],[2],1,0,"", "",_x];
+		_part_gost setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d", 16,15,10,1],"", "Billboard", 1,0.3,[0,0,0],[0,0,0],15,7,7.9,1,[0.5,0.5,0.1],[[1,1,1,1],[1,1,1,1],[1,1,1,0]],[2],1,0,"", "", _x];
 		_part_gost setDropInterval 0.05;
 		_r pushBackUnique _part_gost;
 	} forEach _comp_obj_flamer;
@@ -54,7 +54,7 @@ _part_array_flamer = _comp_obj_casp call fnc_flamer_SFX;
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _flamer);
 _part_gost_sec setParticleCircle [0,[0,0,0]];
 _part_gost_sec setParticleRandom [0,[0.3,0.5,0.5],[0,0,0.1],0,0,[0,0,0,0],0,0];
-_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d",1,0,1],"", "Billboard",1,0.5,[0,0,1],[0,0,0.2],5,10,7.9,0,[3,2,5],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],0,0,"", "",_flamer];
+_part_gost_sec setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1],"", "Billboard", 1,0.5,[0,0,1],[0,0,0.2],5,10,7.9,0,[3,2,5],[[1,1,1,1],[1,1,1,0.5],[1,1,1,0]],[1],0,0,"", "", _flamer];
 _part_gost_sec setDropInterval 0.05;
 
 _li_fire = "#lightpoint" createVehicle getPosATL _flamer;

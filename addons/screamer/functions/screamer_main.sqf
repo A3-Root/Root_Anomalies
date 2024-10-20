@@ -34,40 +34,40 @@ fnc_hitpoint_damage = {
 			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 			_damage = random(_damage);
 		} forEach _vichitpoints;
-		_vehicle setHitPointDamage ["HitLight",1]; 
-		_vehicle setHitPointDamage ["#light_l",1];
-		_vehicle setHitPointDamage ["#light_r",1];
-		_vehicle setHitPointDamage ["#light_l_flare",1];
-		_vehicle setHitPointDamage ["#light_r_flare",1];
-		_vehicle setHitPointDamage ["#light_1_hitpoint",1];
-		_vehicle setHitPointDamage ["light_1_hitpoint",1];
-		_vehicle setHitPointDamage ["#light_2_hitpoint",1];
-		_vehicle setHitPointDamage ["light_2_hitpoint",1];
-		_vehicle setHitPointDamage ["light_l",1]; 
-		_vehicle setHitPointDamage ["light_r",1]; 
-		_vehicle setHitPointDamage ["light_l2",1]; 
-		_vehicle setHitPointDamage ["HitBatteries",1]; 
-		_vehicle setHitPointDamage ["light_r2",1];
+		_vehicle setHitPointDamage ["HitLight", 1]; 
+		_vehicle setHitPointDamage ["#light_l", 1];
+		_vehicle setHitPointDamage ["#light_r", 1];
+		_vehicle setHitPointDamage ["#light_l_flare", 1];
+		_vehicle setHitPointDamage ["#light_r_flare", 1];
+		_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_1_hitpoint", 1];
+		_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_2_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_l", 1]; 
+		_vehicle setHitPointDamage ["light_r", 1]; 
+		_vehicle setHitPointDamage ["light_l2", 1]; 
+		_vehicle setHitPointDamage ["HitBatteries", 1]; 
+		_vehicle setHitPointDamage ["light_r2", 1];
 	} else {
 		_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
 		{
 			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 			_damage = random(_damage);
 		} forEach _vichitpoints;
-		_vehicle setHitPointDamage ["HitLight",1]; 
-		_vehicle setHitPointDamage ["#light_l",1];
-		_vehicle setHitPointDamage ["#light_r",1];
-		_vehicle setHitPointDamage ["#light_l_flare",1];
-		_vehicle setHitPointDamage ["#light_r_flare",1];
-		_vehicle setHitPointDamage ["#light_1_hitpoint",1];
-		_vehicle setHitPointDamage ["light_1_hitpoint",1];
-		_vehicle setHitPointDamage ["#light_2_hitpoint",1];
-		_vehicle setHitPointDamage ["light_2_hitpoint",1];
-		_vehicle setHitPointDamage ["light_l",1]; 
-		_vehicle setHitPointDamage ["light_r",1]; 
-		_vehicle setHitPointDamage ["light_l2",1]; 
-		_vehicle setHitPointDamage ["HitBatteries",1]; 
-		_vehicle setHitPointDamage ["light_r2",1];
+		_vehicle setHitPointDamage ["HitLight", 1]; 
+		_vehicle setHitPointDamage ["#light_l", 1];
+		_vehicle setHitPointDamage ["#light_r", 1];
+		_vehicle setHitPointDamage ["#light_l_flare", 1];
+		_vehicle setHitPointDamage ["#light_r_flare", 1];
+		_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_1_hitpoint", 1];
+		_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_2_hitpoint", 1];
+		_vehicle setHitPointDamage ["light_l", 1]; 
+		_vehicle setHitPointDamage ["light_r", 1]; 
+		_vehicle setHitPointDamage ["light_l2", 1]; 
+		_vehicle setHitPointDamage ["HitBatteries", 1]; 
+		_vehicle setHitPointDamage ["light_r2", 1];
 	};
 };
 
@@ -105,8 +105,8 @@ _scr_obj = "None";
 //_entitate disableAI "FSM";
 //_entitate allowDamage false;
 // damage
-//_entitate addEventHandler ["HandleDamage",{_damage = (_this select 2)/6; _damage}];
-//_entitate addEventHandler ["HandleDamage",{_damage = 0; _damage}];
+//_entitate addEventHandler ["HandleDamage", {_damage = (_this select 2)/6; _damage}];
+//_entitate addEventHandler ["HandleDamage", {_damage = 0; _damage}];
 */
 
 
@@ -153,7 +153,7 @@ if (_isaidmg) then
 		[_entitate] joinSilent _grp;
 	} else 
 	{
-		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
 		removeVest _entitate;
@@ -169,14 +169,14 @@ if (_isaidmg) then
 		[_entitate] joinSilent _grp;
 	} else 
 	{
-		_entitate = _grp createUnit ["O_Soldier_VR_F",getMarkerPos _poz_orig_sc, [], 0,"NONE"];
+		_entitate = _grp createUnit ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0,"NONE"];
 		[_entitate] joinSilent _grp;
 		removeUniform _entitate;
 		removeVest _entitate;
 		removeHeadgear _entitate;
 	};
 	_entitate setCaptive true; 
-	[_entitate, true] remoteExec ["hideObjectGlobal",0,true];
+	[_entitate, true] remoteExec ["hideObjectGlobal", 0,true];
 };
 
 _entitate setSpeaker "NoVoice";
@@ -196,9 +196,9 @@ _bob1 = createVehicle ["Sign_Sphere25cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 _bob2 = createVehicle ["Sign_Sphere25cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 _bob3 = createVehicle ["Sign_Sphere25cm_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 
-[_bob1, true] remoteExec ["hideObjectGlobal",0,true];
-[_bob2, true] remoteExec ["hideObjectGlobal",0,true];
-[_bob3, true] remoteExec ["hideObjectGlobal",0,true];
+[_bob1, true] remoteExec ["hideObjectGlobal", 0,true];
+[_bob2, true] remoteExec ["hideObjectGlobal", 0,true];
+[_bob3, true] remoteExec ["hideObjectGlobal", 0,true];
 
 
 if (!_isalivevic) then 
@@ -297,13 +297,13 @@ while {alive _entitate} do
 			_wave_obj = createVehicle ["Land_Battery_F", position _entitate, [], 0, "CAN_COLLIDE"]; 
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
-			[_entitate,["miscare_screamer",300]] remoteExec ["say3D"];
+			[_entitate,["miscare_screamer", 300]] remoteExec ["say3D"];
 		} else 
 		{
 			_wave_obj = createVehicle ["Land_Battery_F", position _screamer_anomally, [], 0, "CAN_COLLIDE"]; 
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
-			[_screamer_anomally,["miscare_screamer",300]] remoteExec ["say3D"];
+			[_screamer_anomally,["miscare_screamer", 300]] remoteExec ["say3D"];
 		};
 		uiSleep 5;
 

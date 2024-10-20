@@ -30,7 +30,7 @@ _bolovani_blast setDropInterval 0.007;
 
 uiSleep 0.25;
 deleteVehicle _bolovani_blast;
-_crater_impact = createVehicle ["CraterLong",[getPos _head_worm select 0,getPos _head_worm select 1,0],[],0,"CAN_COLLIDE"];
+_crater_impact = createVehicle ["CraterLong", [getPos _head_worm select 0,getPos _head_worm select 1,0],[],0,"CAN_COLLIDE"];
 _crater_impact setDir (random 360);
 uiSleep 0.5;
 deleteVehicle _blast_dust;

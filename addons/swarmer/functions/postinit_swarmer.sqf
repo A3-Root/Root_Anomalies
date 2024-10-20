@@ -3,7 +3,7 @@
 
 [] spawn {
 	waitUntil {!isNil "insecticid"};
-    player addEventHandler ["Fired",
+    player addEventHandler ["Fired", 
 	{
 		private ["_al_throwable"];
 		_al_throwable = _this select 6;

@@ -25,7 +25,7 @@ private _radiuspos = getPosATL _logic;
 
 if (isNil "STEAMER_markerIndex") then { STEAMER_markerIndex = 0 };
 
-_steamerMarkerName = format ["STEAMER_%1",  STEAMER_markerIndex];
+_steamerMarkerName = format ["STEAMER_%1", STEAMER_markerIndex];
 STEAMER_markerIndex = STEAMER_markerIndex + 1;
 _steamermarker = createMarker [_steamerMarkerName,  _logic];
 deleteVehicle _logic;

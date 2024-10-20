@@ -29,20 +29,20 @@ fnc_vic_dmg = {
 		_damage = random(_worm_dmg);
 		_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 	} forEach _vichitpoints;
-	_vehicle setHitPointDamage ["HitLight",1]; 
-	_vehicle setHitPointDamage ["#light_l",1];
-	_vehicle setHitPointDamage ["#light_r",1];
-	_vehicle setHitPointDamage ["#light_l_flare",1];
-	_vehicle setHitPointDamage ["#light_r_flare",1];
-	_vehicle setHitPointDamage ["#light_1_hitpoint",1];
-	_vehicle setHitPointDamage ["light_1_hitpoint",1];
-	_vehicle setHitPointDamage ["#light_2_hitpoint",1];
-	_vehicle setHitPointDamage ["light_2_hitpoint",1];
-	_vehicle setHitPointDamage ["light_l",1]; 
-	_vehicle setHitPointDamage ["light_r",1]; 
-	_vehicle setHitPointDamage ["light_l2",1]; 
-	_vehicle setHitPointDamage ["HitBatteries",1]; 
-	_vehicle setHitPointDamage ["light_r2",1];
+	_vehicle setHitPointDamage ["HitLight", 1]; 
+	_vehicle setHitPointDamage ["#light_l", 1];
+	_vehicle setHitPointDamage ["#light_r", 1];
+	_vehicle setHitPointDamage ["#light_l_flare", 1];
+	_vehicle setHitPointDamage ["#light_r_flare", 1];
+	_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_1_hitpoint", 1];
+	_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_2_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_l", 1]; 
+	_vehicle setHitPointDamage ["light_r", 1]; 
+	_vehicle setHitPointDamage ["light_l2", 1]; 
+	_vehicle setHitPointDamage ["HitBatteries", 1]; 
+	_vehicle setHitPointDamage ["light_r2", 1];
 };
 
 if (!isServer) exitWith {};
@@ -65,7 +65,7 @@ _cap	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_CO
 _coada	= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
 _coada_01= createVehicle ["land_CanOpener_F", getMarkerPos _poz_worm, [], 0, "CAN_COLLIDE"];
 
-_cap setVariable ["isWorm",true,true];
+_cap setVariable ["isWorm", true,true];
 
 wormkiller = _wormdiffuser; publicVariable "wormkiller";
 
