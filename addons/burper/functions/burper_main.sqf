@@ -1,12 +1,3 @@
-
- 
-
-/*
-Inbound
-[[_burperMarkerName, _isroaming, _detectdevice, _protectdevice, _killdevice, _burper_territory, _isvehicle, _killswitch_range, _isaipanic], 
-*/
-
-
 if (!isServer) exitWith {};
 
 private ["_markern", "_nm", "_object_anom_burp", "_markerstr"];
@@ -24,7 +15,7 @@ if (_anti_burper_device	!= "") then {
 
 if (_device_detector != "") then {
 	detection_smugg = true; publicVariable "detection_smugg";
-	detectiv_tool = _device_detector; publicVariable "detectiv_tool"; 
+	detectiv_tool = _device_detector; publicVariable "detectiv_tool";
 	if (_isaipanic) then {
 		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
 	};
@@ -32,7 +23,7 @@ if (_device_detector != "") then {
 		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
 	};
 } else {
-	detection_smugg = false; publicVariable "detection_smugg"; 
+	detection_smugg = false; publicVariable "detection_smugg";
 	if (_isaipanic) then {
 		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid_vizible.sqf";
 	};

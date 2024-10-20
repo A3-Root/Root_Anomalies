@@ -31,7 +31,7 @@ _wat_vap setDropInterval 0.01;
 _bolovani_ground = "#particlesource" createVehicleLocal (getPosATL _obj_eff);
 _bolovani_ground setParticleCircle [0.3, [0, 0, 0]];
 _bolovani_ground setParticleRandom [0, [0.25, 0.25, 0], [0, 0, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
-_bolovani_ground setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 0.1], 0, 20, 7.9, 0.075, [1, 1, 1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _obj_eff,0,true,0.1,[[0,0,0,0]]];
+_bolovani_ground setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 10, [0, 0, 0], [0, 0, 0.1], 0, 20, 7.9, 0.075, [1, 1, 1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _obj_eff, 0, true, 0.1,[[0, 0, 0, 0]]];
 _bolovani_ground setDropInterval 0.001;
 
 uiSleep 0.1;
@@ -39,7 +39,7 @@ uiSleep 0.1;
 _dirt_dust = "#particlesource" createVehicleLocal (getPosATL _obj_eff);
 _dirt_dust setParticleCircle [1, [0, 0, 0]];
 _dirt_dust setParticleRandom [0, [0.25, 0.25, 0], [4, 4, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
-_dirt_dust setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 5, [0, 0, 0], [0, 0, 5], 3, 20, 7.9, 0.075, [0.2, 0.2, 0.2], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _obj_eff,0,true,0.3,[[0,0,0,0]]];
+_dirt_dust setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 5, [0, 0, 0], [0, 0, 5], 3, 20, 7.9, 0.075, [0.2, 0.2, 0.2], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _obj_eff, 0, true, 0.3,[[0, 0, 0, 0]]];
 _dirt_dust setDropInterval 0.005;
 
 uiSleep 1;

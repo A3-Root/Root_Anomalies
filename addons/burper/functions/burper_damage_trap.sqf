@@ -28,7 +28,7 @@ if (!isNil "obj_prot_burper") then {
 					uiSleep 0.5 + (random 0.5);
 					_x setDamage 1;
 					_x hideObjectGlobal true;
-					if !(_x isKindOf "LandVehicle") then { deleteVehicle _x; };
+					if !(_x isKindOf "LandVehicle") then { deleteVehicle _x;};
 					_oase = createVehicle ["Land_HumanSkeleton_F", [getPosATL _x select 0, getPosATL _x select 1, 1.5], [], 0, "CAN_COLLIDE"];
 					[[_oase], "\z\root_anomalies\addons\burper\functions\burper_splash_damage.sqf"] remoteExec ["execVM", 0];
 					_balta_sange = createVehicle ["BloodSplatter_01_Medium_New_F", [getPosATL _x select 0, getPosATL _x select 1, 0], [], 0, "CAN_COLLIDE"];
@@ -57,7 +57,7 @@ if (!isNil "obj_prot_burper") then {
 					uiSleep 0.5 + (random 0.5);
 					_x setDamage 1;
 					_x hideObjectGlobal true;
-					if !(_x isKindOf "LandVehicle") then { deleteVehicle _x; };
+					if !(_x isKindOf "LandVehicle") then { deleteVehicle _x;};
 					_oase = createVehicle ["Land_HumanSkeleton_F", [getPosATL _x select 0, getPosATL _x select 1, 1.5], [], 0, "CAN_COLLIDE"];
 					[[_oase], "\z\root_anomalies\addons\burper\functions\burper_splash_damage.sqf"] remoteExec ["execVM", 0];
 					_balta_sange = createVehicle ["BloodSplatter_01_Medium_New_F", [getPosATL _x select 0, getPosATL _x select 1, 0], [], 0, "CAN_COLLIDE"];

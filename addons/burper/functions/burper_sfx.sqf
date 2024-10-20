@@ -17,14 +17,14 @@ fnc_burp_sfx_primar = {
 	_source_burp = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_princ);
 	_source_burp setParticleCircle [0, [0, 0, 0]];
 	_source_burp setParticleRandom [0, [0.25, 0.25, 0], [5, 5, 5], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
-	_source_burp setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.3, [0, 0, 2], [0, 0, 0], 17, 10, 7.9, 0.007, [4,0.5], [[0, 0, 0, 1],[0, 0, 0, 1]], [0.08], 1, 0, "", "", _obj_sfx_princ];
+	_source_burp setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.3, [0, 0, 2], [0, 0, 0], 17, 10, 7.9, 0.007, [4, 0.5], [[0, 0, 0, 1],[0, 0, 0, 1]], [0.08], 1, 0, "", "", _obj_sfx_princ];
 	_source_burp setDropInterval 0.01;
-	_spot_lit = "#lightpoint" createVehicle (getPosATL _obj_sfx_princ); 
-	_spot_lit lightAttachObject [_obj_sfx_princ, [0.1,0.1,3]];
+	_spot_lit = "#lightpoint" createVehicle (getPosATL _obj_sfx_princ);
+	_spot_lit lightAttachObject [_obj_sfx_princ, [0.1, 0.1, 3]];
 	_spot_lit setLightUseFlare false;
 	_spot_lit setLightFlareSize 1;
 	_spot_lit setLightFlareMaxDistance 1500;
-	_spot_lit setLightAttenuation [0,0,50,1000,1,50];
+	_spot_lit setLightAttenuation [0, 0, 50, 1000, 1, 50];
 	while {((player distance _work_primar) < 1500) && (ciclu_simplu != ciclu_compli)} do {
 		_r_col_burp = random 1;
 		_g_col_burp = random 1;
@@ -52,8 +52,8 @@ fnc_burp_sfx_secundar = {
 	_work_sfx_sec = _this select 0;
 	_obj_sfx_sec = _this select 1;
 	while {((player distance _work_sfx_sec) < 1500) && (ciclu_compli < 3)} do {
-		if ((player distance _work_sfx_sec) <100) then {_sunet_blast = ["01_blast", "02_blast", "03_blast"] call BIS_fnc_selectRandom; enableCamShake true; addCamShake [1,4,13+(random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
-		if ((player distance _work_sfx_sec) >100) then {_far_sunet_blast = ["01_far_blast", "02_far_blast", "03_far_blast"] call BIS_fnc_selectRandom;_work_sfx_sec say3D [_far_sunet_blast, 500]};
+		if ((player distance _work_sfx_sec) <100) then {_sunet_blast = ["01_blast", "02_blast", "03_blast"] call BIS_fnc_selectRandom;enableCamShake true; addCamShake [1, 4, 13+(random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
+		if ((player distance _work_sfx_sec) >100) then {_far_sunet_blast = ["01_far_blast", "02_far_blast", "03_far_blast"] call BIS_fnc_selectRandom; _work_sfx_sec say3D [_far_sunet_blast, 500]};
 		_blast_blurp = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_sec);
 		_blast_blurp setParticleCircle [5, [-3, -3, 0]];
 		_blast_blurp setParticleRandom [2, [6, 6, 0], [-7, -7, 0], 5, 1, [0, 0, 0, 1], 1, 1];
@@ -66,12 +66,12 @@ fnc_burp_sfx_secundar = {
 		_blast_dust setDropInterval 0.01;
 		_effect_sp_dist = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_sec);
 		_effect_sp_dist setParticleCircle [0, [0, 0, 0]];
-		_effect_sp_dist setParticleRandom [0, [0,0, 0], [0,0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
+		_effect_sp_dist setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
 		_effect_sp_dist setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 1.5, [0, 0, 0], [0, 0, 0], 7, 10, 7.9, 0.007, [2, 2, 30, 1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _obj_sfx_sec];
 		_effect_sp_dist setDropInterval 0.4;
 		_dust_eff = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_sec);
 		_dust_eff setParticleCircle [0, [0, 0, 0]];
-		_dust_eff setParticleRandom [0, [0,0, 0], [0,0, 0], 0,0, [0, 0, 0, 0], 0, 0];
+		_dust_eff setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
 		_dust_eff setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 1, [0, 0, 0], [0, 0, 0.75], 15, 10, 7.9, 0.001, [5, 10, 1], [[1, 1, 1, 0.01], [1, 1, 1, 0.05], [0, 0, 0, 0]], [0.08], 1, 0, "", "", _obj_sfx_sec];
 		_dust_eff setDropInterval 0.5;	
 		uiSleep 0.5+(random 1);
@@ -135,8 +135,8 @@ if (detection_smugg) then {
 		ciclu_simplu = 1;
 		ciclu_compli = 1;
 		uiSleep 1;
-		waitUntil {uiSleep 2; (player distance _work_obj) <1500};
-		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0,getPosATL _work_obj select 1,1], [], 0, "CAN_COLLIDE"];
+		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
+		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 1], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
 		uiSleep 0.1;
@@ -175,8 +175,8 @@ if (detection_smugg) then {
 	ciclu_simplu = 1;
 	ciclu_compli = 2;
 	while {alive _work_obj} do {
-		waitUntil {uiSleep 2; (player distance _work_obj) <1500};
-		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0,getPosATL _work_obj select 1,0], [], 0, "CAN_COLLIDE"];
+		waitUntil {uiSleep 2;(player distance _work_obj) <1500};
+		_burper_obj_sec = createVehicle ["Sign_Sphere25cm_F", [getPosATL _work_obj select 0, getPosATL _work_obj select 1, 0], [], 0, "CAN_COLLIDE"];
 		_burper_obj_sec setObjectMaterial [0,"A3\Structures_F\Data\Windows\window_set.rvmat"];	
 		_burper_obj_sec setObjectTextureGlobal [0, "\z\root_anomalies\addons\burper\images\01_burper.jpg"];
 		uiSleep 0.1;	

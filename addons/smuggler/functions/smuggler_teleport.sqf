@@ -6,7 +6,7 @@ fnc_teleportSFX_AI = {
     _ind = 3;
     while {_ind>0} do {
         _unit hideObjectGlobal true;
-        uiSleep 0.2; _unit hideObjectGlobal false;uiSleep 0.2;_ind = _ind-1
+        uiSleep 0.2; _unit hideObjectGlobal false; uiSleep 0.2; _ind = _ind-1
     };
 };
 

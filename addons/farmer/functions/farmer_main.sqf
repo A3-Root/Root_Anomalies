@@ -27,7 +27,7 @@ FARMER_find_target = {
 FARMER_hide_farmer = {
 	_this setAnimSpeedCoef 0.8;
 	_this switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
-	_this setVariable ["vizibil", false,true];
+	_this setVariable ["vizibil", false, true];
 	[_this,["pietre", 1000]] remoteExec ["say3D"];
 	[[_this],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
 	_this hideObjectGlobal true;
@@ -36,16 +36,16 @@ FARMER_hide_farmer = {
 FARMER_show_farmer = {
 	private ["_pos_farmer", "_teritoriu", "_blow_poz"];
 	params ["_farmer", "_poz_orig_sc"];
-	_pos_farmer = [_poz_orig_sc,0,10,3,0,20,0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
-	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil", true,true];
+	_pos_farmer = [_poz_orig_sc, 0, 10, 3, 0, 20, 0,[],_poz_orig_sc] call BIS_fnc_findSafePos;
+	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil", true, true];
 	[_farmer,["punch_7", 1000]] remoteExec ["say3D"];
 	_farmer hideObjectGlobal false;
 	[[_farmer],"\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
-	_farmer setAnimSpeedCoef 0.8; 
+	_farmer setAnimSpeedCoef 0.8;
 	_farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_farmer setUnitPos "UP";
 	uiSleep 1;
-	playSound3D ["\z\root_anomalies\addons\main\sounds\eko.ogg", "", false, [getPos _farmer select 0,getPos _farmer select 1,1000], 20, 5, 0];
+	playSound3D ["\z\root_anomalies\addons\main\sounds\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 1000], 20, 5, 0];
 };
 
 FARMER_avoid_farmer = {
@@ -65,18 +65,18 @@ FARMER_attk_farmer = {
 	{	
 		if !(isPlayer _x) then {
 			_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
-				_x setVelocity [_jump_dir select 0,_jump_dir select 1,9]; 
+				_x setVelocity [_jump_dir select 0,_jump_dir select 1, 9];
 				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 					[_x, _damage_farmer, _bodyPart, "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else { 
 					_x setDamage ((damage _x) + _damage_farmer);
-				}; 
+				};
 			};
 			if (_x isKindOf "LandVehicle") then {
-				_x setVelocity [_jump_dir select 0,_jump_dir select 1,3]; 
+				_x setVelocity [_jump_dir select 0,_jump_dir select 1, 3];
 				_vehicle = _x;
 				_damage = random[0, _damage_farmer, 1];
 				_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
@@ -84,7 +84,7 @@ FARMER_attk_farmer = {
 					_damage = random[0, _damage_farmer, 1];
 					_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
 				} forEach _vichitpoints;
-				_vehicle setHitPointDamage ["HitLight", 1]; 
+				_vehicle setHitPointDamage ["HitLight", 1];
 				_vehicle setHitPointDamage ["#light_l", 1];
 				_vehicle setHitPointDamage ["#light_r", 1];
 				_vehicle setHitPointDamage ["#light_l_flare", 1];
@@ -93,22 +93,22 @@ FARMER_attk_farmer = {
 				_vehicle setHitPointDamage ["light_1_hitpoint", 1];
 				_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
 				_vehicle setHitPointDamage ["light_2_hitpoint", 1];
-				_vehicle setHitPointDamage ["light_l", 1]; 
-				_vehicle setHitPointDamage ["light_r", 1]; 
-				_vehicle setHitPointDamage ["light_l2", 1]; 
-				_vehicle setHitPointDamage ["HitBatteries", 1]; 
+				_vehicle setHitPointDamage ["light_l", 1];
+				_vehicle setHitPointDamage ["light_r", 1];
+				_vehicle setHitPointDamage ["light_l2", 1];
+				_vehicle setHitPointDamage ["HitBatteries", 1];
 				_vehicle setHitPointDamage ["light_r2", 1];
 			};
 		}
-	} forEach (_farmer nearEntities [["CAManBase", "LandVehicle"],25]);
+	} forEach (_farmer nearEntities [["CAManBase", "LandVehicle"], 25]);
 };
 
 FARMER_travel_farmer = {
 	params ["_farmer", "_tgt_farmer"];
 	_farmer setUnitPos "DOWN";
-	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0,getPosATL _farmer select 1,3000];
+	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, getPosATL _farmer select 1, 3000];
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
-	_rag setVelocity [_jump_dir select 0,_jump_dir select 1,5];
+	_rag setVelocity [_jump_dir select 0,_jump_dir select 1, 5];
 	[[_rag],"\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
 	uiSleep round (2+random 2);
 	_farmer setVariable ["pozitie_noua", getPos _rag];
@@ -128,9 +128,9 @@ while {!_ck_pl} do {
 _farmer = createAgent ["C_Soldier_VR_F", getMarkerPos _marker_farmer, [], 0, "NONE"];
 _farmer setVariable ["BIS_fnc_animalbehaviour_disable", true];
 _farmer setSpeaker "NoVoice";
-_farmer disableConversation true;_farmer addRating -10000; _farmer setBehaviour "CARELESS";
+_farmer disableConversation true; _farmer addRating -10000; _farmer setBehaviour "CARELESS";
 _farmer enableFatigue false;
-_farmer setSkill ["courage", 1];_farmer setUnitPos "UP"; _farmer disableAI "ALL"; _farmer setMass 7000;
+_farmer setSkill ["courage", 1]; _farmer setUnitPos "UP"; _farmer disableAI "ALL"; _farmer setMass 7000;
 
 {
     _farmer enableAI _x
@@ -143,7 +143,7 @@ _farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
     _unit=_this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam];if ((_unit getVariable "al_dam_total")>1) then {
+    _curr_dam = (_unit getVariable "al_dam_total")+(_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total")>1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -166,7 +166,7 @@ for "_i" from 0 to 5 do {
 };
 
 for "_i" from 0 to 5 do {
-    _farmer setObjectTextureGlobal [_i, "#(rgb,8,8,3)color(0,0.5,0,0.5)"];
+    _farmer setObjectTextureGlobal [_i, "#(rgb, 8, 8, 3)color(0, 0.5, 0, 0.5)"];
     uiSleep 0.1;
 };
 

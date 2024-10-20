@@ -8,7 +8,7 @@ private ["_noseize"];
 _damage_strig = _this select 0;
 _noseize = _this select 1;
 
-_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 if (typeOf player != "VirtualCurator_F") then { 
 	if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
@@ -38,10 +38,10 @@ if (_noseize) exitWith {};
 	_handle ppEffectAdjust _effect;
 	_handle ppEffectCommit 0.5;
 	waitUntil {ppEffectCommitted _handle};
-	uiSleep 0.5; 
+	uiSleep 0.5;
 	_handle ppEffectAdjust [0];
 	_handle ppEffectCommit 0.5;
-	uiSleep 1.5; 
+	uiSleep 1.5;
 	_handle ppEffectEnable false;
 	ppEffectDestroy _handle;
 };
@@ -58,7 +58,7 @@ if (_noseize) exitWith {};
 	_handle ppEffectEnable true;
 	_handle ppEffectAdjust _effect;
 	_handle ppEffectCommit 0.5;
-	uiSleep 0.5; 
+	uiSleep 0.5;
 	_handle ppEffectEnable false;
 	ppEffectDestroy _handle;
 };

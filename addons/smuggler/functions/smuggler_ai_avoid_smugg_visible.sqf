@@ -15,11 +15,11 @@ if (count _list_ai_in_range>0) then
 		_reldir = [_x, getPos _obj_teleporter] call BIS_fnc_dirTo;
 		_fct = [30,-30] call BIS_fnc_selectRandom;
 		if (_reldir<180) then {_op_dir=_reldir+180 +_fct} else {_op_dir=_reldir-180+_fct};
-		_avoid_poz = [getPosATL _x,100+random 500, _op_dir] call BIS_fnc_relPos;
+		_avoid_poz = [getPosATL _x, 100+random 500, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
 		_x setSkill ["commanding", 1];
 	} forEach _list_ai_in_range;
 
 };
-uiSleep 10; /* uiSleep 30; */
+uiSleep 10;
 };

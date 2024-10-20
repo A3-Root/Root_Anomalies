@@ -5,20 +5,20 @@ if (!hasInterface)	exitWith {};
 cutText ["", "WHITE OUT", 1]; titleCut ["", "WHITE IN", 1];
 _effect_tip = ["blur", "colorinv", "chrom", "colorcor"] call BIS_fnc_selectRandom;
 enableCamShake true;
-addCamShake [3+random 7,3,13+random 33];
+addCamShake [3+random 7, 3, 13+random 33];
 playSound "puls";
 
 switch (_effect_tip) do 
 {
 	case "blur": 
 				{
-				"dynamicBlur" ppEffectEnable true; 
-				"dynamicBlur" ppEffectAdjust [40]; 
-				"dynamicBlur" ppEffectCommit 0;   
+				"dynamicBlur" ppEffectEnable true;
+				"dynamicBlur" ppEffectAdjust [40];
+				"dynamicBlur" ppEffectCommit 0;  
 				"dynamicBlur" ppEffectAdjust [0.0];
 				"dynamicBlur" ppEffectCommit 3;
 				uiSleep 3;
-				"dynamicBlur" ppEffectEnable false; 
+				"dynamicBlur" ppEffectEnable false;
 				};
 	case "colorinv": 
 				{
@@ -35,7 +35,7 @@ switch (_effect_tip) do
 					_handle ppEffectAdjust _effect;
 					_handle ppEffectCommit 5;
 					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3; 
+					uiSleep 3;
 					_handle ppEffectEnable false;
 					ppEffectDestroy _handle;
 				};
@@ -54,7 +54,7 @@ switch (_effect_tip) do
 					_handle ppEffectAdjust _effect;
 					_handle ppEffectCommit 5;
 					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3; 
+					uiSleep 3;
 					_handle ppEffectEnable false;
 					ppEffectDestroy _handle;
 				};
@@ -74,7 +74,7 @@ switch (_effect_tip) do
 					_handle ppEffectAdjust _effect;
 					_handle ppEffectCommit 5;
 					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3; 
+					uiSleep 3;
 					_handle ppEffectEnable false;
 					ppEffectDestroy _handle;
 				};

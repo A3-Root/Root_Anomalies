@@ -11,12 +11,12 @@ fn_teleport = {
 	waitUntil {isNil{player getVariable "tele"}};
 
 	player setVariable ["tele", true];
-	if !(_noseizee) then { [] spawn {execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_video_effect.sqf"}; };
+	if !(_noseizee) then { [] spawn {execVM "\z\root_anomalies\addons\smuggler\functions\smuggler_video_effect.sqf"};};
 	["zoomin"] remoteExec ["playSound", _unit];
 	_sound_in = ["halu_1", "halu_2", "halu_3", "halu_4", "halu_5", "halu_6", "halu_7", "halu_8", "halu_9", "halu_91", "halu_92", "halu_93", "halu_94", "halu_95", "halu_96", "halu_97", "halu_98", "halu_99", "halu_991", "halu_992", "halu_993", "halu_994", "halu_995", "halu_996", "halu_997", "halu_998", "halu_999", "halu_9999"] call BIS_fnc_selectRandom;
 	[_sound_in] remoteExec ["playSound", _unit];
 	uiSleep 0.5;
-	_unit setPos [_pozitie select 0,_pozitie select 1,2];
+	_unit setPos [_pozitie select 0,_pozitie select 1, 2];
 	uiSleep (3 + random 6);
 	player setVariable ["tele", nil];
 };
@@ -24,7 +24,7 @@ fn_teleport = {
 fn_final_scream = {
 waitUntil {isNil{player getVariable "tele"}};
 _tipat=["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
-[_this,[_tipat,300]] remoteExec ["say3D"];
+[_this,[_tipat, 300]] remoteExec ["say3D"];
 };
 
 private ["_noseizeer", "_dmg_on_tele"];
@@ -50,10 +50,10 @@ _poz_5 = [];
 
 switch (_floor_dice) do 
 {
-	case 0: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 0: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
@@ -64,10 +64,10 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 1: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 1: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
@@ -78,11 +78,11 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 2: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_2 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 2: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			[_unit_check,_poz_2,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
@@ -93,12 +93,12 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 3: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_2 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_3 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 3: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			[_unit_check,_poz_2,_noseizeer] call fn_teleport;			
 			[_unit_check,_poz_3,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
@@ -109,13 +109,13 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 4: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_2 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_3 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_4 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 4: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			[_unit_check,_poz_2,_noseizeer] call fn_teleport;			
 			[_unit_check,_poz_3,_noseizeer] call fn_teleport;		
 			[_unit_check,_poz_4,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{
@@ -126,14 +126,14 @@ switch (_floor_dice) do
 			};
 			_unit_check call fn_final_scream;
 			};
-	case 5: {_poz_1 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_2 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_3 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_4 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;_poz_5 = [getPos _obj_tele,300,-1,5,0,-1,0] call BIS_fnc_findSafePos;
+	case 5: {_poz_1 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_2 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_3 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_4 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos; _poz_5 = [getPos _obj_tele, 300,-1, 5, 0,-1, 0] call BIS_fnc_findSafePos;
 			[_unit_check,_poz_1,_noseizeer] call fn_teleport;
 			[_unit_check,_poz_2,_noseizeer] call fn_teleport;			
 			[_unit_check,_poz_3,_noseizeer] call fn_teleport;		
 			[_unit_check,_poz_4,_noseizeer] call fn_teleport;			
 			[_unit_check,_poz_5,_noseizeer] call fn_teleport;
 			uiSleep 0.3;
-			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 			{

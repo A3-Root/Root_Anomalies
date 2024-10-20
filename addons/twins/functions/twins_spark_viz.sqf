@@ -41,11 +41,11 @@ while {alive _electromagnetic_anom} do
 			enableCamShake true;			
 			while {player distance _electr_viz < _dist_dam_w} do 
 			{
-				addCamShake [1,4,33];
+				addCamShake [1, 4, 33];
 				_aberat ppEffectAdjust[1, 0.8, true];
 				_aberat ppEffectCommit 3;
 				uiSleep 3;
-				addCamShake [1,4,33];
+				addCamShake [1, 4, 33];
 				_aberat ppEffectAdjust[0, 0, true];
 				_aberat ppEffectCommit 3;
 				uiSleep 3;
@@ -60,7 +60,7 @@ while {alive _electromagnetic_anom} do
 	{
 		_play_sunet = false;
 		playSound "sound_twin";
-		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3,0.8,0.65,0.5,0.8,0.65];
+		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 		if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
 		{
@@ -81,18 +81,18 @@ while {alive _obj_emit} do
 	waitUntil {(player distance _obj_emit) < 1500};
 	if (typeOf player != "VirtualCurator_F") then {
 	_dir_rel = [player, _obj_emit] call BIS_fnc_dirTo;
-	_cam_dir = [0,0,0] getDir getCameraViewDirection player;
+	_cam_dir = [0, 0, 0] getDir getCameraViewDirection player;
 
 	if ((abs(_dir_rel - _cam_dir) <= 46) or (abs(_dir_rel - _cam_dir) >= 314)) then 
 	{
-		if (_viz_fct<1) then {_viz_fct = _viz_fct +1;_total_viz = _obj_emit getVariable "vizibil";_total_viz=_total_viz+1;_obj_emit setVariable ["vizibil", _total_viz, true];};
+		if (_viz_fct<1) then {_viz_fct = _viz_fct +1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz=_total_viz+1; _obj_emit setVariable ["vizibil", _total_viz, true];};
 	} else 
 		{
 			_main_obj_sun = ["metalic1", "metalic2", "metalic3", "metalic4", "metalic5"] call BIS_fnc_selectRandom;
-			if ((_sun_ini!=_main_obj_sun) and (_token>12)) then {_obj_emit say3D [_main_obj_sun, 1500];_token=0};
+			if ((_sun_ini!=_main_obj_sun) and (_token>12)) then {_obj_emit say3D [_main_obj_sun, 1500]; _token=0};
 			_token= _token+0.2;
 			_sun_ini = _main_obj_sun;
-			if (_viz_fct>0) then {_viz_fct = _viz_fct-1;_total_viz = _obj_emit getVariable "vizibil";_total_viz=_total_viz-1;_obj_emit setVariable ["vizibil", _total_viz, true];};
+			if (_viz_fct>0) then {_viz_fct = _viz_fct-1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz=_total_viz-1; _obj_emit setVariable ["vizibil", _total_viz, true];};
 		};
-	uiSleep 0.2; };
+	uiSleep 0.2;};
 };

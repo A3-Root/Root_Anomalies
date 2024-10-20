@@ -15,37 +15,37 @@ _bangsound say3D ["earthquake_02", 3500];
 _blast = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _blast setParticleCircle [0, [0, 0, 0]];
 _blast setParticleRandom [0, [0, 0, 0], [0, 0, 0], 0, 0, [0, 0, 0, 0], 0, 0];
-_blast setParticleParams [["\A3\data_f\koule", 1, 0, 1], "", "SpaceObject", 1,0.5,[0,0,0],[0,0,1],3,10,7.9,0,[0,225],[[0.1, 0.1, 0.1, 0.1], [0.1,0.1, 0.1, 0]], [1], 1, 0, "", "", _spark_move];
+_blast setParticleParams [["\A3\data_f\koule", 1, 0, 1], "", "SpaceObject", 1, 0.5,[0, 0, 0],[0, 0, 1], 3, 10, 7.9, 0,[0, 225],[[0.1, 0.1, 0.1, 0.1], [0.1, 0.1, 0.1, 0]], [1], 1, 0, "", "", _spark_move];
 _blast setDropInterval 50;
 
 _ripple = "#particlesource" createVehicleLocal getPosATL _spark_move;
-_ripple setParticleCircle [0,[0,0,0]];
-_ripple setParticleRandom [0,[0.25,0.25,0],[0.175,0.175,0],0,0.25,[0,0,0,0.1],0,0];
-_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1,0,1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0],0,10,7.9,0, [5,0,250,500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
+_ripple setParticleCircle [0,[0, 0, 0]];
+_ripple setParticleRandom [0,[0.25, 0.25, 0],[0.175, 0.175, 0], 0, 0.25,[0, 0, 0, 0.1], 0, 0];
+_ripple setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract.p3d", 1, 0, 1], "", "Billboard", 1, 0.5, [0, 0, 0], [0, 0, 0], 0, 10, 7.9, 0, [5, 0, 250, 500], [[1, 1, 1, 1], [1, 1, 1, 1]], [0.05], 1, 0, "", "", _spark_move];
 _ripple setDropInterval 0.25;
 
-_light_emp = "#lightpoint" createVehicleLocal getPosATL _spark_move; 
-_light_emp lightAttachObject [_spark_move, [0,0,3]];
-_light_emp setLightAmbient [0.1,0.1,1];
-_light_emp setLightColor [0.1,0.1,1];
+_light_emp = "#lightpoint" createVehicleLocal getPosATL _spark_move;
+_light_emp lightAttachObject [_spark_move, [0, 0, 3]];
+_light_emp setLightAmbient [0.1, 0.1, 1];
+_light_emp setLightColor [0.1, 0.1, 1];
 _light_emp setLightBrightness 10;
 _light_emp setLightUseFlare true; _light_emp setLightFlareSize 10; _light_emp setLightFlareMaxDistance 2000;
 _light_emp setLightDayLight true;
-_light_emp setLightAttenuation [10,10,50,0,50,2000];
+_light_emp setLightAttenuation [10, 10, 50, 0, 50, 2000];
 
 uiSleep 0.1;
 if !(_isseisore) then 
 {
-	_hndl = ppEffectCreate ["ColorInversion", 1501]; 
-	_hndl ppEffectEnable true; 
-	_hndl ppEffectAdjust [0.75,0.75,0.75];
+	_hndl = ppEffectCreate ["ColorInversion", 1501];
+	_hndl ppEffectEnable true;
+	_hndl ppEffectAdjust [0.75, 0.75, 0.75];
 	_hndl ppEffectCommit 0.5;
 
 	uiSleep 0.5;
 
-	_hndl = ppEffectCreate ["ColorInversion", 1501]; 
-	_hndl ppEffectEnable true; 
-	_hndl ppEffectAdjust [0,0,0];
+	_hndl = ppEffectCreate ["ColorInversion", 1501];
+	_hndl ppEffectEnable true;
+	_hndl ppEffectAdjust [0, 0, 0];
 	_hndl ppEffectCommit 1.5;
 
 
@@ -67,34 +67,27 @@ deleteVehicle _light_emp;
 deleteVehicle _ripple;
 
 
-/*
-_vehicle = _x;
-_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
 {
-	_vehicle setHitPointDamage [_x, 1];
-} forEach _vichitpoints;
-*/
-{
-_x setHitPointDamage ["hitturret", 1]; 
-_x setHitPointDamage ["hitcomturret", 1]; 
+_x setHitPointDamage ["hitturret", 1];
+_x setHitPointDamage ["hitcomturret", 1];
 _x setHitPointDamage ["hitcomgun", 1];
-_x setHitPointDamage ["HitBatteries", 1]; 
-_x setHitPointDamage ["HitLight", 1]; 
+_x setHitPointDamage ["HitBatteries", 1];
+_x setHitPointDamage ["HitLight", 1];
 _x setHitPointDamage ["#light_l", 1];
 _x setHitPointDamage ["#light_r", 1];
 _x setHitPointDamage ["#light_l_flare", 1];
 _x setHitPointDamage ["#light_r_flare", 1];
-_x setHitPointDamage ["light_l", 1]; 
-_x setHitPointDamage ["light_r", 1]; 
-_x setHitPointDamage ["light_l2", 1]; 
-_x setHitPointDamage ["light_r2", 1]; 
-_x setHitPointDamage ["hitEngine", 1]; 
-_x setHitPointDamage ["HitEngine2", 1]; 
+_x setHitPointDamage ["light_l", 1];
+_x setHitPointDamage ["light_r", 1];
+_x setHitPointDamage ["light_l2", 1];
+_x setHitPointDamage ["light_r2", 1];
+_x setHitPointDamage ["hitEngine", 1];
+_x setHitPointDamage ["HitEngine2", 1];
 _x setHitPointDamage ["HitAvionics", 1];
-_x disableTIEquipment true; 
+_x disableTIEquipment true;
 _x disableNVGEquipment true;
 _x setVariable ["A3TI_Disable", true];
-_x disableAI "LIGHTS"; 
+_x disableAI "LIGHTS";
 _x setPilotLight false;
 _x setCollisionLight false;
 } forEach (nearestObjects [_spark_move, [
@@ -145,7 +138,7 @@ _x setCollisionLight false;
 "I_G_Mortar_01_F", 
 "I_static_AA_F", 
 "I_static_AT_F"
-], _AOE]); 
+], _AOE]);
 
 
 
@@ -153,10 +146,10 @@ _x setCollisionLight false;
 _spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRandom;
 _x say3D _spark_sound;
 _e_static = "#particlesource" createVehicleLocal (getPosATL _x);
-_e_static setParticleFire [0.5,3,60];
+_e_static setParticleFire [0.5, 3, 60];
 _e_static setParticleCircle [1.5, [0, 0, 0]];
-_e_static setParticleRandom [0.2, [3.5,3.5,0], [0.175, 0.175, 0], 0, 0.2, [0, 0, 0, 1], 1, 0];
-_e_static setParticleParams [["\A3\data_f\blesk1", 1, 0, 1], "", "SpaceObject", 1, 0.05, [0, 0, 0], [0, 0, 0], 0, 10, 7.9,0, [0.003, 0.003], [[1, 1, 0.1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _x];
+_e_static setParticleRandom [0.2, [3.5, 3.5, 0], [0.175, 0.175, 0], 0, 0.2, [0, 0, 0, 1], 1, 0];
+_e_static setParticleParams [["\A3\data_f\blesk1", 1, 0, 1], "", "SpaceObject", 1, 0.05, [0, 0, 0], [0, 0, 0], 0, 10, 7.9, 0, [0.003, 0.003], [[1, 1, 0.1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _x];
 _e_static setDropInterval 0.025;
 uiSleep 0.5;
 deleteVehicle _e_static;
@@ -208,14 +201,14 @@ deleteVehicle _e_static;
 "I_G_Mortar_01_F", 
 "I_static_AA_F", 
 "I_static_AT_F"
-], _AOE]); 
+], _AOE]);
 
 
 
 
 {
-_x setHit ["light_1_hitpoint", 0.97]; 
-_x setHit ["light_2_hitpoint", 0.97]; 
+_x setHit ["light_1_hitpoint", 0.97];
+_x setHit ["light_2_hitpoint", 0.97];
 _x setHit ["light_3_hitpoint", 0.97];
 _x setHit ["light_4_hitpoint", 0.97];
 _bbr = boundingBoxReal vehicle _x;
@@ -234,13 +227,13 @@ if (_spark_type== "orange") then
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];
-	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 15, 7.9, 0, [0.5,0.5,0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x,0,true,0.3,[[0,0,0,0]]];
+	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 15, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3,[[0, 0, 0, 0]]];
 	_scantei_spark setDropInterval _drop;
 } else
 {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.05, 0.05, 0.1], [5, 5, 3], 0, 0.0025, [0, 0, 0, 0], 0, 0];
-	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5,0.5,0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x,0,true,0.3,[[0,0,0,0]]];
+	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0,_spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3,[[0, 0, 0, 0]]];
 	_scantei_spark setDropInterval 0.001;
 };
 _scantei_spark say3D _spark_sound;
@@ -623,7 +616,7 @@ _binos = [
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]);
 
 uiSleep 0.5;
 {							
@@ -638,7 +631,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]);
 
 uiSleep 0.5;
 {							
@@ -653,7 +646,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]);
 
 
 uiSleep 0.5;
@@ -669,7 +662,7 @@ uiSleep 0.5;
 			_x removeWeapon _nvg;
 		};
 	};
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]);
 
 
 
@@ -769,7 +762,7 @@ _x removePrimaryWeaponItem "OPTRE_M7_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Laser";
 _x removePrimaryWeaponItem "OPTRE_BMR_Flashlight";
 _x removePrimaryWeaponItem "OPTRE_DMR_Light"																								
-} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]); 
+} forEach (nearestObjects [_spark_move, ["CAManBase"], _AOE]);
 
 
 

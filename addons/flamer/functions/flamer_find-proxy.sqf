@@ -14,7 +14,7 @@ _sortedArr = [];
 	if (not _inArray) then
 	{
 		_modelPos = _veh selectionPosition _x;
-		if (not (_modelPos isEqualTo [0,0,0])) then
+		if (not (_modelPos isEqualTo [0, 0, 0])) then
 		{
 			_sortedArr set [count _sortedArr, _x];
 			_worldPos = _veh modelToWorld _modelPos;
@@ -29,5 +29,5 @@ diag_log "[";
 {
 	diag_log format ["%1", _x];
 } forEach _sortedArr;
-diag_log "];";
+diag_log "]; ";
 };

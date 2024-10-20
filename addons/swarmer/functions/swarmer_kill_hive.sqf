@@ -14,7 +14,7 @@ while {alive _gren} do
 			if (!isNil{_x getVariable "isHive"}) then 
 			{
 				uiSleep 1;
-				_x setDamage 1; 
+				_x setDamage 1;
 				[[_x],"\z\root_anomalies\addons\swarmer\functions\swarmer_dead_SFX.sqf"] remoteExec ["execVM"];
 			};
 		} forEach _ck_hiv;

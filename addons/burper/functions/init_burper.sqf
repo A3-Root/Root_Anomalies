@@ -2,7 +2,7 @@
 
 
 /*
-null = [marker,mobile_anomaly,device_detector,damage_protect,anti_burper_device] execVM "AL_burpy\alias_burper.sqf";
+null = [marker, mobile_anomaly, device_detector, damage_protect, anti_burper_device] execVM "AL_burpy\alias_burper.sqf";
 
 marker				- string, name fo the marker where you want to place the anomaly
 mobile_anomaly		- boolean, if true the anomaly will change location over time, otherwise they stay in the same location where they were initially placed
@@ -56,7 +56,7 @@ deleteVehicle _logic;
 		if !(_iskillable) then {_killdevice = "NO-KILL-DEVICE-CONFIGURED"; _killswitch_range = 1};
 		if (_killswitch_range < _burper_territory) then {
 			if (_killdevice isKindOf "LandVehicle") then {
-				if ((_killswitch_range + _burper_territory) > (2 * _burper_territory)) then { _killswitch_range = 1.5 * _burper_territory; };
+				if ((_killswitch_range + _burper_territory) > (2 * _burper_territory)) then { _killswitch_range = 1.5 * _burper_territory;};
 			} else {
 				_killswitch_range = _killswitch_range + 5;
 			};

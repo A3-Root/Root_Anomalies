@@ -1,20 +1,9 @@
-
- 
-
-/*
-
-Inbound
-
-[_object_anom_burp, _anti_burper_device, _killrange] execVM "burper_remove.sqf";
-
-*/
-
 params ["_object_anom_burp", "_anti_burper_device", "_kill_range"];
 
 private "_device_anti_burp";
 
 waitUntil {
-	uiSleep 1; 
+	uiSleep 1;
 	!isNil "anti_burper";
 };
 

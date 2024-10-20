@@ -7,7 +7,7 @@ _head_worm = _this select 0;
 _tail_worm = _this select 1;
 _voce_idle = _this select 2;
 
-[_voce_idle, true] remoteExec ["hideObjectGlobal", 0,true];
+[_voce_idle, true] remoteExec ["hideObjectGlobal", 0, true];
 
 [_voce_idle] spawn {
 	_tail_voice = _this select 0;
@@ -25,11 +25,11 @@ if (sunOrMoon==0) then
 	_smoke_head = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 	_smoke_head setParticleCircle [0, [0, 0, 0]];
 	_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
-	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm,0,true,0.1,[[0,0,0,0]]];
+	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1,[[0, 0, 0, 0]]];
 	_smoke_head setDropInterval 0.01;
 
-	_spot_lit = "#lightpoint" createVehicle (getPosATL _head_worm); 
-	_spot_lit lightAttachObject [_head_worm, [0.1,0.1,5]];
+	_spot_lit = "#lightpoint" createVehicle (getPosATL _head_worm);
+	_spot_lit lightAttachObject [_head_worm, [0.1, 0.1, 5]];
 	_spot_lit setLightUseFlare false;
 	_spot_lit setLightDayLight true;
 	_spot_lit setLightFlareSize 1;
@@ -60,9 +60,9 @@ if (sunOrMoon==0) then
 	_smoke_head = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 	_smoke_head setParticleCircle [0, [0, 0, 0]];
 	_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
-	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm,0,true,0.1,[[0,0,0,0]]];
+	_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1,[[0, 0, 0, 0]]];
 	_smoke_head setDropInterval 0.01;
-	while {player distance _head_worm <2000} do	{uiSleep 15; /* uiSleep 30; */};
+	while {player distance _head_worm <2000} do	{uiSleep 15;};
 	deleteVehicle _smoke_head;
 };
 

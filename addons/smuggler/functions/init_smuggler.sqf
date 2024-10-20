@@ -39,7 +39,7 @@ deleteVehicle _logic;
 	["TOOLBOX:YESNO", ["Disable Object Spawning", "If true, the Smuggler will disable spawning in random objects and entites including custom AI/Vehicles/Things configured below in random."], false],
 	["EDIT", ["Detection Device", "Class Names of the Detection Device. Can be the same item as Protection Device."], ["MineDetector"]],
 	["EDIT", ["Protection Device", "Class Names of the Protection Device. Can be the same item as Detection Device."], ["B_Kitbag_mcamo"]],
-	["EDIT:MULTI", ["Spawn Objects Allowed", "Comma (,) seperated classnames (without spaces) of the objects/entities."], ["Land_OfficeCabinet_01_F,Land_ArmChair_01_F,OfficeTable_01_old_F,B_G_Soldier_AR_F,B_GEN_Soldier_F,C_man_1,Weapon_arifle_AKM_F,Weapon_launch_RPG7_F,I_C_Soldier_Bandit_5_F,O_Soldier_GL_F", {}, 4]],
+	["EDIT:MULTI", ["Spawn Objects Allowed", "Comma (,) seperated classnames (without spaces) of the objects/entities."], ["Land_OfficeCabinet_01_F,Land_ArmChair_01_F, OfficeTable_01_old_F, B_G_Soldier_AR_F, B_GEN_Soldier_F, C_man_1, Weapon_arifle_AKM_F, Weapon_launch_RPG7_F, I_C_Soldier_Bandit_5_F, O_Soldier_GL_F", {}, 4]],
 	["SLIDER", ["Spawn Objects Delay", "Addtional delay in seconds between spawning random objects. Minimum delay is set to 10 seconds. For example, if this value is set to 15, actual delay between spawning entites would be 25 seconds. (10 + 15)"], [0, 600, 10, 0]],
 	["SLIDER:PERCENT", ["Smuggler Damage", "Percentage amount of damage the Smuggler does per teleportation. '0' means no damage taken when teleported."], [0, 1, 0.1, 2]],
 	["TOOLBOX:YESNO", ["Disable Sensitive Lights", "If true, Bright lights will be disabled during teleportation. Highly recommended for people with sensitivity to lights."], false]
