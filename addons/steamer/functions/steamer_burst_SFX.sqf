@@ -53,8 +53,7 @@ _coloana setParticleParams [["\A3\data_f\cl_water", 1, 0, 1], "", "Billboard", 1
 _coloana setDropInterval 0.01;
 [_coloana] spawn {params ["_sterg"]; uiSleep 1; deleteVehicle _sterg};
 _poz_eko = getPos _blow_poz;
-[_eko, _poz_eko] spawn
-	{
+[_eko, _poz_eko] spawn {
 		params ["_eko", "_blow_poz"];
 		uiSleep 1;
 		playSound3D ["\z\root_anomalies\addons\main\sounds\eko_01.ogg", "", false, [_blow_poz select 0, _blow_poz select 1, 500], 7, 5, 0];

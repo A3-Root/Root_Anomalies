@@ -16,8 +16,7 @@ anti_burper_device	- string, class name of the object which will act as a Burper
 if (!hasInterface) exitWith {};
 
 
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
-{
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 

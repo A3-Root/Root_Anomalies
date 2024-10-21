@@ -40,11 +40,9 @@ while {alive _obj_teleporter} do {
                             if (_x isKindOf "Man") then {
                                 _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                                 _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-                                if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-                                {
+                                if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 	                                [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
-                                } else 
-                                {
+                                } else {
 	                                _x setDamage ((damage _x) + _dmg_on_teleport);
                                 };
                             } else {
@@ -69,11 +67,9 @@ while {alive _obj_teleporter} do {
                     if (_x isKindOf "Man") then {
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                         _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-                        if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-                        {
+                        if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 	                        [_x, _dmg_on_teleport, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
-                        } else 
-                        {
+                        } else {
 	                        _x setDamage ((damage _x) + _dmg_on_teleport);
                         };
 

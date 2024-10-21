@@ -11,17 +11,14 @@ _voce_idle = _this select 2;
 
 [_voce_idle] spawn {
 	_tail_voice = _this select 0;
-	while {!isNull _tail_voice} do 
-	{
+	while {!isNull _tail_voice} do {
 	_tail_voice say3D ["idle_02", 500];
 	uiSleep 7.5;
 	};
 };
 
-while {!isNull _head_worm} do 
-{
-if (sunOrMoon == 0) then 
-{
+while {!isNull _head_worm} do {
+if (sunOrMoon == 0) then {
 	_smoke_head = "#particlesource" createVehicleLocal (getPosATL _head_worm);
 	_smoke_head setParticleCircle [0, [0, 0, 0]];
 	_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
@@ -36,8 +33,7 @@ if (sunOrMoon == 0) then
 	_spot_lit setLightFlareMaxDistance 1500;
 	_spot_lit setLightAttenuation [0, 0, 50, 1000, 1, 50];
 
-	while {player distance _head_worm < 2000} do
-	{
+	while {player distance _head_worm < 2000} do {
 	_r_col_burp= random 1;
 	_g_col_burp= random 1;
 	_b_col_burp= random 1;
@@ -45,8 +41,7 @@ if (sunOrMoon == 0) then
 	_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 	_flick = 1 + floor (random 9);
 	_fl_inc = 0;	
-	while {_fl_inc < _flick} do 
-		{
+	while {_fl_inc < _flick} do {
 			_spot_lit setLightBrightness (10 + random 30);
 			_fl_inc = _fl_inc + 1;
 			uiSleep 0.1 + random 0.2;

@@ -13,8 +13,7 @@ damage_inflicted	 - number, the amount of damage SWARMER inflicts with his attac
 if (!hasInterface) exitWith {};
 
 
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
-{
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 
@@ -35,19 +34,15 @@ deleteVehicle _logic;
 		_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
 		private _swarmerhive = "Land_GarbageBags_F";
 
-		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then 
-		{
+		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then {
 			_swarmerhive = _swarmerobject createVehicle _swarmerloc;
-		} else 
-		{
+		} else {
 			_swarmerhive = "Land_GarbageBags_F" createVehicle _swarmerloc;
 		};
 
-		if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then 
-		{
+		if (getNumber (configFile >> "CfgVehicles" >> _pesticideobject >> "scope") > 0) then {
 			_pesticideobject = _pesticideobject;
-		} else 
-		{
+		} else {
 			if !(_nopesticide) then {_pesticideobject = "SmokeShellGreen";};
 		};
 

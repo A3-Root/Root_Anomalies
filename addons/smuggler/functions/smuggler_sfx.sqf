@@ -48,8 +48,7 @@ fnc_effecte_princ_smug = {
 	_spot_lit setLightAttenuation [0, 0, 50, 1000, 1, 50];
 	_spot_lit setLightDayLight true;	
 
-	while {(player distance _obj_sursa_smugg < 1000) && player_chk_det} do 
-	{
+	while {(player distance _obj_sursa_smugg < 1000) && player_chk_det} do {
 		_fct_lit = [1, -1] call BIS_fnc_selectRandom;
 		uiSleep 0.5 + random 1;
 		_spot_lit lightAttachObject [_sursa_princ_center, [0.5 + random _fct_lit, 0.5 + random _fct_lit, 1]];
@@ -61,14 +60,12 @@ fnc_effecte_princ_smug = {
 		
 		_on_fly_brit = round (10 + random 30);
 		_ini_brit = 0;
-		while {_ini_brit < _on_fly_brit} do 
-		{
+		while {_ini_brit < _on_fly_brit} do {
 			_spot_lit setLightBrightness _ini_brit;
 			_ini_brit = _ini_brit + 1;
 			uiSleep 0.1;
 		};
-		while {_ini_brit > 0} do 
-		{
+		while {_ini_brit > 0} do {
 			_spot_lit setLightBrightness _ini_brit;
 			_ini_brit = _ini_brit - 1;
 			uiSleep 0.1;
@@ -85,8 +82,7 @@ fnc_sec_effect_smug = {
 	
 	player setVariable ["loop_dust", true];
 
-	while {player getVariable "loop_dust"} do
-	{
+	while {player getVariable "loop_dust"} do {
 		_rafala_smug = ["rafala_smug_01", "rafala_smug_02", "rafala_smug_03"] call BIS_fnc_selectRandom;
 		_obj_sec_center say3D [_rafala_smug, 500];
 
@@ -125,10 +121,8 @@ _sursa_core		 = _this select 1;
 
 waitUntil {!isNil{_sursa_core getVariable "activeaza"}};
 
-if (detect_smug != "") then 
-{
-	while {!isNull _obj_sursa_smugg} do 
-	{
+if (detect_smug != "") then {
+	while {!isNull _obj_sursa_smugg} do {
 		waitUntil {uiSleep 5; player distance _obj_sursa_smugg < 1000};
 		_sursa_core setVariable ["activeaza", true, true];
 		[_obj_sursa_smugg, _sursa_core] spawn fnc_sec_effect_smug;
@@ -139,11 +133,9 @@ if (detect_smug != "") then
 		player setVariable ["loop_dust", false];
 		uiSleep 10;
 	};
-} else 
-	{
+} else {
 		player_chk_det = true;
-		while {!isNull _obj_sursa_smugg} do 
-		{
+		while {!isNull _obj_sursa_smugg} do {
 			waitUntil {uiSleep 5; player distance _obj_sursa_smugg < 1000};
 			_sursa_core setVariable ["activeaza", true, true];
 			[_obj_sursa_smugg, _sursa_core] spawn fnc_sec_effect_smug;

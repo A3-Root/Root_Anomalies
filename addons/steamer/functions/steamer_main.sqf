@@ -27,13 +27,11 @@ while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1500) then {_ck_pl
 _steamer_dud = createAgent ["O_Soldier_VR_F", getMarkerPos _orig_poz, [], 0, "NONE"]; _steamer_dud hideObjectGlobal true; _steamer_dud enableSimulationGlobal false;
 [[_steamer_dud], "\z\root_anomalies\addons\steamer\functions\steamer_voice.sqf"] remoteExec ["execVM", 0, true];
 _list_unit_range_steamer = [];
-while {alive _steamer_dud} do 
-{
+while {alive _steamer_dud} do {
 	while {count _list_unit_range_steamer isEqualTo 0} do {_list_unit_range_steamer = [_steamer_dud, _teritoriu] call fnc_find_target_steamer; uiSleep 10};
 	_tgt_steamer = selectRandom ( _list_unit_range_steamer select {typeOf _x != "VirtualCurator_F" });
 	uiSleep 5;
-	while {(!isNil "_tgt_steamer") && (alive _steamer_dud)} do 
-	{
+	while {(!isNil "_tgt_steamer") && (alive _steamer_dud)} do {
 		if (_travelpath) then {[_steamer_dud, _tgt_steamer] call fnc_travel_steamer;};
 		_burst_poz= (ASLToAGL getPosATL _tgt_steamer);
 		_blow_units = _burst_poz nearEntities [["CAManBase", "LandVehicle"], 6];
@@ -42,16 +40,13 @@ while {alive _steamer_dud} do
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_x, _damage_steamer, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
-			} else 
-			{
+			} else {
 				_x setDamage ((damage _x) + _damage_steamer);
 			};
 
-			if (_x isKindOf "LandVehicle") then 
-			{
+			if (_x isKindOf "LandVehicle") then {
 				_x setVelocity [25, 25, 25];
 				_vehicle = _x;
 				_damage = random[0, _damage_steamer, 1];
@@ -97,11 +92,9 @@ _obj_man = _steamer_dud nearEntities ["CAManBase", 20];
 	_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 	_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 	if (typeOf _x != "VirtualCurator_F") then {	
-		if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-		{
+		if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 			[_x, _dmg_on_death, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
-		} else 
-		{
+		} else {
 			_x setDamage ((damage _x) + _dmg_on_death);
 		};
 	};

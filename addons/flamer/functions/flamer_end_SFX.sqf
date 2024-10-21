@@ -72,10 +72,8 @@ _picior_sec setParticleParams [["\a3\Data_f\ParticleEffects\Universal\Universal"
 _picior_sec setDropInterval 0.02;
 [_picior_sec] spawn {params ["_sterg"]; uiSleep 1.1; deleteVehicle _sterg};	
 
-if (player distance _part_surs < 100) then 
-{	
-	[] spawn 
-	{		
+if (player distance _part_surs < 100) then {	
+	[] spawn {		
 		cutText ["", "WHITE OUT", 1];
 		uiSleep 0.1;
 		titleCut ["", "WHITE IN", 1];
@@ -105,8 +103,7 @@ _flama setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16,
 _flama setDropInterval 0.02;
 [_flama] spawn {params ["_sterg"]; uiSleep 1.1; deleteVehicle _sterg};
 _brit = 5;
-while {_brit > 0} do 
-{
+while {_brit > 0} do {
 	_li_exp setLightBrightness _brit;
 	_brit = _brit - 0.1;
 	uiSleep 0.1;

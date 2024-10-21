@@ -48,18 +48,15 @@ _poz_3 = [];
 _poz_4 = [];
 _poz_5 = [];
 
-switch (_floor_dice) do 
-{
+switch (_floor_dice) do {
 	case 0: {_poz_1 = [getPos _obj_tele, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos;
 			[_unit_check, _poz_1, _noseizeer] call fn_teleport;
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;
@@ -69,11 +66,9 @@ switch (_floor_dice) do
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;
@@ -84,11 +79,9 @@ switch (_floor_dice) do
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;
@@ -100,11 +93,9 @@ switch (_floor_dice) do
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;
@@ -117,11 +108,9 @@ switch (_floor_dice) do
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;
@@ -135,11 +124,9 @@ switch (_floor_dice) do
 			uiSleep 0.3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-			{
+			if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 				[_unit_check, _dmg_on_tele, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _unit_check];	
-			} else 
-			{
+			} else {
 				_unit_check setDamage ((damage _unit_check) + _dmg_on_tele);
 			};
 			_unit_check call fn_final_scream;

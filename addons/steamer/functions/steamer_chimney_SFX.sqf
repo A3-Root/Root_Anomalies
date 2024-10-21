@@ -8,8 +8,7 @@ params ["_horn"];
 if (!isNil {_horn getVariable "is_ON"}) exitWith {};
 _horn setVariable ["is_ON", true, true];
 
-while {!isNull _horn} do 
-{
+while {!isNull _horn} do {
 	waitUntil {uiSleep 10; player distance _horn < 1500};
 	_emanatie = "#particlesource" createVehicleLocal (getPos _horn);
 	_emanatie setParticleCircle [0, [0, 0, 0]];

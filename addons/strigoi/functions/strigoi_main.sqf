@@ -42,11 +42,9 @@ STRIGOI_attk_strig = {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (typeOf _tgt_casp != "VirtualCurator_F") then {
-				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then 
-				{
+				if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
 					[_tgt_casp, _damage_strig, _bodyPart, _dmgType] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_casp];	
-				} else 
-				{
+				} else {
 					_x setDamage ((damage _tgt_casp) + _damage_strig);
 				};
 			};
@@ -114,11 +112,9 @@ params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_stri
 private ["_hp_incr", "_hp_curr_strig", "_pos_strig", "_anomalie_dedus", "_gasit", "_obj_de_agatat", "_pot_poz", "_press_implicit_x", "_press_implicit_y", "_fct_mult", "_vert_vit", "_inaltime_salt", "_distanta_salt", "_dur_zbor", "_umbla_casper", "_strigoi", "_tgt_casp"];
 
 [] spawn {
-	if (isNil "allPlayers_on") then 
-	{
+	if (isNil "allPlayers_on") then {
 		chk_players = true;
-		while {chk_players} do 
-		{
+		while {chk_players} do {
 			allPlayers_on = call BIS_fnc_listPlayers;
 			publicVariable "allPlayers_on";
 			uiSleep 60;
@@ -182,31 +178,25 @@ _strigoi call STRIGOI_hide_strig;
 
 _list_unit_range_casp = [];
 
-while {alive _strigoi} do 
-{
+while {alive _strigoi} do {
 	while {count _list_unit_range_casp isEqualTo 0} do {_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target; uiSleep 10};
 	_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") } );
 	[_strigoi, getMarkerPos _poz_orig_sc, _teritoriu] call STRIGOI_show_strig;
-	while {(!isNil "_tgt_casp") && {(alive _strigoi) && ((_strigoi distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do 
-	{
+	while {(!isNil "_tgt_casp") && {(alive _strigoi) && ((_strigoi distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do {
 		[_list_unit_range_casp] call STRIGOI_strig_drain;
 		_strigoi moveTo AGLToASL (_tgt_casp getRelPos[10, 180]);
 		if (_isaipanic) then {[_strigoi, _tgt_casp] call STRIGOI_avoid_casp;};
 		uiSleep 1;
-		if (_strigoi distance _tgt_casp < 40) then 
-		{
+		if (_strigoi distance _tgt_casp < 40) then {
 			_atk_sun = selectRandom ["01_atk_bg", "02_atk", "03_atk", "04_atk"];
 			[_strigoi, [_atk_sun, 400]] remoteExec ["say3D"];
 			[_strigoi, _tgt_casp, _damage_strig, _noseize] call STRIGOI_attk_strig;
 			uiSleep 1;
 		};
-		if (selectRandom [true, false]) then 
-		{
-			if (selectRandom [true, false]) then 
-			{
+		if (selectRandom [true, false]) then {
+			if (selectRandom [true, false]) then {
 				_copaci = nearestTerrainObjects [_tgt_casp, ["TREE"], 20];
-				if !(count _copaci isEqualTo 0) then 
-				{
+				if !(count _copaci isEqualTo 0) then {
 					uiSleep 1;
 					_obj_de_agatat = "";
 					{
@@ -214,8 +204,7 @@ while {alive _strigoi} do
 						_unghi_ancora = _strigoi getRelDir _x;
 						_toleranta = abs(_unghi_fugarit - _unghi_ancora);
 						_pot_poz = (boundingCenter _x) select 2;
-						if ((_pot_poz > 2) && {(_toleranta < 60) && (_strigoi distance _x < 20)}) exitWith 
-						{
+						if ((_pot_poz > 2) && {(_toleranta < 60) && (_strigoi distance _x < 20)}) exitWith {
 							_obj_de_agatat= _x;
 							[_strigoi, _tgt_casp, _umbla_casper, _obj_de_agatat, _cap_casper, _pot_poz] call STRIGOI_salt_1;
 							uiSleep 1;
@@ -226,8 +215,7 @@ while {alive _strigoi} do
 			} else {[_strigoi, _tgt_casp, _cap_casper] call STRIGOI_jump_ground};
 		};
 		
-		if ((!alive _tgt_casp) || (_tgt_casp distance getMarkerPos _poz_orig_sc > _teritoriu)) then 
-		{
+		if ((!alive _tgt_casp) || (_tgt_casp distance getMarkerPos _poz_orig_sc > _teritoriu)) then {
 			_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target;
 			if !(count _list_unit_range_casp isEqualTo 0) then {_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") })} else {_tgt_casp = nil};
 		};

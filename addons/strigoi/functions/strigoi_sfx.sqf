@@ -25,13 +25,11 @@ fnc_spectral = {
 		_r pushBackUnique _part_gost;
 	} forEach _comp_obj_casp;
 
-	[_r, _effectArrays, _comp_obj_casp] spawn 
-	{
+	[_r, _effectArrays, _comp_obj_casp] spawn {
 		_part_gost_array = _this select 0;
 		_effectArrays = _this select 1;
 		_comp_obj_casp = _this select 2;
-		while {!((count _this) isEqualTo 0)} do 
-		{
+		while {!((count _this) isEqualTo 0)} do {
 			uiSleep 3;
 			_arr = _effectArrays select sunOrMoon;
 			{

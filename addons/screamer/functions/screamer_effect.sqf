@@ -12,10 +12,7 @@ _emit say3D ["scream", 500];
 _obj_eff say3D ["stones_scream", 500];
 
 enableCamShake true;
-if ((player distance _emit) < 150) then 
-{
-	addCamShake [1, 5, 25];
-};
+if ((player distance _emit) < 150) then { addCamShake [1, 5, 25]; };
 _blur_sonic = "#particlesource" createVehicleLocal (getPosATL _obj_eff);
 _blur_sonic setParticleCircle [0, [0, 0, 0]];
 _blur_sonic setParticleRandom [0, [0.25, 0.25, 0], [0.175, 0.175, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];

@@ -11,10 +11,8 @@ while {!isNull _object_anom_core} do {
 	while {!(_object_anom_core getVariable "activeaza")} do {{if (_x distance getPos _object_anom_core < 1100) then {_object_anom_core setVariable ["activeaza", true, true]}} forEach allPlayers; uiSleep 10};
 	_object_anom_core setVariable ["activeaza", false, true];
 	_spawn_obj_classname= _spawn_obj_class call BIS_fnc_selectRandom;
-	if (getNumber (configFile >> "CfgVehicles" >> _spawn_obj_classname >> "scope") > 0) then 
-	{
-		if (_spawn_obj_classname isKindOf "MAN") then 
-		{
+	if (getNumber (configFile >> "CfgVehicles" >> _spawn_obj_classname >> "scope") > 0) then {
+		if (_spawn_obj_classname isKindOf "MAN") then {
 			_grp_side = [east, west, civilian, independent] call BIS_fnc_selectRandom;
 			_grp = createGroup _grp_side;
 			_bounce_obj_temp = createVehicle ["Land_CanOpener_F", getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
@@ -42,15 +40,13 @@ while {!isNull _object_anom_core} do {
 			if (alive _gigi) then {[_gigi, ""] remoteExec ["switchMove"]};
 			_gigi setDamage (damage _gigi + (random 0.15));
 			_gigi doMove _run_poz;
-			[_gigi] spawn 
-			{
+			[_gigi] spawn {
 				_unit_fresh = _this select 0;
 				uiSleep 120;
 				_unit_fresh setVariable ["teleported_in", nil, true];
 			};
 			uiSleep 10 + random spawn_delay_smugg;
-		} else 
-		{
+		} else {
 			_bounce_obj_temp = createVehicle ["Land_CanOpener_F", getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
 			[_bounce_obj_temp] remoteExec ["hideObject", -2];
 			_telep_in = ["telep_01", "telep_02", "telep_03", "telep_04", "telep_05"] call BIS_fnc_selectRandom;

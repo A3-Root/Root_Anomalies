@@ -31,14 +31,12 @@ _mobile_s setVariable ["isHive", false, true];
 swarmer_public = _mobile_s; publicVariable "swarmer_public";
 atak_swarmer = false; publicVariable "atak_swarmer";
 
-while {alive _mobile_s} do 
-{
+while {alive _mobile_s} do {
 	while {!(_mobile_s getVariable "isHive")} do {{if (_x distance getPos _mobile_s < 1000) then {_mobile_s setVariable ["isHive", true, true]}} forEach allPlayers; uiSleep 10};
 	_mobile_s setVariable ["tgt", nil, true];
 	_list_unit_range_hiv = [_mobile_s, _radius] call fnc_find_target_hiv;
 	_list_unit_range_hiv = _list_unit_range_hiv select {typeOf _x != "VirtualCurator_F" };
-	if (count _list_unit_range_hiv > 0) then 
-	{
+	if (count _list_unit_range_hiv > 0) then {
 		_tgt_hiv = selectRandom _list_unit_range_hiv;
 		_mobile_s setVariable ["tgt", _tgt_hiv, true];
 		{[_mobile_s, _x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
@@ -73,8 +71,7 @@ while {alive _mobile_s} do
 				{[_mobile_s, _x] spawn fnc_avoid_hive} forEach _list_unit_range_hiv;
 			};
 		};
-		if (!alive _tgt_hiv) then 
-		{
+		if (!alive _tgt_hiv) then {
 			[_mobile_s, _tgt_hiv] spawn fnc_ajust_poz;
 			uiSleep 2;
 			_mobile_s stop true;

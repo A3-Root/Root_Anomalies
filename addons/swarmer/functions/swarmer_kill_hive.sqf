@@ -5,14 +5,11 @@ if (!isServer) exitWith {};
 
 params ["_gren"];
 
-while {alive _gren} do 
-{
+while {alive _gren} do {
 	_ck_hiv = (position _gren) nearEntities ["CAManBase", 7];
-	if (count _ck_hiv > 0) then 
-	{
+	if (count _ck_hiv > 0) then {
 		{
-			if (!isNil{_x getVariable "isHive"}) then 
-			{
+			if (!isNil{_x getVariable "isHive"}) then {
 				uiSleep 1;
 				_x setDamage 1;
 				[[_x], "\z\root_anomalies\addons\swarmer\functions\swarmer_dead_SFX.sqf"] remoteExec ["execVM"];

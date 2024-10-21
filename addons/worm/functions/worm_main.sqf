@@ -173,13 +173,10 @@ while {!isNull _cap} do {
                         _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                         _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
-                        if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then 
-                        {
-                            if(_isacemedical) then 
-                            {
+                        if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
+                            if(_isacemedical) then {
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-                            } else 
-                            {
+                            } else {
                                 _x setDamage ((damage _x) + _damage_worm);
                             }
                         };

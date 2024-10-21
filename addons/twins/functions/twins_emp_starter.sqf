@@ -34,8 +34,7 @@ _light_emp setLightDayLight true;
 _light_emp setLightAttenuation [10, 10, 50, 0, 50, 2000];
 
 uiSleep 0.1;
-if !(_isseisore) then 
-{
+if !(_isseisore) then {
 	_hndl = ppEffectCreate ["ColorInversion", 1501];
 	_hndl ppEffectEnable true;
 	_hndl ppEffectAdjust [0.75, 0.75, 0.75];
@@ -223,14 +222,12 @@ _spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRan
 _drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _x);
 
-if (_spark_type == "orange") then 
-{
+if (_spark_type == "orange") then {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.1, 0.1, 0.1], [0, 0, 0], 0, 0.25, [0, 0, 0, 0], 0, 0];
 	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0, _spark_poz_rel], [0, 0, 0], 0, 15, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3, [[0, 0, 0, 0]]];
 	_scantei_spark setDropInterval _drop;
-} else
-{
+} else {
 	_scantei_spark setParticleCircle [0, [0, 0, 0]];
 	_scantei_spark setParticleRandom [1, [0.05, 0.05, 0.1], [5, 5, 3], 0, 0.0025, [0, 0, 0, 0], 0, 0];
 	_scantei_spark setParticleParams [["\A3\data_f\proxies\muzzle_flash\muzzle_flash_silencer.p3d", 1, 0, 1], "", "SpaceObject", 1, 1, [0, 0, _spark_poz_rel], [0, 0, 0], 0, 20, 7.9, 0, [0.5, 0.5, 0.05], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [0.08], 1, 0, "", "", _x, 0, true, 0.3, [[0, 0, 0, 0]]];

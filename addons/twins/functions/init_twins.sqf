@@ -17,8 +17,7 @@ EMP_enabled			- boolean, if is true an EMP will be emitted when Twins is killed
 if (!hasInterface) exitWith {};
 
 
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
-{
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 
@@ -43,18 +42,15 @@ deleteVehicle _logic;
 		_results params ["_anomaly_obj", "_heart_obj", "_tracking_dist", "_issparks", "_damage_range", "_isai", "_isemp", "_isseizure"];
 		private ["_heart_obj", "_twins_obj"];
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") > 0) then 
-		{
+		if !(getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") > 0) then {
 			_heart_obj = "B_UAV_06_F";
 		};
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") > 0) then 
-		{
+		if !(getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") > 0) then {
 			_twins_obj = "Land_HighVoltageTower_large_F";
 		};
 
-		if (_tracking_dist < _damage_range) then
-		{
+		if (_tracking_dist < _damage_range) then {
 			_tracking_dist = _damage_range + 20;
 		};
 

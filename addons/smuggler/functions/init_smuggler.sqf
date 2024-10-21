@@ -18,8 +18,7 @@ teleport_protect - classname of the object you want to function as protection to
 if (!hasInterface) exitWith {};
 
 
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
-{
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 
@@ -49,10 +48,7 @@ deleteVehicle _logic;
 
 		if !(_isdetectable) then {_detectdevice = ""};
 		if !(_isprotectable) then {_protectdevice = ""};
-		if (_isspawning) then {_spawnobjects = "[]"} else 
-		{
-			_spawnobjects = _spawnobjects splitString ", ";
-		};
+		if (_isspawning) then {_spawnobjects = "[]"} else {_spawnobjects = _spawnobjects splitString ",";};
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 

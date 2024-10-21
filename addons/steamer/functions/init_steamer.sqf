@@ -14,8 +14,7 @@ recharge_delay		- number,  delay in seconds between Streamer's attacks
 if (!hasInterface) exitWith {};
 
 
-if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith
-{
+if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
     diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
 };
 

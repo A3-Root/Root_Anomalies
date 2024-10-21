@@ -215,8 +215,7 @@ while {alive _farmer} do {
         (!isNil "_tgt_farmer") &&{
             (alive _farmer) && ((_farmer distance getMarkerPos _marker_farmer) < _territory)
         }
-    } do
-    {
+    } do {
         _farmer setDir (_farmer getRelDir _tgt_farmer);
         if ((_farmer distance _tgt_farmer) > 20) then {
             _farmer call FARMER_hide_farmer;
@@ -229,8 +228,7 @@ while {alive _farmer} do {
 
             _pozitie_noua = _farmer getVariable "pozitie_noua";
             [_farmer, _pozitie_noua] call FARMER_show_farmer;
-            if (_isaipanic) then 
-            {
+            if (_isaipanic) then {
                 {
                     [_farmer, _x] spawn FARMER_avoid_farmer
                 } forEach _list_unit_range_farm;
@@ -241,8 +239,7 @@ while {alive _farmer} do {
         if ((_farmer distance _tgt_farmer) < 20) then {
             uiSleep 1;
             [_farmer, _damage_inflicted] call FARMER_attk_farmer;
-            if (_isaipanic) then 
-            {
+            if (_isaipanic) then {
                 {
                     [_farmer, _x] spawn FARMER_avoid_farmer
                 } forEach _list_unit_range_farm;

@@ -8,22 +8,18 @@ enableCamShake true;
 addCamShake [3 + random 7, 3, 13 + random 33];
 playSound "puls";
 
-switch (_effect_tip) do 
-{
-	case "blur": 
-				{
-				"dynamicBlur" ppEffectEnable true;
-				"dynamicBlur" ppEffectAdjust [40];
-				"dynamicBlur" ppEffectCommit 0;  
-				"dynamicBlur" ppEffectAdjust [0.0];
-				"dynamicBlur" ppEffectCommit 3;
-				uiSleep 3;
-				"dynamicBlur" ppEffectEnable false;
-				};
-	case "colorinv": 
-				{
-				["ColorInversion", 2500, [0, 1, 0]] spawn 
-				{
+switch (_effect_tip) do {
+	case "blur": {
+		"dynamicBlur" ppEffectEnable true;
+		"dynamicBlur" ppEffectAdjust [40];
+		"dynamicBlur" ppEffectCommit 0;  
+		"dynamicBlur" ppEffectAdjust [0.0];
+		"dynamicBlur" ppEffectCommit 3;
+		uiSleep 3;
+		"dynamicBlur" ppEffectEnable false;
+		};
+	case "colorinv": {
+				["ColorInversion", 2500, [0, 1, 0]] spawn {
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
 						_handle = ppEffectCreate [_name, _priority];
@@ -40,8 +36,7 @@ switch (_effect_tip) do
 					ppEffectDestroy _handle;
 				};
 				};				
-	case "chrom": 
-				{
+	case "chrom": {
 				["ChromAberration", 200, [0.93, 0.86, true]] spawn {
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
@@ -59,10 +54,8 @@ switch (_effect_tip) do
 					ppEffectDestroy _handle;
 				};
 				};								
-	case "colorcor": 
-				{
-				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn 
-				{
+	case "colorcor": {
+				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn {
 					params ["_name", "_priority", "_effect", "_handle"];
 					while {
 						_handle = ppEffectCreate [_name, _priority];

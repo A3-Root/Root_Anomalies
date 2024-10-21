@@ -34,18 +34,14 @@ _spark_obj setVariable ["vizibil", 0, true];
 
 	_vizibil= true;
 	
-	while {alive _heart_twin} do 
-	{
+	while {alive _heart_twin} do {
 		_closest_units = (position _spark_move) nearEntities [["CAManBase", "LandVehicle"], _tracking_p];
 		
 		
-		if (_spark_move getVariable "vizibil" < 1) then 
-		{
-			if ((count _closest_units > 0) && (_allow_move > 10)) then 
-			{
+		if (_spark_move getVariable "vizibil" < 1) then {
+			if ((count _closest_units > 0) && (_allow_move > 10)) then {
 				_closer_un = _closest_units select 0;
-				if ((_closer_un distance _spark_move) > _dam_range) then 
-				{
+				if ((_closer_un distance _spark_move) > _dam_range) then {
 				_dir_depl = [_closer_un, _spark_move] call BIS_fnc_dirTo;
 				_pos_umbla = [getPosATL _spark_move, _incr, _dir_depl] call BIS_fnc_relPos;
 				_spark_move setPosATL _pos_umbla;
@@ -58,8 +54,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 		} else {_allow_move = 0};
 	uiSleep 2;
 	};
-	if (_EMP_enabled) then 
-	{
+	if (_EMP_enabled) then {
 		[_spark_move, _isseige, _tracking_p] execVM "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";
 		uiSleep 2;
 	};
@@ -67,10 +62,8 @@ _spark_obj setVariable ["vizibil", 0, true];
 	deleteVehicle _heart_twin;
 };
 
-if (_spark_effect) then 
-{
-	while {alive _spark_obj} do 
-	{
+if (_spark_effect) then {
+	while {alive _spark_obj} do {
 		_spark_poz_rel = ["st", "dr", "ct"] call BIS_fnc_selectRandom;
 		if (_spark_poz_rel == "st") then {_poz_spark attachTo [_spark_obj, [-12, 0, 12.35]]};
 		if (_spark_poz_rel == "dr") then {_poz_spark attachTo [_spark_obj, [11.5, 0, 12.35]]};
@@ -80,8 +73,7 @@ if (_spark_effect) then
 		_sclipiri = 1 + floor (random 5);
 		uiSleep _pauza;
 		_nr = 0;
-		while {_nr < _sclipiri} do 
-		{
+		while {_nr < _sclipiri} do {
 			_pauza_intre_sclipiri = 0.1 + (random 2);
 			[[_poz_spark, _pauza_intre_sclipiri], "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;

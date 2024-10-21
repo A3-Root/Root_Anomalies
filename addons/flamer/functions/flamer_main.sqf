@@ -24,17 +24,14 @@ FLAMER_attk_flamer = {
 	_isacefire = false;
 	_isacemedical = false;
 	_dmg_fire = _damage_flamer * 10;
-	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then 
-	{
+	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 		diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 		_isacemedical = false;
 		_isacefire = false;
-	} else 
-	{
+	} else {
 		_isacemedical = true;
 		_isacefire = false;
-		if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then 
-		{
+		if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then {
 			_isacefire = true;
 		};
 	};
@@ -47,26 +44,20 @@ FLAMER_attk_flamer = {
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-		{
-			if (_isacefire) then 
-			{
+		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+			if (_isacefire) then {
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-			} else 
-			{
-				if (_isacemedical) then 
-				{
+			} else {
+				if (_isacemedical) then {
 					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
+				} else {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
 			_tip = selectRandom ["04", "burned", "02", "03"];
 			[_x, [_tip, 200]] remoteExec ["say3D"];
-		} else
-		{
+		} else {
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 				_vehicle = _x;
 				_damage = random(_damage_flamer);
@@ -106,17 +97,14 @@ FLAMER_jump_flamer = {
 	_isacefire = false;
 	_isacemedical = false;
 	_dmg_fire = _damage_flamer * 5;
-	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then 
-	{
+	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 		diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 		_isacemedical = false;
 		_isacefire = false;
-	} else 
-	{
+	} else {
 		_isacemedical = true;
 		_isacefire = false;
-		if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then 
-		{
+		if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then {
 			_isacefire = true;
 		};
 	};
@@ -129,26 +117,20 @@ FLAMER_jump_flamer = {
 	{
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-		{
-			if (_isacefire) then 
-			{
+		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+			if (_isacefire) then {
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-			} else 
-			{
-				if (_isacemedical) then 
-				{
+			} else {
+				if (_isacemedical) then {
 					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
+				} else {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
 			};
 			_tip = selectRandom ["04", "burned", "02", "03"];
 			[_x, [_tip, 200]] remoteExec ["say3D"];
-		} else
-		{
+		} else {
 			if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 				_vehicle = _x;
 				_damage = random(_damage_flamer);
@@ -170,17 +152,14 @@ private ["_poz_orig_sc", "_teritoriu", "_damage_flamer", "_recharge_delay", "_hp
 
 uiSleep 2;
 
-if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then 
-{
+if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
     diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 	_isacemedical = false;
 	_isacefire = false;
-} else 
-{
+} else {
 	_isacemedical = true;
 	_isacefire = false;
-	if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then 
-	{
+	if (isClass (configFile >> "CfgPatches" >> "ace_fire")) then {
 		_isacefire = true;
 	};
 };
@@ -203,8 +182,7 @@ _flamer addEventHandler ["Hit", {
     _unit= _this select 0;
     _flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
 	_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
-	if ((_unit getVariable "flamer_dmg_total") > 1) then 
-	{
+	if ((_unit getVariable "flamer_dmg_total") > 1) then {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"]
@@ -243,39 +221,31 @@ _list_unit_range_flamer = [];
 
 
 
-while {alive _flamer} do 
-{
+while {alive _flamer} do {
 	while {count _list_unit_range_flamer isEqualTo 0} do {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; uiSleep 5;};
 	_tgt_flamer = selectRandom (_list_unit_range_flamer select {typeOf _x != "VirtualCurator_F" });
 	[_flamer, getMarkerPos _poz_orig_sc, _teritoriu, _damage_flamer] call FLAMER_show_flamer;
-	while {(!isNil "_tgt_flamer") && {(alive _flamer) && ((_flamer distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do 
-	{
+	while {(!isNil "_tgt_flamer") && {(alive _flamer) && ((_flamer distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do {
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], 5];
 		{
 			
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-			{
-				if (_isacefire) then 
-				{
+			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
-					if (_isacemedical) then 
-					{
+				} else {
+					if (_isacemedical) then {
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-					} else 
-					{
+					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
 				_tip = selectRandom ["04", "burned", "02", "03"];
 				[_x, [_tip, 200]] remoteExec ["say3D"];
-			} else
-			{
+			} else {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 					_vehicle = _x;
 					_damage = random(0.3);
@@ -287,37 +257,28 @@ while {alive _flamer} do
 				};
 			};
 		} forEach (_nearflamer - [_flamer]);
-		if (selectRandom [true, false, true, true, false]) then 
-		{
+		if (selectRandom [true, false, true, true, false]) then {
 			_flamer moveTo AGLToASL (_tgt_flamer getRelPos[10, 180]);
 			if (_isaipanic) then {[_flamer, _tgt_flamer] call FLAMER_avoid_flamer;};
-		}
-		else 
-		{
+		} else {
 			_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], 5];
 			{
 				_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 				_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-				if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-				{
-					if (_isacefire) then 
-					{
+				if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+					if (_isacefire) then {
 						[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-					} else 
-					{
-						if (_isacemedical) then 
-						{
+					} else {
+						if (_isacemedical) then {
 							[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-						} else 
-						{
+						} else {
 							_x setDamage ((damage _x) + 0.03);
 						};
 					};
 					_tip = selectRandom ["04", "burned", "02", "03"];
 					[_x, [_tip, 200]] remoteExec ["say3D"];
-				} else
-				{
+				} else {
 					if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 						_vehicle = _x;
 						_damage = random(0.3);
@@ -334,19 +295,14 @@ while {alive _flamer} do
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-			{
-				if (_isacefire) then 
-				{
+			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
-					if (_isacemedical) then 
-					{
+				} else {
+					if (_isacemedical) then {
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-					} else 
-					{
+					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
@@ -372,26 +328,20 @@ while {alive _flamer} do
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-			{
-				if (_isacefire) then 
-				{
+			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
-					if (_isacemedical) then 
-					{
+				} else {
+					if (_isacemedical) then {
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-					} else 
-					{
+					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
 				_tip = selectRandom ["04", "burned", "02", "03"];
 				[_x, [_tip, 200]] remoteExec ["say3D"];
-			} else
-			{
+			} else {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 					_vehicle = _x;
 					_damage = random(0.3);
@@ -409,26 +359,20 @@ while {alive _flamer} do
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then 
-			{
-				if (_isacefire) then 
-				{
+			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
+				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
 					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-				} else 
-				{
-					if (_isacemedical) then 
-					{
+				} else {
+					if (_isacemedical) then {
 						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
-					} else 
-					{
+					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
 				};
 				_tip = selectRandom ["04", "burned", "02", "03"];
 				[_x, [_tip, 200]] remoteExec ["say3D"];
-			} else
-			{
+			} else {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
 					_vehicle = _x;
 					_damage = random(0.3);

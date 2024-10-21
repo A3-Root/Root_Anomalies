@@ -5,29 +5,24 @@ _unsortedArr = ["spine", "spine1", "spine2", "spine3", "head", "leftshoulder", "
 
 _veh = cursorTarget;
 
-if (not isNull _veh) then
-{
-_sortedArr = [];
-
-{
-	_inArray = _x in _sortedArr;
-	if (not _inArray) then
+if (not isNull _veh) then {
+	_sortedArr = [];
 	{
-		_modelPos = _veh selectionPosition _x;
-		if (not (_modelPos isEqualTo [0, 0, 0])) then
-		{
-			_sortedArr set [count _sortedArr, _x];
-			_worldPos = _veh modelToWorld _modelPos;
-			_ball = "Sign_Sphere10cm_F" createVehicleLocal _worldPos;
-			_ball setPosATL _worldPos;
+		_inArray = _x in _sortedArr;
+		if (not _inArray) then {
+			_modelPos = _veh selectionPosition _x;
+			if (not (_modelPos isEqualTo [0, 0, 0])) then {
+				_sortedArr set [count _sortedArr, _x];
+				_worldPos = _veh modelToWorld _modelPos;
+				_ball = "Sign_Sphere10cm_F" createVehicleLocal _worldPos;
+				_ball setPosATL _worldPos;
+			};
 		};
-	};
-	uiSleep 0.1;
-} forEach _unsortedArr;
-
-diag_log "[";
-{
-	diag_log format ["%1", _x];
-} forEach _sortedArr;
-diag_log "]; ";
+		uiSleep 0.1;
+	} forEach _unsortedArr;
+	diag_log "[";
+	{
+		diag_log format ["%1", _x];
+	} forEach _sortedArr;
+	diag_log "]; ";
 };

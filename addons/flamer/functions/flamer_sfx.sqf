@@ -31,15 +31,12 @@ enableCamShake true;
 _dmg_fire = _damage_flamer * 5;
 _isacefire = false;
 _isacemedical = false;
-if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then 
-{
+if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
     diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 	_isacemedical = false;
-} else 
-{
+} else {
 	_isacemedical = true;
-	if (isClass (configFile >> "CfgPatches" >> "ace_common")) then 
-	{
+	if (isClass (configFile >> "CfgPatches" >> "ace_common")) then {
 		_isacefire = true;
 	};
 };
@@ -64,33 +61,26 @@ _li_fire setLightDayLight true;
 _li_fire setLightAmbient[1, 0.2, 0.1];
 _li_fire setLightColor[1, 0.2, 0.1];
 
-while {(_flamer getVariable "vizibil") && (alive _flamer)} do 
-{
+while {(_flamer getVariable "vizibil") && (alive _flamer)} do {
 	_li_fire setLightBrightness 5 + (random 1);
 	_li_fire setLightAttenuation [0, 0, 100, 0, 0.1, 15 + (random 1)];
 	uiSleep 0.05 + (random 0.1);
 	uiSleep 1;
-	if (player distance _flamer < _territory) then
-	{	
+	if (player distance _flamer < _territory) then {	
 		addCamShake [5, 2, 5];
 		call BIS_fnc_flamesEffect;
 		[10] call BIS_fnc_bloodEffect;
 		call BIS_fnc_indicateBleeding;
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 		_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
-		if (typeOf player != "VirtualCurator_F") then 
-		{
-			if (_isacefire) then 
-			{
+		if (typeOf player != "VirtualCurator_F") then {
+			if (_isacefire) then {
 				[player, _dmg_fire] remoteExec ["ace_fire_fnc_burn", player];
 				[player, 0.05, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
-			} else 
-			{
-				if (_isacemedical) then 
-				{
+			} else {
+				if (_isacemedical) then {
 					[player, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
-				} else 
-				{
+				} else {
 					player setDamage ((damage player) + _damage_flamer);
 				};
 			};
