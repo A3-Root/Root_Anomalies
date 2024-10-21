@@ -34,7 +34,7 @@ atak_swarmer = false; publicVariable "atak_swarmer";
 while {alive _mobile_s} do {
 	while {!(_mobile_s getVariable "isHive")} do {{if (_x distance getPos _mobile_s < 1000) then {_mobile_s setVariable ["isHive", true, true]}} forEach allPlayers; uiSleep 10};
 	_mobile_s setVariable ["tgt", nil, true];
-	_list_unit_range_hiv = [_mobile_s, _radius] call fnc_find_target_hiv;
+	_list_unit_range_hiv = [_st_srv, _radius] call fnc_find_target_hiv;
 	_list_unit_range_hiv = _list_unit_range_hiv select {typeOf _x != "VirtualCurator_F" };
 	if (count _list_unit_range_hiv > 0) then {
 		_tgt_hiv = selectRandom _list_unit_range_hiv;

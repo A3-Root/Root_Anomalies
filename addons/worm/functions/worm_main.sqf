@@ -77,7 +77,7 @@ _coada_01 attachTo [_coada, [0, -1, 1]];
 _hide_me = true;
 while {_hide_me} do {
     uiSleep 2;
-    _list_ai_in_range_worm = (position _cap) nearEntities [["CAManBase", "LandVehicle"], _territory];
+    _list_ai_in_range_worm = (getMarkerPos _poz_worm) nearEntities [["CAManBase", "LandVehicle"], _territory];
     if (count _list_ai_in_range_worm > 0) then {
         _hide_me = false;
         _tgt_worm = _list_ai_in_range_worm call BIS_fnc_selectRandom;
@@ -126,7 +126,7 @@ uiSleep 1;
 
 while {!isNull _cap} do {
     _tgt_worm = [];
-    _list_ai_in_range_worm = (position _cap) nearEntities [["CAManBase", "LandVehicle"], _territory];
+    _list_ai_in_range_worm = (getMarkerPos _poz_worm) nearEntities [["CAManBase", "LandVehicle"], _territory];
     _list_ai_in_range_worm select {(typeOf _x != "VirtualCurator_F") };
     _tgt_worm = selectRandom _list_ai_in_range_worm;
     if (count _list_ai_in_range_worm > 0) then {
@@ -227,6 +227,6 @@ while {!isNull _cap} do {
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         };
     } else {
-        uiSleep 10
+        uiSleep 3
     };
 };
