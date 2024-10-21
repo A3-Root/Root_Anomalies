@@ -76,10 +76,10 @@ while {(_flamer getVariable "vizibil") && (alive _flamer)} do {
 		if (typeOf player != "VirtualCurator_F") then {
 			if (_isacefire) then {
 				[player, _dmg_fire] remoteExec ["ace_fire_fnc_burn", player];
-				[player, 0.05, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
+				[player, 0.05, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
 			} else {
 				if (_isacemedical) then {
-					[player, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
+					[player, _damage_flamer, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", player];
 				} else {
 					player setDamage ((damage player) + _damage_flamer);
 				};

@@ -172,7 +172,8 @@ _cap_casper = "Land_HelipadEmpty_F" createVehicle [0, 0, 0];
 _cap_casper attachTo [_strigoi, [0, 0, 0.2], "neck"];
 _strigoi setVariable ["_cap_casper", _cap_casper, true];
 for "_i" from 0 to 5 do {_strigoi setObjectMaterialGlobal [_i, "A3\Structures_F\Data\Windows\window_set.rvmat"]; uiSleep 0.1;};
-for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai, 512, 512, 1)perlinNoise(256, 256, 0, 0.3)"]; uiSleep 0.1;};
+uiSleep 1;
+for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)perlinNoise(256,256,0,0.3)"]; uiSleep 0.1;};
 _strigoi call STRIGOI_hide_strig;
 [[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_fatigue_p.sqf"] remoteExec ["execVM", 0, true];
 

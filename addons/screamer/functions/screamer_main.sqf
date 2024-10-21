@@ -254,9 +254,9 @@ uiSleep 1;
 while {alive _entitate} do {
 	_entitate setUnitPos "UP";
 	if  (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
-	_teleport = false;
+		_teleport = false;
 	
-	while {!_teleport and (alive _entitate)} do {
+		while {!_teleport and (alive _entitate)} do {
 		_entitate setUnitPos "UP";
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
 		if (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
@@ -441,10 +441,14 @@ while {alive _entitate} do {
 		uiSleep 1;
 
 		scream_on= false;
-		_units_range = [];
-	};
-};
-uiSleep 5;
+		_units_range_1 = [];
+		_units_range_2 = [];
+		_units_range_3 = [];
+		};
+	} else {
+		_teleport = true;
+	}
+	uiSleep 5;
 };
 
 if (_isalivevic) then 

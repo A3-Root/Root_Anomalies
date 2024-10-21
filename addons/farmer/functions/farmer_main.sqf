@@ -165,8 +165,11 @@ for "_i" from 0 to 5 do {
     uiSleep 0.1;
 };
 
+uiSleep 2;
+
 for "_i" from 0 to 5 do {
-    _farmer setObjectTextureGlobal [_i, "#(rgb, 8, 8, 3)color(0, 0.5, 0, 0.5)"];
+    diag_log format ["Trying to load farmer texture # %1", _i];
+    _farmer setObjectTextureGlobal [_i, "#(rgb,8,8,3)color(0,0.5,0,0.5)"];
     uiSleep 0.1;
 };
 
@@ -262,7 +265,7 @@ while {alive _farmer} do {
     _farmer setUnitPos "UP";
     uiSleep 1;
     _farmer call FARMER_hide_farmer;
-    	_farmer enableSimulationGlobal false;
+    _farmer enableSimulationGlobal false;
     _list_unit_range_farm = [];
     _farmer setUnitPos "UP";
 };

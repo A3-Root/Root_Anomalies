@@ -47,10 +47,10 @@ FLAMER_attk_flamer = {
 		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 			if (_isacefire) then {
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+				[_x, (_damage_flamer / 4), _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 			} else {
 				if (_isacemedical) then {
-					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, _damage_flamer, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
@@ -69,7 +69,8 @@ FLAMER_attk_flamer = {
 			};
 		};
 	} forEach (_nearflamer - [_flamer]);
-	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 7, false]; {_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
+	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 7, false]; 
+	{_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
 	uiSleep 4;
 	_flamer setVariable ["atk", false];
 };
@@ -120,10 +121,10 @@ FLAMER_jump_flamer = {
 		if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 			if (_isacefire) then {
 				[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-				[_x, (_damage_flamer / 4), _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+				[_x, (_damage_flamer / 4), _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 			} else {
 				if (_isacemedical) then {
-					[_x, _damage_flamer, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, _damage_flamer, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					_x setDamage ((damage _x) + _damage_flamer);
 				};
@@ -235,10 +236,10 @@ while {alive _flamer} do {
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					if (_isacemedical) then {
-						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+						[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
@@ -268,10 +269,10 @@ while {alive _flamer} do {
 				if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 					if (_isacefire) then {
 						[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+						[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else {
 						if (_isacemedical) then {
-							[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+							[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 						} else {
 							_x setDamage ((damage _x) + 0.03);
 						};
@@ -298,10 +299,10 @@ while {alive _flamer} do {
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					if (_isacemedical) then {
-						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+						[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
@@ -331,10 +332,10 @@ while {alive _flamer} do {
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					if (_isacemedical) then {
-						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+						[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
@@ -362,10 +363,10 @@ while {alive _flamer} do {
 			if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "Man") && (_x != _flamer)) then {
 				if (_isacefire) then {
 					[_x, _dmg_fire] remoteExec ["ace_fire_fnc_burn", _x];
-					[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+					[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 				} else {
 					if (_isacemedical) then {
-						[_x, 0.03, _bodyPart, "burning"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+						[_x, 0.03, _bodyPart, "burn"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
 					} else {
 						_x setDamage ((damage _x) + 0.03);
 					};
