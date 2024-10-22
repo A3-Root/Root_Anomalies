@@ -1,7 +1,7 @@
 
  
 fnc_avoid_hive = {params ["_hiver", "_chased"]; if (isPlayer _chased) exitWith {}; _relPos = _chased getPos [50, (_hiver getDir _chased) + (random 33) * (selectRandom [1, -1])]; _chased doMove _relPos; _chased setSkill ["commanding", 1];};
-fnc_find_target_hiv = {params ["_hiver", "_teritoriu"]; private ["_neartargets", "_teritoriu"]; _neartargets = (ASLToAGL getPosATL _hiver) nearEntities ["CAManBase", _teritoriu]; _neartargets - [_hiver];};
+fnc_find_target_hiv = {params ["_hiver", "_teritoriu", "_swarmerobject"]; private "_neartargets"; _neartargets = (getPosATL _swarmerobject) nearEntities ["CAManBase", _teritoriu]; _neartargets - [_hiver];};
 fnc_move_swarm = {params ["_mobile_s", "_tgt_hiv"]; private ["_mobile_s", "_tgt_hiv"]; _mobile_s setDir ([_mobile_s, _tgt_hiv] call BIS_fnc_dirTo); _mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0, 7, 0]);};
 fnc_ajust_poz = {params ["_mobile_s", "_tgt_hiv"]; private ["_mobile_s", "_tgt_hiv"]; _mobile_s setDir ([_mobile_s, _tgt_hiv] call BIS_fnc_dirTo); _mobile_s moveTo AGLToASL (_tgt_hiv modelToWorld [0, 0, 0]);};
 
@@ -34,7 +34,7 @@ atak_swarmer = false; publicVariable "atak_swarmer";
 while {alive _mobile_s} do {
 	while {!(_mobile_s getVariable "isHive")} do {{if (_x distance getPos _mobile_s < 1000) then {_mobile_s setVariable ["isHive", true, true]}} forEach allPlayers; uiSleep 10};
 	_mobile_s setVariable ["tgt", nil, true];
-	_list_unit_range_hiv = [_st_srv, _radius] call fnc_find_target_hiv;
+	_list_unit_range_hiv = [_st_srv, _radius, _st_srv] call fnc_find_target_hiv;
 	_list_unit_range_hiv = _list_unit_range_hiv select {typeOf _x != "VirtualCurator_F" };
 	if (count _list_unit_range_hiv > 0) then {
 		_tgt_hiv = selectRandom _list_unit_range_hiv;
@@ -84,5 +84,7 @@ while {alive _mobile_s} do {
 			_mobile_s stop false;
 		};
 	} else {_mobile_s setVariable ["isHive", false, true]; atak_swarmer = false; publicVariable "atak_swarmer"; uiSleep 5};
-}:
+};
 uiSleep 10; deleteVehicle _mobile_s;
+
+

@@ -3,7 +3,6 @@
 
 if (!hasInterface) exitWith {};
 
-_soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
 explozie_end = "\z\root_anomalies\addons\main\sounds\explozie_3.ogg";
 
 params ["_steamer_poz"];

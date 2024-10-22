@@ -34,11 +34,11 @@ STRIGOI_attk_strig = {
 	_tgt_casp		= _this select 1;
 	_damage_strig	= _this select 2;
 	_noseize	    = _this select 3;
-	[[_strigoi, _tgt_casp, _noseize], "\z\root_anomalies\addons\strigoi\functions\strigoi_atk_viz.sqf"] remoteExec ["execVM"];
+	[[_strigoi, _tgt_casp, _noseize], "\z\root_anomalies\addons\strigoi\functions\strigoi_atk_viz.sqf"] remoteExec ["execVM", [0, -2] select isDedicated];
 	if ((isPlayer _tgt_casp) && (typeOf _tgt_casp != "VirtualCurator_F")) then {
 		[[_damage_strig, _noseize], "\z\root_anomalies\addons\strigoi\functions\strigoi_tgt_attk.sqf"] remoteExec ["execVM", _tgt_casp]
 	} else {
-		if (_tgt_casp isKindOf "Man") then {
+		if ((_tgt_casp isKindOf "Man") && (_tgt_casp != _strigoi)) then {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
 			if (typeOf _tgt_casp != "VirtualCurator_F") then {
@@ -128,6 +128,7 @@ _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} forEach allPlayers; uiSleep 10};
 
 _strigoi = createAgent ["C_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
+_strigoi allowDamage false;
 _strigoi setVariable ["BIS_fnc_animalBehaviour_disable", true];
 _strigoi setSpeaker "NoVoice"; _strigoi disableConversation true;
 _strigoi addRating -10000; _strigoi setBehaviour "CARELESS";
@@ -164,7 +165,6 @@ _strigoi addEventHandler ["Killed", {
 
 
 
-
 _strigoi setAnimSpeedCoef 1.1;
 
 _umbla_casper = "Land_HelipadEmpty_F" createVehicle [getPosATL _strigoi select 0, getPosATL _strigoi select 1, 20];
@@ -172,17 +172,20 @@ _cap_casper = "Land_HelipadEmpty_F" createVehicle [0, 0, 0];
 _cap_casper attachTo [_strigoi, [0, 0, 0.2], "neck"];
 _strigoi setVariable ["_cap_casper", _cap_casper, true];
 for "_i" from 0 to 5 do {_strigoi setObjectMaterialGlobal [_i, "A3\Structures_F\Data\Windows\window_set.rvmat"]; uiSleep 0.1;};
-uiSleep 1;
+uiSleep 0.3;
 for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)perlinNoise(256,256,0,0.3)"]; uiSleep 0.1;};
 _strigoi call STRIGOI_hide_strig;
-[[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_fatigue_p.sqf"] remoteExec ["execVM", 0, true];
+[[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_fatigue_p.sqf"] remoteExec ["execVM", [0, -2] select isDedicated, true];
 
 _list_unit_range_casp = [];
 
+_isEntityHidden = false;
+
 while {alive _strigoi} do {
-	while {count _list_unit_range_casp isEqualTo 0} do {_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target; uiSleep 10};
+	while {count _list_unit_range_casp isEqualTo 0} do {_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target; uiSleep 5};
 	_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") } );
 	[_strigoi, getMarkerPos _poz_orig_sc, _teritoriu] call STRIGOI_show_strig;
+	_isEntityHidden = false;
 	while {(!isNil "_tgt_casp") && {(alive _strigoi) && ((_strigoi distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do {
 		[_list_unit_range_casp] call STRIGOI_strig_drain;
 		_strigoi moveTo AGLToASL (_tgt_casp getRelPos[10, 180]);
@@ -222,9 +225,14 @@ while {alive _strigoi} do {
 		};
 		uiSleep 1;
 	};
-	_strigoi call STRIGOI_hide_strig;
+	if !(_isEntityHidden) then {
+		_strigoi call STRIGOI_hide_strig;
+		_isEntityHidden = true;
+	};
 	_tgt_casp = nil;
 	_list_unit_range_casp = [];
+	_strigoi moveTo getMarkerPos _poz_orig_sc;
 	uiSleep 5;
 };
+
 deleteVehicle _umbla_casper; detach _cap_casper; deleteVehicle _cap_casper; uiSleep 5; deleteVehicle _strigoi;

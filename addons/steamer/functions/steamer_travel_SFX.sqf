@@ -2,6 +2,8 @@
  
 
 if (!hasInterface) exitWith {};
+
+
 _project = _this select 0;
 
 _burst = "#particlesource" createVehicleLocal (getPosATL _project);
@@ -16,5 +18,10 @@ _ground setParticleRandom [0, [0.25, 0.25, 0], [0, 0, 0], 0, 0.2, [0, 0, 0, 0], 
 _ground setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0, 1], "", "SpaceObject", 1, 30, [0, 0, 0], [0, 0, 0.1], 0, 20, 7.9, 0, [1, 0.1], [[1, 1, 1, 1], [1, 1, 1, 0]], [1], 0, 0, "", "", _project, 0, true, 0.1, [[0, 0, 0, 0]]];
 _ground setDropInterval 0.05;
 
-while {alive _project} do {playSound3D ["\z\root_anomalies\addons\main\sounds\al_boil.ogg", "", false, [getPos _project select 0, getPos _project select 1, 0.5], 20, 5, 0]; uiSleep 1};
+uiSleep 0.1;
+
+while {alive _project} do {
+    playSound3D ["\z\root_anomalies\addons\main\sounds\al_boil.ogg", "", false, [getPos _project select 0, getPos _project select 1, 0.5], 20, 5, 0]; 
+    uiSleep 1;
+};
 deleteVehicle _ground; deleteVehicle _burst;
