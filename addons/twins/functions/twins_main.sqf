@@ -19,8 +19,7 @@ _pauza = 5;
 
 _spark_obj setVariable ["vizibil", 0, true];
 
-[_spark_obj, _track_dist, _damage_range, _heart_twin, _EMP_enabled, _isseige] spawn 
-{
+[_spark_obj, _track_dist, _damage_range, _heart_twin, _EMP_enabled, _isseige] spawn {
 	_spark_move = _this select 0;
 	_tracking_p	= _this select 1;
 	_dam_range	= _this select 2;

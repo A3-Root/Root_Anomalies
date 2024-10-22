@@ -253,15 +253,15 @@ uiSleep 1;
 
 while {alive _entitate} do {
 	_entitate setUnitPos "UP";
-	if  (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
+	if  (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
 		_teleport = false;
 	
 		while {!_teleport and (alive _entitate)} do {
 		_entitate setUnitPos "UP";
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
-		if (count (_entitate nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
+		if (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
 
-		_pot_tgt = ((_entitate nearEntities [_screamer_targets, _screamer_territory]) select {((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
+		_pot_tgt = ((getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) select {((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
 		_poz = getPosATL _pot_tgt;
 
 		if (_isalivevic) then {
@@ -447,17 +447,16 @@ while {alive _entitate} do {
 		};
 	} else {
 		_teleport = true;
-	}
+		_entitate doMove getMarkerPos _poz_orig_sc;
+	};
 	uiSleep 5;
 };
 
-if (_isalivevic) then 
-{
+if (_isalivevic) then {
 	[[_entitate], "\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
 	uiSleep 4;
 	deleteVehicle _entitate;
-} else
-{
+} else {
 	deleteVehicle _entitate;
 	[[_screamer_anomally], "\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
 	uiSleep 4;
