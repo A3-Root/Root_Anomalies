@@ -17,7 +17,7 @@ while {alive _gren} do {
 		} forEach _ck_hiv;
 	};
 	uiSleep 2;
-}
+};
 
 _cleanup = nearestObjects [_gren, ["BloodPool_01_Large_NewF", "BloodSplatter_01_Large_New_F"], 150];
 private "_lastbloodpos";
