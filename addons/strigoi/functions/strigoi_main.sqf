@@ -128,7 +128,6 @@ _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _teritoriu) then {_ck_pl = true}} forEach allPlayers; uiSleep 10};
 
 _strigoi = createAgent ["C_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
-_strigoi allowDamage false;
 _strigoi setVariable ["BIS_fnc_animalBehaviour_disable", true];
 _strigoi setSpeaker "NoVoice"; _strigoi disableConversation true;
 _strigoi addRating -10000; _strigoi setBehaviour "CARELESS";

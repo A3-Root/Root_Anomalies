@@ -60,6 +60,8 @@ FARMER_attk_farmer = {
 	params ["_farmer", "_damage_farmer"];
 	_farmer setUnitPos "UP";
 	[[_farmer, _damage_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
+    _farmertargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 25];
+	_farmertargets - [_farmer];
 
 	uiSleep 1.2;
 	{	
@@ -100,7 +102,7 @@ FARMER_attk_farmer = {
 				_vehicle setHitPointDamage ["light_r2", 1];
 			};
 		}
-	} forEach (_farmer nearEntities [["CAManBase", "LandVehicle"], 25]);
+	} forEach _farmertargets;
 };
 
 FARMER_travel_farmer = {
@@ -268,6 +270,7 @@ while {alive _farmer} do {
     _farmer enableSimulationGlobal false;
     _list_unit_range_farm = [];
     _farmer setUnitPos "UP";
+    _farmer setPos getMarkerPos _marker_farmer;
 };
 
 playSound3D ["\z\root_anomalies\addons\main\sounds\eko.ogg", "", false, [getPos _farmer select 0, getPos _farmer select 1, 100], 20, 5, 0];

@@ -48,7 +48,6 @@ for "_i" from 1 to 20 do {
 		_pp = linearConversion [0, 100, _i, 5, 0, true];
 		[player, 1] call BIS_fnc_dirtEffect;
 		addCamShake [_pp, 2, 30];
-		player allowDamage true;
 		_jump_dir = (getPosATL _farmer vectorFromTo getPosATL player) vectorMultiply 3;
 		player setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
 		_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
@@ -63,7 +62,7 @@ for "_i" from 1 to 20 do {
 	};
 	uiSleep 0.05;
 };
-player allowDamage true;
+
 if ((player distance _farmer) < 20) then {
 	_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 	_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
