@@ -29,8 +29,8 @@ deton = "Bomb_03_F" createVehicle _blur_pos;
 uiSleep 0.5;
 
 
-for "_i" from 1 to 10 do {
-    _blur_surround_pos = [(_blur_pos select 0) + random [-25, 0, 25], (_blur_pos select 1) + random [-25, 0, 25], (_blur_pos select 2) + random [1, 3, 5]];
+for "_i" from 1 to 3 do {
+    _blur_surround_pos = [(_blur_pos select 0) + random [-5, 0, 5], (_blur_pos select 1) + random [-5, 0, 5], (_blur_pos select 2) + random [1, 2, 3]];
     _claymore = "ClaymoreDirectionalMine_Remote_Ammo_Scripted" createVehicle _blur_surround_pos;
     _claymore setDamage 1;
     uiSleep (random[0.4, 0.8, 1.2]);

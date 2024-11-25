@@ -25,49 +25,29 @@ SCREAMER_vehicle_dmg = {
 	private ["_vehicle", "_damage", "_vichitpoints"];
 	_vehicle = _this select 0;
 	_damage = _this select 1;
+	_vehicle setHitPointDamage ["HitLight", 1];
+	_vehicle setHitPointDamage ["#light_l", 1];
+	_vehicle setHitPointDamage ["#light_r", 1];
+	_vehicle setHitPointDamage ["#light_l_flare", 1];
+	_vehicle setHitPointDamage ["#light_r_flare", 1];
+	_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_1_hitpoint", 1];
+	_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_2_hitpoint", 1];
+	_vehicle setHitPointDamage ["light_l", 1];
+	_vehicle setHitPointDamage ["light_r", 1];
+	_vehicle setHitPointDamage ["light_l2", 1];
+	_vehicle setHitPointDamage ["HitBatteries", 1];
+	_vehicle setHitPointDamage ["light_r2", 1];
 	if (_vehicle isKindOf "Air") then {
 		_vehicle addTorque (_vehicle vectorModelToWorld [10, 10, 10]);
 		_vehicle setVelocity [25, -10, -10];
-		_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
-		{
-			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-			_damage = random(_damage);
-		} forEach _vichitpoints;
-		_vehicle setHitPointDamage ["HitLight", 1];
-		_vehicle setHitPointDamage ["#light_l", 1];
-		_vehicle setHitPointDamage ["#light_r", 1];
-		_vehicle setHitPointDamage ["#light_l_flare", 1];
-		_vehicle setHitPointDamage ["#light_r_flare", 1];
-		_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_1_hitpoint", 1];
-		_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_2_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_l", 1];
-		_vehicle setHitPointDamage ["light_r", 1];
-		_vehicle setHitPointDamage ["light_l2", 1];
-		_vehicle setHitPointDamage ["HitBatteries", 1];
-		_vehicle setHitPointDamage ["light_r2", 1];
-	} else {
-		_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
-		{
-			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
-			_damage = random(_damage);
-		} forEach _vichitpoints;
-		_vehicle setHitPointDamage ["HitLight", 1];
-		_vehicle setHitPointDamage ["#light_l", 1];
-		_vehicle setHitPointDamage ["#light_r", 1];
-		_vehicle setHitPointDamage ["#light_l_flare", 1];
-		_vehicle setHitPointDamage ["#light_r_flare", 1];
-		_vehicle setHitPointDamage ["#light_1_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_1_hitpoint", 1];
-		_vehicle setHitPointDamage ["#light_2_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_2_hitpoint", 1];
-		_vehicle setHitPointDamage ["light_l", 1];
-		_vehicle setHitPointDamage ["light_r", 1];
-		_vehicle setHitPointDamage ["light_l2", 1];
-		_vehicle setHitPointDamage ["HitBatteries", 1];
-		_vehicle setHitPointDamage ["light_r2", 1];
 	};
+		_vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
+		{
+			_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
+			_damage = random(_damage);
+		} forEach _vichitpoints;
 };
 
 private ["_entitate", "_poz_orig_sc", "_anomaly_vic", "_damage_screamer_close", "_damage_screamer_medium", "_damage_screamer_far", "_screamer_territory", "_screamer_hostiles", "_screamer_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_grp"];
@@ -291,28 +271,67 @@ while {alive _entitate} do {
 		_bob_pos_2 = (position _bob2);
 		_bob_pos_3 = (position _bob3);
 		_overallunits = nearestObjects [_anomally_pos, _screamer_dmgs, _screamer_radius];
+		_overallfrontunits = [];
+		{
+			if (!(_x == _screamer_anomally) && !(_x == _entitate) && (((_entitate getRelDir _x > 314) && (_entitate getRelDir _x < 361)) || ((_entitate getRelDir _x > -1) && (_entitate getRelDir _x < 46)))) then {
+				_overallfrontunits pushBack _x;
+			};
+		} forEach _overallunits;
 		_units_range_1 = [];
 		_units_range_2 = [];
 		_units_range_3 = [];
 		{
-   		_unit = _x;
-   		if(_bob_pos_3 distance _unit > (_screamer_radius / 2)) then {
-			_units_range_3 = _units_range_3 + [_unit];} else {
-				if(_bob_pos_1 distance _unit < (_screamer_radius / 5)) then {
-					_units_range_1 = _units_range_1 + [_unit];} else {
-						if((_bob_pos_2 distance _unit > (_screamer_radius / 5)) && (_bob_pos_2 distance _unit < (_screamer_radius / 2))) then {
-							_units_range_2 = _units_range_2 + [_unit];};};
-						};
-		} forEach _overallunits;
+			_unit = _x;
+			if (_bob_pos_3 distance _unit > (_screamer_radius / 2)) then {
+				_units_range_3 = _units_range_3 + [_unit];
+			} else {
+				if (_bob_pos_1 distance _unit < (_screamer_radius / 5)) then {
+					_units_range_1 = _units_range_1 + [_unit];
+				} else {
+					if (_bob_pos_2 distance _unit > (_screamer_radius / 5)) then {
+						_units_range_2 = _units_range_2 + [_unit];
+					};
+				};
+			};
+		} forEach _overallfrontunits;
 		if !((_units_range_1 find _entitate) == -1) then {_units_range_1 = _units_range_1 - [_entitate]};
 		if !((_units_range_2 find _entitate) == -1) then {_units_range_2 = _units_range_2 - [_entitate]};
 		if !((_units_range_3 find _entitate) == -1) then {_units_range_3 = _units_range_3 - [_entitate]};
-		if (!_isalivevic) then {
 		if !((_units_range_1 find _screamer_anomally) == -1) then {_units_range_1 = _units_range_1 - [_screamer_anomally]};
 		if !((_units_range_2 find _screamer_anomally) == -1) then {_units_range_2 = _units_range_2 - [_screamer_anomally]};
 		if !((_units_range_3 find _screamer_anomally) == -1) then {_units_range_3 = _units_range_3 - [_screamer_anomally]};
-		};
 				
+/*
+
+Need to filter out units that are only in direct line of sight of the entity
+
+Possible functions: BIS_fnc_isInFrontOf and getRelDir
+
+getRelDir Method:
+
+_overallfrontunits = [];
+{
+	_tmpdirection = _entitate getRelDir _x;
+	if (!(_x == _screamer_anomally) && !(_x == _entitate) && (((_entitate getRelDir _x > 314) && (_entitate getRelDir _x < 361)) || ((_entitate getRelDir _x > -1) && (_entitate getRelDir _x < 46)))) then {
+		_overallfrontunits pushBack _x;
+	};
+} forEach _overallunits;
+
+alternatively,
+
+_overallfrontunits = _overallunits select {
+    _direction = _entitate getRelDir _x;
+    (((_direction >= 315) && ( _direction <= 360 )) || ((_direction >= 0) && ( _direction <= 45 )))
+};
+
+
+BIS_fnc_isInFrontOf Method:
+
+_overallfrontunits = _overallunits select { [_entitate, _x] call BIS_fnc_isInFrontOf };
+
+*/
+
+
 		uiSleep 1;
 
 		_wave_obj attachTo [_entitate, [0, -1, 1.5]];
@@ -352,7 +371,6 @@ while {alive _entitate} do {
 		};
 		if (_isaipanic) then {[_entitate, _screamer_territory, _screamer_targets] call SCREAMER_avoid;};
 		scream_on= true;
-
 
 		{
 			_vel = velocity _x;
