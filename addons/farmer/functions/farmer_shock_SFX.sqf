@@ -1,7 +1,6 @@
 
  
 
-private ["_farmer", "_damage_farmer"];
 if (!hasInterface) exitWith {};
 params ["_farmer", "_damage_farmer"];
 enableCamShake true;
