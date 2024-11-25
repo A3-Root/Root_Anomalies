@@ -36,13 +36,14 @@ deleteVehicle _logic;
 	["SLIDER", ["Flamer Health", "Amount of damage the Flamer takes before being killed."], [10, 5000, 400, 0]], 
 	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Flamer will be overriden from 75m."], false],
 	["SLIDER:RADIUS", ["Flamer Territory", "Radius in meters of the Flamer's territory."], [1, 1000, 75, 0, _pos, [7, 120, 32, 1]]], 
+	["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
 	["SLIDER:PERCENT", ["Flamer Damage", "Percentage amount of damage the Flamer does to its target. Recommended to start from low and gradually increase to your preferred range."], [0.01, 1, 0.4, 2]], 
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Flamer during its attack."], false],
 	["SLIDER", ["Flamer Recharge Delay", "Delay in seconds between Flamer's attacks. Recommended to keep lower values."], [1, 60, 1, 0]], 
 	["SLIDER:PERCENT", ["Flamer Damage on Death", "Percentage amount of damage the Flamer does to the surrounding when it dies."], [0.01, 1, 1, 2]]
 	], {
 		params ["_results", "_flamerMarkerName"];
-		_results params ["_flamer_hp", "_territory_override", "_flamer_territory", "_flamer_damage", "_isaipanic", "_flamer_recharge", "_damage_on_death"];
+		_results params ["_flamer_hp", "_territory_override", "_flamer_territory", "_activation_range", "_flamer_damage", "_isaipanic", "_flamer_recharge", "_damage_on_death"];
 
 		if !(_territory_override) then {
         	if (_flamer_territory < 75) then {
@@ -52,7 +53,7 @@ deleteVehicle _logic;
 		
 		["Flamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 		
-		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic, _activation_range], "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

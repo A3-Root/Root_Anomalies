@@ -36,7 +36,7 @@ deleteVehicle _logic;
     ["SLIDER", ["Farmer Health", "Amount of damage the Farmer takes before being killed."], [10, 5000, 400, 0]],
     ["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Farmer will be overriden from 75m."], false],
     ["SLIDER:RADIUS", ["Farmer Territory", "Radius in meters of the Farmer's territory."], [10, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
-    ["SLIDER:RADIUS", ["Farmer Activation Range", "Radius in meters for any player to activate Farmer. The Farmer will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
+    ["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
     ["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Farmer during its attack."], false],
     ["SLIDER:PERCENT", ["Farmer Damage", "Percentage amount of damage the Farmer does to his target."], [0.01, 1, 0.6, 2]],
     ["SLIDER", ["Farmer Recharge Delay", "Delay in seconds between Farmer's attacks."], [3, 60, 5, 0]]
