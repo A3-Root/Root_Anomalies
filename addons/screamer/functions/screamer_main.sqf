@@ -1,7 +1,7 @@
 
 
 
-fnc_avoid_screamer = {
+SCREAMER_avoid = {
 	private ["_danger_close", "_op_dir", "_chased_units", "_fct", "_reldir", "_avoid_poz", "_territory", "_targets"];
 	_danger_close = _this select 0;
 	_territory = _this select 1;
@@ -21,7 +21,7 @@ fnc_avoid_screamer = {
 	} forEach _chased_units;
 };
 
-fnc_hitpoint_damage = {
+SCREAMER_vehicle_dmg = {
 	private ["_vehicle", "_damage", "_vichitpoints"];
 	_vehicle = _this select 0;
 	_damage = _this select 1;
@@ -350,7 +350,7 @@ while {alive _entitate} do {
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, -1, 0, true];
 			_press_implicit_y = 1 + _press_implicit_x;
 		};
-		if (_isaipanic) then {[_entitate, _screamer_territory, _screamer_targets] call fnc_avoid_screamer;};
+		if (_isaipanic) then {[_entitate, _screamer_territory, _screamer_targets] call SCREAMER_avoid;};
 		scream_on= true;
 
 
@@ -374,7 +374,7 @@ while {alive _entitate} do {
 			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
-					[_x, _random_close] call fnc_hitpoint_damage;
+					[_x, _random_close] call SCREAMER_vehicle_dmg;
 					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};
@@ -401,7 +401,7 @@ while {alive _entitate} do {
 			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
-					[_x, _random_medium] call fnc_hitpoint_damage;
+					[_x, _random_medium] call SCREAMER_vehicle_dmg;
 					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};
@@ -428,7 +428,7 @@ while {alive _entitate} do {
 			if (typeOf _x == "VirtualCurator_F") then {_x setDamage 0;};
 			if (_isvicdmg) then {
 				if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air")) then {
-					[_x, _random_far] call fnc_hitpoint_damage;
+					[_x, _random_far] call SCREAMER_vehicle_dmg;
 					playSound3D [format ["A3\Sounds_F\vehicles2\soft\shared\collisions\Vehicle_Soft_Collision_Medium_0%1.wss", (floor random 8) + 1], _x, false, getPosATL _x, 3, 1, 150];
 				};
 			};

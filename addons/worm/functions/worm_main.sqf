@@ -1,7 +1,7 @@
 
 
 
-fnc_avoid_worm = {
+WORM_avoid = {
     private ["_danger_close", "_op_dir", "_chased_units", "_fct", "_reldir", "_avoid_poz"];
     _danger_close = _this select 0;
     _chased_units = _this select 1;
@@ -19,7 +19,7 @@ fnc_avoid_worm = {
     } forEach _chased_units;
 };
 
-fnc_vic_dmg = {
+WORM_vehicle_dmg = {
     params ["_unit", "_worm_dmg"];
     private ["_vehicle", "_damage", "_vichitpoints", "_worm_dmg"];
     _vehicle = _unit;
@@ -131,7 +131,7 @@ while {!isNull _cap} do {
     _tgt_worm = selectRandom _list_ai_in_range_worm;
     if (count _list_ai_in_range_worm > 0) then {
         if ((_tgt_worm distance _cap < 15) && !(surfaceIsWater getPos _tgt_worm)) then {
-            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
             if (_dir_move <= 90) then {
                 _press_implicit_x = linearConversion [0, 90, _dir_move, 0, 1, true];
@@ -168,7 +168,7 @@ while {!isNull _cap} do {
                 if ((_x != _cap) && (_x != _coada) && (_x != _coada_01) && !(surfaceIsWater getPos _x)) then {
                     if (_x isKindOf "LandVehicle") then {
                         _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
-                        [_x, _damage_worm] call fnc_vic_dmg;
+                        [_x, _damage_worm] call WORM_vehicle_dmg;
                     } else {
                         _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
@@ -184,7 +184,7 @@ while {!isNull _cap} do {
                 };
             } forEach _nearobj_wrom;
             uiSleep 1;
-            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
             if (((getPosATL _cap select 2) < 0) || ((getPosATL _cap select 2) > 2)) then {
                 _cap setPos ([getPos _cap, 0.5, 50, 10, 0, 1, 0] call BIS_fnc_findSafePos)
             };
@@ -194,7 +194,7 @@ while {!isNull _cap} do {
         
         if ((!isNull _tgt_worm) && (_tgt_worm distance _cap > 15) && !(surfaceIsWater getPos _tgt_worm)) then {
             _sunet_deplas= ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
-            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call fnc_avoid_worm;};
+            if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
             _fct_move = 8 + random 8;
             _fct = [10 + random - 35, 10 + random 45] call BIS_fnc_selectRandom;
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;

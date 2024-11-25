@@ -3,7 +3,7 @@
 
 if (!hasInterface) exitWith {};
 
-fnc_burp_sfx_primar = {
+BURPER_sfx_primary = {
 	private ["_obj_sfx_princ", "_work_primar", "_source_burp", "_spot_lit", "_r_col_burp", "_g_col_burp", "_b_col_burp", "_brit_burp"];
 	_work_primar	= _this select 0;
 	_obj_sfx_princ	= _this select 1;
@@ -47,7 +47,7 @@ fnc_burp_sfx_primar = {
 	deleteVehicle _spot_lit;
 };
 
-fnc_burp_sfx_secundar = {
+BURPER_sfx_secondary = {
 	private ["_obj_sfx_sec", "_work_sfx_sec", "_effect_sp_dist", "_dust_eff", "_blast_blurp", "_blast_dust"];
 	_work_sfx_sec = _this select 0;
 	_obj_sfx_sec = _this select 1;
@@ -83,7 +83,7 @@ fnc_burp_sfx_secundar = {
 	};
 };
 
-fnc_anim_burp = {
+BURPER_animation = {
 	private ["_obj_anim", "_b_dir", "_h_bounce", "_sus", "_chek", "_curr_chek", "_fly_chek", "_work_obj"];
 	_obj_anim = _this select 0;
 	_work_obj = _this select 1;
@@ -104,7 +104,7 @@ fnc_anim_burp = {
 	};
 };
 
-fnc_check_detector = {
+BURPER_detector_check = {
 	if ((typeOf _this  == "VirtualCurator_F") or ([_this, _detectiv_tool] call BIS_fnc_hasItem)) then {
 		_this setVariable ["has_detector", true, true];
 		ciclu_compli = 2;
@@ -137,13 +137,13 @@ if (detection_smugg) then {
 		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_sp		= _this select 0;
 			_burper_obj_sec_sp	= _this select 1;
-			[_work_obj_sp, _burper_obj_sec_sp] call fnc_burp_sfx_secundar
+			[_work_obj_sp, _burper_obj_sec_sp] call BURPER_sfx_secondary
 		};	
 		
 		[_work_obj] spawn {
 			_check_player_det_burp = _this select 0;
 			while {((player distance _check_player_det_burp) < 1500)} do {
-				player call fnc_check_detector;
+				player call BURPER_detector_check;
 				check_pass = player getVariable "has_detector";
 				uiSleep 3;
 			};
@@ -155,10 +155,10 @@ if (detection_smugg) then {
 		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_princ		= _this select 0;
 			_work_obj_sec_sfx	= _this select 1;
-			[_work_obj_princ, _work_obj_sec_sfx] call fnc_burp_sfx_primar
+			[_work_obj_princ, _work_obj_sec_sfx] call BURPER_sfx_primary
 		};
 		
-		[_burper_obj_sec, _work_obj] call fnc_anim_burp;
+		[_burper_obj_sec, _work_obj] call BURPER_animation;
 		deleteVehicle _burper_obj_sec;
 		ciclu_compli = 3;
 		uiSleep 1;
@@ -176,14 +176,14 @@ if (detection_smugg) then {
 		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_princ		= _this select 0;
 			_work_obj_sec_sfx	= _this select 1;
-			[_work_obj_princ, _work_obj_sec_sfx] call fnc_burp_sfx_primar
+			[_work_obj_princ, _work_obj_sec_sfx] call BURPER_sfx_primary
 		};
 		[_work_obj, _burper_obj_sec] spawn {
 			_work_obj_sp		= _this select 0;
 			_burper_obj_sec_sp	= _this select 1;
-			[_work_obj_sp, _burper_obj_sec_sp] call fnc_burp_sfx_secundar
+			[_work_obj_sp, _burper_obj_sec_sp] call BURPER_sfx_secondary
 		};
-		[_burper_obj_sec, _work_obj] call fnc_anim_burp;
+		[_burper_obj_sec, _work_obj] call BURPER_animation;
 		deleteVehicle _burper_obj_sec;
 	};
 };

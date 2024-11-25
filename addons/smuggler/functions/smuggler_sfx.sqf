@@ -1,7 +1,7 @@
 
  
 
-fnc_effecte_princ_smug = {
+SMUGGLER_sfx_primary = {
 	private ["_obj_princ_effect", "_bule_smugg", "_fct_lit", "_dust_smug", "_sursa_princ_center", "_brit_burp", "_b_col_burp", "_g_col_burp", "_r_col_burp", "_sp_dist_smug", "_spot_lit"];
 	_obj_princ_effect 	= _this select 0;
 	_sursa_princ_center	= _this select 1;
@@ -75,7 +75,7 @@ fnc_effecte_princ_smug = {
 	detach _spot_lit; deleteVehicle _spot_lit; deleteVehicle _bule_smugg; deleteVehicle _dust_smug; deleteVehicle _sp_dist_smug; deleteVehicle _center_smug; deleteVehicle _invelis;
 };
 
-fnc_sec_effect_smug = {
+SMUGGLER_sfx_secondary = {
 	private ["_obj_sec_effect", "_suck_frunze", "_suck_dust", "_obj_sec_center", "_rafala_smug"];
 	_obj_sec_effect = _this select 0;
 	_obj_sec_center = _this select 1;
@@ -104,7 +104,7 @@ fnc_sec_effect_smug = {
 	};
 };
 
-fnc_check_detector_smug = {
+SMUGGLER_detector_check = {
 	if ([_this, detect_smug] call BIS_fnc_hasItem) then {
 		_hasItemOrNot = true;
 		true;
@@ -125,11 +125,11 @@ if (detect_smug != "") then {
 	while {!isNull _obj_sursa_smugg} do {
 		waitUntil {uiSleep 5; player distance _obj_sursa_smugg < 1000};
 		_sursa_core setVariable ["activeaza", true, true];
-		[_obj_sursa_smugg, _sursa_core] spawn fnc_sec_effect_smug;
-		waitUntil {player call fnc_check_detector_smug};
+		[_obj_sursa_smugg, _sursa_core] spawn SMUGGLER_sfx_secondary;
+		waitUntil {player call SMUGGLER_detector_check};
 		player_chk_det = true;
-		[] spawn {waitUntil{uiSleep 1; !(player call fnc_check_detector_smug)}; player_chk_det = false};
-		[_obj_sursa_smugg, _sursa_core] call fnc_effecte_princ_smug;
+		[] spawn {waitUntil{uiSleep 1; !(player call SMUGGLER_detector_check)}; player_chk_det = false};
+		[_obj_sursa_smugg, _sursa_core] call SMUGGLER_sfx_primary;
 		player setVariable ["loop_dust", false];
 		uiSleep 10;
 	};
@@ -138,8 +138,8 @@ if (detect_smug != "") then {
 		while {!isNull _obj_sursa_smugg} do {
 			waitUntil {uiSleep 5; player distance _obj_sursa_smugg < 1000};
 			_sursa_core setVariable ["activeaza", true, true];
-			[_obj_sursa_smugg, _sursa_core] spawn fnc_sec_effect_smug;
-			[_obj_sursa_smugg, _sursa_core] call fnc_effecte_princ_smug;
+			[_obj_sursa_smugg, _sursa_core] spawn SMUGGLER_sfx_secondary;
+			[_obj_sursa_smugg, _sursa_core] call SMUGGLER_sfx_primary;
 			player setVariable ["loop_dust", false];
 			uiSleep 10;
 		};

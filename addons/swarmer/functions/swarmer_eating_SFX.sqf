@@ -1,7 +1,7 @@
 
  
 
-fnc_blood = {
+SWARMER_blood = {
 	private ["_spot", "_blood_splash"];
 	_spot = _this select 0;
 	_blood_splash = "#particlesource" createVehicleLocal (getPosATL _spot);
@@ -13,7 +13,7 @@ fnc_blood = {
 	deleteVehicle _blood_splash;
 };
 
-fnc_meat = {
+SWARMER_meat = {
 	params ["_splash_point"]; private ["_splash_point"];
 	_meat_pieces = "#particlesource" createVehicleLocal (getPosATL _splash_point);
 	_meat_pieces setParticleCircle [1, [0, 0, 0]];
@@ -31,9 +31,9 @@ if (!alive _hives) exitWith {};
 
 _pct_unit= ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
 _fire_obj_unit = []; {_part_fire = "Land_HelipadEmpty_F" createVehicleLocal [0, 0, 0]; _part_fire attachTo [_splash_point, [0, 0, 0], _x]; _fire_obj_unit pushBack _part_fire;} forEach _pct_unit;
-{[_x] spawn fnc_blood} forEach _fire_obj_unit;
+{[_x] spawn SWARMER_blood} forEach _fire_obj_unit;
 (_fire_obj_unit select 0) say3D ["eating", 300]; _splash_point say3D ["strigat_92", 300];
 
-if (!alive _splash_point) then {[_splash_point] call fnc_meat};
+if (!alive _splash_point) then {[_splash_point] call SWARMER_meat};
 uiSleep 13;
 {deleteVehicle _x} forEach _fire_obj_unit;

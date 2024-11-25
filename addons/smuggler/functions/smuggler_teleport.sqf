@@ -1,6 +1,6 @@
 
 
-fnc_teleportSFX_AI = {
+SMUGGLER_teleSFX_AI = {
     private ["_unit", "_ind"];
     _unit = _this select 0;
     _ind = 3;
@@ -31,7 +31,7 @@ while {alive _obj_teleporter} do {
                     _fresh_spawn = _x getVariable "teleported_in";
                     if (isNil "_fresh_spawn") then {
                         [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
-                        [_x] call fnc_teleportSFX_AI;
+                        [_x] call SMUGGLER_teleSFX_AI;
                         if (isPlayer _x) then {
                             [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
                         } else {
@@ -58,7 +58,7 @@ while {alive _obj_teleporter} do {
             _fresh_spawn = _x getVariable "teleported_in";
             if (isNil "_fresh_spawn") then {
                 [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
-                [_x] call fnc_teleportSFX_AI;
+                [_x] call SMUGGLER_teleSFX_AI;
                 if (isPlayer _x) then {
                     [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
                 } else {
@@ -87,7 +87,7 @@ while {alive _obj_teleporter} do {
             _fresh_spawn = _x getVariable "teleported_in";
             if (isNil "_fresh_spawn") then {
                 [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
-                [_x] call fnc_teleportSFX_AI;
+                [_x] call SMUGGLER_teleSFX_AI;
                 _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
                 _x setPos _dest_tele;
                 _x setDamage ((damage _x) + _dmg_on_teleport);

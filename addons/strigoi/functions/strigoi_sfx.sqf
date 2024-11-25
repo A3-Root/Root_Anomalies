@@ -1,7 +1,7 @@
 
  
 
-fnc_spectral = {
+STRIGOI_spectral = {
 	_r = [];
 	_comp_obj_casp = _this;
 	_effectArrays = 
@@ -56,7 +56,7 @@ _pct_casper= ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot"
 {_part_surs = "Land_HelipadEmpty_F" createVehicle [0, 0, 0]; _comp_obj_casp pushBack _part_surs; _part_surs attachTo [_strigoi, [0, 0, 0], _x]} forEach _pct_casper;
 [_comp_obj_casp, _strigoi] spawn {_guri = _this select 0; _tease_voice = _this select 1;	while {alive _tease_voice} do {_gura = selectRandom _guri; _tease_sound = selectRandom ["01_tease", "02_tease", "NoSound"]; _gura say3D [_tease_sound, 100]; uiSleep 20;}};
 
-_part_gost_array = _comp_obj_casp call fnc_spectral;
+_part_gost_array = _comp_obj_casp call STRIGOI_spectral;
 
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _strigoi);
 _part_gost_sec setParticleCircle [0, [0, 0, 0]];
