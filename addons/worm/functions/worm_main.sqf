@@ -47,7 +47,7 @@ WORM_vehicle_dmg = {
 
 if (!isServer) exitWith {};
 
-params ["_poz_worm", "_damage_worm", "_territory", "_isaipanic", "_wormdiffuser"];
+params ["_poz_worm", "_damage_worm", "_territory", "_isaipanic", "_wormdiffuser", "_activation_range"];
 private ["_press_implicit_x", "_press_implicit_y", "_isacemedical"];
 
 _isacemedical = false;
@@ -105,7 +105,7 @@ while {_hide_me} do {
             _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
             _press_implicit_y = 1 + _press_implicit_x;
         };
-        [[_cap, _coada, _coada_01], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
+        [[_cap, _coada, _coada_01, _activation_range], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
         [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
         _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         _cap setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 20 + random 10];
@@ -163,10 +163,10 @@ while {!isNull _cap} do {
                 (getPosATL _cap select 2) < 1
             };
             [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
-            _nearobj_wrom = nearestObjects [getPosATL _cap, [], 15];
+            _nearobj_wrom = nearestObjects [getPosATL _cap, [], 25];
             {
                 if ((_x != _cap) && (_x != _coada) && (_x != _coada_01) && !(surfaceIsWater getPos _x)) then {
-                    if (_x isKindOf "LandVehicle") then {
+                    if ((_x isKindOf "LandVehicle") || (_x isKindOf "Air")) then {
                         _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                         [_x, _damage_worm] call WORM_vehicle_dmg;
                     } else {
@@ -178,7 +178,7 @@ while {!isNull _cap} do {
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
                             } else {
                                 _x setDamage ((damage _x) + _damage_worm);
-                            }
+                            };
                         };
                     };
                 };
@@ -190,8 +190,7 @@ while {!isNull _cap} do {
             };
             uiSleep 8;
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
-        };
-        
+        };     
         if ((!isNull _tgt_worm) && (_tgt_worm distance _cap > 15) && !(surfaceIsWater getPos _tgt_worm)) then {
             _sunet_deplas = ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
             if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
@@ -227,6 +226,6 @@ while {!isNull _cap} do {
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         };
     } else {
-        uiSleep 3
+        uiSleep 3;
     };
 };

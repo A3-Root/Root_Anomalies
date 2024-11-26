@@ -4,10 +4,10 @@
 [] spawn {
 	waitUntil {!isNil "wormkiller"};
     player addEventHandler ["Fired", {
-		private ["_worm_throwable", "_shooter"];
-		_worm_throwable = _this select 6;
-		_shooter = _this select 0;
-		[_worm_throwable] execVM "\z\root_anomalies\addons\worm\functions\worm_kill_detect.sqf";
+		params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+		if (typeOf _projectile == wormkiller) then {
+			[_wormkill, "\z\root_anomalies\addons\worm\functions\worm_kill_confirm.sqf"] remoteExec ["execVM"];
+		};
 	}];
 };
 

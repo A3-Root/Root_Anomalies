@@ -35,7 +35,7 @@ _crater_impact setDir (random 360);
 uiSleep 0.5;
 deleteVehicle _blast_dust;
 
-if (player distance _head_worm < 1500) then {
+if (player distance _head_worm < 500) then {
 _after_effect = ["post_impact_01", "post_impact_02", "post_impact_03", "post_impact_04"] call BIS_fnc_selectRandom;
 playSound _after_effect;
 };
