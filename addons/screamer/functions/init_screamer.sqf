@@ -33,7 +33,7 @@ deleteVehicle _logic;
 	["EDIT", ["Screamer Model", "Classname of the object used as the Anomaly."], ["Land_AncientStatue_01_F"]],
 	["SLIDER", ["Screamer Health", "Percentage amount of health the Screamer has."], [10, 5000, 400, 0]],
 	["SLIDER:RADIUS", ["Screamer Territory", "Radius in meters of the Screamer's territory."], [20, 500, 100, 0, _radiuspos, [7, 120, 32, 1]]], 
-	["SLIDER:RADIUS", ["Screamer Effect Radius", "Radius in meters of the Screamer's attack."], [10, 490, 50, 0, _radiuspos, [7, 120, 32, 1]]], 
+	["SLIDER:RADIUS", ["Screamer Effect Distance", "Distance in meters of the Screamer's attack. Recommended default value of 50 meters."], [10, 490, 50, 0, _radiuspos, [7, 120, 32, 1]]], 
 	["TOOLBOX:YESNO", ["Affect Vehicles", "If true, the Screamer will also affect vehicles in its scream path."], true],
 	["TOOLBOX:YESNO", ["AI Engages Steamer? [EXPERIMENTAL]", "If true, the Screamer will be engaged by AI. [NOTE - If the Screamer Model is a static model, a bright visible VR soldier would additionally be created for this purpose.]"], false],
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Screamer location during its attack."], false],

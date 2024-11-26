@@ -26,13 +26,12 @@ deleteVehicle _logic;
 	["EDIT", ["Swarmer Hive Object", "Classname of the object used to spawn the Swarmer."], ["Land_GarbageBags_F"]], 
 	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Swarmer will be overriden from 75m."], false],
 	["SLIDER:RADIUS", ["Swarmer Territory", "Radius in meters of the Swarmer's territory."], [1, 1000, 75, 0, _swarmerloc, [7, 120, 32, 1]]], 
-	["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _swarmerloc, [7, 120, 32, 1]]],
 	["TOOLBOX:YESNO", ["Disable Pesticide", "If true, Pesticide will be disabled and the Swarmer cannot be killed conventionally."], false],
 	["EDIT", ["Pesticide", "Classname of the THROWABLE OBJECT (Grenades, Smokes, etc.) used to kill the Swarmer."], ["SmokeShellGreen"]], 
 	["SLIDER:PERCENT", ["Swarmer Damage", "Percentage amount of damage the Swarmer does to his target."], [0.01, 1, 0.6, 2]]
 	], {
 		params ["_results", "_swarmerloc"];
-		_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_activation_range", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
+		_results params ["_swarmerobject", "_territory_override", "_swarmer_territory", "_needpesticide", "_pesticideobject", "_swarmerdamage"];
 		private _swarmerhive = "Land_GarbageBags_F";
 
 		if (getNumber (configFile >> "CfgVehicles" >> _swarmerobject >> "scope") > 0) then {
@@ -55,7 +54,7 @@ deleteVehicle _logic;
 
 		["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage, _activation_range], "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

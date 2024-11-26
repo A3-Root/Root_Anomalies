@@ -7,7 +7,7 @@ SWARMER_adjustPos = { params ["_swarmer_agent", "_tgt_hiv"]; private ["_swarmer_
 
 if (!isServer) exitWith {};
 
-params ["_swarmer_hiveobj", "_radius", "_hiv_ki", "_dmg_un", "_activation_range"];
+params ["_swarmer_hiveobj", "_radius", "_hiv_ki", "_dmg_un"];
 private ["_tgt_hiv"];
 
 uiSleep 2;
@@ -23,12 +23,12 @@ _swarmer_agent setBehaviour "CARELESS"; _swarmer_agent allowDamage false; _swarm
 _swarmer_agent setUnitPos "UP"; _swarmer_agent disableAI "ALL"; {_swarmer_agent enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"]; _swarmer_agent setAnimSpeedCoef 1.1;
 _swarmer_agent setVariable ["isHive", false, true];
 [[_swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_voice.sqf"] remoteExec ["execVM"];
-[[_swarmer_agent, _activation_range], "\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf"] remoteExec ["execVM"];
+[[_swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf"] remoteExec ["execVM"];
 swarmer_public = _swarmer_agent; publicVariable "swarmer_public";
 atak_swarmer = false; publicVariable "atak_swarmer";
 
 while {alive _swarmer_agent} do {
-	while {!(_swarmer_agent getVariable "isHive")} do {{if (_x distance getPos _swarmer_agent < _activation_range) then {_swarmer_agent setVariable ["isHive", true, true]}} forEach allPlayers; uiSleep 10};
+	while {!(_swarmer_agent getVariable "isHive")} do {{if (_x distance getPos _swarmer_agent < 1000) then {_swarmer_agent setVariable ["isHive", true, true]}} forEach allPlayers; uiSleep 10};
 	_swarmer_agent setVariable ["tgt", nil, true];
 	_list_unit_range_hiv = [];
 	_list_unit_range_hiv = [_swarmer_agent, _radius, _swarmer_hiveobj] call SWARMER_find_target;

@@ -32,14 +32,13 @@ deleteVehicle _logic;
 ["Steamer Anomaly Settings", [
 	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Steamer will be overriden from 75m."], false],
 	["SLIDER:RADIUS", ["Steamer Territory", "Radius in meters of the Steamer's territory."], [10, 1000, 75, 0, _radiuspos, [7, 120, 32, 1]]],
-	["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _radiuspos, [7, 120, 32, 1]]],
 	["SLIDER:PERCENT", ["Steamer Damage", "Percentage amount of damage the Steamer does to his target."], [0.01, 1, 0.2, 2]],
 	["SLIDER", ["Steamer Recharge Delay", "Delay in seconds between Steamer's attacks."], [5, 60, 10, 0]],
 	["SLIDER:PERCENT", ["Steamer Damage on Death", "Percentage amount of damage the Steamer does upon death."], [0.01, 1, 0.6, 2]],
 	["TOOLBOX:YESNO", ["Enable Travel Path", "If true, the Steamer's location will be easier to identify/pinpoint as it will generate a line of dug up mud towards its target."], false]
 	], {
 		params ["_results", "_steamerMarkerName"];
-		_results params ["_territory_override", "_steamer_territory", "_activation_range", "_steamer_damage", "_steamer_recharge", "_dmg_on_death", "_travelpath"];
+		_results params ["_territory_override", "_steamer_territory", "_steamer_damage", "_steamer_recharge", "_dmg_on_death", "_travelpath"];
 
 		if !(_territory_override) then {
         	if (_steamer_territory < 75) then {
@@ -49,7 +48,7 @@ deleteVehicle _logic;
 		
 		["Steamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath, _activation_range], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

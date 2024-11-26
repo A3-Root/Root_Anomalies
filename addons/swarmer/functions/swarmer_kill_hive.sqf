@@ -20,11 +20,7 @@ while {alive _gren} do {
 };
 
 _cleanup = nearestObjects [_gren, ["BloodPool_01_Large_NewF", "BloodSplatter_01_Large_New_F"], 150];
-private "_lastbloodpos";
 {
-	_lastbloodpos = getPosATL _x;
 	deleteVehicle _x;
 	uiSleep 1;
 } forEach _cleanup;
-_bloodpool = createVehicle [selectRandom["BloodPool_01_Large_New_F", "BloodSplatter_01_Large_New_F"], [0, 0, 0], [], 0, "CAN_COLLIDE"];
-_bloodpool setPosATL _lastbloodpos;

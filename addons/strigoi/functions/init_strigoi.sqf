@@ -39,14 +39,13 @@ deleteVehicle _logic;
 	["SLIDER", ["Strigoi Health", "Amount of damage the Strigoi takes before being killed."], [10, 5000, 400, 0]],
 	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Strigoi will be overriden from 75m."], false],
 	["SLIDER:RADIUS", ["Strigoi Territory", "Radius in meters of the Strigoi's territory."], [10, 1000, 75, 0, _radiuspos, [7, 120, 32, 1]]],
-	["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _radiuspos, [7, 120, 32, 1]]],
 	["SLIDER:PERCENT", ["Strigoi Damage", "Percentage amount of damage the Strigoi does to his target."], [0.01, 1, 0.6, 2]],
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Flamer during its attack."], false],
 	["TOOLBOX:YESNO", ["Night Mode Only", "If true, Strigoi will only be active/spawned during night time."], false],
 	["TOOLBOX:YESNO", ["Disable Sensitive Lights", "If true, Strigoi's 'seizure' like ability will be disabled preventing bright lights from flashing. Highly recommended for people with sensitivity to lights."], false]
 	], {
 		params ["_results", "_strigoiMarkerName"];
-		_results params ["_strigoi_hp", "_territory_override", "_strigoi_territory", "_activation_range", "_strigoi_damage", "_isaipanic", "_isnightonly", "_noseizure"];
+		_results params ["_strigoi_hp", "_territory_override", "_strigoi_territory", "_strigoi_damage", "_isaipanic", "_isnightonly", "_noseizure"];
 
 		if !(_territory_override) then {
         	if (_strigoi_territory < 75) then {
@@ -56,7 +55,7 @@ deleteVehicle _logic;
 
 		["Strigoi Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic, _activation_range], "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;

@@ -22,10 +22,7 @@ FLAMER_attk_flamer = {
 	params ["_flamer", "_tgt_casp", "_damage_flamer"];
 	private ["_flamer", "_tgt_casp", "_damage_flamer", "_isacemedical", "_vehicle", "_vichitpoints", "_damage", "_time"];
 	_isacemedical = false;
-	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
-		diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
-		_isacemedical = false;
-	} else {
+	if (isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 		_isacemedical = true;
 	};
 	_shoot_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
@@ -57,7 +54,7 @@ FLAMER_attk_flamer = {
 		};
 	} forEach (_nearflamer - [_flamer]);
 	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 7, false]; 
-	{_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach _nearvik;
+	{_x setDamage (damage _x + ( _damage_flamer * 5 ))} forEach (_nearvik - [_flamer]);
 	uiSleep 4;
 	_flamer setVariable ["atk", false];
 };
@@ -70,11 +67,11 @@ FLAMER_hide_flamer = {
 
 FLAMER_show_flamer = {
 	params ["_flamer", "_poz_orig_sc", "_teritoriu", "_damage_flamer"];
-	private ["_flamer", "_poz_orig_sc", "_pos_strig", "_teritoriu", "_damage_flamer"];
+	private ["_pos_strig"];
 	_pos_strig = [_poz_orig_sc, 1, _teritoriu / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_flamer setPos _pos_strig;
 	_flamer setVariable ["vizibil", true, true];
-	[[_flamer, _damage_flamer, _poz_orig_sc], "\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
+	[[_flamer, _damage_flamer, _poz_orig_sc, 1000], "\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 100]);
 	[_flamer getVariable "_cap_flamer", ["foc_initial", 1000]] remoteExec ["say3D"];
 };
@@ -83,10 +80,7 @@ FLAMER_jump_flamer = {
 	params ["_flamer", "_tgt_casp", "_cap_flamer", "_damage_flamer"];
 	private ["_jump_dir", "_blast_dust", "_flama", "_li_fire", "_bbb", "_isacemedical", "_vehicle", "_vichitpoints", "_damage", "_time"];
 	_isacemedical = false;
-	if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
-		diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
-		_isacemedical = false;
-	} else {
+	if (isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 		_isacemedical = true;
 	};
 	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10 + random 10);
@@ -119,11 +113,11 @@ FLAMER_jump_flamer = {
 		};
 	} forEach (_nearflamer - [_flamer]);
 	_flamer setVelocity [_jump_dir select 0, _jump_dir select 1, round (10 + random 15)];
-	{_x setDamage [1, false]; _x hideObjectGlobal true} forEach _obj_veg;
-	{_x setDamage (damage _x + 0.10)} forEach _nearvik;
+	{_x setDamage [1, false]; _x hideObjectGlobal true} forEach (_obj_veg - [_flamer]);
+	{_x setDamage (damage _x + _damage_flamer)} forEach (_nearvik - [_flamer]);
 };
 
-params ["_poz_orig_sc", "_teritoriu", "_damage_flamer", "_recharge_delay", "_hp_flamer", "_damage_on_death", "_isaipanic", "_activation_range"];
+params ["_poz_orig_sc", "_teritoriu", "_damage_flamer", "_recharge_delay", "_hp_flamer", "_damage_on_death", "_isaipanic"];
 private ["_isacemedical", "_vehicle", "_vichitpoints", "_damage", "_time"];
 
 uiSleep 2;
@@ -138,25 +132,29 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 _ck_pl = false;
 _flamer = createAgent ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"]; _flamer setVariable ["BIS_fnc_animalBehaviour_disable", true]; _flamer setSpeaker "NoVoice"; _flamer disableConversation true; _flamer addRating -10000; _flamer setBehaviour "CARELESS"; _flamer enableFatigue false; _flamer setSkill ["courage", 1]; _flamer setUnitPos "UP"; _flamer disableAI "ALL"; _flamer setMass 7000; {_flamer enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"];
 
+_flamer removeAllEventHandlers "HandleDamage";
+
+_flamer addEventHandler ["HandleDamage", {0}];
+
+_flamer removeAllEventHandlers "Hit";
 
 _hp_curr_flamer = 1 / _hp_flamer;
 _flamer setVariable ["flamer_dmg_total", 0];
 _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
-_flamer removeAllEventHandlers "Hit";
 
 _flamer addEventHandler ["Hit", {
-    _unit = _this select 0;
+	diag_log format ["******* _flamer Hit EH Triggered"];
+    params ["_unit", "_source", "_damage", "_instigator"];
+	diag_log format ["******* _unit: %1    ----   _source: %2    ----   _damage: %3    ----   _instigator: %4", _unit, _source, _damage, _instigator];
     _flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
+	diag_log format ["******* flamer_dmg_total: %1", flamer_dmg_total];
+	diag_log format ["******* _flamer_curr_dmg: %1", _flamer_curr_dmg];
 	_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
 	if ((_unit getVariable "flamer_dmg_total") > 1) then {
-        _unit setDamage 1
+        _unit setDamage 1;
     };
-    [[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"]
+    [[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"];
 }];
-
-_flamer removeAllEventHandlers "HandleDamage";
-
-_flamer addEventHandler ["HandleDamage", {0}];
 
 _flamer addEventHandler ["Killed", {
     (_this select 0) hideObjectGlobal true;
@@ -183,7 +181,7 @@ _list_unit_range_flamer = [];
 
 
 
-while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _activation_range) then {_ck_pl = true}} forEach allPlayers; uiSleep 5;};
+while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < 1000) then {_ck_pl = true}} forEach allPlayers; uiSleep 5;};
 
 
 
@@ -191,7 +189,7 @@ while {alive _flamer} do {
 	while {count _list_unit_range_flamer isEqualTo 0} do {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; uiSleep 5;};
 	_list_unit_range_flamer - [_flamer];
 	_tgt_flamer = selectRandom (_list_unit_range_flamer select {typeOf _x != "VirtualCurator_F" });
-	[_flamer, getMarkerPos _poz_orig_sc, _teritoriu, _damage_flamer] call FLAMER_show_flamer;
+	[_flamer, getMarkerPos _poz_orig_sc, _teritoriu, _damage_flamer, 1000] call FLAMER_show_flamer;
 	while {(!isNil "_tgt_flamer") && {(alive _flamer) && ((_flamer distance getMarkerPos _poz_orig_sc) < _teritoriu)}} do {
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20];

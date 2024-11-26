@@ -5,7 +5,7 @@ if (!isServer) exitWith {};
 private ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_pozitie_noua", "_tgt_farmer", "_list_unit_range_farm", "_isaipanic"];
 
 
-params ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_isaipanic", "_farmer_activation"];
+params ["_marker_farmer", "_territory", "_damage_inflicted", "_recharge_delay", "_health_points", "_isaipanic"];
 _soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimstring;
 explozie = "\z\root_anomalies\addons\main\sounds\punch_7.ogg";
 pietre = "\z\root_anomalies\addons\main\sounds\pietre.ogg";
@@ -79,6 +79,7 @@ FARMER_attk_farmer = {
 			};
 		};
         if ((_x isKindOf "LandVehicle") && !(_x == _farmer)) then {
+            _jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 3;
             _x setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
             _vehicle = _x;
             _damage = random[0, _damage_farmer, 1];
@@ -132,7 +133,14 @@ _farmer setSkill ["courage", 1]; _farmer setUnitPos "UP"; _farmer disableAI "ALL
 _hp_curr_farmer = 1 / _health_points;
 _farmer setVariable ["al_dam_total", 0];
 _farmer setVariable ["al_dam_incr", _hp_curr_farmer];
+
 _farmer removeAllEventHandlers "Hit";
+
+_farmer removeAllEventHandlers "HandleDamage";
+
+_farmer addEventHandler ["HandleDamage", {
+    0
+}];
 
 _farmer addEventHandler ["Hit", {
     _unit = _this select 0;
@@ -140,12 +148,6 @@ _farmer addEventHandler ["Hit", {
         _unit setDamage 1
     };
     [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
-}];
-
-_farmer removeAllEventHandlers "HandleDamage";
-
-_farmer addEventHandler ["HandleDamage", {
-    0
 }];
 
 _farmer addEventHandler ["Killed", {
@@ -180,7 +182,7 @@ while {alive _farmer} do {
     _farmer setUnitPos "UP";
     while {!_ck_pl} do {
         {
-            if (_x distance getMarkerPos _marker_farmer < _farmer_activation) then {
+            if (_x distance getMarkerPos _marker_farmer < 1000) then {
                 _ck_pl = true
             }
         } forEach allPlayers;

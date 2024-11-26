@@ -47,7 +47,7 @@ WORM_vehicle_dmg = {
 
 if (!isServer) exitWith {};
 
-params ["_poz_worm", "_damage_worm", "_territory", "_isaipanic", "_wormdiffuser", "_activation_range"];
+params ["_poz_worm", "_damage_worm", "_territory", "_isaipanic", "_wormdiffuser"];
 private ["_press_implicit_x", "_press_implicit_y", "_isacemedical"];
 
 _isacemedical = false;
@@ -105,7 +105,7 @@ while {_hide_me} do {
             _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
             _press_implicit_y = 1 + _press_implicit_x;
         };
-        [[_cap, _coada, _coada_01, _activation_range], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
+        [[_cap, _coada, _coada_01], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
         [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
         _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         _cap setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 20 + random 10];

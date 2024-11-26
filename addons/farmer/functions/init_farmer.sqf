@@ -36,13 +36,12 @@ deleteVehicle _logic;
     ["SLIDER", ["Farmer Health", "Amount of damage the Farmer takes before being killed."], [10, 5000, 400, 0]],
     ["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Farmer will be overriden from 75m."], false],
     ["SLIDER:RADIUS", ["Farmer Territory", "Radius in meters of the Farmer's territory."], [10, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
-    ["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
     ["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Farmer during its attack."], false],
     ["SLIDER:PERCENT", ["Farmer Damage", "Percentage amount of damage the Farmer does to his target."], [0.01, 1, 0.6, 2]],
     ["SLIDER", ["Farmer Recharge Delay", "Delay in seconds between Farmer's attacks."], [3, 60, 5, 0]]
 ], {
     params ["_results", "_farmerMarkerName"];
-    _results params ["_farmer_hp", "_territory_override", "_farmer_territory", "_farmer_activation", "_isaipanic", "_farmer_damage", "_farmer_recharge"];
+    _results params ["_farmer_hp", "_territory_override", "_farmer_territory", "_isaipanic", "_farmer_damage", "_farmer_recharge"];
     
     if !(_territory_override) then {
         if (_farmer_territory < 75) then {
@@ -52,7 +51,7 @@ deleteVehicle _logic;
 
     ["Farmer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic, _farmer_activation], "\z\root_anomalies\addons\farmer\functions\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "\z\root_anomalies\addons\farmer\functions\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 }, {
     ["Aborted"] call zen_common_fnc_showMessage;
     playSound "FD_Start_F";

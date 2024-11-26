@@ -20,6 +20,7 @@ if (!hasInterface) exitWith {};
 _flamer = _this select 0;
 _damage_flamer = _this select 1;
 _poz_orig_sc = _this select 2;
+
 _comp_obj_casp = [];
 
 player setSpeaker "NoVoice";

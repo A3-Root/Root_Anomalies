@@ -36,13 +36,12 @@ deleteVehicle _logic;
 ["Worm Anomaly Settings", [
 	["TOOLBOX:YESNO", ["Override Minimum Territory", "If true, the minimum territory radius of the Worm will be overriden from 200m."], false],
 	["SLIDER:RADIUS", ["Worm Territory", "Radius in meters of the Worm's territory."], [50, 1000, 200, 0, _radiuspos, [7, 120, 32, 1]]], 
-	["SLIDER:RADIUS", ["Activation Range", "Radius in meters for any player to activate the anomaly. The anomaly will then proceed to attack units in its specified territory range."], [25, 1000, 75, 0, _radiuspos, [7, 120, 32, 1]]],
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will run away from the Worm and its territory during its attack."], false],
 	["EDIT", ["Worm Diffuser", "Classname of the object used to kill the Worm."], ["SmokeShellGreen"]], 
 	["SLIDER:PERCENT", ["Worm Damage", "Percentage amount of damage the Worm does to its target."], [0.01, 1, 0.6, 2]]
 	], {
 		params ["_results", "_wormmarkerName"];
-		_results params ["_override_territory", "_worm_territory", "_activation_range", "_isaipanic", "_wormdiffuser", "_worm_damage"];
+		_results params ["_override_territory", "_worm_territory", "_isaipanic", "_wormdiffuser", "_worm_damage"];
 
 		if (!(_override_territory) && (_worm_territory < 200)) then {
 			_worm_territory = 200;
@@ -56,7 +55,7 @@ deleteVehicle _logic;
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser, _activation_range], "\z\root_anomalies\addons\worm\functions\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser], "\z\root_anomalies\addons\worm\functions\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

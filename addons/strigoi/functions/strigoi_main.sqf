@@ -104,13 +104,13 @@ STRIGOI_jump_ground = {
 	_strigoi setVelocity [_jump_dir select 0, _jump_dir select 1, round (5 + random 15)];
 };
 
-params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic", "_activation_range"];
+params ["_poz_orig_sc", "_teritoriu", "_vizible_day", "_damage_strig", "_hp_strigoi", "_noseize", "_isaipanic"];
 private ["_hp_incr", "_hp_curr_strig", "_pos_strig", "_anomalie_dedus", "_gasit", "_obj_de_agatat", "_pot_poz", "_press_implicit_x", "_press_implicit_y", "_fct_mult", "_vert_vit", "_inaltime_salt", "_distanta_salt", "_dur_zbor", "_umbla_casper", "_strigoi", "_tgt_casp"];
 
 uiSleep 2;
 
 _ck_pl = false;
-while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < _activation_range) then {_ck_pl = true}} forEach allPlayers; uiSleep 10};
+while {!_ck_pl} do {{if (_x distance getMarkerPos _poz_orig_sc < 1000) then {_ck_pl = true}} forEach allPlayers; uiSleep 10};
 
 _strigoi = createAgent ["C_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
 _strigoi setVariable ["BIS_fnc_animalBehaviour_disable", true];

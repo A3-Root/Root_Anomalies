@@ -3,7 +3,7 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_head_worm", "_tail_worm", "_voce_idle", "_activation_range"];
+params ["_head_worm", "_tail_worm", "_voce_idle"];
 
 [_voce_idle, true] remoteExec ["hideObjectGlobal", 2, true];
 
@@ -31,7 +31,7 @@ while {!isNull _head_worm} do {
 		_spot_lit setLightFlareMaxDistance 1500;
 		_spot_lit setLightAttenuation [0, 0, 50, 1000, 1, 50];
 
-		while {player distance _head_worm < _activation_range} do {
+		while {player distance _head_worm < 1000} do {
 			_r_col_burp = random 1;
 			_g_col_burp = random 1;
 			_b_col_burp = random 1;
@@ -55,9 +55,9 @@ while {!isNull _head_worm} do {
 		_smoke_head setParticleRandom [3, [0.25, 0.25, 0.25], [0.1, 0.1, 0.1], 5, 0.25, [0.1, 0.1, 0.05, 0.1], 1, 0];
 		_smoke_head setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head_worm, 0, true, 0.1, [[0, 0, 0, 0]]];
 		_smoke_head setDropInterval 0.01;
-		while {player distance _head_worm < _activation_range} do	{uiSleep 15;};
+		while {player distance _head_worm < 1000} do	{uiSleep 15;};
 		deleteVehicle _smoke_head;
 	};
 
-	waitUntil {player distance _head_worm < _activation_range};
+	waitUntil {player distance _head_worm < 1000};
 };

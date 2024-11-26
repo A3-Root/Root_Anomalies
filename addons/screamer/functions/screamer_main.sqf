@@ -50,25 +50,13 @@ SCREAMER_vehicle_dmg = {
 		} forEach _vichitpoints;
 };
 
-private ["_entitate", "_poz_orig_sc", "_anomaly_vic", "_damage_screamer_close", "_damage_screamer_medium", "_damage_screamer_far", "_screamer_territory", "_screamer_hostiles", "_screamer_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_grp"];
-private ["_screamer_spawn", "_vichitpoints", "_random_close", "_random_medium", "_random_far", "_screamer_targets", "_screamer_dmgs", "_screamer_anomally", "_temp_mass", "_isalivevic", "_valid_statue", "_screamer_health", "_scr_obj"];
+private ["_entitate", "_grp"];
+private ["_vichitpoints", "_random_close", "_random_medium", "_random_far", "_screamer_targets", "_screamer_dmgs", "_screamer_anomally", "_temp_mass", "_isalivevic", "_valid_statue", "_scr_obj"];
 
 if (!isServer) exitWith {};
 
 
-_poz_orig_sc = _this select 0;
-_anomaly_vic = _this select 1;
-_damage_screamer_close = _this select 2;
-_damage_screamer_medium = _this select 3;
-_damage_screamer_far = _this select 4;
-_screamer_territory = _this select 5;
-_screamer_hostiles = _this select 6;
-_screamer_radius = _this select 7;
-_isvicdmg = _this select 8;
-_isaidmg = _this select 9;
-_isaipanic = _this select 10;
-_screamer_spawn = _this select 11;
-_screamer_health = _this select 12;
+params ["_poz_orig_sc", "_anomaly_vic", "_damage_screamer_close", "_damage_screamer_medium", "_damage_screamer_far", "_screamer_territory", "_screamer_hostiles", "_screamer_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_screamer_spawn", "_screamer_health"];
 
 _time = 3 + diag_tickTime;
 
@@ -231,6 +219,9 @@ if (_isalivevic) then {
 
 uiSleep 1;
 
+// SCREAMER NOT MOVING -- NEED TO INVESTIGATE ITS CHECKS
+
+
 while {alive _entitate} do {
 	_entitate setUnitPos "UP";
 	if  (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
@@ -301,37 +292,6 @@ while {alive _entitate} do {
 		if !((_units_range_2 find _screamer_anomally) == -1) then {_units_range_2 = _units_range_2 - [_screamer_anomally]};
 		if !((_units_range_3 find _screamer_anomally) == -1) then {_units_range_3 = _units_range_3 - [_screamer_anomally]};
 				
-/*
-
-Need to filter out units that are only in direct line of sight of the entity
-
-Possible functions: BIS_fnc_isInFrontOf and getRelDir
-
-getRelDir Method:
-
-_overallfrontunits = [];
-{
-	_tmpdirection = _entitate getRelDir _x;
-	if (!(_x == _screamer_anomally) && !(_x == _entitate) && (((_entitate getRelDir _x > 314) && (_entitate getRelDir _x < 361)) || ((_entitate getRelDir _x > -1) && (_entitate getRelDir _x < 46)))) then {
-		_overallfrontunits pushBack _x;
-	};
-} forEach _overallunits;
-
-alternatively,
-
-_overallfrontunits = _overallunits select {
-    _direction = _entitate getRelDir _x;
-    (((_direction >= 315) && ( _direction <= 360 )) || ((_direction >= 0) && ( _direction <= 45 )))
-};
-
-
-BIS_fnc_isInFrontOf Method:
-
-_overallfrontunits = _overallunits select { [_entitate, _x] call BIS_fnc_isInFrontOf };
-
-*/
-
-
 		uiSleep 1;
 
 		_wave_obj attachTo [_entitate, [0, -1, 1.5]];

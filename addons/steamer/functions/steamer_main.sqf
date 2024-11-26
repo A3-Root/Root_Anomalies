@@ -24,11 +24,11 @@ STEAMER_travel_path = {
 
 
 if (!isServer) exitWith {};
-params ["_orig_poz", "_teritoriu", "_damage_steamer", "_recharge", "_dmg_on_death", "_travelpath", "_activation_range"];
+params ["_orig_poz", "_teritoriu", "_damage_steamer", "_recharge", "_dmg_on_death", "_travelpath"];
 private ["_damage", "_vehicle", "_vichitpoints"];
 
 _ck_pl = false;
-while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < _activation_range) then {_ck_pl = true}} forEach allPlayers; uiSleep 5};
+while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1000) then {_ck_pl = true}} forEach allPlayers; uiSleep 5};
 _steamer_dud = createAgent ["O_Soldier_VR_F", getMarkerPos _orig_poz, [], 0, "NONE"]; _steamer_dud hideObjectGlobal true; _steamer_dud enableSimulationGlobal false;
 [[_steamer_dud], "\z\root_anomalies\addons\steamer\functions\steamer_voice.sqf"] remoteExec ["execVM", 0, true];
 _list_unit_range_steamer = [];
