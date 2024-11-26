@@ -3,7 +3,7 @@
 /*
 
 ================================================================================================================================
-STRIGOI Parameters =======================
+STRIGOI Parameters 
 ================================================================================================================================
 [_marker_name, _territory, _day_activ, _inflicted_damage, _hp_strigoi] execVM "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"
 

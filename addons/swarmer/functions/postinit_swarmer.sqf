@@ -4,10 +4,10 @@
 [] spawn {
 	waitUntil {!isNil "insecticid"};
     player addEventHandler ["Fired", {
-		private ["_al_throwable"];
-		_al_throwable = _this select 6;
-		_shooter = _this select 0;
-		[_al_throwable] execVM "\z\root_anomalies\addons\swarmer\functions\swarmer_smoke_detect.sqf";
+		params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+		if (typeOf _projectile == insecticid) then {
+			[_projectile, "\z\root_anomalies\addons\swarmer\functions\swarmer_kill_hive.sqf"] remoteExec ["execVM"];
+		};
 	}];
 };
 

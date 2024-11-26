@@ -6,11 +6,12 @@ private ["_stup", "_roi_SFX", "_dest_flow", "_life_fct", "_flow_self", "_tgt_hiv
 if (!hasInterface) exitWith {};
 
 _stup = _this select 0;
+_activation_range = _this select 1;
 _life_fct = 2;
 
 while {alive _stup} do
 {
-	waitUntil {player distance _stup < 1000};
+	waitUntil {player distance _stup < (_activation_range + 200)};
 	_roi_SFX = "#particlesource" createVehicleLocal (getPos _stup);
 	_roi_SFX setParticleCircle [0, [-0.1, -0.1, -0.1]];
 	_roi_SFX setParticleRandom [0.1, [3, 3, 2], [0.2, 0.2, -0.1], 0, 0, [0, 0, 0, 1], 1, 1];
