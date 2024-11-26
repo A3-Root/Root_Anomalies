@@ -9,7 +9,7 @@ _obj_emit = _this select 0;
 _dist_damage = _this select 1;
 _isseize = _this select 2;
 
-_sun_ini= "none";
+_sun_ini = "none";
 
 _token = 13;
 
@@ -67,7 +67,7 @@ while {alive _electromagnetic_anom} do {
 	};
 };
 };
-_viz_fct= 0;
+_viz_fct = 0;
 while {alive _obj_emit} do {
 	waitUntil {(player distance _obj_emit) < 1500};
 	if (typeOf player != "VirtualCurator_F") then {
@@ -75,13 +75,13 @@ while {alive _obj_emit} do {
 	_cam_dir = [0, 0, 0] getDir getCameraViewDirection player;
 
 	if ((abs(_dir_rel - _cam_dir) <= 46) or (abs(_dir_rel - _cam_dir) >= 314)) then {
-		if (_viz_fct < 1) then {_viz_fct = _viz_fct + 1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz= _total_viz + 1; _obj_emit setVariable ["vizibil", _total_viz, true];};
+		if (_viz_fct < 1) then {_viz_fct = _viz_fct + 1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz = _total_viz + 1; _obj_emit setVariable ["vizibil", _total_viz, true];};
 	} else {
 			_main_obj_sun = ["metalic1", "metalic2", "metalic3", "metalic4", "metalic5"] call BIS_fnc_selectRandom;
-			if ((_sun_ini != _main_obj_sun) and (_token > 12)) then {_obj_emit say3D [_main_obj_sun, 1500]; _token= 0};
-			_token= _token + 0.2;
+			if ((_sun_ini != _main_obj_sun) and (_token > 12)) then {_obj_emit say3D [_main_obj_sun, 1500]; _token = 0};
+			_token = _token + 0.2;
 			_sun_ini = _main_obj_sun;
-			if (_viz_fct > 0) then {_viz_fct = _viz_fct - 1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz= _total_viz - 1; _obj_emit setVariable ["vizibil", _total_viz, true];};
+			if (_viz_fct > 0) then {_viz_fct = _viz_fct - 1; _total_viz = _obj_emit getVariable "vizibil"; _total_viz = _total_viz - 1; _obj_emit setVariable ["vizibil", _total_viz, true];};
 		};
 	uiSleep 0.2;};
 };

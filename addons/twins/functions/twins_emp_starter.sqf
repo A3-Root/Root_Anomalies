@@ -7,7 +7,7 @@ private ["_hndl", "_range_lit", "_brit", "_light_emp", "_ripple", "_blast", "_ba
 
 _AOE = _tracking_p;
 
-_bangsound= "#particlesource" createVehicleLocal getPosATL _spark_move;
+_bangsound = "#particlesource" createVehicleLocal getPosATL _spark_move;
 _bangsound say3D ["earthquake_02", 3500];
 
 
@@ -48,7 +48,7 @@ if !(_isseisore) then {
 	_hndl ppEffectCommit 1.5;
 
 
-	_range_lit= 0;
+	_range_lit = 0;
 	_brit = 0;
 
 	while {_brit < 100} do 

@@ -19,8 +19,8 @@ _dmg_on_teleport = _this select 2;
 _noseize       = _this select 3;
 
 
-_list_teleport= [];
-_list_vek_teleport= [];
+_list_teleport = [];
+_list_vek_teleport = [];
 
 while {alive _obj_teleporter} do {
     _list_teleport = (position _obj_teleporter) nearEntities ["CAManBase", 15];
@@ -94,7 +94,7 @@ while {alive _obj_teleporter} do {
             };
         } forEach _list_vek_teleport;
         _list_vek_teleport = [];
-        _list_teleport= [];
+        _list_teleport = [];
     };
     uiSleep 2;
 };

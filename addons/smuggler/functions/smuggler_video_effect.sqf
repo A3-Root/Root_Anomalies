@@ -17,59 +17,59 @@ switch (_effect_tip) do {
 		"dynamicBlur" ppEffectCommit 3;
 		uiSleep 3;
 		"dynamicBlur" ppEffectEnable false;
-		};
+	};
 	case "colorinv": {
-				["ColorInversion", 2500, [0, 1, 0]] spawn {
-					params ["_name", "_priority", "_effect", "_handle"];
-					while {
-						_handle = ppEffectCreate [_name, _priority];
-						_handle < 0
-					} do {
-						_priority = _priority + 1;
-					};
-					_handle ppEffectEnable true;
-					_handle ppEffectAdjust _effect;
-					_handle ppEffectCommit 5;
-					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3;
-					_handle ppEffectEnable false;
-					ppEffectDestroy _handle;
-				};
-				};				
+		["ColorInversion", 2500, [0, 1, 0]] spawn {
+			params ["_name", "_priority", "_effect", "_handle"];
+			while {
+				_handle = ppEffectCreate [_name, _priority];
+				_handle < 0
+			} do {
+				_priority = _priority + 1;
+			};
+			_handle ppEffectEnable true;
+			_handle ppEffectAdjust _effect;
+			_handle ppEffectCommit 5;
+			waitUntil {ppEffectCommitted _handle};
+			uiSleep 3;
+			_handle ppEffectEnable false;
+			ppEffectDestroy _handle;
+		};
+	};				
 	case "chrom": {
-				["ChromAberration", 200, [0.93, 0.86, true]] spawn {
-					params ["_name", "_priority", "_effect", "_handle"];
-					while {
-						_handle = ppEffectCreate [_name, _priority];
-						_handle < 0
-					} do {
-						_priority = _priority + 1;
-					};
-					_handle ppEffectEnable true;
-					_handle ppEffectAdjust _effect;
-					_handle ppEffectCommit 5;
-					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3;
-					_handle ppEffectEnable false;
-					ppEffectDestroy _handle;
-				};
-				};								
+		["ChromAberration", 200, [0.93, 0.86, true]] spawn {
+			params ["_name", "_priority", "_effect", "_handle"];
+			while {
+				_handle = ppEffectCreate [_name, _priority];
+				_handle < 0
+			} do {
+				_priority = _priority + 1;
+			};
+			_handle ppEffectEnable true;
+			_handle ppEffectAdjust _effect;
+			_handle ppEffectCommit 5;
+			waitUntil {ppEffectCommitted _handle};
+			uiSleep 3;
+			_handle ppEffectEnable false;
+			ppEffectDestroy _handle;
+		};
+	};								
 	case "colorcor": {
-				["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn {
-					params ["_name", "_priority", "_effect", "_handle"];
-					while {
-						_handle = ppEffectCreate [_name, _priority];
-						_handle < 0
-					} do {
-						_priority = _priority + 1;
-					};
-					_handle ppEffectEnable true;
-					_handle ppEffectAdjust _effect;
-					_handle ppEffectCommit 5;
-					waitUntil {ppEffectCommitted _handle};
-					uiSleep 3;
-					_handle ppEffectEnable false;
-					ppEffectDestroy _handle;
-				};
-				};					
+		["ColorCorrections", 1500, [ 1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn {
+			params ["_name", "_priority", "_effect", "_handle"];
+			while {
+				_handle = ppEffectCreate [_name, _priority];
+				_handle < 0
+			} do {
+				_priority = _priority + 1;
+			};
+			_handle ppEffectEnable true;
+			_handle ppEffectAdjust _effect;
+			_handle ppEffectCommit 5;
+			waitUntil {ppEffectCommitted _handle};
+			uiSleep 3;
+			_handle ppEffectEnable false;
+			ppEffectDestroy _handle;
+		};
+	};					
 };

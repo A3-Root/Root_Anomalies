@@ -87,9 +87,9 @@ BURPER_animation = {
 	private ["_obj_anim", "_b_dir", "_h_bounce", "_sus", "_chek", "_curr_chek", "_fly_chek", "_work_obj"];
 	_obj_anim = _this select 0;
 	_work_obj = _this select 1;
-	_b_dir= 0;
-	_h_bounce= 0;
-	_sus= false;
+	_b_dir = 0;
+	_h_bounce = 0;
+	_sus = false;
 	while {
 		((player distance _obj_anim) < 1500) && (ciclu_simplu != ciclu_compli) && (_work_obj getVariable "burper_activ")
 	} do {

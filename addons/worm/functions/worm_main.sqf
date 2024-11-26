@@ -9,9 +9,9 @@ WORM_avoid = {
         _reldir = [_x, getPos _danger_close] call BIS_fnc_dirto;
         _fct = [30, -30] call BIS_fnc_selectRandom;
         if (_reldir < 180) then {
-            _op_dir= _reldir + 180 + _fct
+            _op_dir = _reldir + 180 + _fct
         } else {
-            _op_dir= _reldir - 180 + _fct
+            _op_dir = _reldir - 180 + _fct
         };
         _avoid_poz = [getPosATL _x, 20 + random 50, _op_dir] call BIS_fnc_relPos;
         _x doMove _avoid_poz;
@@ -193,7 +193,7 @@ while {!isNull _cap} do {
         };
         
         if ((!isNull _tgt_worm) && (_tgt_worm distance _cap > 15) && !(surfaceIsWater getPos _tgt_worm)) then {
-            _sunet_deplas= ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
+            _sunet_deplas = ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
             if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
             _fct_move = 8 + random 8;
             _fct = [10 + random - 35, 10 + random 45] call BIS_fnc_selectRandom;

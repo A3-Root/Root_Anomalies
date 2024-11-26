@@ -12,7 +12,7 @@ SCREAMER_avoid = {
 		if (_x != _danger_close) then {
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
 		_fct = [30, -30] call BIS_fnc_selectRandom;
-		if (_reldir < 180) then {_op_dir= _reldir + 180 + _fct} else {_op_dir= _reldir - 180 + _fct};
+		if (_reldir < 180) then {_op_dir = _reldir + 180 + _fct} else {_op_dir = _reldir - 180 + _fct};
 		_avoid_poz = [getPosATL _x, 30 + random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;
 		_x setSkill ["commanding", 1];
@@ -186,7 +186,7 @@ if (_isalivevic) then {
 	_entitate removeAllEventHandlers "Hit";
 
 	_entitate addEventHandler ["Hit", {
-		_unit= _this select 0;
+		_unit = _this select 0;
 		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
@@ -210,7 +210,7 @@ if (_isalivevic) then {
 	_screamer_anomally removeAllEventHandlers "Hit";
 
 	_screamer_anomally addEventHandler ["Hit", {
-		_unit= _this select 0;
+		_unit = _this select 0;
 		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
@@ -239,7 +239,7 @@ while {alive _entitate} do {
 		while {!_teleport and (alive _entitate)} do {
 		_entitate setUnitPos "UP";
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
-		if (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport= true;};
+		if (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport = true;};
 
 		_pot_tgt = ((getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) select {((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
 		_poz = getPosATL _pot_tgt;
@@ -370,7 +370,7 @@ _overallfrontunits = _overallunits select { [_entitate, _x] call BIS_fnc_isInFro
 			_press_implicit_y = 1 + _press_implicit_x;
 		};
 		if (_isaipanic) then {[_entitate, _screamer_territory, _screamer_targets] call SCREAMER_avoid;};
-		scream_on= true;
+		scream_on = true;
 
 		{
 			_vel = velocity _x;
@@ -458,7 +458,7 @@ _overallfrontunits = _overallunits select { [_entitate, _x] call BIS_fnc_isInFro
 		deleteVehicle _wave_obj;
 		uiSleep 1;
 
-		scream_on= false;
+		scream_on = false;
 		_units_range_1 = [];
 		_units_range_2 = [];
 		_units_range_3 = [];

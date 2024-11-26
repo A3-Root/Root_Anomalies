@@ -31,7 +31,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 	_closest_units = [];
 	_incr = 0;
 
-	_vizibil= true;
+	_vizibil = true;
 	
 	while {alive _heart_twin} do {
 		_closest_units = (position _spark_move) nearEntities [["CAManBase", "LandVehicle"], _tracking_p];
@@ -45,7 +45,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 				_pos_umbla = [getPosATL _spark_move, _incr, _dir_depl] call BIS_fnc_relPos;
 				_spark_move setPosATL _pos_umbla;
 				_spark_move setDir _dir_depl;
-				_incr= _incr -(15 + floor(random 11));
+				_incr = _incr -(15 + floor(random 11));
 				_allow_move = 0;
 				};
 			};
@@ -76,7 +76,7 @@ if (_spark_effect) then {
 			_pauza_intre_sclipiri = 0.1 + (random 2);
 			[[_poz_spark, _pauza_intre_sclipiri], "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
 			uiSleep _pauza_intre_sclipiri;
-			_nr= _nr + 1;
+			_nr = _nr + 1;
 		};
 	};
 deleteVehicle _poz_spark;

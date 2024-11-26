@@ -10,17 +10,17 @@ _object_anom_core setVariable ["activeaza", false, true];
 while {!isNull _object_anom_core} do {
 	while {!(_object_anom_core getVariable "activeaza")} do {{if (_x distance getPos _object_anom_core < 1100) then {_object_anom_core setVariable ["activeaza", true, true]}} forEach allPlayers; uiSleep 10};
 	_object_anom_core setVariable ["activeaza", false, true];
-	_spawn_obj_classname= _spawn_obj_class call BIS_fnc_selectRandom;
+	_spawn_obj_classname = _spawn_obj_class call BIS_fnc_selectRandom;
 	if (getNumber (configFile >> "CfgVehicles" >> _spawn_obj_classname >> "scope") > 0) then {
 		if (_spawn_obj_classname isKindOf "MAN") then {
 			_grp_side = [east, west, civilian, independent] call BIS_fnc_selectRandom;
 			_grp = createGroup _grp_side;
 			_bounce_obj_temp = createVehicle ["Land_CanOpener_F", getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
 			[_bounce_obj_temp] remoteExec ["hideObject", -2];
-			_tipat= ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
+			_tipat = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
 			_telep_in = ["telep_01", "telep_02", "telep_03", "telep_04", "telep_05"] call BIS_fnc_selectRandom;
 			[_object_anom_core , [_telep_in, 300]] remoteExec ["say3D"];
-			_gigi= _grp createUnit [_spawn_obj_classname, getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
+			_gigi = _grp createUnit [_spawn_obj_classname, getPosATL _object_anom_core, [], 0, "CAN_COLLIDE"];
 			[_gigi, "NoVoice"] remoteExec ["setSpeaker", 0];	_gigi setBehaviour "AWARE";	_gigi enableFatigue false;	_gigi setUnitPos "UP"; _gigi setSkill ["commanding", 1];
 			_gigi setVariable ["teleported_in", 1, true];
 			_bounce_obj_temp setDir (random 360);

@@ -34,9 +34,9 @@ if (sunOrMoon == 0) then {
 	_spot_lit setLightAttenuation [0, 0, 50, 1000, 1, 50];
 
 	while {player distance _head_worm < 2000} do {
-	_r_col_burp= random 1;
-	_g_col_burp= random 1;
-	_b_col_burp= random 1;
+	_r_col_burp = random 1;
+	_g_col_burp = random 1;
+	_b_col_burp = random 1;
 	_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
 	_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 	_flick = 1 + floor (random 9);

@@ -35,7 +35,7 @@ deleteVehicle _logic;
 	["SLIDER:RADIUS", ["Screamer Territory", "Radius in meters of the Screamer's territory."], [20, 500, 100, 0, _radiuspos, [7, 120, 32, 1]]], 
 	["SLIDER:RADIUS", ["Screamer Effect Radius", "Radius in meters of the Screamer's attack."], [10, 490, 50, 0, _radiuspos, [7, 120, 32, 1]]], 
 	["TOOLBOX:YESNO", ["Affect Vehicles", "If true, the Screamer will also affect vehicles in its scream path."], true],
-	["TOOLBOX:YESNO", ["AI Engage [EXPERIMENTAL]", "If true, the Screamer will be engaged by AI. [NOTE - If the Screamer Model is a static model, a bright visible VR soldier would additionally be created for this purpose.]"], false],
+	["TOOLBOX:YESNO", ["AI Engages Steamer? [EXPERIMENTAL]", "If true, the Screamer will be engaged by AI. [NOTE - If the Screamer Model is a static model, a bright visible VR soldier would additionally be created for this purpose.]"], false],
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Screamer location during its attack."], false],
 	["SLIDER:PERCENT", ["Screamer Damage (Close)", "Percentage amount of damage the Screamer does to hostiles at close range."], [0.01, 1, 0.4, 2]],
 	["SLIDER:PERCENT", ["Screamer Damage (Medium)", "Percentage amount of damage the Screamer does to hostiles at mid range."], [0.01, 1, 0.2, 2]],

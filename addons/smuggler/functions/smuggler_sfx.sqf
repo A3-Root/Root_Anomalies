@@ -52,9 +52,9 @@ SMUGGLER_sfx_primary = {
 		_fct_lit = [1, -1] call BIS_fnc_selectRandom;
 		uiSleep 0.5 + random 1;
 		_spot_lit lightAttachObject [_sursa_princ_center, [0.5 + random _fct_lit, 0.5 + random _fct_lit, 1]];
-		_r_col_burp= random 1;
-		_g_col_burp= random 1;
-		_b_col_burp= random 1;
+		_r_col_burp = random 1;
+		_g_col_burp = random 1;
+		_b_col_burp = random 1;
 		_spot_lit setLightColor [_r_col_burp, _g_col_burp, _b_col_burp];
 		_spot_lit setLightAmbient [_g_col_burp, _r_col_burp, _b_col_burp];
 		

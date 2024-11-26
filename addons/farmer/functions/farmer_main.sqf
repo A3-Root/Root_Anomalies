@@ -135,7 +135,7 @@ _farmer setVariable ["al_dam_incr", _hp_curr_farmer];
 _farmer removeAllEventHandlers "Hit";
 
 _farmer addEventHandler ["Hit", {
-    _unit= _this select 0;
+    _unit = _this select 0;
     _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
         _unit setDamage 1
     };

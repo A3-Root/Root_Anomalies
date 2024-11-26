@@ -90,7 +90,7 @@ FLAMER_jump_flamer = {
 		_isacemedical = true;
 	};
 	_jump_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply round (10 + random 10);
-	_salt_sunet= selectRandom ["01_blast", "02_blast", "03_blast"];
+	_salt_sunet = selectRandom ["01_blast", "02_blast", "03_blast"];
 	_obj_veg = nearestTerrainObjects [position _flamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
 	_nearvik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 20, false];
 	[_cap_flamer, [_salt_sunet, 200]] remoteExec ["say3D"];
@@ -145,7 +145,7 @@ _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
 _flamer removeAllEventHandlers "Hit";
 
 _flamer addEventHandler ["Hit", {
-    _unit= _this select 0;
+    _unit = _this select 0;
     _flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
 	_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
 	if ((_unit getVariable "flamer_dmg_total") > 1) then {

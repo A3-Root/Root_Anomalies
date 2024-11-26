@@ -23,7 +23,7 @@ fn_teleport = {
 
 fn_final_scream = {
 waitUntil {isNil{player getVariable "tele"}};
-_tipat= ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
+_tipat = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
 [_this, [_tipat, 300]] remoteExec ["say3D"];
 };
 

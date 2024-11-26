@@ -39,7 +39,7 @@ if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 waitUntil {uiSleep 5; player distance _flamer < 1000};
 _flamer spawn {while {alive _this} do {if (_this getVariable "vizibil") then {[_this, ["flamer_voice", 100]] remoteExec ["say3D"]}; uiSleep 5 + random 1}};
 
-_pct_flamer= ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
+_pct_flamer = ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
 {_part_surs = "Land_HelipadEmpty_F" createVehicleLocal [0, 0, 0]; _comp_obj_casp pushBack _part_surs; _part_surs attachTo [_flamer, [0, 0, 0], _x]} forEach _pct_flamer;
 _part_array_flamer = _comp_obj_casp call FLAMER_sfx;
 _part_gost_sec = "#particlesource" createVehicleLocal (getPosATL _flamer);
