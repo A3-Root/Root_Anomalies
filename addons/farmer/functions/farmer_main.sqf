@@ -79,8 +79,8 @@ FARMER_attk_farmer = {
 			};
 		};
         if ((_x isKindOf "LandVehicle") && !(_x == _farmer)) then {
-            _jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 3;
-            _x setVelocity [_jump_dir select 0, _jump_dir select 1, 3];
+            _jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 5;
+            _x setVelocity [_jump_dir select 0, _jump_dir select 1, 7];
             _vehicle = _x;
             _damage = random[0, _damage_farmer, 1];
             _vichitpoints = getAllHitPointsDamage _vehicle; _vichitpoints = _vichitpoints select 0;
@@ -143,11 +143,13 @@ _farmer addEventHandler ["HandleDamage", {
 }];
 
 _farmer addEventHandler ["Hit", {
-    _unit = _this select 0;
-    _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
-        _unit setDamage 1
+    params ["_unit", "_source", "_damage", "_instigator"];
+	if (_unit != _source) then {
+        _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
+            _unit setDamage 1
+        };
+        [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
     };
-    [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
 }];
 
 _farmer addEventHandler ["Killed", {

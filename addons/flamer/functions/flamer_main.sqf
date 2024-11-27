@@ -143,17 +143,15 @@ _flamer setVariable ["flamer_dmg_total", 0];
 _flamer setVariable ["flamer_dmg_increase", _hp_curr_flamer];
 
 _flamer addEventHandler ["Hit", {
-	diag_log format ["******* _flamer Hit EH Triggered"];
     params ["_unit", "_source", "_damage", "_instigator"];
-	diag_log format ["******* _unit: %1    ----   _source: %2    ----   _damage: %3    ----   _instigator: %4", _unit, _source, _damage, _instigator];
-    _flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
-	diag_log format ["******* flamer_dmg_total: %1", flamer_dmg_total];
-	diag_log format ["******* _flamer_curr_dmg: %1", _flamer_curr_dmg];
-	_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
-	if ((_unit getVariable "flamer_dmg_total") > 1) then {
-        _unit setDamage 1;
-    };
-    [[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"];
+	if (_unit != _source) then {
+		_flamer_curr_dmg = (_unit getVariable "flamer_dmg_total") + (_unit getVariable "flamer_dmg_increase");
+		_unit setVariable ["flamer_dmg_total", _flamer_curr_dmg];
+		if ((_unit getVariable "flamer_dmg_total") > 1) then {
+			_unit setDamage 1;
+		};
+		[[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"];
+	};
 }];
 
 _flamer addEventHandler ["Killed", {
