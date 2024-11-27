@@ -60,7 +60,7 @@ FARMER_attk_farmer = {
 	params ["_farmer", "_damage_farmer"];
 	_farmer setUnitPos "UP";
 	[[_farmer, _damage_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
-    _farmertargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 25];
+    _farmertargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 20];
 	_farmertargets - [_farmer];
 
 	uiSleep 1.2;
@@ -209,7 +209,7 @@ while {alive _farmer} do {
         }
     } do {
         _farmer setDir (_farmer getRelDir _tgt_farmer);
-        if ((_farmer distance _tgt_farmer) > 20) then {
+        if ((_farmer distance _tgt_farmer) > 15) then {
             _farmer call FARMER_hide_farmer;
 
             [_farmer, _tgt_farmer] call FARMER_travel_farmer;
@@ -224,7 +224,7 @@ while {alive _farmer} do {
             uiSleep 1;
         };
         _farmer setUnitPos "UP";
-        if ((_farmer distance _tgt_farmer) < 20) then {
+        if ((_farmer distance _tgt_farmer) <= 15) then {
             uiSleep 1;
             [_farmer, _damage_inflicted] call FARMER_attk_farmer;
             if (_isaipanic) then {
