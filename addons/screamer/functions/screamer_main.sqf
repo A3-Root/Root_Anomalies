@@ -55,7 +55,6 @@ private ["_vichitpoints", "_random_close", "_random_medium", "_random_far", "_sc
 
 if (!isServer) exitWith {};
 
-
 params ["_poz_orig_sc", "_anomaly_vic", "_damage_screamer_close", "_damage_screamer_medium", "_damage_screamer_far", "_screamer_territory", "_screamer_hostiles", "_screamer_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_screamer_spawn", "_screamer_health"];
 
 _time = 3 + diag_tickTime;
@@ -83,7 +82,6 @@ if (_isvicdmg) then {
 	_screamer_dmgs = ["Man", "LandVehicle", "Air"];
 };
 
-
 if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then {
 	if (_anomaly_vic isKindOf "Man") then {
 		_isalivevic = true;
@@ -95,7 +93,6 @@ if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then
 	_isalivevic = false;
 	_valid_statue = false;
 };
-
 
 if (_isaidmg) then {
 	_grp = createGroup _screamer_spawn;
@@ -143,10 +140,9 @@ _bob1 = createVehicle ["Sign_Sphere25cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"];
 _bob2 = createVehicle ["Sign_Sphere25cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"];
 _bob3 = createVehicle ["Sign_Sphere25cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"];
 
-[_bob1, true] remoteExec ["hideObjectGlobal", 0, true];
-[_bob2, true] remoteExec ["hideObjectGlobal", 0, true];
-[_bob3, true] remoteExec ["hideObjectGlobal", 0, true];
-
+[_bob1, true] remoteExec ["hideObjectGlobal", 2, true];
+[_bob2, true] remoteExec ["hideObjectGlobal", 2, true];
+[_bob3, true] remoteExec ["hideObjectGlobal", 2, true];
 
 if (!_isalivevic) then 
 {
@@ -226,30 +222,35 @@ while {alive _entitate} do {
 	_entitate setUnitPos "UP";
 	if  (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) > 1) then {
 		_teleport = false;
+		diag_log format ["******** Teleport = False"];
 	
 		while {!_teleport and (alive _entitate)} do {
 		_entitate setUnitPos "UP";
 		private ["_press_implicit_y", "_press_implicit_x", "_wave_obj", "_anomally_pos", "_bob_pos_1", "_bob_pos_2", "_bob_pos_3", "_pot_tgt", "_poz"];
-		if (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport = true;};
+		if (count (getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) < 2) then {_teleport = true; diag_log format ["******** Teleport = True (Inside !teleport)"]; };
 
 		_pot_tgt = ((getMarkerPos _poz_orig_sc nearEntities [_screamer_targets, _screamer_territory]) select {((side _x) in _screamer_hostiles) && (typeOf _x != "VirtualCurator_F") && {alive _x} && {(lifeState _x) != "INCAPACITATED"}}) param [0, objNull];
 		_poz = getPosATL _pot_tgt;
+		diag_log format ["******** _pot_tgt = %1", _pot_tgt];
+		diag_log format ["******** _poz = %1", _poz];
 
 		if (_isalivevic) then {
 			_wave_obj = createVehicle ["Land_Battery_F", position _entitate, [], 0, "CAN_COLLIDE"];
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
+			diag_log format ["******** _isalivevic DoMove"];
 			[_entitate, ["miscare_screamer", 300]] remoteExec ["say3D"];
 		} else {
 			_wave_obj = createVehicle ["Land_Battery_F", position _screamer_anomally, [], 0, "CAN_COLLIDE"];
 			_wave_obj setMass 10;
 			_entitate doMove _poz;
+			diag_log format ["******** NOT_isalivevic DoMove"];
 			[_screamer_anomally, ["miscare_screamer", 300]] remoteExec ["say3D"];
 		};
 		uiSleep 5;
 
-		_entitate lookAt _poz;
 		doStop _entitate;
+		_entitate lookAt _pot_tgt;
 		uiSleep 1;
 
 		if (_isalivevic) then {
