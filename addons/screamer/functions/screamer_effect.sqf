@@ -44,7 +44,7 @@ if ((player distance _emit) < 100) then {playSound "earthquakes"};
 
 uiSleep 2;
 deleteVehicle _blur_sonic;
-enableCamShake false;
+resetCamShake;
 uiSleep 2;
 deleteVehicle _dirt_dust;
 deleteVehicle _bolovani_ground;

@@ -19,7 +19,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -52,7 +52,7 @@ deleteVehicle _logic;
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

@@ -9,7 +9,6 @@ _obj_eff = _this select 0;
 
 _obj_eff say3D ["teleport_screamer", 500];
 
-enableCamShake true;
 addCamShake [1, 5, 25];
 
 _blur_sonic = "#particlesource" createVehicleLocal (getPosATL _obj_eff);
@@ -36,5 +35,10 @@ for "_i" from 1 to 3 do {
     uiSleep (random[0.4, 0.8, 1.2]);
 };
 
+_nearbySpheres = _blur_pos nearObjects ["Sign_Sphere25cm_F", 100];
+{
+    deleteVehicle _x;
+} forEach _nearbySpheres;
+
 deleteVehicle _blur_sonic;
-enableCamShake false;
+resetCamShake;

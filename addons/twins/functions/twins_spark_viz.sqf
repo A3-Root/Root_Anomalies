@@ -47,7 +47,7 @@ while {alive _electromagnetic_anom} do {
 			};
 			_aberat ppEffectEnable false;
 			ppEffectDestroy _aberat;
-			enableCamShake false;
+			resetCamShake;
 		};
 	};
 	

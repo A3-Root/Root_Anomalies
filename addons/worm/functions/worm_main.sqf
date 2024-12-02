@@ -53,7 +53,6 @@ private ["_press_implicit_x", "_press_implicit_y", "_isacemedical"];
 _isacemedical = false;
 
 if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
-    diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 	_isacemedical = false;
 } else {
 	_isacemedical = true;
@@ -114,7 +113,7 @@ while {_hide_me} do {
     };
 };
 uiSleep 1;
-enableCamShake false;
+resetCamShake;
 waitUntil {
     (getPosATL _cap select 2) < 1
 };

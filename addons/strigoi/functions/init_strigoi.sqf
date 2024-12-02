@@ -20,7 +20,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -55,7 +55,7 @@ deleteVehicle _logic;
 
 		["Strigoi Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;

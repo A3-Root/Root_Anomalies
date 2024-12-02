@@ -15,7 +15,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -48,7 +48,7 @@ deleteVehicle _logic;
 		
 		["Steamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

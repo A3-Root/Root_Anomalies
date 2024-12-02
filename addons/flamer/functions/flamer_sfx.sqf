@@ -31,7 +31,6 @@ enableCamShake true;
 
 _isacemedical = false;
 if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
-    diag_log "******ACE Medical Engine not detected. Using vanilla medical system.";
 	_isacemedical = false;
 } else {
 	_isacemedical = true;

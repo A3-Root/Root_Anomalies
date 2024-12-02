@@ -18,7 +18,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -58,7 +58,7 @@ deleteVehicle _logic;
 		
 		_twins_obj = _anomaly_obj createVehicle _objpos;
 
-		[[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure], "\z\root_anomalies\addons\twins\functions\twins_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure], "\z\root_anomalies\addons\twins\functions\twins_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

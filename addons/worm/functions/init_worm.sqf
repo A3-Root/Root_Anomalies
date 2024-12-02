@@ -18,7 +18,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -55,7 +55,7 @@ deleteVehicle _logic;
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser], "\z\root_anomalies\addons\worm\functions\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_wormmarkerName, _worm_damage, _worm_territory, _isaipanic, _wormdiffuser], "\z\root_anomalies\addons\worm\functions\worm_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

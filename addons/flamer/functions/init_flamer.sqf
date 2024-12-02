@@ -14,7 +14,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -52,7 +52,7 @@ deleteVehicle _logic;
 		
 		["Flamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 		
-		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

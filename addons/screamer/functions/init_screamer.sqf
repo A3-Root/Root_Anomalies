@@ -13,7 +13,7 @@ if (!hasInterface) exitWith {};
 
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {
-    diag_log "******Root_Anomalies Error: CBA and/or ZEN not detected. They are required for this mod.";
+    diag_log "******Root_Anomalies Error: Zeus Enhanced (ZEN) not detected. Aborting Mod Load.";
 };
 
 params ["_logic"];
@@ -33,19 +33,19 @@ deleteVehicle _logic;
 	["EDIT", ["Screamer Model", "Classname of the object used as the Anomaly."], ["Land_AncientStatue_01_F"]],
 	["SLIDER", ["Screamer Health", "Percentage amount of health the Screamer has."], [10, 5000, 400, 0]],
 	["SLIDER:RADIUS", ["Screamer Territory", "Radius in meters of the Screamer's territory."], [20, 500, 100, 0, _radiuspos, [7, 120, 32, 1]]], 
-	["SLIDER:RADIUS", ["Screamer Effect Distance", "Distance in meters of the Screamer's attack. Recommended default value of 50 meters."], [10, 490, 50, 0, _radiuspos, [7, 120, 32, 1]]], 
+	["SLIDER:RADIUS", ["Screamer Effect Distance", "Distance in meters of the Screamer's attack. NOTE - Higher values would create unrealistic/unimmersive gameplay. Recommended to leave default."], [10, 490, 50, 0, _radiuspos, [7, 120, 32, 1]]], 
 	["TOOLBOX:YESNO", ["Affect Vehicles", "If true, the Screamer will also affect vehicles in its scream path."], true],
-	["TOOLBOX:YESNO", ["AI Engages Steamer? [EXPERIMENTAL]", "If true, the Screamer will be engaged by AI. [NOTE - If the Screamer Model is a static model, a bright visible VR soldier would additionally be created for this purpose.]"], false],
+	["TOOLBOX:YESNO", ["AI Engages [EXPERIMENTAL]", "If true, the Screamer will be engaged by AI. [NOTE - If the Screamer Model is a static model, a bright visible VR soldier would additionally be created for this purpose.]"], false],
 	["TOOLBOX:YESNO", ["AI Panic", "If true, the AI will forcefully run away from Screamer location during its attack."], false],
-	["SLIDER:PERCENT", ["Screamer Damage (Close)", "Percentage amount of damage the Screamer does to hostiles at close range."], [0.01, 1, 0.4, 2]],
-	["SLIDER:PERCENT", ["Screamer Damage (Medium)", "Percentage amount of damage the Screamer does to hostiles at mid range."], [0.01, 1, 0.2, 2]],
-	["SLIDER:PERCENT", ["Screamer Damage (Far)", "Percentage amount of damage the Screamer does to hostiles at far ranges."], [0.01, 1, 0.1, 2]]
+	["SLIDER:PERCENT", ["Screamer Damage (Close)", "Percentage amount of damage the Screamer does to hostiles at close range."], [0.01, 1, 0.8, 2]],
+	["SLIDER:PERCENT", ["Screamer Damage (Medium)", "Percentage amount of damage the Screamer does to hostiles at mid range."], [0.01, 1, 0.4, 2]],
+	["SLIDER:PERCENT", ["Screamer Damage (Far)", "Percentage amount of damage the Screamer does to hostiles at far ranges."], [0.01, 1, 0.2, 2]]
 	], {
 		params ["_results", "_screamermarkerName"];
 		_results params ["_screamer_spawn_side", "_screamer_hostiles", "_screamer_model", "_screamer_health", "_screamer_territory", "_screamer_atk_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_screamer_damage_close", "_screamer_damage_medium", "_screamer_damage_far"];
 
 		if (_screamer_hostiles isEqualTo []) then {
-            _screamer_hostiles = ["west", "east", "RESISTANCE", "civilian"];
+            _screamer_hostiles = [east, west, civilian, resistance];
         };
 
 		if (_isaidmg) then {
@@ -55,7 +55,7 @@ deleteVehicle _logic;
 				_screamer_spawn_side = _screamer_spawn_side select 0;
 			};
 		} else {
-			_screamer_spawn_side = east;
+			_screamer_spawn_side = civilian;
 		};
 		
 		if (_screamer_atk_radius > (_screamer_territory / 2)) then {
@@ -68,7 +68,7 @@ deleteVehicle _logic;
 		
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health], "\z\root_anomalies\addons\screamer\functions\screamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 0];
+		[[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health], "\z\root_anomalies\addons\screamer\functions\screamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";
