@@ -1,4 +1,4 @@
-Zeus Module for Alias's Anomalies for use in mission without needing Eden Editor.
+Heavily Reworked Zeus Module for Alias's Anomalies for use in mission without needing Eden Editor.
 
 Found under tabs "Root's Anomalies" in the "Modules" section.
 
@@ -22,7 +22,7 @@ Works out-of-the-box with both Vanilla Medical and ACE Medical systems.
 
 [img]https://i.imgur.com/EWy3dQc.gif[/img]
 
-Useful for Stalker, SCP, Halloween, F.E.A.R, Horror, Sci-Fi, Alien, Anomalies, Monster or any other themed Missions.
+Useful for Stalker, SCP, Halloween, F.E.A.R, Horror, Sci-Fi, Alien, Anomalies, Prototype, Monster or any other themed Missions.
 
 [hr] [/hr]
 
@@ -36,7 +36,7 @@ Check out more of his cool stuff [url=https://steamcommunity.com/id/aliascartoon
 [h1][b]++++ ANOMALIES ++++[/b][/h1]
 
 All of the anomalies are made with customization in mind. It is highly recommended to read through each option to tweak it as per your requirement.
-Health is calculated by number of 'hits' (multipled by 10) received from other units. 10 Health = 100 hits from projectile required to 'neutralize' the anomaly. Some anomalies have special property for termination. Please read them carefully.
+Health is calculated by number of 'hits' received from other units. 10 Health = Hits from projectile required to 'neutralize' the anomaly. Some anomalies have special property for termination. Please read them carefully.
 
 [b]Available Anomalies:[/b]
 
@@ -123,48 +123,3 @@ Health is calculated by number of 'hits' (multipled by 10) received from other u
 [*] Can confuse the anomaly in selecting its target by having more than one unit near it and by running in different directions.
 [*] Can be neutralized by throwing the configured 'Worm Diffuser' object.
 [/list]
-
-[hr] [/hr]
-
-[h1][b]++++ LICENSE NOTICE ++++[/b][/h1]
-
-Project is now open sourced with APL-SA Licence! Check out [more info here!](https://github.com/A3-Root/Root_Anomalies/LICENSE)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Zeus Module for Alias's Anomalies for use in mission without needing Eden Editor.
-
-Found under tabs "Root's Anomalies" in the "Modules" section.
-
-
-
-
-
-# To-Do
-## Immediate: 
-- Add "isObjectHidden" condition amongst other checks
-- [_this, detect_smug] call BIS_fnc_hasItem
-- Fix self destruct in anomalies
-- Optimization and bug fixes
-- Test with build project
-
-## Later:
-- Better and clear documentation
-- Better code refactor
-- Optimization
-- Better functions
-- Further customizations (Make anomalies target specific AI/Group/Unit)
