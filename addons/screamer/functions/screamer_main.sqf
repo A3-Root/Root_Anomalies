@@ -294,7 +294,7 @@ while {alive _entitate} do {
 		_overallunits = nearestObjects [_anomally_pos, _screamer_dmgs, _screamer_radius];
 		_overallfrontunits = [];
 		{
-			if (!(_x == _screamer_anomally) && !(_x == _entitate) && (((_entitate getRelDir _x > 299) && (_entitate getRelDir _x < 361)) || ((_entitate getRelDir _x > -1) && (_entitate getRelDir _x < 61)))) then {
+			if ((_x != _screamer_anomally) && (_x != _entitate) && (((_entitate getRelDir _x > 299) && (_entitate getRelDir _x < 361)) || ((_entitate getRelDir _x > -1) && (_entitate getRelDir _x < 61)))) then {
 				_overallfrontunits pushBack _x;
 			};
 		} forEach _overallunits;
@@ -315,12 +315,12 @@ while {alive _entitate} do {
 				};
 			};
 		} forEach _overallfrontunits;
-		if !((_units_range_1 find _entitate) == -1) then {_units_range_1 = _units_range_1 - [_entitate]};
-		if !((_units_range_2 find _entitate) == -1) then {_units_range_2 = _units_range_2 - [_entitate]};
-		if !((_units_range_3 find _entitate) == -1) then {_units_range_3 = _units_range_3 - [_entitate]};
-		if !((_units_range_1 find _screamer_anomally) == -1) then {_units_range_1 = _units_range_1 - [_screamer_anomally]};
-		if !((_units_range_2 find _screamer_anomally) == -1) then {_units_range_2 = _units_range_2 - [_screamer_anomally]};
-		if !((_units_range_3 find _screamer_anomally) == -1) then {_units_range_3 = _units_range_3 - [_screamer_anomally]};
+		if ((_units_range_1 find _entitate) != -1) then {_units_range_1 = _units_range_1 - [_entitate]};
+		if ((_units_range_2 find _entitate) != -1) then {_units_range_2 = _units_range_2 - [_entitate]};
+		if ((_units_range_3 find _entitate) != -1) then {_units_range_3 = _units_range_3 - [_entitate]};
+		if ((_units_range_1 find _screamer_anomally) != -1) then {_units_range_1 = _units_range_1 - [_screamer_anomally]};
+		if ((_units_range_2 find _screamer_anomally) != -1) then {_units_range_2 = _units_range_2 - [_screamer_anomally]};
+		if ((_units_range_3 find _screamer_anomally) != -1) then {_units_range_3 = _units_range_3 - [_screamer_anomally]};
 				
 		uiSleep 1;
 
@@ -432,7 +432,7 @@ while {alive _entitate} do {
 		};
 	} else {
 		_teleport = true;
-		if !(_entitate distance (getMarkerPos _poz_orig_sc) < 10) then { _entitate doMove getMarkerPos _poz_orig_sc; } else { doStop _entitate; };
+		if (_entitate distance (getMarkerPos _poz_orig_sc) > 10) then { _entitate doMove getMarkerPos _poz_orig_sc; } else { doStop _entitate; };
 	};
 	uiSleep 5;
 };

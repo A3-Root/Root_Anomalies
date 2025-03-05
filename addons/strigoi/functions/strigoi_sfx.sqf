@@ -29,7 +29,7 @@ STRIGOI_spectral = {
 		_part_gost_array = _this select 0;
 		_effectArrays = _this select 1;
 		_comp_obj_casp = _this select 2;
-		while {!((count _this) isEqualTo 0)} do {
+		while {((count _this) != 0)} do {
 			uiSleep 3;
 			_arr = _effectArrays select sunOrMoon;
 			{

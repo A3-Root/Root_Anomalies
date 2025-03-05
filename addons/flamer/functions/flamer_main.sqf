@@ -293,7 +293,7 @@ while {alive _flamer} do {
 				};
 			};
 		} forEach (_nearflamer - [_flamer]);
-		if ((!alive _tgt_flamer) || (_tgt_flamer distance getMarkerPos _poz_orig_sc > _teritoriu)) then {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; if !(count _list_unit_range_flamer isEqualTo 0) then {_tgt_flamer = selectRandom _list_unit_range_flamer} else {_tgt_flamer = nil}};
+		if ((!alive _tgt_flamer) || (_tgt_flamer distance getMarkerPos _poz_orig_sc > _teritoriu)) then {_list_unit_range_flamer = [_flamer, _teritoriu] call FLAMER_find_target; if (count _list_unit_range_flamer != 0) then {_tgt_flamer = selectRandom _list_unit_range_flamer} else {_tgt_flamer = nil}};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20];
 		{

@@ -42,11 +42,11 @@ deleteVehicle _logic;
 		_results params ["_anomaly_obj", "_heart_obj", "_tracking_dist", "_issparks", "_damage_range", "_isai", "_isemp", "_isseizure"];
 		private ["_heart_obj", "_twins_obj"];
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") > 0) then {
+		if (getNumber (configFile >> "CfgVehicles" >> _heart_obj >> "scope") <= 0) then {
 			_heart_obj = "B_UAV_06_F";
 		};
 
-		if !(getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") > 0) then {
+		if (getNumber (configFile >> "CfgVehicles" >> _twins_obj >> "scope") <= 0) then {
 			_twins_obj = "Land_HighVoltageTower_large_F";
 		};
 

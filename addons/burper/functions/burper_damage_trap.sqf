@@ -1,4 +1,4 @@
-_list_units_in_range = "NO-INFANTRY-IN-RANGE";
+_list_units_in_range = [];
 
 _object_burp_damage = _this select 0;
 _burper_radius = _this select 1;

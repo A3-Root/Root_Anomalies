@@ -184,7 +184,7 @@ while {alive _strigoi} do {
 		if (selectRandom [true, false]) then {
 			if (selectRandom [true, false]) then {
 				_copaci = nearestTerrainObjects [_tgt_casp, ["TREE"], 20];
-				if !(count _copaci isEqualTo 0) then {
+				if (count _copaci != 0) then {
 					uiSleep 1;
 					_obj_de_agatat = "";
 					{
@@ -205,7 +205,7 @@ while {alive _strigoi} do {
 		
 		if ((!alive _tgt_casp) || (_tgt_casp distance getMarkerPos _poz_orig_sc > _teritoriu)) then {
 			_list_unit_range_casp = [_strigoi, _teritoriu] call STRIGOI_find_target;
-			if !(count _list_unit_range_casp isEqualTo 0) then {_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") })} else {_tgt_casp = nil};
+			if (count _list_unit_range_casp != 0) then {_tgt_casp = selectRandom ( _list_unit_range_casp select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") })} else {_tgt_casp = nil};
 		};
 		uiSleep 1;
 	};

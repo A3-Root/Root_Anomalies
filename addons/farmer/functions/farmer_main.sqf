@@ -65,7 +65,7 @@ FARMER_attk_farmer = {
 
 	uiSleep 1.2;
 	{	
-		if (!(isPlayer _x) && !(_x == _farmer)) then {
+		if (!(isPlayer _x) && (_x != _farmer)) then {
 			_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 3;
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
@@ -78,7 +78,7 @@ FARMER_attk_farmer = {
 				};
 			};
 		};
-        if ((_x isKindOf "LandVehicle") && !(_x == _farmer)) then {
+        if ((_x isKindOf "LandVehicle") && (_x != _farmer)) then {
             _jump_dir = (getPosATL _farmer vectorFromTo getPosATL _x) vectorMultiply 5;
             _x setVelocity [_jump_dir select 0, _jump_dir select 1, 7];
             _vehicle = _x;
@@ -240,7 +240,7 @@ while {alive _farmer} do {
         _farmer setUnitPos "UP";
         if ((!alive _tgt_farmer) || (_tgt_farmer distance getMarkerPos _marker_farmer > _territory)) then {
             _list_unit_range_farm = [_farmer, _territory] call FARMER_find_target;
-            if !(count _list_unit_range_farm isEqualTo 0) then {
+            if (count _list_unit_range_farm != 0) then {
                 _tgt_farmer = selectRandom (_list_unit_range_farm select {(typeOf _x != "VirtualCurator_F") && (lifeState _x != "INCAPACITATED") });
             } else {
                 _tgt_farmer = nil
