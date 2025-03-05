@@ -24,6 +24,11 @@ class CfgFunctions {
 		class RootFarmerCategory
 		{
 			class Farmer {file = "\z\root_anomalies\addons\farmer\functions\init_farmer.sqf";};
+			class FarmerMain {file = "\z\root_anomalies\addons\farmer\functions\farmer_main.sqf";};
+			class FarmerShock {file = "\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf";};
+			class FarmerSplash {file = "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf";};
+			class FarmerTeleport {file = "\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf";};
+			class FarmerTravel {file = "\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf";};
 		};
 	};
 };

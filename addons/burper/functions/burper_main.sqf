@@ -10,26 +10,26 @@ _balta_sang setDir (random 360);
 
 if (_anti_burper_device	!= "") then {
 	anti_burper = _anti_burper_device; publicVariable "anti_burper";
-	[_object_anom_burp, _anti_burper_device, _killrange] execVM "\z\root_anomalies\addons\burper\functions\burper_remove.sqf";
+	[_object_anom_burp, _anti_burper_device, _killrange] spawn compile preprocessFileLineNumbers "\z\root_anomalies\addons\burper\functions\burper_remove.sqf";
 };
 
 if (_device_detector != "") then {
 	detection_smugg = true; publicVariable "detection_smugg";
 	detectiv_tool = _device_detector; publicVariable "detectiv_tool";
 	if (_isaipanic) then {
-		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
+		[_object_anom_burp] spawn compile preprocessFileLineNumbers "\z\root_anomalies\addons\burper\functions\burper_ai_avoid.sqf";
 	};
 } else {
 	detection_smugg = false; publicVariable "detection_smugg";
 	if (_isaipanic) then {
-		[_object_anom_burp] execVM "\z\root_anomalies\addons\burper\functions\burper_ai_avoid_vizible.sqf";
+		[_object_anom_burp] spawn compile preprocessFileLineNumbers "\z\root_anomalies\addons\burper\functions\burper_ai_avoid_vizible.sqf";
 	};
 };
 
 if (_damage_protect != "") then {obj_prot_burper = _damage_protect; publicVariable "obj_prot_burper"};
 
-[_object_anom_burp, _burper_radius, _vehicle_allowed, _anti_burper_device] execVM "\z\root_anomalies\addons\burper\functions\burper_damage_trap.sqf";
-[[_object_anom_burp], "\z\root_anomalies\addons\burper\functions\burper_sfx.sqf"] remoteExec ["execVM", 0, true];
+[_object_anom_burp, _burper_radius, _vehicle_allowed, _anti_burper_device] spawn compile preprocessFileLineNumbers "\z\root_anomalies\addons\burper\functions\burper_damage_trap.sqf";
+[_object_anom_burp] remoteExec ["Root_fnc_BurperSfx", [0, -2] select isDedicated, true];
 
 if (_mobile_anomaly) then {
 	while {alive _object_anom_burp} do 

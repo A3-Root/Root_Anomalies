@@ -24,6 +24,15 @@ class CfgFunctions {
 		class RootBurperCategory {
 			file = "functions";
 			class Burper {file = "\z\Root_Anomalies\addons\burper\functions\init_burper.sqf";};
+			class BurperViz {file = "\z\Root_Anomalies\addons\burper\functions\burper_ai_avoid_vizible.sqf";};
+			class BurperAI {file = "\z\Root_Anomalies\addons\burper\functions\burper_ai_avoid.sqf";};
+			class BurperBlast {file = "\z\Root_Anomalies\addons\burper\functions\burper_blast.sqf";};
+			class BurperTrap {file = "\z\Root_Anomalies\addons\burper\functions\burper_damage_trap.sqf";};
+			class BurperDisable {file = "\z\Root_Anomalies\addons\burper\functions\burper_disable.sqf";};
+			class BurperMain {file = "\z\Root_Anomalies\addons\burper\functions\burper_main.sqf";};
+			class BurperRemove {file = "\z\Root_Anomalies\addons\burper\functions\burper_remove.sqf";};
+			class BurperSfx {file = "\z\Root_Anomalies\addons\burper\functions\burper_sfx.sqf";};
+			class BurperSplash {file = "\z\Root_Anomalies\addons\burper\functions\burper_splash_damage.sqf";};
 		};
 	};
 };

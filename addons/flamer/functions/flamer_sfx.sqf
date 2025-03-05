@@ -30,9 +30,7 @@ eko_sharp = "\z\root_anomalies\addons\main\sounds\eko_sharp.ogg";
 enableCamShake true;
 
 _isacemedical = false;
-if !(isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
-	_isacemedical = false;
-} else {
+if (isClass (configFile >> "CfgPatches" >> "ace_medical_engine")) then {
 	_isacemedical = true;
 };
 

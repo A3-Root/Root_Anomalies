@@ -52,7 +52,7 @@ deleteVehicle _logic;
 		
 		["Flamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 		
-		[[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic], "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_flamerMarkerName, _flamer_territory, _flamer_damage, _flamer_recharge, round _flamer_hp, _damage_on_death, _isaipanic] remoteExec ["Root_fnc_FlamerMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

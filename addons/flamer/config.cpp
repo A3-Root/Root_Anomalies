@@ -23,6 +23,14 @@ class CfgFunctions {
 	class Root {
 		class RootFlamerCategory {
 			class Flamer {file = "\z\root_anomalies\addons\flamer\functions\init_flamer.sqf";};
+			class FlamerAtk {file = "\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf";};
+			class FlamerEndSfx {file = "\z\root_anomalies\addons\flamer\functions\flamer_end_SFX.sqf";};
+			class FlamerEnd {file = "\z\root_anomalies\addons\flamer\functions\flamer_end.sqf";};
+			class FlamerJump {file = "\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf";};
+			class FlamerMain {file = "\z\root_anomalies\addons\flamer\functions\flamer_main.sqf";};
+			class FlamerPlasma {file = "\z\root_anomalies\addons\flamer\functions\flamer_plasma_SFX.sqf";};
+			class FlamerSfx {file = "\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf";};
+			class FlamerSplash {file = "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf";};
 		};
 	};
 };

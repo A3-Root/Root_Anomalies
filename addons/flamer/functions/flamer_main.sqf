@@ -27,7 +27,7 @@ FLAMER_attk_flamer = {
 	};
 	_shoot_dir = (getPosATL _flamer vectorFromTo getPosATL _tgt_casp) vectorMultiply 15;
 	[_flamer getVariable "_cap_flamer", ["foc_initial", 500]] remoteExec ["say3D"];
-	[[_flamer, _shoot_dir], "\z\root_anomalies\addons\flamer\functions\flamer_plasma_SFX.sqf"] remoteExec ["execVM"];
+	[_flamer, _shoot_dir] remoteExec ["Root_fnc_FlamerPlasma", [0, -2] select isDedicated];
 	uiSleep 0.5;
 	_tip = selectRandom ["04", "burned", "02", "03"];
 	_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20];
@@ -71,7 +71,7 @@ FLAMER_show_flamer = {
 	_pos_strig = [_poz_orig_sc, 1, _teritoriu / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_flamer setPos _pos_strig;
 	_flamer setVariable ["vizibil", true, true];
-	[[_flamer, _damage_flamer, _poz_orig_sc, 1000], "\z\root_anomalies\addons\flamer\functions\flamer_sfx.sqf"] remoteExec ["execVM", 0];
+	[_flamer, _damage_flamer, _poz_orig_sc, 1000] remoteExec ["Root_fnc_FlamerSfx", [0, -2] select isDedicated];
 	_flamer enableSimulationGlobal true; _flamer hideObjectGlobal false; {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 100]);
 	[_flamer getVariable "_cap_flamer", ["foc_initial", 1000]] remoteExec ["say3D"];
 };
@@ -149,7 +149,7 @@ _flamer addEventHandler ["Hit", {
 		if ((_unit getVariable "flamer_dmg_total") > 1) then {
 			_unit setDamage 1;
 		};
-		[[_unit], "\z\root_anomalies\addons\flamer\functions\flamer_splash_hit.sqf"] remoteExec ["execVM"];
+		[_unit] remoteExec ["Root_fnc_FlamerSplash"];
 	};
 }];
 
@@ -172,7 +172,7 @@ for "_i" from 0 to 5 do {
 _flamer setVariable ["atk", false];
 _flamer call FLAMER_hide_flamer;
 _list_unit_range_flamer = [];
-[_flamer, _damage_on_death] execVM "\z\root_anomalies\addons\flamer\functions\flamer_end.sqf";
+[_flamer, _damage_on_death] spawn Root_fnc_FlamerEnd;
 
 
 
@@ -239,7 +239,10 @@ while {alive _flamer} do {
 						} forEach _vichitpoints;
 					};
 				};
-			} forEach (_nearflamer - [_flamer]); [[_flamer], "\z\root_anomalies\addons\flamer\functions\flamer_jump_SFX.sqf"] remoteExec ["execVM"]; [_flamer, _tgt_flamer, _cap_flamer, _damage_flamer] spawn FLAMER_jump_flamer};
+			} forEach (_nearflamer - [_flamer]); 
+			[_flamer] remoteExec ["Root_fnc_FlamerJump", [0, -2] select isDedicated]; 
+			[_flamer, _tgt_flamer, _cap_flamer, _damage_flamer] spawn FLAMER_jump_flamer;
+		};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20];
 		{
@@ -267,7 +270,7 @@ while {alive _flamer} do {
 			};
 		} forEach (_nearflamer - [_flamer]);
 		if ((_flamer distance _tgt_flamer < 15) && !(_flamer getVariable "atk")) then 
-		{_flamer setVariable ["atk", true]; [_flamer, _tgt_flamer, _damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [[_tgt_flamer], "\z\root_anomalies\addons\flamer\functions\flamer_atk_SFX.sqf"] remoteExec ["execVM"]};
+		{_flamer setVariable ["atk", true]; [_flamer, _tgt_flamer, _damage_flamer] spawn FLAMER_attk_flamer; uiSleep 0.5; [_tgt_flamer] remoteExec ["Root_fnc_FlamerAtk"]};
 		uiSleep _recharge_delay;
 		_nearflamer = (ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20];
 		{

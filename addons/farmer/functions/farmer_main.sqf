@@ -29,7 +29,7 @@ FARMER_hide_farmer = {
 	_this switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_this setVariable ["vizibil", false, true];
 	[_this, ["pietre", 1000]] remoteExec ["say3D"];
-	[[_this], "\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
+	[_this] remoteExec ["Root_fnc_FarmerTeleport", [0, -2] select isDedicated];
 	_this hideObjectGlobal true;
 };
 
@@ -40,7 +40,7 @@ FARMER_show_farmer = {
 	_farmer setPos _poz_orig_sc; _farmer setVariable ["vizibil", true, true];
 	[_farmer, ["punch_7", 1000]] remoteExec ["say3D"];
 	_farmer hideObjectGlobal false;
-	[[_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_teleport.sqf"] remoteExec ["execVM", 0];
+	[_farmer] remoteExec ["Root_fnc_FarmerTeleport", [0, -2] select isDedicated];
 	_farmer setAnimSpeedCoef 0.8;
 	_farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 	_farmer setUnitPos "UP";
@@ -59,7 +59,7 @@ FARMER_attk_farmer = {
 	private ["_vehicle", "_damage", "_vichitpoints"];
 	params ["_farmer", "_damage_farmer"];
 	_farmer setUnitPos "UP";
-	[[_farmer, _damage_farmer], "\z\root_anomalies\addons\farmer\functions\farmer_shock_SFX.sqf"] remoteExec ["execVM"];
+	[_farmer, _damage_farmer] remoteExec ["Root_fnc_FarmerShock", [0, -2] select isDedicated];
     _farmertargets = (ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 20];
 	_farmertargets - [_farmer];
 
@@ -112,7 +112,7 @@ FARMER_travel_farmer = {
 	_rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, getPosATL _farmer select 1, 3000];
 	_jump_dir = (getPosATL _farmer vectorFromTo getPosATL _tgt_farmer) vectorMultiply 20;
 	_rag setVelocity [_jump_dir select 0, _jump_dir select 1, 5];
-	[[_rag], "\z\root_anomalies\addons\farmer\functions\farmer_travel_SFX.sqf"] remoteExec ["execVM"];
+	[_rag] remoteExec ["Root_fnc_FarmerTravel", [0, -2] select isDedicated];
 	uiSleep round (2 + random 2);
 	_farmer setVariable ["pozitie_noua", getPos _rag];
 	deleteVehicle _rag;
@@ -148,7 +148,7 @@ _farmer addEventHandler ["Hit", {
         _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
             _unit setDamage 1
         };
-        [[_unit], "\z\root_anomalies\addons\farmer\functions\farmer_splash_hit.sqf"] remoteExec ["execVM"]
+        [_unit] remoteExec ["Root_fnc_FarmerSplash", [0, -2] select isDedicated];
     };
 }];
 

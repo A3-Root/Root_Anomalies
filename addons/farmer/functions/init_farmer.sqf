@@ -51,7 +51,7 @@ deleteVehicle _logic;
 
     ["Farmer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-    [[_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic], "\z\root_anomalies\addons\farmer\functions\farmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+    [_farmerMarkerName, _farmer_territory, _farmer_damage, _farmer_recharge, round _farmer_hp, _isaipanic] remoteExec ["Root_fnc_FarmerMain", 2];
 }, {
     ["Aborted"] call zen_common_fnc_showMessage;
     playSound "FD_Start_F";
