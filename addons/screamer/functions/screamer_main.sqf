@@ -236,42 +236,13 @@ while {alive _entitate} do {
 			_entitate doMove _poz;
 			[_screamer_anomally, ["miscare_screamer", 300]] remoteExec ["say3D"];
 		};
-		uiSleep 5;
-		doStop _entitate;		
+		uiSleep 3;
 
-/*
-		private _tmpdir = ((getDir _entitate) + (_entitate getRelDir _pot_tgt));
-		_entitate setFormDir _tmpdir;
-		_entitate setDir _tmpdir;
-		_entitate lookAt _pot_tgt;
-		_entitate doWatch _pot_tgt;
-		uiSleep 1;
-*/
-
-
-		// Get positions of entity and target
-		private _entityPos = getPosATL _entitate;
-		private _targetPos = getPosATL _pot_tgt;
-
-		// Calculate direction from entity to target
-		private _dirToTarget = [_targetPos select 0, _targetPos select 1] vectorFromTo [_entityPos select 0, _entityPos select 1];
-		private _angleToTarget = (_dirToTarget select 1) atan2 (_dirToTarget select 0);
-		private _currentDir = getDir _entitate;
-
-		// Calculate angle difference
-		private _angleDiff = (_angleToTarget - _currentDir + 360) % 360;
-		if (_angleDiff > 180) then {_angleDiff = _angleDiff - 360;};
-
-		// If the target is not already in front of the entity, update direction
-		if (abs _angleDiff > 10) then {
-			_entitate setFormDir (_currentDir + _angleDiff);
-			_entitate setDir (_currentDir + _angleDiff);
-		};
-
-		_entitate lookAt _pot_tgt;
-		_entitate doWatch _pot_tgt;
+		_entitate lookAt (unitAimPosition _pot_tgt vectorAdd (velocity _pot_tgt vectorMultiply 0.01));
 		uiSleep 2;
-
+		doStop _entitate;		
+		_entitate lookAt (unitAimPosition _pot_tgt vectorAdd (velocity _pot_tgt vectorMultiply 0.01));
+		uiSleep 1;
 
 		_al_pressure = 90;
 		_dir_blast = getDir _entitate;

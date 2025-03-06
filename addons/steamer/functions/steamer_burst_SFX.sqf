@@ -8,11 +8,10 @@ params ["_tgt_poz", "_crater_bool"];
 _blow_poz = "CraterLong_small" createVehicleLocal [_tgt_poz select 0, _tgt_poz select 1, -0.5]; _blow_poz hideObjectGlobal true; _blow_poz setDir round (random 360);
 _blow_poz setVectorUp surfaceNormal getPosATL _blow_poz;
 enableCamShake true;
-_soundPath = [(str missionConfigFile), 0, -15] call BIS_fnc_trimString;
-explozie = _soundPath + "\z\root_anomalies\addons\main\sounds\explozie_3.ogg";
-pietre = _soundPath + "\z\root_anomalies\addons\main\sounds\pietre.ogg";
-eko_01 = _soundPath + "\z\root_anomalies\addons\main\sounds\eko_01.ogg";
-eko_02 = _soundPath + "\z\root_anomalies\addons\main\sounds\eko_02.ogg";
+explozie = "\z\root_anomalies\addons\main\sounds\explozie_3.ogg";
+pietre = "\z\root_anomalies\addons\main\sounds\pietre.ogg";
+eko_01 = "\z\root_anomalies\addons\main\sounds\eko_01.ogg";
+eko_02 = "\z\root_anomalies\addons\main\sounds\eko_02.ogg";
 _eko = selectRandom [eko_01, eko_02];
 
 playSound3D ["\z\root_anomalies\addons\main\sounds\explozie_3.ogg", "", false, [getPos _blow_poz select 0, getPos _blow_poz select 1, 1], 7, 5, 0];
