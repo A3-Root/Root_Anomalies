@@ -30,9 +30,9 @@ STRIGOI_avoid_casp = {
 
 STRIGOI_attk_strig = {
 	params ["_strigoi", "_tgt_casp", "_damage_strig", "_noseize"];
-	[[_strigoi, _tgt_casp, _noseize], "\z\root_anomalies\addons\strigoi\functions\strigoi_atk_viz.sqf"] remoteExec ["execVM", [0, -2] select isDedicated];
+	[_strigoi, _tgt_casp, _noseize] remoteExec ["Root_fnc_StrigoiViz", [0, -2] select isDedicated];
 	if ((isPlayer _tgt_casp) && (typeOf _tgt_casp != "VirtualCurator_F")) then {
-		[[_damage_strig, _noseize], "\z\root_anomalies\addons\strigoi\functions\strigoi_tgt_attk.sqf"] remoteExec ["execVM", _tgt_casp]
+		[_damage_strig, _noseize] remoteExec ["Root_fnc_StrigoiTgt", _tgt_casp]
 	} else {
 		if ((_tgt_casp isKindOf "Man") && (_tgt_casp != _strigoi)) then {
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
@@ -66,7 +66,7 @@ STRIGOI_show_strig = {
 	_pos_strig = [_poz_orig_sc, 1, _teritoriu / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
 	_strigoi setPos _pos_strig;
 	_strigoi setVariable ["vizibil", true, true];
-	[[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_sfx.sqf"] remoteExec ["execVM", 0];
+	[_strigoi] remoteExec ["Root_fnc_StrigoiSfx", [0, -2] select isDedicated];
 	_strigoi enableSimulationGlobal true; _strigoi hideObjectGlobal false; {_strigoi reveal _x} forEach (_strigoi nearEntities [["CAManBase"], 100]);
 	[_strigoi getVariable "_cap_casper", ["03_tip_casp", 1000]] remoteExec ["say3D"];
 };
@@ -132,7 +132,7 @@ _strigoi addEventHandler ["Hit", {
     _curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
         _unit setDamage 1
     };
-    [[_unit], "\z\root_anomalies\addons\strigoi\functions\strigoi_splash_hit.sqf"] remoteExec ["execVM"]
+    [_unit] remoteExec ["Root_fnc_StrigoiSplash", [0, -2] select isDedicated];
 }];
 
 _strigoi removeAllEventHandlers "HandleDamage";
@@ -159,7 +159,7 @@ for "_i" from 0 to 5 do {_strigoi setObjectMaterialGlobal [_i, "A3\Structures_F\
 uiSleep 0.3;
 for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)perlinNoise(256,256,0,0.3)"]; uiSleep 0.1;};
 _strigoi call STRIGOI_hide_strig;
-[[_strigoi], "\z\root_anomalies\addons\strigoi\functions\strigoi_fatigue_p.sqf"] remoteExec ["execVM", [0, -2] select isDedicated, true];
+[_strigoi] remoteExec ["Root_fnc_StrigoiFatigue", [0, -2] select isDedicated, true];
 
 _list_unit_range_casp = [];
 

@@ -54,7 +54,7 @@ deleteVehicle _logic;
 
 		["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage], "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_swarmerhive, _swarmer_territory, _pesticideobject, _swarmerdamage] remoteExec ["Root_fnc_SwarmerMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

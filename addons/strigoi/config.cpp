@@ -23,6 +23,12 @@ class CfgFunctions {
 	class Root {
 		class RootStrigoiCategory {
 			class Strigoi {file = "\z\root_anomalies\addons\strigoi\functions\init_strigoi.sqf";};
+			class StrigoiViz {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_atk_viz.sqf";};
+			class StrigoiFatigue {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_fatigue_p.sqf";};
+			class StrigoiMain {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf";};
+			class StrigoiSfx {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_sfx.sqf";};
+			class StrigoiSplash {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_splash_hit.sqf";};
+			class StrigoiTgt {file = "\z\root_anomalies\addons\strigoi\functions\strigoi_tgt_attk.sqf";};
 		};
 	};
 };

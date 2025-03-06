@@ -55,7 +55,7 @@ deleteVehicle _logic;
 
 		["Strigoi Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic], "\z\root_anomalies\addons\strigoi\functions\strigoi_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_strigoiMarkerName, _strigoi_territory, _isnightonly, _strigoi_damage, round _strigoi_hp, _noseizure, _isaipanic] remoteExec ["Root_fnc_StrigoiMain", 2];
 
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;

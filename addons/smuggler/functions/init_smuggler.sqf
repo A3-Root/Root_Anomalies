@@ -52,7 +52,7 @@ deleteVehicle _logic;
 
 		["Smuggler Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure], "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_smugglerMarkerName, _isroaming, _detectdevice, _spawnobjects, _spawnobjectsdelay, _protectdevice, _dmg_on_teleport, _noseizure] remoteExec ["Root_fnc_SmugglerMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

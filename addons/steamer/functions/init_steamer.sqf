@@ -48,7 +48,7 @@ deleteVehicle _logic;
 		
 		["Steamer Anomaly Configured and Created!"] call zen_common_fnc_showMessage;
 
-		[[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath], "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_steamerMarkerName, _steamer_territory, _steamer_damage, _steamer_recharge, _dmg_on_death, _travelpath] remoteExec ["Root_fnc_SteamerMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

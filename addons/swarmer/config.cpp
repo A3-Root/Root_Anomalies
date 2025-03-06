@@ -23,6 +23,13 @@ class CfgFunctions {
 	class Root {
 		class RootSwarmerCategory {
 			class Swarmer {file = "\z\root_anomalies\addons\swarmer\functions\init_swarmer.sqf";};
+			class SwarmerDead {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_dead_SFX.sqf";};
+			class SwarmerEating {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf";};
+			class SwarmerFlies {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_flies.sqf";};
+			class SwarmerKill {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_kill_hive.sqf";};
+			class SwarmerMain {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_main.sqf";};
+			class SwarmerSfx {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf";};
+			class SwarmerVoice {file = "\z\root_anomalies\addons\swarmer\functions\swarmer_voice.sqf";};
 		};
 	};
 };

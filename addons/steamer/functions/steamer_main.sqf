@@ -16,7 +16,7 @@ STEAMER_travel_path = {
 	_rag = "Land_PenBlack_F" createVehicle [getPosATL _steamer_dud select 0, getPosATL _steamer_dud select 1, 3000];
 	_jump_dir = (getPosATL _steamer_dud vectorFromTo getPosATL _tgt_steamer) vectorMultiply 20;
 	_rag setVelocity [_jump_dir select 0, _jump_dir select 1, 5];
-	[[_rag], "\z\root_anomalies\addons\steamer\functions\steamer_travel_SFX.sqf"] remoteExec ["execVM"];
+	[_rag] remoteExec ["Root_fnc_SteamerTravel"];
 	uiSleep 1;
 	deleteVehicle _rag;
 };
@@ -30,7 +30,7 @@ private ["_damage", "_vehicle", "_vichitpoints"];
 _ck_pl = false;
 while {!_ck_pl} do {{if (_x distance getMarkerPos _orig_poz < 1000) then {_ck_pl = true}} forEach allPlayers; uiSleep 5};
 _steamer_dud = createAgent ["O_Soldier_VR_F", getMarkerPos _orig_poz, [], 0, "NONE"]; _steamer_dud hideObjectGlobal true; _steamer_dud enableSimulationGlobal false;
-[[_steamer_dud], "\z\root_anomalies\addons\steamer\functions\steamer_voice.sqf"] remoteExec ["execVM", 0, true];
+[_steamer_dud] remoteExec ["Root_fnc_SteamerVoice", 0, true];
 _list_unit_range_steamer = [];
 while {alive _steamer_dud} do {
 	while {count _list_unit_range_steamer isEqualTo 0} do {_list_unit_range_steamer = [_steamer_dud, _teritoriu] call STEAMER_find_target; uiSleep 5};
@@ -42,7 +42,7 @@ while {alive _steamer_dud} do {
 		_burst_poz = (ASLToAGL getPosATL _tgt_steamer);
 		_blow_units = _burst_poz nearEntities [["CAManBase", "LandVehicle", "Air"], 10];
 		_crater_bool = selectRandom [false, true, false, false];
-		[[getPosATL _tgt_steamer, _crater_bool], "\z\root_anomalies\addons\steamer\functions\steamer_burst_SFX.sqf"] remoteExec ["execVM"];
+		[getPosATL _tgt_steamer, _crater_bool] remoteExec ["Root_fnc_SteamerBurst"];
 		{
 			_bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 			_dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade"];
@@ -77,7 +77,7 @@ while {alive _steamer_dud} do {
 				_vehicle setHitPointDamage ["HitBatteries", 1];
 				_vehicle setHitPointDamage ["light_r2", 1];
 			};
-			if (isPlayer _x) then {[[_burst_poz, _x], "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"] remoteExec ["execVM", _x]} else {[_burst_poz, _x] execVM "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf"};
+			if (isPlayer _x) then {[_burst_poz, _x] remoteExec ["Root_fnc_SteamerRagdoll", _x]} else {[_burst_poz, _x] spawn Root_fnc_SteamerRagdoll;};
 		} forEach (_blow_units - [_steamer_dud]);
 		{[_x] call STEAMER_avoid_steam} forEach _list_unit_range_steamer;
 		uiSleep (4 + round (random _recharge));
@@ -88,7 +88,7 @@ while {alive _steamer_dud} do {
 	_list_unit_range_steamer = [];
 };
 waitUntil {!alive _steamer_dud};
-[[getPosATL _steamer_dud], "\z\root_anomalies\addons\steamer\functions\steamer_end.sqf"] remoteExec ["execVM", [0, -2] select isDedicated];
+[getPosATL _steamer_dud] remoteExec ["Root_fnc_SteamerEnd", [0, -2] select isDedicated];
 _obj_veg = nearestTerrainObjects [position _steamer_dud, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
 {_x setDamage [_dmg_on_death, true]} forEach _obj_veg;
 _obj_build = nearestObjects [position _steamer_dud, ["BUILDING", "HOUSE", "CHURCH", "CHAPEL", "FUELSTATION", "HOSPITAL", "RUIN", "BUNKER", "Land_fs_roof_F", "Land_TTowerBig_2_F", "Land_TTowerBig_1_F", "Lamps_base_F", "PowerLines_base_F", "PowerLines_Small_base_F", "Land_LampStreet_small_F", "CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air", "Ship"], 20, false];

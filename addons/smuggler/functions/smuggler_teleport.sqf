@@ -33,7 +33,7 @@ while {alive _obj_teleporter} do {
                         [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
                         [_x] call SMUGGLER_teleSFX_AI;
                         if (isPlayer _x) then {
-                            [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
+                            [_x, _obj_teleporter, _noseize, _dmg_on_teleport] remoteExec ["Root_fnc_SmugglerTeleEffect", _x];
                         } else {
                             _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
                             _x setPos _dest_tele;
@@ -60,7 +60,7 @@ while {alive _obj_teleporter} do {
                 [_obj_teleporter, ["tele_message", 100]] remoteExec ["say3D"];
                 [_x] call SMUGGLER_teleSFX_AI;
                 if (isPlayer _x) then {
-                    [[_x, _obj_teleporter, _noseize, _dmg_on_teleport], "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport_effect.sqf"] remoteExec ["execVM"]
+                    [_x, _obj_teleporter, _noseize, _dmg_on_teleport] remoteExec ["Root_fnc_SmugglerTeleEffect", _x];
                 } else {
                     _dest_tele = [getPos _obj_teleporter, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos;
                     _x setPos _dest_tele;

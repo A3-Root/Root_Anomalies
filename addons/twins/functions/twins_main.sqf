@@ -10,12 +10,12 @@ private ["_track_dist", "_poz_spark", "_isseige"];
 _heart_twin = _twin_heart createVehicle [0, 0, 0];
 _heart_twin attachTo [_spark_obj, [-0.5, 0, 1.5]];
 
-[[_heart_twin], "\z\root_anomalies\addons\twins\functions\twins_inima.sqf"] remoteExec ["execVM", 0];
+[_heart_twin] remoteExec ["Root_fnc_TwinsInima", [0, -2] select isDedicated];
 
 if (_spark_effect) then {_poz_spark = createVehicle ["Sign_Sphere10cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"]; [_poz_spark, true] remoteExec ["hideObjectGlobal", 0, true]};
-if (_effect_on_AI) then {[[_spark_obj, _damage_range], "\z\root_anomalies\addons\twins\functions\twins_damage_AI.sqf"] remoteExec ["execVM", 0];};
+if (_effect_on_AI) then {[_spark_obj, _damage_range] remoteExec ["Root_fnc_TwinsDamage", 2];};
 _pauza = 5;
-[[_spark_obj, _damage_range, _isseige], "\z\root_anomalies\addons\twins\functions\twins_spark_viz.sqf"] remoteExec ["execVM", 0, true];
+[_spark_obj, _damage_range, _isseige] remoteExec ["Root_fnc_TwinsInima", [0, -2] select isDedicated, true];
 
 _spark_obj setVariable ["vizibil", 0, true];
 
@@ -54,7 +54,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 	uiSleep 2;
 	};
 	if (_EMP_enabled) then {
-		[_spark_move, _isseige, _tracking_p] execVM "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";
+		[_spark_move, _isseige, _tracking_p] spawn Root_fnc_TwinsEmp;
 		uiSleep 2;
 	};
 	deleteVehicle _spark_move;
@@ -74,7 +74,7 @@ if (_spark_effect) then {
 		_nr = 0;
 		while {_nr < _sclipiri} do {
 			_pauza_intre_sclipiri = 0.1 + (random 2);
-			[[_poz_spark, _pauza_intre_sclipiri], "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf"] remoteExec ["execVM"];
+			[_poz_spark, _pauza_intre_sclipiri] remoteExec ["Root_fnc_TwinsEffect", [0, -2] select isDedicated];
 			uiSleep _pauza_intre_sclipiri;
 			_nr = _nr + 1;
 		};

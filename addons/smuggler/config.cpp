@@ -23,11 +23,17 @@ class CfgFunctions {
 	class Root {
 		class RootSmugglerCategory {
 			class Smuggler {file = "\z\root_anomalies\addons\smuggler\functions\init_smuggler.sqf";};
+			class SmugglerAIVisible {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg_visible.sqf";};
+			class SmugglerAIAvoid {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_ai_avoid_smugg.sqf";};
+			class SmugglerMain {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_main.sqf";};
+			class SmugglerSfx {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_sfx.sqf";};
+			class SmugglerSpawn {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_spawn.sqf";};
+			class SmugglerTeleEffect {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport_effect.sqf";};
+			class SmugglerTeleport {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_teleport.sqf";};
+			class SmugglerVidEffect {file = "\z\root_anomalies\addons\smuggler\functions\smuggler_video_effect.sqf";};
 		};
 	};
 };
-
-
 
 
 class CfgFactionClasses {
@@ -47,3 +53,4 @@ class CfgVehicles {
 		displayName = "Smuggler Anomaly";
 	};
 };
+

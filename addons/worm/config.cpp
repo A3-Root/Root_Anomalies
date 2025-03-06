@@ -23,6 +23,11 @@ class CfgFunctions {
 	class Root {
 		class RootWormCategory {
 			class Worm {file = "\z\root_anomalies\addons\worm\functions\init_worm.sqf";};
+			class WormAttack {file = "\z\root_anomalies\addons\worm\functions\worm_attack.sqf";};
+			class WormBump {file = "\z\root_anomalies\addons\worm\functions\worm_bump.sqf";};
+			class WormEffect {file = "\z\root_anomalies\addons\worm\functions\worm_effect.sqf";};
+			class WormKill {file = "\z\root_anomalies\addons\worm\functions\worm_kill_confirm.sqf";};
+			class WormMain {file = "\z\root_anomalies\addons\worm\functions\worm_main.sqf";};
 		};
 	};
 };

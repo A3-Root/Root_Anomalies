@@ -68,7 +68,7 @@ deleteVehicle _logic;
 		
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
 
-		[[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health], "\z\root_anomalies\addons\screamer\functions\screamer_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_screamermarkerName, _screamer_model, _screamer_damage_close, _screamer_damage_medium, _screamer_damage_far, _screamer_territory, _screamer_hostiles, _screamer_atk_radius, _isvicdmg, _isaidmg, _isaipanic, _screamer_spawn_side, _screamer_health] remoteExec ["Root_fnc_ScreamerMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

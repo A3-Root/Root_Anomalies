@@ -104,8 +104,8 @@ while {_hide_me} do {
             _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
             _press_implicit_y = 1 + _press_implicit_x;
         };
-        [[_cap, _coada, _coada_01], "\z\root_anomalies\addons\worm\functions\worm_effect.sqf"] remoteExec ["execVM", 0, true];
-        [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
+        [_cap, _coada, _coada_01] remoteExec ["Root_fnc_WormEffect", [0, -2] select isDedicated, true];
+        [_cap, _coada] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
         _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         _cap setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 20 + random 10];
         uiSleep 1;
@@ -119,8 +119,8 @@ waitUntil {
 };
 [_cap, ["bump", 500]] remoteExec ["say3D"];
 addCamShake [1, 4, 23];
-[[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
-[[_cap], "\z\root_anomalies\addons\worm\functions\worm_bump.sqf"] remoteExec ["execVM", 0];
+[_cap, _coada] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
+[_cap] remoteExec ["Root_fnc_WormBump", [0, -2] select isDedicated];
 uiSleep 1;
 
 while {!isNull _cap} do {
@@ -161,7 +161,7 @@ while {!isNull _cap} do {
             waitUntil {
                 (getPosATL _cap select 2) < 1
             };
-            [[_cap, _coada], "\z\root_anomalies\addons\worm\functions\worm_attack.sqf"] remoteExec ["execVM", 0];
+            [_cap, _coada] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
             _nearobj_wrom = nearestObjects [getPosATL _cap, [], 25];
             {
                 if ((_x != _cap) && (_x != _coada) && (_x != _coada_01) && !(surfaceIsWater getPos _x)) then {

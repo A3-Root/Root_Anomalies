@@ -23,6 +23,13 @@ class CfgFunctions {
 	class Root {
 		class RootSteamerCategory {
 			class Steamer {file = "\z\root_anomalies\addons\steamer\functions\init_steamer.sqf";};
+			class SteamerBurst {file = "\z\root_anomalies\addons\steamer\functions\steamer_burst_SFX.sqf";};
+			class SteamerChimney {file = "\z\root_anomalies\addons\steamer\functions\steamer_chimney_SFX.sqf";};
+			class SteamerEnd {file = "\z\root_anomalies\addons\steamer\functions\steamer_end.sqf";};
+			class SteamerMain {file = "\z\root_anomalies\addons\steamer\functions\steamer_main.sqf";};
+			class SteamerRagdoll {file = "\z\root_anomalies\addons\steamer\functions\steamer_ragdoll.sqf";};
+			class SteamerTravel {file = "\z\root_anomalies\addons\steamer\functions\steamer_travel_SFX.sqf";};
+			class SteamerVoice {file = "\z\root_anomalies\addons\steamer\functions\steamer_voice.sqf";};
 		};
 	};
 };

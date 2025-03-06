@@ -44,7 +44,7 @@ _wave setDropInterval 0.002;
 [_wave] spawn {params ["_sterg"]; uiSleep 0.5; deleteVehicle _sterg};
 
 _blow_poz hideObjectGlobal false;
-if (_crater_bool) then {[_blow_poz] execVM "\z\root_anomalies\addons\steamer\functions\steamer_chimney_SFX.sqf"};
+if (_crater_bool) then {[_blow_poz] spawn Root_fnc_SteamerChimney;};
 	
 _coloana = "#particlesource" createVehicleLocal (getPos _blow_poz);
 _coloana setParticleCircle [0, [0, 0, 0]];

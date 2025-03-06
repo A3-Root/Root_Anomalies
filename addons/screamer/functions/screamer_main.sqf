@@ -172,7 +172,7 @@ if (_isalivevic) then {
 		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
-		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
+		[_unit] remoteExec ["Root_fnc_ScreamerSplash", [0, -2] select isDedicated];
 	}];
 
 	_entitate removeAllEventHandlers "HandleDamage";
@@ -196,7 +196,7 @@ if (_isalivevic) then {
 		_curr_dam = (_unit getVariable "al_dam_total") + (_unit getVariable "al_dam_incr"); _unit setVariable ["al_dam_total", _curr_dam]; if ((_unit getVariable "al_dam_total") > 1) then {
 			_unit setDamage 1
 		};
-		[[_unit], "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf"] remoteExec ["execVM"]
+		[_unit] remoteExec ["Root_fnc_ScreamerSplash", [0, -2] select isDedicated];
 	}];
 
 	_screamer_anomally removeAllEventHandlers "HandleDamage";
@@ -328,9 +328,9 @@ while {alive _entitate} do {
 		detach _wave_obj;
 
 		if (_isalivevic) then {
-			if (alive _entitate) then {[[_wave_obj, _entitate], "\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execVM"]};
+			if (alive _entitate) then {[_wave_obj, _entitate] remoteExec ["Root_fnc_ScreamerEffect", [0, -2] select isDedicated]};
 		} else {
-			if (alive _entitate) then {[[_wave_obj, _screamer_anomally], "\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf"] remoteExec ["execVM"]};
+			if (alive _entitate) then {[_wave_obj, _screamer_anomally] remoteExec ["Root_fnc_ScreamerEffect", [0, -2] select isDedicated]};
 		};
 
 		{
@@ -438,12 +438,12 @@ while {alive _entitate} do {
 };
 
 if (_isalivevic) then {
-	[[_entitate], "\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
+	[_entitate] remoteExec ["Root_fnc_ScreamerTeleport", [0, -2] select isDedicated];
 	uiSleep 4;
 	deleteVehicle _entitate;
 } else {
 	deleteVehicle _entitate;
-	[[_screamer_anomally], "\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf"] remoteExec ["execVM"];
+	[_screamer_anomally] remoteExec ["Root_fnc_ScreamerTeleport", [0, -2] select isDedicated];
 	uiSleep 4;
 	deleteVehicle _screamer_anomally;
 };

@@ -22,8 +22,8 @@ _swarmer_agent setVariable ["BIS_fnc_animalBehaviour_disable", true]; _swarmer_a
 _swarmer_agent setBehaviour "CARELESS"; _swarmer_agent allowDamage false; _swarmer_agent enableFatigue false; _swarmer_agent setSkill ["courage", 1];
 _swarmer_agent setUnitPos "UP"; _swarmer_agent disableAI "ALL"; {_swarmer_agent enableAI _x} forEach ["MOVE", "ANIM", "TEAMSWITCH", "PATH"]; _swarmer_agent setAnimSpeedCoef 1.1;
 _swarmer_agent setVariable ["isHive", false, true];
-[[_swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_voice.sqf"] remoteExec ["execVM"];
-[[_swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_SFX.sqf"] remoteExec ["execVM"];
+[_swarmer_agent] remoteExec ["Root_fnc_SwarmerVoice", [0, -2] select isDedicated];
+[_swarmer_agent] remoteExec ["Root_fnc_SwarmerSfx", [0, -2] select isDedicated];
 swarmer_public = _swarmer_agent; publicVariable "swarmer_public";
 atak_swarmer = false; publicVariable "atak_swarmer";
 
@@ -46,7 +46,7 @@ while {alive _swarmer_agent} do {
 				_swarmer_agent moveTo AGLToASL (_tgt_hiv modelToWorld [0, 0, 0]);
 				_swarmer_agent moveTo AGLToASL (_tgt_hiv modelToWorld [0, 0, 0]);
 				if (alive _swarmer_agent) then {
-					[[_tgt_hiv, _swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
+					[_tgt_hiv, _swarmer_agent] remoteExec ["Root_fnc_SwarmerEating", [0, -2] select isDedicated];
 					_amountOfDamage = _dmg_un;
 					_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
 					_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
@@ -72,7 +72,7 @@ while {alive _swarmer_agent} do {
 			[_swarmer_agent, _tgt_hiv] spawn SWARMER_adjustPos;
 			uiSleep 2;
 			_swarmer_agent stop true;
-			[[_tgt_hiv, _swarmer_agent], "\z\root_anomalies\addons\swarmer\functions\swarmer_eating_SFX.sqf"] remoteExec ["execVM"];
+			[_tgt_hiv, _swarmer_agent] remoteExec ["Root_fnc_SwarmerEating", [0, -2] select isDedicated];
 			_tgt_hiv hideObjectGlobal true;
 			_oase = createVehicle ["Land_HumanSkeleton_F", getPosATL _tgt_hiv, [], 0, "CAN_COLLIDE"]; _oase setDir (round (random 360));
 			_swarmer_agent setVariable ["tgt", nil, true];

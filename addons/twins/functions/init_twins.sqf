@@ -58,7 +58,7 @@ deleteVehicle _logic;
 		
 		_twins_obj = _anomaly_obj createVehicle _objpos;
 
-		[[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure], "\z\root_anomalies\addons\twins\functions\twins_main.sqf"] remoteExec ["BIS_fnc_execVM", 2];
+		[_twins_obj, _tracking_dist, _issparks, _damage_range, _isai, _isemp, _heart_obj, _isseizure] remoteExec ["Root_fnc_TwinsMain", 2];
 	}, {
 		["Aborted"] call zen_common_fnc_showMessage;
 		playSound "FD_Start_F";

@@ -23,6 +23,12 @@ class CfgFunctions {
 	class Root {
 		class RootTwinsCategory {
 			class Twins {file = "\z\root_anomalies\addons\twins\functions\init_twins.sqf";};
+			class TwinsDamage {file = "\z\root_anomalies\addons\twins\functions\twins_damage_AI.sqf";};
+			class TwinsEmp {file = "\z\root_anomalies\addons\twins\functions\twins_emp_starter.sqf";};
+			class TwinsInima {file = "\z\root_anomalies\addons\twins\functions\twins_inima.sqf";};
+			class TwinsMain {file = "\z\root_anomalies\addons\twins\functions\twins_main.sqf";};
+			class TwinsEffect {file = "\z\root_anomalies\addons\twins\functions\twins_spark_effect.sqf";};
+			class TwinsViz {file = "\z\root_anomalies\addons\twins\functions\twins_spark_viz.sqf";};
 		};
 	};
 };
