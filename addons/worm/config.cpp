@@ -28,7 +28,6 @@ class CfgFunctions {
 			class WormEffect {file = "\z\root_anomalies\addons\worm\functions\worm_effect.sqf";};
 			class WormKill {file = "\z\root_anomalies\addons\worm\functions\worm_kill_confirm.sqf";};
 			class WormMain {file = "\z\root_anomalies\addons\worm\functions\worm_main.sqf";};
-			class WormRagdoll {file = "\z\root_anomalies\addons\worm\functions\worm_ragdoll.sqf";};
 		};
 	};
 };
