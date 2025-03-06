@@ -70,8 +70,8 @@ wormkiller = _wormdiffuser; publicVariable "wormkiller";
 
 _coada attachTo [_cap, [0, -1, 1]];
 _coada_01 attachTo [_coada, [0, -1, 1]];
-[_coada, true] remoteExec ["hideObjectGlobal", 0, true];
-[_coada_01, true] remoteExec ["hideObjectGlobal", 0, true];
+[_coada, true] remoteExec ["hideObject", 0, true];
+[_coada_01, true] remoteExec ["hideObject", 0, true];
 
 _hide_me = true;
 while {_hide_me} do {
@@ -165,16 +165,17 @@ while {!isNull _cap} do {
             _nearobj_wrom = nearestObjects [getPosATL _cap, [], 25];
             {
                 if ((_x != _cap) && (_x != _coada) && (_x != _coada_01) && !(surfaceIsWater getPos _x)) then {
+                    _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                     if ((_x isKindOf "LandVehicle") || (_x isKindOf "Air")) then {
-                        _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                         [_x, _damage_worm] call WORM_vehicle_dmg;
                     } else {
-                        _x setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
                         _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                         _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
                         if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
                             if(_isacemedical) then {
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+                                [_x, (_damage_worm * 1.5), "LeftLeg", "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+                                [_x, (_damage_worm * 1.5), "RightLeg", "falling"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
                             } else {
                                 _x setDamage ((damage _x) + _damage_worm);
                             };

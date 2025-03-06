@@ -58,11 +58,9 @@ if (!isServer) exitWith {};
 
 params ["_poz_orig_sc", "_anomaly_vic", "_damage_screamer_close", "_damage_screamer_medium", "_damage_screamer_far", "_screamer_territory", "_screamer_hostiles", "_screamer_radius", "_isvicdmg", "_isaidmg", "_isaipanic", "_screamer_spawn", "_screamer_health"];
 
-_time = 3 + diag_tickTime;
-
 _vichitpoints = [];
 
-waitUntil {diag_tickTime > _time };
+uiSleep 3;
 
 _isalivevic = false;
 _valid_statue = false;
@@ -85,7 +83,11 @@ if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then
 		_isalivevic = true;
 	} else {
 		_isalivevic = false;
-		_valid_statue = true;
+		if (_anomaly_vic isKindOf "LandVehicle") then { 
+			_valid_statue = false; 
+		} else {
+			_valid_statue = true;
+		};
 	};
 } else {
 	_isalivevic = false;
@@ -94,32 +96,24 @@ if (getNumber (configFile >> "CfgVehicles" >> _anomaly_vic >> "scope") > 0) then
 
 if (_isaidmg) then {
 	_grp = createGroup _screamer_spawn;
-	if (_isalivevic) then 	{
-		_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0, "NONE"];
-		[_entitate] joinSilent _grp;
-	} else {
-		_entitate = _grp createUnit ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
-		[_entitate] joinSilent _grp;
-		removeUniform _entitate;
-		removeVest _entitate;
-		removeHeadgear _entitate;
-	};
-	_entitate setCaptive false;
 } else {
 	_grp = createGroup civilian;
-	if (_isalivevic) then {
-		_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0, "NONE"];
-		[_entitate] joinSilent _grp;
-	} else {
-		_entitate = _grp createUnit ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
-		[_entitate] joinSilent _grp;
-		removeUniform _entitate;
-		removeVest _entitate;
-		removeHeadgear _entitate;
-	};
-	_entitate setCaptive true;
-	_entitate hideObjectGlobal true;
 };
+
+if (_isalivevic) then {
+	_entitate = _grp createUnit [_anomaly_vic, getMarkerPos _poz_orig_sc, [], 0, "NONE"];
+	[_entitate] joinSilent _grp;
+} else {
+	_entitate = _grp createUnit ["O_Soldier_VR_F", getMarkerPos _poz_orig_sc, [], 0, "NONE"];
+	[_entitate] joinSilent _grp;
+	removeUniform _entitate;
+	removeVest _entitate;
+	removeHeadgear _entitate;
+};
+
+_entitate setCaptive false;
+_entitate setCaptive true;
+_entitate hideObjectGlobal true;
 
 _entitate setSpeaker "NoVoice";
 _entitate disableConversation true;
@@ -243,19 +237,44 @@ while {alive _entitate} do {
 			[_screamer_anomally, ["miscare_screamer", 300]] remoteExec ["say3D"];
 		};
 		uiSleep 5;
+		doStop _entitate;		
 
-		doStop _entitate;
-		
+/*
 		private _tmpdir = ((getDir _entitate) + (_entitate getRelDir _pot_tgt));
 		_entitate setFormDir _tmpdir;
 		_entitate setDir _tmpdir;
 		_entitate lookAt _pot_tgt;
 		_entitate doWatch _pot_tgt;
 		uiSleep 1;
+*/
 
-		_dir_blast = getDir _entitate;
+
+		// Get positions of entity and target
+		private _entityPos = getPosATL _entitate;
+		private _targetPos = getPosATL _pot_tgt;
+
+		// Calculate direction from entity to target
+		private _dirToTarget = [_targetPos select 0, _targetPos select 1] vectorFromTo [_entityPos select 0, _entityPos select 1];
+		private _angleToTarget = (_dirToTarget select 1) atan2 (_dirToTarget select 0);
+		private _currentDir = getDir _entitate;
+
+		// Calculate angle difference
+		private _angleDiff = (_angleToTarget - _currentDir + 360) % 360;
+		if (_angleDiff > 180) then {_angleDiff = _angleDiff - 360;};
+
+		// If the target is not already in front of the entity, update direction
+		if (abs _angleDiff > 10) then {
+			_entitate setFormDir (_currentDir + _angleDiff);
+			_entitate setDir (_currentDir + _angleDiff);
+		};
+
+		_entitate lookAt _pot_tgt;
+		_entitate doWatch _pot_tgt;
+		uiSleep 2;
+
 
 		_al_pressure = 90;
+		_dir_blast = getDir _entitate;
 
 		if (_dir_blast <= 90) then {
 			_press_implicit_x = linearConversion [0, 90, _dir_blast, 0, 1, true];

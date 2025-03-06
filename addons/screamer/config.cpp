@@ -25,7 +25,7 @@ class CfgFunctions {
 			class Screamer {file = "\z\root_anomalies\addons\screamer\functions\init_screamer.sqf";};
 			class ScreamerEffect {file = "\z\root_anomalies\addons\screamer\functions\screamer_effect.sqf";};
 			class ScreamerMain {file = "\z\root_anomalies\addons\screamer\functions\screamer_main.sqf";};
-			class ScreamerSplash {file = "\z\root_anomalies\addons\screamer\functions\screamer_splash.sqf";};
+			class ScreamerSplash {file = "\z\root_anomalies\addons\screamer\functions\screamer_splash_hit.sqf";};
 			class ScreamerTeleport {file = "\z\root_anomalies\addons\screamer\functions\screamer_teleport.sqf";};
 		};
 	};

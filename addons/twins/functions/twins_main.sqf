@@ -12,7 +12,7 @@ _heart_twin attachTo [_spark_obj, [-0.5, 0, 1.5]];
 
 [_heart_twin] remoteExec ["Root_fnc_TwinsInima", [0, -2] select isDedicated];
 
-if (_spark_effect) then {_poz_spark = createVehicle ["Sign_Sphere10cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"]; [_poz_spark, true] remoteExec ["hideObjectGlobal", 0, true]};
+if (_spark_effect) then {_poz_spark = createVehicle ["Sign_Sphere10cm_F", [0, 0, 0], [], 0, "CAN_COLLIDE"]; [_poz_spark, true] remoteExec ["hideObject", 0, true]};
 if (_effect_on_AI) then {[_spark_obj, _damage_range] remoteExec ["Root_fnc_TwinsDamage", 2];};
 _pauza = 5;
 [_spark_obj, _damage_range, _isseige] remoteExec ["Root_fnc_TwinsInima", [0, -2] select isDedicated, true];

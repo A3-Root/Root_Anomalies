@@ -5,7 +5,7 @@ if (!hasInterface) exitWith {};
 
 params ["_head_worm", "_tail_worm", "_voce_idle"];
 
-[_voce_idle, true] remoteExec ["hideObjectGlobal", 2, true];
+[_voce_idle, true] remoteExec ["hideObject", 0, true];
 
 [_voce_idle] spawn {
 	_tail_voice = _this select 0;
