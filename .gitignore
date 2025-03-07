@@ -4,3 +4,4 @@ keys/*
 .hemttout
 *.logs
 *.log
+Anomalies Workspace/temp/*
