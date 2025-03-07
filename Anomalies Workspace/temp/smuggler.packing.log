@@ -1,0 +1,89 @@
+﻿Processing \root_anomalies\smuggler...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Smuggler_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Smuggler_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootSmugglerCategory {
+class Smuggler {file = "root_anomalies\smuggler\functions\init_smuggler.sqf";};
+class SmugglerAIVisible {file = "root_anomalies\smuggler\functions\smuggler_ai_avoid_smugg_visible.sqf";};
+class SmugglerAIAvoid {file = "root_anomalies\smuggler\functions\smuggler_ai_avoid_smugg.sqf";};
+class SmugglerMain {file = "root_anomalies\smuggler\functions\smuggler_main.sqf";};
+class SmugglerSfx {file = "root_anomalies\smuggler\functions\smuggler_sfx.sqf";};
+class SmugglerSpawn {file = "root_anomalies\smuggler\functions\smuggler_spawn.sqf";};
+class SmugglerTeleEffect {file = "root_anomalies\smuggler\functions\smuggler_teleport_effect.sqf";};
+class SmugglerTeleport {file = "root_anomalies\smuggler\functions\smuggler_teleport.sqf";};
+class SmugglerVidEffect {file = "root_anomalies\smuggler\functions\smuggler_video_effect.sqf";};
+};
+};
+};
+
+
+class CfgFactionClasses {
+class NO_CATEGORY;
+class ROOT_ANOMALIES : NO_CATEGORY {
+displayName = "Root's Anomalies";
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Smuggler_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Smuggler_Module";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Smuggler";
+displayName = "Smuggler Anomaly";
+};
+};
+
+<rebuilding units[]= and friends>...
+loading...
+functions\init_smuggler.sqf:loading...
+functions\smuggler_ai_avoid_smugg.sqf:loading...
+functions\smuggler_ai_avoid_smugg_visible.sqf:loading...
+functions\smuggler_main.sqf:loading...
+functions\smuggler_sfx.sqf:loading...
+functions\smuggler_spawn.sqf:loading...
+functions\smuggler_teleport.sqf:loading...
+functions\smuggler_teleport_effect.sqf:loading...
+functions\smuggler_video_effect.sqf:loading...
+
+
+Prefix = root_anomalies\smuggler
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+..........
+Writing sha '849D435B27D6C014DAED701A885BC4830DCD4043'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\smuggler.pbo
+<MakePbo end>
+
+signing smuggler.pbo ...
+success

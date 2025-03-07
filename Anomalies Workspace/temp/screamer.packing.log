@@ -1,0 +1,72 @@
+﻿Processing \root_anomalies\screamer...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Screamer_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Screamer_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootScreamerCategory {
+class Screamer {file = "root_anomalies\screamer\functions\init_screamer.sqf";};
+class ScreamerEffect {file = "root_anomalies\screamer\functions\screamer_effect.sqf";};
+class ScreamerMain {file = "root_anomalies\screamer\functions\screamer_main.sqf";};
+class ScreamerSplash {file = "root_anomalies\screamer\functions\screamer_splash_hit.sqf";};
+class ScreamerTeleport {file = "root_anomalies\screamer\functions\screamer_teleport.sqf";};
+};
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Screamer_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Screamer";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Screamer";
+displayName = "Screamer Anomaly";
+};
+};
+<rebuilding units[]= and friends>...
+loading...
+functions\init_screamer.sqf:loading...
+functions\screamer_effect.sqf:loading...
+functions\screamer_main.sqf:loading...
+functions\screamer_splash_hit.sqf:loading...
+functions\screamer_teleport.sqf:loading...
+
+
+Prefix = root_anomalies\screamer
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+......
+Writing sha '3F8C8AB2E7FD22D032719CB1A3901CF5B2EFF728'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\screamer.pbo
+<MakePbo end>
+
+signing screamer.pbo ...
+success

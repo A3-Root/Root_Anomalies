@@ -1,0 +1,75 @@
+﻿Processing \root_anomalies\farmer...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Farmer_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Farmer_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootFarmerCategory
+{
+class Farmer {file = "root_anomalies\farmer\functions\init_farmer.sqf";};
+class FarmerMain {file = "root_anomalies\farmer\functions\farmer_main.sqf";};
+class FarmerShock {file = "root_anomalies\farmer\functions\farmer_shock_SFX.sqf";};
+class FarmerSplash {file = "root_anomalies\farmer\functions\farmer_splash_hit.sqf";};
+class FarmerTeleport {file = "root_anomalies\farmer\functions\farmer_teleport.sqf";};
+class FarmerTravel {file = "root_anomalies\farmer\functions\farmer_travel_SFX.sqf";};
+};
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Farmer_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Farmer_Module";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Farmer";
+displayName = "Farmer Anomaly";
+};
+};
+<rebuilding units[]= and friends>...
+loading...
+functions\farmer_main.sqf:loading...
+functions\farmer_shock_SFX.sqf:loading...
+functions\farmer_splash_hit.sqf:loading...
+functions\farmer_teleport.sqf:loading...
+functions\farmer_travel_SFX.sqf:loading...
+functions\init_farmer.sqf:loading...
+
+
+Prefix = root_anomalies\farmer
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+.......
+Writing sha '96B0A05C2D4B70EFB9C86CBB65631D71B31BD675'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\farmer.pbo
+<MakePbo end>
+
+signing farmer.pbo ...
+success

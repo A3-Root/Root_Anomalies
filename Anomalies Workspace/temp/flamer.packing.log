@@ -1,0 +1,81 @@
+﻿Processing \root_anomalies\flamer...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Flamer_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Flamer_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootFlamerCategory {
+class Flamer {file = "root_anomalies\flamer\functions\init_flamer.sqf";};
+class FlamerAtk {file = "root_anomalies\flamer\functions\flamer_atk_SFX.sqf";};
+class FlamerEndSfx {file = "root_anomalies\flamer\functions\flamer_end_SFX.sqf";};
+class FlamerEnd {file = "root_anomalies\flamer\functions\flamer_end.sqf";};
+class FlamerJump {file = "root_anomalies\flamer\functions\flamer_jump_SFX.sqf";};
+class FlamerMain {file = "root_anomalies\flamer\functions\flamer_main.sqf";};
+class FlamerPlasma {file = "root_anomalies\flamer\functions\flamer_plasma_SFX.sqf";};
+class FlamerSfx {file = "root_anomalies\flamer\functions\flamer_sfx.sqf";};
+class FlamerSplash {file = "root_anomalies\flamer\functions\flamer_splash_hit.sqf";};
+};
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Flamer_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Flamer_Module";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Flamer";
+displayName = "Flamer Anomaly";
+};
+};
+<rebuilding units[]= and friends>...
+loading...
+functions\flamer_atk_SFX.sqf:loading...
+functions\flamer_end.sqf:loading...
+functions\flamer_end_SFX.sqf:loading...
+functions\flamer_jump_SFX.sqf:loading...
+functions\flamer_main.sqf:loading...
+functions\flamer_plasma_SFX.sqf:loading...
+functions\flamer_sfx.sqf:loading...
+functions\flamer_splash_hit.sqf:loading...
+functions\init_flamer.sqf:loading...
+images\03_flesh.jpg:loading...
+
+
+Prefix = root_anomalies\flamer
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+...........
+Writing sha '9173F7F8EADB3108D4FCF444491734E71E66F618'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\flamer.pbo
+<MakePbo end>
+
+signing flamer.pbo ...
+success
