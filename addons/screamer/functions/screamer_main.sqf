@@ -395,7 +395,7 @@ while {alive _entitate} do {
 			_random_far = random[0, (_damage_screamer_far / 3), _damage_screamer_far];
 			if ((_x isKindOf "CAManBase") && (typeOf _x != "VirtualCurator_F")) then {
 				if(_isacemedical) then {
-					[_x, _damage_screamer_far, "Body", "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
+					[_x, _damage_screamer_far, _bodyPart, "backblast"] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];	
 				} else {
 					_x setDamage ((damage _x) + _damage_screamer_far);
 				};

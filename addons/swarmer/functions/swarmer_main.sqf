@@ -48,10 +48,22 @@ while {alive _swarmer_agent} do {
 				if (alive _swarmer_agent) then {
 					[_tgt_hiv, _swarmer_agent] remoteExec ["Root_fnc_SwarmerEating", [0, -2] select isDedicated];
 					_amountOfDamage = _dmg_un;
-					_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
-					_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
 					if (!(isNil "ace_medical_fnc_addDamageToUnit")) then {
-						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];	
+						_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+						_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];
+						_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+						_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];
+						_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+						_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];
+						_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+						_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];
+						_type_of_damage = selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"];
+						_bodyPart = selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"];
+						[_tgt_hiv, _amountOfDamage, _bodyPart, _type_of_damage] remoteExec ["ace_medical_fnc_addDamageToUnit", _tgt_hiv];
 					} else {
 						_tgt_hiv setDamage ((damage _tgt_hiv) + _amountOfDamage);
 					};

@@ -14,4 +14,3 @@
 - Further customizations (Make anomalies target specific AI/Group/Unit)
 
 
-CBA_B_InvisibleTargetVehicle

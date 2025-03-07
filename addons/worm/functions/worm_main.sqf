@@ -178,6 +178,15 @@ while {!isNull _cap} do {
                                 _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                                 _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
                                 [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+                                _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
+                                _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
+                                [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+                                _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
+                                _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
+                                [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
+                                _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
+                                _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
+                                [_x, _damage_worm, _bodyPart, _dmgtype] remoteExec ["ace_medical_fnc_addDamageToUnit", _x];
                             } else {
                                 _x setDamage ((damage _x) + _damage_worm);
                             };
