@@ -9,7 +9,7 @@ url = "https://github.com/A3-Root/Root_Anomalies"
 [files]
 include = [
     "CHANGELOG.md",
-    "meta.cpp",
+    "meta.cpp",\
     "mod.cpp",
     "LICENSE",
     "*.md",
