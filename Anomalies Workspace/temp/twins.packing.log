@@ -1,0 +1,76 @@
+﻿Processing \root_anomalies\twins...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Twins_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Twins_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootTwinsCategory {
+class Twins {file = "root_anomalies\twins\functions\init_twins.sqf";};
+class TwinsDamage {file = "root_anomalies\twins\functions\twins_damage_AI.sqf";};
+class TwinsEmp {file = "root_anomalies\twins\functions\twins_emp_starter.sqf";};
+class TwinsInima {file = "root_anomalies\twins\functions\twins_inima.sqf";};
+class TwinsMain {file = "root_anomalies\twins\functions\twins_main.sqf";};
+class TwinsEffect {file = "root_anomalies\twins\functions\twins_spark_effect.sqf";};
+class TwinsViz {file = "root_anomalies\twins\functions\twins_spark_viz.sqf";};
+};
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Twins_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Twins";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Twins";
+displayName = "Twins Anomaly";
+};
+};
+<rebuilding units[]= and friends>...
+loading...
+functions\init_twins.sqf:loading...
+functions\twins_damage_AI.sqf:loading...
+functions\twins_emp_starter.sqf:loading...
+functions\twins_inima.sqf:loading...
+functions\twins_main.sqf:loading...
+functions\twins_spark_effect.sqf:loading...
+functions\twins_spark_viz.sqf:loading...
+
+
+Prefix = root_anomalies\twins
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+........
+Writing sha 'DDAAC35E2445A2C7D661C3929A9CC14B9A3E95E4'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\twins.pbo
+<MakePbo end>
+
+signing twins.pbo ...
+success

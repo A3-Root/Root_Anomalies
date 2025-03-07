@@ -1,0 +1,76 @@
+﻿Processing \root_anomalies\strigoi...
+verifying model.cfgs(if any)...
+<scanning files to pack (and verifying mlods if any)>
+
+</end scan>
+<MakePbo start>
+config.cpp:lint checking...
+class CfgPatches {
+class Root_Strigoi_Anomaly {
+addonRootClass = "Root_Anomalies";
+requiredAddons[] = {
+"A3_Modules_F_Curator",
+"cba_main",
+"zen_custom_modules",
+"Root_Anomalies"
+};
+units[] = {"Strigoi_Module"};
+weapons[] = {};
+author = "Root";
+authors[] = {
+"Root",
+"Aliascartoons"
+};
+url = "https://github.com/A3-Root/Root_Anomalies";
+requiredVersion = 2.18;
+};
+};
+
+class CfgFunctions {
+class Root {
+class RootStrigoiCategory {
+class Strigoi {file = "root_anomalies\strigoi\functions\init_strigoi.sqf";};
+class StrigoiViz {file = "root_anomalies\strigoi\functions\strigoi_atk_viz.sqf";};
+class StrigoiFatigue {file = "root_anomalies\strigoi\functions\strigoi_fatigue_p.sqf";};
+class StrigoiMain {file = "root_anomalies\strigoi\functions\strigoi_main.sqf";};
+class StrigoiSfx {file = "root_anomalies\strigoi\functions\strigoi_sfx.sqf";};
+class StrigoiSplash {file = "root_anomalies\strigoi\functions\strigoi_splash_hit.sqf";};
+class StrigoiTgt {file = "root_anomalies\strigoi\functions\strigoi_tgt_attk.sqf";};
+};
+};
+};
+
+class CfgVehicles {
+class zen_modules_moduleBase;
+class Strigoi_Module: zen_modules_moduleBase {
+author = "Root";
+_generalMacro = "Strigoi_Module";
+category = "ROOT_ANOMALIES";
+function = "Root_fnc_Strigoi";
+displayName = "Strigoi Anomaly";
+};
+};
+<rebuilding units[]= and friends>...
+loading...
+functions\init_strigoi.sqf:loading...
+functions\strigoi_atk_viz.sqf:loading...
+functions\strigoi_fatigue_p.sqf:loading...
+functions\strigoi_main.sqf:loading...
+functions\strigoi_sfx.sqf:loading...
+functions\strigoi_splash_hit.sqf:loading...
+functions\strigoi_tgt_attk.sqf:loading...
+
+
+Prefix = root_anomalies\strigoi
+
+writing header entries..
+
+writing pbo header...
+Writing data blocks...
+........
+Writing sha '74590A569DD8D098D2B819DE7CF2108DEC1CC3F9'
+File written to G:\Games\Arma 3\## PBOs\Created\@roots_anomalies\addons\strigoi.pbo
+<MakePbo end>
+
+signing strigoi.pbo ...
+success
