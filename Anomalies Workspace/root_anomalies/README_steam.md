@@ -2,7 +2,7 @@ Heavily Reworked Zeus Module for Alias's Anomalies for use in mission without ne
 
 Found under tabs "Root's Anomalies" in the "Modules" section.
 
-Project is now open sourced with APL-SA Licence! Check out the [GitHub page here!](https://github.com/A3-Root/Root_Anomalies)
+Project is now open sourced with APL-SA Licence! Check out the [url=https://github.com/A3-Root/Root_Anomalies]GitHub page here![/url]
 
 [b]Current version - 4.0.0[/b]
 
@@ -123,3 +123,12 @@ Health is calculated by number of 'hits' received from other units. 10 Health = 
 [*] Can confuse the anomaly in selecting its target by having more than one unit near it and by running in different directions.
 [*] Can be neutralized by throwing the configured 'Worm Diffuser' object.
 [/list]
+
+[hr] [/hr]
+
+[h1][b]++++ LICENSE ++++[/b][/h1]
+
+[img]https://i.imgur.com/jUUdDUu.png[/img]
+Project is now open sourced with APL-SA Licence! Check out the [url=https://github.com/A3-Root/Root_Anomalies]GitHub page here![/url]
+
+[hr] [/hr]
