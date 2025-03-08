@@ -2,8 +2,6 @@
 
 For use in missions without needing the Eden Editor. Found under tabs "Root's Anomalies" in the "Modules" section.
 
-Project is now open sourced with APL-SA Licence! Check out the [GitHub page here!](https://github.com/A3-Root/Root_Anomalies)
-
 **Current Version**: 4.0.0
 
 ## REQUIRED ADDITIONAL ADDONS/DEPENDENCIES
@@ -23,20 +21,15 @@ Useful for **Stalker**, **SCP**, **Halloween**, **F.E.A.R**, **Horror**, **Sci-F
 
 ---
 
-# ++++ CREDITS ++++
-
-Major credits to **ALIASCARTOONS** for his original idea and work. Check out more of his cool stuff [here.](https://steamcommunity.com/id/aliascartoons/myworkshopfiles/)
-
----
-
 # ++++ ANOMALIES ++++
 
 All anomalies are made with customization in mind. It is highly recommended to read through each option to tweak them as per your requirement. Health is calculated by the number of 'hits' received from other units. 10 Health = Hits from projectiles required to 'neutralize' the anomaly. Some anomalies have special termination properties. Please read carefully.
 
+
 ## Available Anomalies:
 
 ### **Burper Anomaly**
-![Burper](http://i.imgur.com/0yeQOIv.gif)
+![Burper](https://i.imgur.com/0yeQOIv.gif)
 - Instantly kills all objects within the configured radius.
 - Can be made visible/detectable only for units with 'Detection Device' configured (Default: Vanilla Mine Detector).
 - Can be made evaded by units wearing the 'Protection Device' (Default: Kitbag (MTP)).
@@ -48,19 +41,19 @@ All anomalies are made with customization in mind. It is highly recommended to r
 - Targets ground-based infantry and vehicles.
 
 ### **Flamer Anomaly**
-![Flamer](http://i.imgur.com/xQlsU22.gif)
+![Flamer](https://i.imgur.com/xQlsU22.gif)
 - Uses fire to burn and kill units within its territory. 
 - Targets ground and air units.
 - Does not like water.
 
 ### **Screamer Anomaly**
-![Screamer](http://i.imgur.com/9ZU3G9t.gif)
+![Screamer](https://i.imgur.com/9ZU3G9t.gif)
 - Uses high-pitch sound to push back things.
 - Can be customized to use custom models (including live AI).
 - Requires heavy explosives to neutralize, depending on the chosen model.
 
 ### **Smuggler Anomaly**
-![Smuggler](http://i.imgur.com/JGYihwh.gif)
+![Smuggler](https://i.imgur.com/JGYihwh.gif)
 - 'Teleports' / 'Smuggles' objects and units to and from various random places.
 - Can be customized to spawn random/specific objects including AI.
 - Spawned AI are **always** hostile to players regardless of their side.
@@ -70,30 +63,30 @@ All anomalies are made with customization in mind. It is highly recommended to r
 > **Note:** Highly recommended **NOT** to manually delete the entity after being placed.
 
 ### **Steamer Anomaly**
-![Steamer](http://i.imgur.com/FN9yRUy.gif)
+![Steamer](https://i.imgur.com/FN9yRUy.gif)
 - Uses underground gas pipes to move to a random target within its territory and burst out.
 - Can only be neutralized with explosives near its location.
 - Customizable to provide a 'visible' pathing to its position for a short period, aiding in locating its position.
 
 ### **Strigoi Anomaly**
-![Strigoi](http://i.imgur.com/t3D4g6A.gif)
+![Strigoi](https://i.imgur.com/t3D4g6A.gif)
 - Uses electric current to disorient, confuse, drain stamina, and kill units within its territory.
 - Customizable to be active only during nighttime.
 - Can disable 'Flashing Lights' in settings to help players with epilepsy or other conditions.
 
 ### **Swarmer Anomaly**
-![Swarmer](http://i.imgur.com/VIYrFKS.gif)
+![Swarmer](https://i.imgur.com/VIYrFKS.gif)
 - Deadly flies that leech off nearby units until the unit is dead or escapes its territory.
 - Neutralized by throwing the configured 'Pesticide' object.
 
 ### **Twins Anomaly**
-![Twins](http://i.imgur.com/EbXKTPc.gif)
+![Twins](https://i.imgur.com/EbXKTPc.gif)
 - An anomaly that plays with the mind and vision of its target, slowly killing them.
 - Can be neutralized by shooting its "Heart."
 - Customizable to turn off 'Flashing Lights' for players with epilepsy or similar conditions.
 
 ### **Worm Anomaly**
-![Worm](http://i.imgur.com/ILe4Buj.gif)
+![Worm](https://i.imgur.com/ILe4Buj.gif)
 - A gaseous entity in the shape of a worm attacking its target by slamming to the ground.
 - Can confuse the anomaly by having multiple units near it, running in different directions.
 - Neutralized by throwing the configured 'Worm Diffuser' object.
@@ -104,6 +97,6 @@ All anomalies are made with customization in mind. It is highly recommended to r
 
 ![License](https://i.imgur.com/jUUdDUu.png)
 
-Project is now open-sourced under the APL-SA License! Check out the [GitHub page here!](https://github.com/A3-Root/Root_Anomalies)
+Project is now open-sourced under the [Arma Public License Share Alike (APL-SA) License!](https://www.bohemia.net/community/licenses/arma-public-license-share-alike)
 
 ---
