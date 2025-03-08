@@ -11,6 +11,8 @@ For use in missions without needing the Eden Editor. Found under tabs "Root's An
 ## Optional Addons (Supplemental):
 - [Root's Effects](https://steamcommunity.com/sharedfiles/filedetails/?id=2797232351)
 
+---
+
 Signed and tested for dedicated servers. Works out-of-the-box with both Vanilla Medical and ACE Medical systems.
 
 **Requires EVERYONE** (Client, Server, and all connected Machines/Players) to have this addon installed and loaded due to custom textures and sounds.
