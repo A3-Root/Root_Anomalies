@@ -1,4 +1,4 @@
-# Heavily Reworked Zeus Module for Alias's Anomalies
+# Heavily Reworked Zeus Module of Aliascartoon's Anomalies
 
 For use in missions without needing the Eden Editor. Found under tabs "Root's Anomalies" in the "Modules" section.
 
@@ -87,5 +87,3 @@ All anomalies are made with customization in mind. It is highly recommended to r
 ![License](https://i.imgur.com/jUUdDUu.png)
 
 Project is now open-sourced under the [Arma Public License Share Alike (APL-SA) License!](https://www.bohemia.net/community/licenses/arma-public-license-share-alike)
-
----
