@@ -4,11 +4,11 @@ For use in missions without needing the Eden Editor. Found under tabs "Root's An
 
 **Current Version**: 4.0.0
 
-## REQUIRED ADDITIONAL ADDONS/DEPENDENCIES
+## Required Additional Addons (Dependencies):
 - [CBA A3](https://steamcommunity.com/workshop/filedetails/?id=450814997)
 - [Zeus Enhanced (ZEN)](https://steamcommunity.com/sharedfiles/filedetails/?id=1779063631)
 
-## OPTIONAL/SUPPLEMENTAL ADDON
+## Optional Addons (Supplemental):
 - [Root's Effects](https://steamcommunity.com/sharedfiles/filedetails/?id=2797232351)
 
 Signed and tested for dedicated servers. Works out-of-the-box with both Vanilla Medical and ACE Medical systems.
@@ -21,12 +21,9 @@ Useful for **Stalker**, **SCP**, **Halloween**, **F.E.A.R**, **Horror**, **Sci-F
 
 ---
 
-#  ANOMALIES 
+#  Anomalies 
 
 All anomalies are made with customization in mind. It is highly recommended to read through each option to tweak them as per your requirement. Health is calculated by the number of 'hits' received from other units. 10 Health = Hits from projectiles required to 'neutralize' the anomaly. Some anomalies have special termination properties. Please read carefully.
-
-
-## Available Anomalies:
 
 ### **Burper Anomaly**
 - Instantly kills all objects within the configured radius.
