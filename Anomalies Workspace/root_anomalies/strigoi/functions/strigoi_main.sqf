@@ -75,7 +75,7 @@ STRIGOI_salt_1 = {
 	params ["_strigoi", "_poz_tgt", "_umbla_casper", "_obj_de_agatat", "_cap_casper", "_pot_poz"];
 	private "_unghi_fugarit";
 	_umbla_casper setPos (_obj_de_agatat getPos [2, _obj_de_agatat getRelDir _poz_tgt]);
-	_salt_sunet = ["01_salt", "02_salt", "03_salt"] call BIS_fnc_selectRandom;
+	_salt_sunet = selectRandom ["01_salt", "02_salt", "03_salt"];
 	[_cap_casper, [_salt_sunet, 200]] remoteExec ["say3D"];
 	_strigoi setVelocityTransformation [getPosATL _strigoi, getPosATL _umbla_casper, velocity _strigoi, velocity _umbla_casper, [0, 0, 0], [0, 0, 0], [0, 0, 1], [0, 0, 2], 0.3];
 	_strigoi attachTo [_umbla_casper, [0, 0, (getPos _obj_de_agatat select 2) + _pot_poz / 4]];

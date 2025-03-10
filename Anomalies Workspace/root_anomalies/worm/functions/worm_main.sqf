@@ -7,7 +7,7 @@ WORM_avoid = {
     _chased_units = _this select 1;
     {
         _reldir = [_x, getPos _danger_close] call BIS_fnc_dirto;
-        _fct = [30, -30] call BIS_fnc_selectRandom;
+        _fct = selectRandom [30, -30];
         if (_reldir < 180) then {
             _op_dir = _reldir + 180 + _fct
         } else {
@@ -28,6 +28,7 @@ WORM_vehicle_dmg = {
 	{
 		_damage = random(_worm_dmg);
 		_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + _damage];
+        [_vehicle, [_x, (_vehicle getHitPointDamage _x) + _damage]] remoteExec ["setHitPointDamage", _vehicle];
 	} forEach _vichitpoints;
 	_vehicle setHitPointDamage ["HitLight", 1];
 	_vehicle setHitPointDamage ["#light_l", 1];
@@ -79,7 +80,7 @@ while {_hide_me} do {
     _list_ai_in_range_worm = (getMarkerPos _poz_worm) nearEntities [["CAManBase", "LandVehicle"], _territory];
     if (count _list_ai_in_range_worm > 0) then {
         _hide_me = false;
-        _tgt_worm = _list_ai_in_range_worm call BIS_fnc_selectRandom;
+        _tgt_worm = selectRandom _list_ai_in_range_worm;
         _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
         _dir_move = _dir_move + 45;
         if (_dir_move <= 90) then {
@@ -154,7 +155,7 @@ while {!isNull _cap} do {
                 _press_implicit_x = linearConversion [0, 90, _dir_move, -1, 0, true];
                 _press_implicit_y = 1 + _press_implicit_x;
             };
-            _worm_salt = ["salt_08", "salt_05"] call BIS_fnc_selectRandom;
+            _worm_salt = selectRandom ["salt_08", "salt_05"];
             _cap setVelocity [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
             [_coada, [_worm_salt, 500]] remoteExec ["say3D"];
             uiSleep 0.5;
@@ -166,11 +167,11 @@ while {!isNull _cap} do {
             {
                 if ((_x != _cap) && (_x != _coada) && (_x != _coada_01) && !(surfaceIsWater getPos _x)) then {
                     if ((_x isKindOf "LandVehicle") || (_x isKindOf "Air")) then {
-                        _x setVelocityModelSpace [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
+                        [_x, [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                         [_x, _damage_worm] call WORM_vehicle_dmg;
                     } else {
                         if ((typeOf _x != "VirtualCurator_F") && (_x isKindOf "CAManBase")) then {
-                            _x setVelocityModelSpace [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10];
+                            [_x, [_press_implicit_x * 5, _press_implicit_y * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                             if(_isacemedical) then {
                                 _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
                                 _dmgType = selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"];
@@ -203,10 +204,10 @@ while {!isNull _cap} do {
             _cap setPosATL [getPosATL _cap select 0, getPosATL _cap select 1, 2];
         };     
         if ((!isNull _tgt_worm) && (_tgt_worm distance _cap > 15) && !(surfaceIsWater getPos _tgt_worm)) then {
-            _sunet_deplas = ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"] call BIS_fnc_selectRandom;
+            _sunet_deplas = selectRandom ["move_01", "move_02", "move_03", "move_04", "move_05", "move_06", "move_07", "move_08", "move_09", "move_10", "move_11", "move_12", "move_13", "move_14", "move_15"];
             if (_isaipanic) then {[_cap, _list_ai_in_range_worm] call WORM_avoid;};
             _fct_move = 8 + random 8;
-            _fct = [10 + random - 35, 10 + random 45] call BIS_fnc_selectRandom;
+            _fct = selectRandom [10 + random - 35, 10 + random 45];
             _dir_move = [getPos _cap, _tgt_worm] call BIS_fnc_dirto;
             _dir_move = _dir_move + _fct;
             if (_dir_move <= 90) then {

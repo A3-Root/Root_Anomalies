@@ -6,9 +6,9 @@ if (!hasInterface) exitWith {};
 _obj_emit = _this select 0;
 _paz_emit = _this select 1;
 
-_sparky_sun = ["spark1", "spark11", "spark2", "spark22", "spark5", "spark4"] call BIS_fnc_selectRandom;
+_sparky_sun = selectRandom ["spark1", "spark11", "spark2", "spark22", "spark5", "spark4"];
 
-_spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
+_spark_type = selectRandom ["white", "orange"];
 
 _drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _obj_emit);

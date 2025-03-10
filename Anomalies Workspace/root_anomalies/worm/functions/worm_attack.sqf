@@ -9,7 +9,7 @@ _head_worm = _this select 0;
 _tail_worm = _this select 1;
 
 enableCamShake true;
-_worm_impact = ["impact_30", "impact_27"] call BIS_fnc_selectRandom;
+_worm_impact = selectRandom ["impact_30", "impact_27"];
 _head_worm say3D [_worm_impact, 500];
 
 _blast_dust = "#particlesource" createVehicleLocal (getPosATL _head_worm);
@@ -36,7 +36,7 @@ uiSleep 0.5;
 deleteVehicle _blast_dust;
 
 if (player distance _head_worm < 500) then {
-_after_effect = ["post_impact_01", "post_impact_02", "post_impact_03", "post_impact_04"] call BIS_fnc_selectRandom;
+_after_effect = selectRandom ["post_impact_01", "post_impact_02", "post_impact_03", "post_impact_04"];
 playSound _after_effect;
 };
 uiSleep 60;

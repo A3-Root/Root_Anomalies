@@ -1,5 +1,10 @@
 
- 
+/* 
+To Kill it via Script: 
+
+["", true] remoteExec ["Root_fnc_WormKill", 2];
+
+*/
 
 if (!isServer) exitWith {};
 

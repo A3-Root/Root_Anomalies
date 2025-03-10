@@ -21,7 +21,7 @@ if (!isNil "obj_prot_burper") then {
 			{
 				if ((typeOf _x == "VirtualCurator_F") or ([_x, obj_prot_burper] call BIS_fnc_hasItem)) then {
 				} else {
-					_tipat = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
+					_tipat = selectRandom ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"];
 					[_x, [_tipat, 100]] remoteExec ["say3D"];
 					uiSleep 0.5 + (random 0.5);
 					_x setDamage 1;
@@ -50,7 +50,7 @@ if (!isNil "obj_prot_burper") then {
 		if (count _list_units_in_range > 0) then {
 			{
 				if ((typeOf _x != "VirtualCurator_F") or (typeOf _x != _anti_burp)) then {
-					_tipat = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"] call BIS_fnc_selectRandom;
+					_tipat = selectRandom ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"];
 					[_x, [_tipat, 100]] remoteExec ["say3D"];
 					uiSleep 0.5 + (random 0.5);
 					_x setDamage 1;

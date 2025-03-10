@@ -142,7 +142,7 @@ _x setCollisionLight false;
 
 
 {
-_spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRandom;
+_spark_sound = selectRandom ["spark1", "spark11", "spark2", "spark22"];
 _x say3D _spark_sound;
 _e_static = "#particlesource" createVehicleLocal (getPosATL _x);
 _e_static setParticleFire [0.5, 3, 60];
@@ -217,8 +217,8 @@ _maxHeight = abs ((_p2 select 2) - (_p1 select 2));
 
 _spark_poz_rel = (_maxHeight / 2) - 0.45;
 
-_spark_type = ["white", "orange"] call BIS_fnc_selectRandom;
-_spark_sound = ["spark1", "spark11", "spark2", "spark22"] call BIS_fnc_selectRandom;
+_spark_type = selectRandom ["white", "orange"];
+_spark_sound = selectRandom ["spark1", "spark11", "spark2", "spark22"];
 _drop = 0.001 + (random 0.05);
 _scantei_spark = "#particlesource" createVehicleLocal (getPosATL _x);
 

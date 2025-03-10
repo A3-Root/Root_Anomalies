@@ -52,8 +52,8 @@ BURPER_sfx_secondary = {
 	_work_sfx_sec = _this select 0;
 	_obj_sfx_sec = _this select 1;
 	while {((player distance _work_sfx_sec) < 1500) && (ciclu_compli < 3)} do {
-		if ((player distance _work_sfx_sec) < 100) then {_sunet_blast = ["01_blast", "02_blast", "03_blast"] call BIS_fnc_selectRandom;enableCamShake true; addCamShake [1, 4, 13 + (random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
-		if ((player distance _work_sfx_sec) > 100) then {_far_sunet_blast = ["01_far_blast", "02_far_blast", "03_far_blast"] call BIS_fnc_selectRandom; _work_sfx_sec say3D [_far_sunet_blast, 500]};
+		if ((player distance _work_sfx_sec) < 100) then {_sunet_blast = selectRandom ["01_blast", "02_blast", "03_blast"];enableCamShake true; addCamShake [1, 4, 13 + (random 33)]; _work_sfx_sec say3D [_sunet_blast, 100]};
+		if ((player distance _work_sfx_sec) > 100) then {_far_sunet_blast = selectRandom ["01_far_blast", "02_far_blast", "03_far_blast"]; _work_sfx_sec say3D [_far_sunet_blast, 500]};
 		_blast_blurp = "#particlesource" createVehicleLocal (getPosATL _obj_sfx_sec);
 		_blast_blurp setParticleCircle [5, [-3, -3, 0]];
 		_blast_blurp setParticleRandom [2, [6, 6, 0], [-7, -7, 0], 5, 1, [0, 0, 0, 1], 1, 1];

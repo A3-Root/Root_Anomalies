@@ -63,7 +63,7 @@ _spark_obj setVariable ["vizibil", 0, true];
 
 if (_spark_effect) then {
 	while {alive _spark_obj} do {
-		_spark_poz_rel = ["st", "dr", "ct"] call BIS_fnc_selectRandom;
+		_spark_poz_rel = selectRandom ["st", "dr", "ct"];
 		if (_spark_poz_rel == "st") then {_poz_spark attachTo [_spark_obj, [-12, 0, 12.35]]};
 		if (_spark_poz_rel == "dr") then {_poz_spark attachTo [_spark_obj, [11.5, 0, 12.35]]};
 		if (_spark_poz_rel == "ct") then {_poz_spark attachTo [_spark_obj, [-0.3, 0, 12.2]]};

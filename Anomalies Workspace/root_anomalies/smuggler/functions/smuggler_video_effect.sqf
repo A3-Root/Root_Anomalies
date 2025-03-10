@@ -3,7 +3,7 @@
 if (!hasInterface)	exitWith {};
 
 cutText ["", "WHITE OUT", 1]; titleCut ["", "WHITE IN", 1];
-_effect_tip = ["blur", "colorinv", "chrom", "colorcor"] call BIS_fnc_selectRandom;
+_effect_tip = selectRandom ["blur", "colorinv", "chrom", "colorcor"];
 enableCamShake true;
 addCamShake [3 + random 7, 3, 13 + random 33];
 playSound "puls";

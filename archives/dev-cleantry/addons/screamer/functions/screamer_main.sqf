@@ -11,7 +11,7 @@ SCREAMER_avoid = {
 		if ((_x isKindOf "LandVehicle") or (_x isKindOf "Air") or (_x isKindOf "CAManBase")) then {
 		if (_x != _danger_close) then {
 		_reldir = [_x, getPos _danger_close] call BIS_fnc_dirTo;
-		_fct = [30, -30] call BIS_fnc_selectRandom;
+		_fct = selectRandom [30, -30];
 		if (_reldir < 180) then {_op_dir = _reldir + 180 + _fct} else {_op_dir = _reldir - 180 + _fct};
 		_avoid_poz = [getPosATL _x, 30 + random 10, _op_dir] call BIS_fnc_relPos;
 		_x doMove _avoid_poz;

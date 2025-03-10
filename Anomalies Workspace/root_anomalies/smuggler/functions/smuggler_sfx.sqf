@@ -49,7 +49,7 @@ SMUGGLER_sfx_primary = {
 	_spot_lit setLightDayLight true;	
 
 	while {(player distance _obj_sursa_smugg < 1000) && player_chk_det} do {
-		_fct_lit = [1, -1] call BIS_fnc_selectRandom;
+		_fct_lit = selectRandom [1, -1];
 		uiSleep 0.5 + random 1;
 		_spot_lit lightAttachObject [_sursa_princ_center, [0.5 + random _fct_lit, 0.5 + random _fct_lit, 1]];
 		_r_col_burp = random 1;
@@ -83,7 +83,7 @@ SMUGGLER_sfx_secondary = {
 	player setVariable ["loop_dust", true];
 
 	while {player getVariable "loop_dust"} do {
-		_rafala_smug = ["rafala_smug_01", "rafala_smug_02", "rafala_smug_03"] call BIS_fnc_selectRandom;
+		_rafala_smug = selectRandom ["rafala_smug_01", "rafala_smug_02", "rafala_smug_03"];
 		_obj_sec_center say3D [_rafala_smug, 500];
 
 		_suck_frunze = "#particlesource" createVehicleLocal (getPosATL _obj_sec_effect);
