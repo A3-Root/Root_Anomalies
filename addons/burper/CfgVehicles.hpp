@@ -1,3 +1,5 @@
+#include "\z\root_anomalies\addons\main\module_attributes.hpp"
+
 class CfgVehicles {
 	// ---- Zeus (ZEN) module ----
 	class zen_modules_moduleBase;
@@ -111,6 +113,7 @@ class CfgVehicles {
 				typeName = "STRING";
 				defaultValue = """O_Truck_03_device_F""";
 			};
+			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};
 		class ModuleDescription: ModuleDescription {

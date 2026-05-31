@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * call Root_fnc_initSettings;
+ * call root_anomalies_main_fnc_initSettings;
  *
  * Public: No
  */

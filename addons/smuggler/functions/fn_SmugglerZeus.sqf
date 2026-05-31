@@ -51,7 +51,8 @@ deleteVehicle _logic;
         private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call root_anomalies_main_fnc_parseClassList};
 
         ["Smuggler Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] remoteExec ["root_anomalies_smuggler_fnc_SmugglerMain", 2];
+        private _config = createHashMapFromArray [["type", "smuggler"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize, _config] remoteExec ["root_anomalies_smuggler_fnc_SmugglerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

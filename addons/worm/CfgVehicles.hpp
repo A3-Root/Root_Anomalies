@@ -1,3 +1,5 @@
+#include "\z\root_anomalies\addons\main\module_attributes.hpp"
+
 class CfgVehicles {
 	// ---- Zeus (ZEN) module ----
 	class zen_modules_moduleBase;
@@ -69,6 +71,7 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "0.6";
 			};
+			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};
 		class ModuleDescription: ModuleDescription {

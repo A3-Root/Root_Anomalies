@@ -42,4 +42,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Smuggler3DEN activating marker %1",_markerName);
 
-[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] call root_anomalies_smuggler_fnc_SmugglerMain;
+private _config = [_logic, "smuggler"] call root_anomalies_main_fnc_cfgCapture;
+[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize, _config] call root_anomalies_smuggler_fnc_SmugglerMain;

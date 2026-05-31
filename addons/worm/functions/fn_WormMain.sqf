@@ -24,7 +24,8 @@ params [
     ["_damage", 0.6, [0]],
     ["_territory", 200, [0]],
     ["_aiPanic", false, [false]],
-    ["_diffuser", "SmokeShellGreen", [""]]
+    ["_diffuser", "SmokeShellGreen", [""]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
@@ -73,6 +74,12 @@ _tail attachTo [_head, [0, -1, 1]];
 _tail2 attachTo [_tail, [0, -1, 1]];
 [_tail, true] remoteExec ["hideObject", 0, true];
 [_tail2, true] remoteExec ["hideObject", 0, true];
+
+// Default the worm's diffuser as a sedation class if none specified in config.
+if !("sedationClassnames" in _config) then {
+    _config set ["sedationClassnames", [_diffuser, ROOT_ANOMALIES_SEDATIVE_SMOKE]];
+};
+[_head, _config] call root_anomalies_main_fnc_finalizeInstance;
 
 LOG_DEBUG_2("WormMain spawned at %1 (territory %2)",_markerPos,_territory);
 

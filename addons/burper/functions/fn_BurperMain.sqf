@@ -32,7 +32,8 @@ params [
     ["_radius", 10, [0]],
     ["_vehicleAllowed", true, [false]],
     ["_killRange", 20, [0]],
-    ["_aiPanic", true, [false]]
+    ["_aiPanic", true, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _pos = getMarkerPos _marker;
@@ -47,6 +48,8 @@ _obj setVariable [QGVAR(detector), _detector, true];
 _obj setVariable [QGVAR(protector), _protector, true];
 _obj setVariable [QGVAR(killDevice), _killDevice, true];
 _obj setVariable [QGVAR(active), true, true];
+
+[_obj, _config] call root_anomalies_main_fnc_finalizeInstance;
 
 LOG_DEBUG_2("BurperMain spawned at %1 (radius %2)",_pos,_radius);
 

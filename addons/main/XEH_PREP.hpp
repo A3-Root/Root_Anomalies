@@ -1,7 +1,7 @@
 // Precompiles every Root's Anomalies core/capture function and the public API.
 // PREP is redefined per sub-folder; PREP_API compiles into root_anomalies_fnc_*.
 
-// ---- core\ (internal helpers: root_anomalies_main_fnc_*) ----
+// ---- core
 #undef PREP
 #define PREP(fncName) [QPATHTOF(functions\core\DOUBLES(fn,fncName).sqf),QFUNC(fncName)] call CBA_fnc_compileFunction
 
@@ -14,8 +14,10 @@ PREP(mergeConfig);
 PREP(idleTarget);
 PREP(parseSides);
 PREP(cfgFromLogic);
+PREP(cfgCapture);
+PREP(finalizeInstance);
 
-// ---- capture\ (internal: root_anomalies_main_fnc_*) ----
+// ---- capture
 #undef PREP
 #define PREP(fncName) [QPATHTOF(functions\capture\DOUBLES(fn,fncName).sqf),QFUNC(fncName)] call CBA_fnc_compileFunction
 
@@ -25,7 +27,7 @@ PREP(sedationWatch);
 PREP(addCaptureInteraction);
 PREP(doCapture);
 
-// ---- api\ (public surface: root_anomalies_fnc_*) ----
+// ---- api
 PREP_API(registerDriver);
 PREP_API(spawn);
 PREP_API(configure);

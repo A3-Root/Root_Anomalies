@@ -44,7 +44,8 @@ deleteVehicle _logic;
         _results params ["_model", "_health", "_territory", "_interval", "_damage", "_fearRadius", "_noseize"];
 
         ["Wraith Anomaly configured and summoned!"] call zen_common_fnc_showMessage;
-        [_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _noseize] remoteExec ["root_anomalies_wraith_fnc_WraithMain", 2];
+        private _config = createHashMapFromArray [["type", "wraith"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        [_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _noseize, _config] remoteExec ["root_anomalies_wraith_fnc_WraithMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

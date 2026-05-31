@@ -41,7 +41,8 @@ params [
     ["_aiEngage", false, [false]],
     ["_aiPanic", false, [false]],
     ["_spawnSide", civilian, [civilian]],
-    ["_health", 400, [0]]
+    ["_health", 400, [0]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _avoidScreamer = {
@@ -169,16 +170,19 @@ _hpHolder addEventHandler ["Killed", {
 uiSleep 1;
 private _entityObj = [_anomaly, _entity] select _isAlive;
 
+// Register with the unified API (capture / sedation / getInstances).
+[_entityObj, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("ScreamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _entity} do {
+while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do {
     _entity setUnitPos "UP";
     _entity doWatch objNull;
     private _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
 
     if (count _near > 1) then {
         private _teleport = false;
-        while {!_teleport && {alive _entity}} do {
+        while {!_teleport && {alive _entity} && {!(_entityObj getVariable [QGVAR(captured), false])}} do {
             _entity setUnitPos "UP";
             _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
             if (count _near < 2) then {_teleport = true};

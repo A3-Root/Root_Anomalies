@@ -61,7 +61,8 @@ deleteVehicle _logic;
         };
 
         ["Burper Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] remoteExec ["root_anomalies_burper_fnc_BurperMain", 2];
+        private _config = createHashMapFromArray [["type", "burper"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        [_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic, _config] remoteExec ["root_anomalies_burper_fnc_BurperMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

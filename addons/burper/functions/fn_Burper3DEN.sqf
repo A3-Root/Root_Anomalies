@@ -44,4 +44,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Burper3DEN activating marker %1",_markerName);
 
-[_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] call root_anomalies_burper_fnc_BurperMain;
+private _config = [_logic, "burper"] call root_anomalies_main_fnc_cfgCapture;
+[_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic, _config] call root_anomalies_burper_fnc_BurperMain;

@@ -31,7 +31,8 @@ params [
     ["_affectAI", true, [false]],
     ["_emp", true, [false]],
     ["_heartClass", "B_UAV_06_F", [""]],
-    ["_noseize", false, [false]]
+    ["_noseize", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 if (isNull _twins) exitWith {};
@@ -50,6 +51,9 @@ if (_affectAI) then {[_twins, _dmgRange] remoteExec ["root_anomalies_twins_fnc_T
 
 _twins setVariable [QGVAR(visible), 0, true];
 [_twins, _dmgRange, _noseize] remoteExec ["root_anomalies_twins_fnc_TwinsViz", [0, -2] select isDedicated, true];
+
+_twins setVariable [QGVAR(extraDelete), [_heart], true];
+[_twins, _config] call root_anomalies_main_fnc_finalizeInstance;
 
 LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 

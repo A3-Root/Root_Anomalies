@@ -30,7 +30,8 @@ params [
     ["_spawnDelay", 10, [0]],
     ["_protector", "", [""]],
     ["_damage", 0.1, [0]],
-    ["_noseize", false, [false]]
+    ["_noseize", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _pos = getMarkerPos _marker;
@@ -49,6 +50,9 @@ if (_detector != "") then {
 
 [_sursa, _core] remoteExec ["root_anomalies_smuggler_fnc_SmugglerSfx", [0, -2] select isDedicated, true];
 [_sursa, _core, _damage, _noseize] remoteExec ["root_anomalies_smuggler_fnc_SmugglerTeleport", [0, -2] select isDedicated, true];
+
+_sursa setVariable [QGVAR(extraDelete), [_core], true];
+[_sursa, _config] call root_anomalies_main_fnc_finalizeInstance;
 
 LOG_DEBUG_1("SmugglerMain spawned at %1",_pos);
 

@@ -37,4 +37,5 @@ private _twins = _twinsClass createVehicle getPosATL _logic;
 
 LOG_DEBUG_1("Twins3DEN activating object %1",_twinsClass);
 
-[_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _noseize] call root_anomalies_twins_fnc_TwinsMain;
+private _config = [_logic, "twins"] call root_anomalies_main_fnc_cfgCapture;
+[_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _noseize, _config] call root_anomalies_twins_fnc_TwinsMain;

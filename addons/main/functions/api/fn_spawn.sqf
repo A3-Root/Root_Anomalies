@@ -50,16 +50,14 @@ missionNamespace setVariable ["ROOT_ANOMALIES_INSTANCE_IDX", _idx + 1];
 _config set ["id", format ["%1_%2", _key, _idx]];
 _config set ["type", _key];
 
-// Driver creates the entity and starts its per-frame behaviour.
+// Driver creates the entity and starts its behaviour. A "deferred" driver (legacy
+// creature with a blocking Main) may return objNull and call finalizeInstance itself
+// once its entity exists; a normal driver returns the live object to finalize here.
 private _obj = [_pos, _config] call _handler;
-if (isNull _obj) exitWith { LOG_ERROR("spawn: driver returned objNull"); objNull };
 
-_obj setVariable [QGVAR(config), _config, true];
+if (!isNull _obj) then {
+    [_obj, _config] call EFUNC(main,finalizeInstance);
+    LOG_DEBUG_2("spawn: %1 created (%2)",_config get "id",_pos);
+};
 
-// Durability, damage filtering, killswitch, and capture interaction.
-[_obj] call EFUNC(main,initDamage);
-
-GVAR(instances) pushBack _obj;
-
-LOG_DEBUG_2("spawn: %1 created (%2)",_config get "id",_pos);
 _obj

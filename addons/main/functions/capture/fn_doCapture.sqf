@@ -23,7 +23,9 @@ if (!isServer) exitWith { [_obj, _captured] remoteExec [QFUNC(doCapture), 2]; };
 if (_obj getVariable [QGVAR(captured), false]) exitWith {};
 
 _obj setVariable [QGVAR(captured), true, true];
-private _id = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["id", "?"];
+private _cfg = _obj getVariable [QGVAR(config), createHashMap];
+private _id = _cfg getOrDefault ["id", "?"];
+private _managed = _cfg getOrDefault ["manageDamage", true];
 
 if (_obj isKindOf "CAManBase") then {
     _obj setVariable [QGVAR(targets), [], true];
@@ -34,6 +36,18 @@ if (_obj isKindOf "CAManBase") then {
 if (_captured) exitWith {
     [ROOT_ANOMALIES_EVENT_CAPTURED, [_obj]] call CBA_fnc_globalEvent;
     LOG_DEBUG_1("doCapture: %1 captured",_id);
+    // Legacy creatures keep their own blocking lifecycle (which gates on alive/!isNull of
+    // this object) - removing it cleanly stops every sub-loop and contains the anomaly.
+    if (!_managed) then {
+        private _pfh = _obj getVariable [QGVAR(pfh), -1];
+        if (_pfh >= 0) then { _pfh call CBA_fnc_removePerFrameHandler; };
+        private _extra = _obj getVariable [QGVAR(extraDelete), []];
+        [{
+            params ["_obj", "_extra"];
+            { if (!isNull _x) then { deleteVehicle _x; }; } forEach _extra;
+            deleteVehicle _obj;
+        }, [_obj, _extra], 1] call CBA_fnc_waitAndExecute;
+    };
 };
 
 // Killed: stop behaviour PFH and destroy.

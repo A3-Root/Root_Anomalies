@@ -26,7 +26,8 @@ params [
     ["_damage", 0.6, [0]],
     ["_recharge", 5, [0]],
     ["_health", 400, [0]],
-    ["_aiPanic", false, [false]]
+    ["_aiPanic", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _findTarget = {
@@ -162,9 +163,11 @@ for "_i" from 0 to 5 do {
 [_farmer] call _hideFarmer;
 _farmer enableSimulationGlobal false;
 
+[_farmer, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("FarmerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _farmer} do {
+while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])}} do {
     private _ckPl = false;
     _farmer setUnitPos "UP";
     while {!_ckPl} do {

@@ -12,7 +12,7 @@
  * Cleaned classnames <ARRAY of STRING>
  *
  * Example:
- * ["Car, Tank ,"" Man"] call Root_fnc_parseClassList;
+ * ["Car, Tank ,"" Man"] call root_anomalies_main_fnc_parseClassList;
  *
  * Public: No
  */

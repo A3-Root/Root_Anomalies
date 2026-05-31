@@ -28,7 +28,8 @@ params [
     ["_recharge", 1, [0]],
     ["_health", 400, [0]],
     ["_deathDamage", 1, [0]],
-    ["_aiPanic", false, [false]]
+    ["_aiPanic", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
@@ -195,6 +196,8 @@ _flamer setVariable [QGVAR(atk), false];
 [_flamer] call _hideFlamer;
 [_flamer, _deathDamage] spawn root_anomalies_flamer_fnc_FlamerEnd;
 
+[_flamer, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("FlamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _ckPl = false;
@@ -204,7 +207,7 @@ while {!_ckPl} do {
 };
 
 private _inRange = [];
-while {alive _flamer} do {
+while {alive _flamer && {!(_flamer getVariable [QGVAR(captured), false])}} do {
     while {_inRange isEqualTo []} do {_inRange = [_flamer, _territory] call _findTarget; uiSleep 5};
     private _tgt = selectRandom (_inRange select {typeOf _x != "VirtualCurator_F"});
     [_flamer, _markerPos, _territory, _damage] call _showFlamer;

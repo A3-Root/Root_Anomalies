@@ -59,3 +59,28 @@
         typeName = "STRING"; \
         defaultValue = """"""; \
     };
+
+// Capture-only subset for the legacy creatures (they keep their own health/damage model
+// and targeting, so only the sedation/capture options are exposed).
+#define ROOT_CAPTURE_MODULE_ATTRIBUTES \
+    class ROOT_CAPTURE: Checkbox { \
+        property = "ROOT_CAPTURE"; \
+        displayName = "Capturable"; \
+        tooltip = "Allow the sedation + 30s capture interaction (removes the anomaly)."; \
+        typeName = "BOOL"; \
+        defaultValue = "true"; \
+    }; \
+    class ROOT_CAPTURETIME: Edit { \
+        property = "ROOT_CAPTURETIME"; \
+        displayName = "Capture Time (s)"; \
+        tooltip = "Seconds of interaction required to capture while sedated."; \
+        typeName = "NUMBER"; \
+        defaultValue = "30"; \
+    }; \
+    class ROOT_SEDATION: Edit { \
+        property = "ROOT_SEDATION"; \
+        displayName = "Sedation Classes (CSV)"; \
+        tooltip = "Custom smoke/throwable classnames that sedate this anomaly. Empty = default sedative smoke."; \
+        typeName = "STRING"; \
+        defaultValue = """"""; \
+    };

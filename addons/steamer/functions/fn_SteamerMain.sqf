@@ -26,7 +26,8 @@ params [
     ["_damage", 0.2, [0]],
     ["_recharge", 10, [0]],
     ["_deathDamage", 0.6, [0]],
-    ["_travelPath", false, [false]]
+    ["_travelPath", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
@@ -75,15 +76,17 @@ _steamer hideObjectGlobal true;
 _steamer enableSimulationGlobal false;
 [_steamer] remoteExec ["root_anomalies_steamer_fnc_SteamerVoice", 0, true];
 
+[_steamer, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("SteamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _steamer} do {
+while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])}} do {
     while {_inRange isEqualTo []} do {_inRange = [_steamer, _territory] call _findTarget; uiSleep 5};
     private _tgt = selectRandom (_inRange select {typeOf _x != "VirtualCurator_F"});
     uiSleep 0.5;
 
-    while {(!isNil "_tgt") && {alive _steamer}} do {
+    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QGVAR(captured), false])}} do {
         if (_travelPath) then {[_steamer, _tgt] call _travel};
         private _burstPoz = ASLToAGL getPosATL _tgt;
         private _blowUnits = (_burstPoz nearEntities [["CAManBase", "LandVehicle", "Air"], 10]) - [_steamer];

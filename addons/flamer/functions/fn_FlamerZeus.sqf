@@ -46,7 +46,8 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Flamer Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic] remoteExec ["root_anomalies_flamer_fnc_FlamerMain", 2];
+        private _config = createHashMapFromArray [["type", "flamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        [_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] remoteExec ["root_anomalies_flamer_fnc_FlamerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

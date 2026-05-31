@@ -22,7 +22,8 @@ params [
     ["_hiveObj", objNull, [objNull]],
     ["_radius", 75, [0]],
     ["_pesticide", "SmokeShellGreen", [""]],
-    ["_damage", 0.6, [0]]
+    ["_damage", 0.6, [0]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 if (isNull _hiveObj) exitWith {};
@@ -67,9 +68,15 @@ _agent setVariable [QGVAR(isHive), false, true];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_AGENT", _agent, true];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_ATK", false, true];
 
+if !("sedationClassnames" in _config) then {
+    _config set ["sedationClassnames", [_pesticide, ROOT_ANOMALIES_SEDATIVE_SMOKE]];
+};
+_agent setVariable [QGVAR(extraDelete), [_hiveObj], true];
+[_agent, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("SwarmerMain spawned hive at %1 (territory %2)",position _hiveObj,_radius);
 
-while {alive _agent} do {
+while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])}} do {
     while {!(_agent getVariable [QGVAR(isHive), false])} do {
         {if (_x distance getPos _agent < 1000) exitWith {_agent setVariable [QGVAR(isHive), true, true]}} forEach allPlayers;
         uiSleep 10;

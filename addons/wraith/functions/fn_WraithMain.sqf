@@ -30,7 +30,8 @@ params [
     ["_interval", 8, [0]],
     ["_damage", 0.4, [0]],
     ["_fearRadius", 25, [0]],
-    ["_noseize", false, [false]]
+    ["_noseize", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _pos = getMarkerPos _marker;
@@ -70,9 +71,11 @@ _obj addEventHandler ["HandleDamage", {
     };
 };
 
+[_obj, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("WraithMain spawned at %1 (territory %2)",_pos,_territory);
 
-while {alive _obj} do {
+while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])}} do {
     private _candidates = ((position _obj) nearEntities ["CAManBase", _territory]) select {
         (alive _x) && {typeOf _x != "VirtualCurator_F"} && {_x != _obj}
     };

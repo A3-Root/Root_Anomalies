@@ -37,4 +37,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Strigoi3DEN activating marker %1",_markerName);
 
-[_markerName, _territory, _nightOnly, _damage, round _health, _noseize, _aiPanic] call root_anomalies_strigoi_fnc_StrigoiMain;
+private _config = [_logic, "strigoi"] call root_anomalies_main_fnc_cfgCapture;
+[_markerName, _territory, _nightOnly, _damage, round _health, _noseize, _aiPanic, _config] call root_anomalies_strigoi_fnc_StrigoiMain;

@@ -57,4 +57,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Screamer3DEN activating marker %1",_markerName);
 
-[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health] call root_anomalies_screamer_fnc_ScreamerMain;
+private _config = [_logic, "screamer"] call root_anomalies_main_fnc_cfgCapture;
+[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] call root_anomalies_screamer_fnc_ScreamerMain;

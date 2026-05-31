@@ -24,12 +24,16 @@ if (!local _obj) exitWith {
     [_obj] remoteExec [QFUNC(initDamage), _obj];
 };
 
-_obj allowDamage true;
-_obj setVariable [QGVAR(absorbed), 0, true];
 _obj setVariable [QGVAR(captured), false, true];
 _obj setVariable [QGVAR(sedated), false, true];
 
-if (_obj isKindOf "CAManBase") then {
+// Generic health-pool / damage-filter / killswitch model. Anomalies that keep their own
+// damage handling (the legacy creatures) set manageDamage = false and skip this, but still
+// get the sedation + capture interaction below.
+private _cfg = _obj getVariable [QGVAR(config), createHashMap];
+if ((_cfg getOrDefault ["manageDamage", true]) && {_obj isKindOf "CAManBase"}) then {
+    _obj allowDamage true;
+    _obj setVariable [QGVAR(absorbed), 0, true];
     _obj addEventHandler ["HandleDamage", {_this call EFUNC(main,handleDamage)}];
 };
 

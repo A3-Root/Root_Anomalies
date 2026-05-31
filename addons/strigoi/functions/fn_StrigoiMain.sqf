@@ -28,7 +28,8 @@ params [
     ["_damage", 0.6, [0]],
     ["_health", 400, [0]],
     ["_noseize", false, [false]],
-    ["_aiPanic", false, [false]]
+    ["_aiPanic", false, [false]],
+    ["_config", createHashMap, [createHashMap]]
 ];
 
 private _findTarget = {
@@ -161,10 +162,12 @@ for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)pe
 [_strigoi] call _hide;
 [_strigoi] remoteExec ["root_anomalies_strigoi_fnc_StrigoiFatigue", [0, -2] select isDedicated, true];
 
+[_strigoi, _config] call root_anomalies_main_fnc_finalizeInstance;
+
 LOG_DEBUG_2("StrigoiMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _strigoi} do {
+while {alive _strigoi && {!(_strigoi getVariable [QGVAR(captured), false])}} do {
     if (_nightOnly && {sunOrMoon >= 0.5}) then {
         if (_strigoi getVariable [QGVAR(visible), false]) then {[_strigoi] call _hide};
         uiSleep 30;
