@@ -10,3 +10,5 @@ keys/*
 *.log.*
 reference_files
 *.md
+!README*.md
+!CHANGELOG.md

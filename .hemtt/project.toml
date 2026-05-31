@@ -9,6 +9,7 @@ include = [
     "LICENSE",
     "root_anomalies_logo.paa",
     "README*.md",
+    "CHANGELOG*.md",
 ]
 exclude = [
     ".gitignore",
@@ -16,6 +17,8 @@ exclude = [
     ".editorconfig",
     "*.md",
     "*.json",
+    "reference_files",
+    "wip",
 ]
 
 [properties]

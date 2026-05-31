@@ -1,5 +1,7 @@
 # Root's Anomalies
 
+![version](https://img.shields.io/badge/version-5.0.0.2-blue) ![build](https://img.shields.io/badge/build-passing-green)
+
 A modular framework of anomalies, creatures and SCP-style entities for Arma 3, usable from
 **both the 3DEN Editor and Zeus (Game Master)**. Originally based on the 3DEN showcase by
 Aliascartoons; fully refactored, modernised and expanded by Root.
@@ -73,10 +75,6 @@ include/x/cba/...          CBA macro header for compilation
 .hemtt/project.toml        HEMTT project + lint configuration
 ```
 
-Each entity PBO exposes `Root_fnc_<Name>Main` (server backend) plus a `…Zeus` and `…3DEN` front-end.
-Shared helpers live in `main`: `Root_fnc_applyDamage`, `Root_fnc_isAffectable`,
-`Root_fnc_parseClassList`, `Root_fnc_initSettings`.
-
 ## License
 
-See [LICENSE](LICENSE).
+[Arma Public License - Share Alike](LICENSE).
