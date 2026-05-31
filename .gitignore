@@ -12,3 +12,4 @@ reference_files
 *.md
 !README*.md
 !CHANGELOG.md
+*.txt
