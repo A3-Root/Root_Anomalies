@@ -2,7 +2,7 @@
 /*
  * Author: Root, Aliascartoons
  * Description: Zeus (ZEN) front-end for the Farmer. Opens a configuration dialog and
- *              hands off to Root_fnc_FarmerMain on the server.
+ *              hands off to root_anomalies_farmer_fnc_FarmerMain on the server.
  *
  * Arguments:
  * 0: Module logic <OBJECT>
@@ -46,7 +46,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Farmer Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _territory, _damage, _recharge, round _health, _aiPanic] remoteExec ["Root_fnc_FarmerMain", 2];
+        [_markerName, _territory, _damage, _recharge, round _health, _aiPanic] remoteExec ["root_anomalies_farmer_fnc_FarmerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

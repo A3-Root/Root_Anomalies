@@ -72,3 +72,58 @@
 #ifndef SEIZURE_SAFE
     #define SEIZURE_SAFE (missionNamespace getVariable [SETTING_SEIZURE_SAFE, false])
 #endif
+
+// ============================================================================
+// Function precompilation (XEH_PREP)
+// ============================================================================
+// CBA's default PREP expects a flat functions\ dir and fnc_ file naming. This mod
+// keeps functions in sub-folders (core\, api\, capture\, ...) with fn_ naming, so we
+// override PREP to the Warlords-style form and redefine it per sub-folder inside each
+// component's XEH_PREP.hpp (e.g. #define PREP(f) ...functions\core\fn_##f.sqf...).
+#ifdef PREP
+    #undef PREP
+#endif
+#define PREP(fncName) [QPATHTOF(functions\DOUBLES(fn,fncName).sqf),QFUNC(fncName)] call CBA_fnc_compileFunction
+
+// PREP_API compiles a function from main\functions\api\ straight into the clean public
+// namespace root_anomalies_fnc_<name> (no component segment) — the documented API surface.
+#define PREP_API(fncName) [QPATHTOF(functions\api\DOUBLES(fn,fncName).sqf),QUOTE(TRIPLES(PREFIX,fnc,fncName))] call CBA_fnc_compileFunction
+
+// Quoted public-API function name, e.g. QAPI(spawn) -> "root_anomalies_fnc_spawn".
+#define API(fncName) TRIPLES(PREFIX,fnc,fncName)
+#define QAPI(fncName) QUOTE(API(fncName))
+
+// ============================================================================
+// Additional debug logging arities
+// ============================================================================
+#ifndef LOG_DEBUG_4
+    #define LOG_DEBUG_4(msg,a1,a2,a3,a4) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) " + msg, __FILE__, a1, a2, a3, a4] }
+#endif
+
+// ============================================================================
+// Anomaly framework constants
+// ============================================================================
+// Default sedative throwable honoured by every anomaly's capture system.
+#ifndef ROOT_ANOMALIES_SEDATIVE_SMOKE
+    #define ROOT_ANOMALIES_SEDATIVE_SMOKE "ROOT_SmokeShell_Sedative"
+#endif
+
+// Tanky-by-default durability: high max HP, low incoming-damage multiplier.
+#ifndef ROOT_ANOMALIES_DEFAULT_HEALTH
+    #define ROOT_ANOMALIES_DEFAULT_HEALTH 25
+#endif
+#ifndef ROOT_ANOMALIES_DEFAULT_DMGMULT
+    #define ROOT_ANOMALIES_DEFAULT_DMGMULT 0.15
+#endif
+#ifndef ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME
+    #define ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME 30
+#endif
+
+// CBA event raised (global) when an anomaly instance is captured: args [anomaly].
+#ifndef ROOT_ANOMALIES_EVENT_CAPTURED
+    #define ROOT_ANOMALIES_EVENT_CAPTURED "root_anomalies_captured"
+#endif
+// CBA event raised (global) when an anomaly instance is killed/disabled: args [anomaly].
+#ifndef ROOT_ANOMALIES_EVENT_KILLED
+    #define ROOT_ANOMALIES_EVENT_KILLED "root_anomalies_killed"
+#endif

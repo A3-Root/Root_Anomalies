@@ -53,7 +53,7 @@ params ["_twins", ["_dmgRange", 75, [0]], ["_noseize", false, [false]]];
             if (_canDamage) then {
                 _canDamage = false;
                 playSound "sound_twin";
-                [player, random 0.33, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call Root_fnc_applyDamage;
+                [player, random 0.33, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
                 uiSleep 5;
                 _canDamage = true;
             };

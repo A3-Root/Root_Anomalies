@@ -36,4 +36,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Worm3DEN activating marker %1",_markerName);
 
-[_markerName, _damage, _territory, _aiPanic, _diffuser] call Root_fnc_WormMain;
+[_markerName, _damage, _territory, _aiPanic, _diffuser] call root_anomalies_worm_fnc_WormMain;

@@ -45,7 +45,7 @@ deleteVehicle _logic;
         private _hive = _hiveClass createVehicle _pos;
 
         ["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        [_hive, _territory, _pesticide, _damage] remoteExec ["Root_fnc_SwarmerMain", 2];
+        [_hive, _territory, _pesticide, _damage] remoteExec ["root_anomalies_swarmer_fnc_SwarmerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

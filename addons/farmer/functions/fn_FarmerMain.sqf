@@ -40,7 +40,7 @@ private _hideFarmer = {
     _farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
     _farmer setVariable [QGVAR(visible), false, true];
     [_farmer, ["pietre", 1000]] remoteExec ["say3D"];
-    [_farmer] remoteExec ["Root_fnc_FarmerTeleport", [0, -2] select isDedicated];
+    [_farmer] remoteExec ["root_anomalies_farmer_fnc_FarmerTeleport", [0, -2] select isDedicated];
     _farmer hideObjectGlobal true;
 };
 
@@ -50,7 +50,7 @@ private _showFarmer = {
     _farmer setVariable [QGVAR(visible), true, true];
     [_farmer, ["punch_7", 1000]] remoteExec ["say3D"];
     _farmer hideObjectGlobal false;
-    [_farmer] remoteExec ["Root_fnc_FarmerTeleport", [0, -2] select isDedicated];
+    [_farmer] remoteExec ["root_anomalies_farmer_fnc_FarmerTeleport", [0, -2] select isDedicated];
     _farmer setAnimSpeedCoef 0.8;
     _farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
     _farmer setUnitPos "UP";
@@ -69,7 +69,7 @@ private _avoidFarmer = {
 private _attkFarmer = {
     params ["_farmer", "_damageFarmer"];
     _farmer setUnitPos "UP";
-    [_farmer, _damageFarmer] remoteExec ["Root_fnc_FarmerShock", [0, -2] select isDedicated];
+    [_farmer, _damageFarmer] remoteExec ["root_anomalies_farmer_fnc_FarmerShock", [0, -2] select isDedicated];
     private _targets = ((ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 20]) - [_farmer];
 
     uiSleep 1.2;
@@ -80,13 +80,13 @@ private _attkFarmer = {
             private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
             if ((typeOf _victim != "VirtualCurator_F") && {_victim isKindOf "CAManBase"}) then {
                 _victim setVelocity [_jumpDir select 0, _jumpDir select 1, 9];
-                [_victim, _damageFarmer, _bodyPart, "falling"] call Root_fnc_applyDamage;
+                [_victim, _damageFarmer, _bodyPart, "falling"] call root_anomalies_main_fnc_applyDamage;
             };
         };
         if ((_victim isKindOf "LandVehicle") && {_victim != _farmer}) then {
             private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _victim) vectorMultiply 5;
             _victim setVelocity [_jumpDir select 0, _jumpDir select 1, 7];
-            if ([_victim] call Root_fnc_isAffectable) then {
+            if ([_victim] call root_anomalies_main_fnc_isAffectable) then {
                 private _hitPoints = (getAllHitPointsDamage _victim) param [0, []];
                 {
                     private _dmg = random [0, _damageFarmer, 1];
@@ -103,7 +103,7 @@ private _travelFarmer = {
     private _rag = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, getPosATL _farmer select 1, 3000];
     private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _tgtFarmer) vectorMultiply 20;
     _rag setVelocity [_jumpDir select 0, _jumpDir select 1, 5];
-    [_rag] remoteExec ["Root_fnc_FarmerTravel", [0, -2] select isDedicated];
+    [_rag] remoteExec ["root_anomalies_farmer_fnc_FarmerTravel", [0, -2] select isDedicated];
     uiSleep (round (2 + random 2));
     _farmer setVariable [QGVAR(newPos), getPos _rag];
     deleteVehicle _rag;
@@ -135,7 +135,7 @@ _farmer addEventHandler ["Hit", {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec ["Root_fnc_FarmerSplash", [0, -2] select isDedicated];
+        [_unit] remoteExec ["root_anomalies_farmer_fnc_FarmerSplash", [0, -2] select isDedicated];
     };
 }];
 _farmer addEventHandler ["Killed", {

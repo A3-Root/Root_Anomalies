@@ -51,12 +51,12 @@ private _avoid = {
 
 private _attk = {
     params ["_strigoi", "_tgt", "_dmg", "_noseize"];
-    [_strigoi, _tgt, _noseize] remoteExec ["Root_fnc_StrigoiViz", [0, -2] select isDedicated];
+    [_strigoi, _tgt, _noseize] remoteExec ["root_anomalies_strigoi_fnc_StrigoiViz", [0, -2] select isDedicated];
     if ((isPlayer _tgt) && {typeOf _tgt != "VirtualCurator_F"}) then {
-        [_dmg, _noseize] remoteExec ["Root_fnc_StrigoiTgt", _tgt];
+        [_dmg, _noseize] remoteExec ["root_anomalies_strigoi_fnc_StrigoiTgt", _tgt];
     } else {
         if ((_tgt isKindOf "Man") && {_tgt != _strigoi} && {typeOf _tgt != "VirtualCurator_F"}) then {
-            [_tgt, _dmg, ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65], selectRandom ["backblast", "bullet", "explosive", "grenade"]] call Root_fnc_applyDamage;
+            [_tgt, _dmg, ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65], selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
         };
     };
     uiSleep 1;
@@ -75,7 +75,7 @@ private _show = {
     private _p = [_pozOrig, 1, _terr / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
     _strigoi setPos _p;
     _strigoi setVariable [QGVAR(visible), true, true];
-    [_strigoi] remoteExec ["Root_fnc_StrigoiSfx", [0, -2] select isDedicated];
+    [_strigoi] remoteExec ["root_anomalies_strigoi_fnc_StrigoiSfx", [0, -2] select isDedicated];
     _strigoi enableSimulationGlobal true;
     _strigoi hideObjectGlobal false;
     {_strigoi reveal _x} forEach (_strigoi nearEntities [["CAManBase"], 100]);
@@ -141,7 +141,7 @@ _strigoi addEventHandler ["Hit", {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec ["Root_fnc_StrigoiSplash", [0, -2] select isDedicated];
+        [_unit] remoteExec ["root_anomalies_strigoi_fnc_StrigoiSplash", [0, -2] select isDedicated];
     };
 }];
 _strigoi addEventHandler ["Killed", {
@@ -159,7 +159,7 @@ for "_i" from 0 to 5 do {_strigoi setObjectMaterialGlobal [_i, "A3\Structures_F\
 uiSleep 0.3;
 for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)perlinNoise(256,256,0,0.3)"]; uiSleep 0.1};
 [_strigoi] call _hide;
-[_strigoi] remoteExec ["Root_fnc_StrigoiFatigue", [0, -2] select isDedicated, true];
+[_strigoi] remoteExec ["root_anomalies_strigoi_fnc_StrigoiFatigue", [0, -2] select isDedicated, true];
 
 LOG_DEBUG_2("StrigoiMain spawned at %1 (territory %2)",_markerPos,_territory);
 

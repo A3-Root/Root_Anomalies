@@ -48,10 +48,10 @@ deleteVehicle _logic;
 
         if (!_detectable) then {_detector = ""};
         if (!_protectable) then {_protector = ""};
-        private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call Root_fnc_parseClassList};
+        private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call root_anomalies_main_fnc_parseClassList};
 
         ["Smuggler Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] remoteExec ["Root_fnc_SmugglerMain", 2];
+        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] remoteExec ["root_anomalies_smuggler_fnc_SmugglerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

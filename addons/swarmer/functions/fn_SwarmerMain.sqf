@@ -62,8 +62,8 @@ _agent disableAI "ALL";
 _agent setAnimSpeedCoef 1.1;
 _agent setVariable [QGVAR(isHive), false, true];
 
-[_agent] remoteExec ["Root_fnc_SwarmerVoice", [0, -2] select isDedicated];
-[_agent] remoteExec ["Root_fnc_SwarmerSfx", [0, -2] select isDedicated];
+[_agent] remoteExec ["root_anomalies_swarmer_fnc_SwarmerVoice", [0, -2] select isDedicated];
+[_agent] remoteExec ["root_anomalies_swarmer_fnc_SwarmerSfx", [0, -2] select isDedicated];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_AGENT", _agent, true];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_ATK", false, true];
 
@@ -89,9 +89,9 @@ while {alive _agent} do {
             if ((_tgt distance _agent <= 10) && {alive _agent}) then {
                 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_ATK", true, true];
                 _agent moveTo AGLToASL (_tgt modelToWorld [0, 0, 0]);
-                [_tgt, _agent] remoteExec ["Root_fnc_SwarmerEating", [0, -2] select isDedicated];
+                [_tgt, _agent] remoteExec ["root_anomalies_swarmer_fnc_SwarmerEating", [0, -2] select isDedicated];
                 for "_h" from 1 to 5 do {
-                    [_tgt, _damage, selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"], selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"]] call Root_fnc_applyDamage;
+                    [_tgt, _damage, selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"], selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"]] call root_anomalies_main_fnc_applyDamage;
                 };
                 {[_agent, _x, _avoidHive] spawn {params ["_a", "_b", "_c"]; [_a, _b] call _c}} forEach _inRange;
                 uiSleep 2;
@@ -113,7 +113,7 @@ while {alive _agent} do {
             _agent moveTo AGLToASL (_tgt modelToWorld [0, 0, 0]);
             uiSleep 2;
             _agent stop true;
-            [_tgt, _agent] remoteExec ["Root_fnc_SwarmerEating", [0, -2] select isDedicated];
+            [_tgt, _agent] remoteExec ["root_anomalies_swarmer_fnc_SwarmerEating", [0, -2] select isDedicated];
             _tgt hideObjectGlobal true;
             private _bones = createVehicle ["Land_HumanSkeleton_F", getPosATL _tgt, [], 0, "CAN_COLLIDE"];
             _bones setDir (round (random 360));

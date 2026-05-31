@@ -46,7 +46,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Strigoi Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _territory, _nightOnly, _damage, round _health, _noseize, _aiPanic] remoteExec ["Root_fnc_StrigoiMain", 2];
+        [_markerName, _territory, _nightOnly, _damage, round _health, _noseize, _aiPanic] remoteExec ["root_anomalies_strigoi_fnc_StrigoiMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

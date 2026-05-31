@@ -5,7 +5,7 @@ class CfgVehicles {
 		author = "Root";
 		_generalMacro = "ROOT_Smuggler_ModuleZeus";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_SmugglerZeus";
+		function = "root_anomalies_smuggler_fnc_SmugglerZeus";
 		displayName = "Smuggler Anomaly";
 		curatorCanAttach = 1;
 	};
@@ -25,7 +25,7 @@ class CfgVehicles {
 		scope = 2;
 		displayName = "Smuggler Anomaly";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_Smuggler3DEN";
+		function = "root_anomalies_smuggler_fnc_Smuggler3DEN";
 		functionPriority = 1;
 		isGlobal = 2;
 		isTriggerActivated = 0;

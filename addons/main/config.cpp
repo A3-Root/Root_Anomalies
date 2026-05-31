@@ -21,6 +21,19 @@ class CfgPatches {
 	};
 };
 
+class Extended_PreInit_EventHandlers {
+	class ROOT_Anomalies {
+		init = QUOTE(call COMPILE_FILE(XEH_preInit));
+	};
+};
+
+class Extended_PostInit_EventHandlers {
+	class ROOT_Anomalies {
+		init = QUOTE(call COMPILE_FILE(XEH_postInit));
+	};
+};
+
 #include "CfgFactionClasses.hpp"
-#include "CfgFunctions.hpp"
 #include "CfgSounds.hpp"
+#include "CfgAmmo.hpp"
+#include "CfgMagazines.hpp"

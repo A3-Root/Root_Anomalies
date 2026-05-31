@@ -63,7 +63,7 @@ private _avoidScreamer = {
 
 private _vehicleDmg = {
     params ["_vehicle", "_dmg"];
-    if !([_vehicle] call Root_fnc_isAffectable) exitWith {};
+    if !([_vehicle] call root_anomalies_main_fnc_isAffectable) exitWith {};
     {_vehicle setHitPointDamage [_x, 1]} forEach ["HitLight", "HitBatteries"];
     if (_vehicle isKindOf "Air") then {
         [_vehicle, (_vehicle vectorModelToWorld [10, 10, 10])] remoteExec ["addTorque", _vehicle];
@@ -157,7 +157,7 @@ _hpHolder addEventHandler ["Hit", {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec ["Root_fnc_ScreamerSplash", [0, -2] select isDedicated];
+        [_unit] remoteExec ["root_anomalies_screamer_fnc_ScreamerSplash", [0, -2] select isDedicated];
     };
 }];
 _hpHolder addEventHandler ["Killed", {
@@ -237,7 +237,7 @@ while {alive _entity} do {
             uiSleep 1;
             _wave attachTo [_entity, [0, -1, 1.5]];
             detach _wave;
-            if (alive _entity) then {[_wave, _entityObj] remoteExec ["Root_fnc_ScreamerEffect", [0, -2] select isDedicated]};
+            if (alive _entity) then {[_wave, _entityObj] remoteExec ["root_anomalies_screamer_fnc_ScreamerEffect", [0, -2] select isDedicated]};
 
             // Apply blast to the three range bands.
             private _bands = [[_r1, 2, [(_px * _pressure) / 2, (_py * _pressure) / 2], _dmgClose, 3], [_r2, 4, [(_px * _pressure) / 4, (_py * _pressure) / 4], _dmgMedium, 2], [_r3, 6, [(_px * _pressure) / 6, (_py * _pressure) / 6], _dmgFar, 1]];
@@ -252,7 +252,7 @@ while {alive _entity} do {
                     [_u, (_u vectorModelToWorld [_torqueScale, _torqueScale, _torqueScale])] remoteExec ["addTorque", _u];
                     if ((_u isKindOf "CAManBase") && {typeOf _u != "VirtualCurator_F"}) then {
                         for "_h" from 1 to _hits do {
-                            [_u, _bandDmg, selectRandom _bodyParts, "backblast"] call Root_fnc_applyDamage;
+                            [_u, _bandDmg, selectRandom _bodyParts, "backblast"] call root_anomalies_main_fnc_applyDamage;
                         };
                     };
                     if (_affectVehicles && {(_u isKindOf "LandVehicle") || {_u isKindOf "Air"}}) then {
@@ -274,7 +274,7 @@ while {alive _entity} do {
     uiSleep 5;
 };
 
-[_entityObj] remoteExec ["Root_fnc_ScreamerTeleport", [0, -2] select isDedicated];
+[_entityObj] remoteExec ["root_anomalies_screamer_fnc_ScreamerTeleport", [0, -2] select isDedicated];
 uiSleep 4;
 {deleteVehicle _x} forEach _bobs;
 if (!isNull _anomaly) then {deleteVehicle _anomaly};

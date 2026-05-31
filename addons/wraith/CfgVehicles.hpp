@@ -5,7 +5,7 @@ class CfgVehicles {
 		author = "Root";
 		_generalMacro = "ROOT_Wraith_ModuleZeus";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_WraithZeus";
+		function = "root_anomalies_wraith_fnc_WraithZeus";
 		displayName = "Wraith Anomaly";
 		curatorCanAttach = 1;
 	};
@@ -25,7 +25,7 @@ class CfgVehicles {
 		scope = 2;
 		displayName = "Wraith Anomaly";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_Wraith3DEN";
+		function = "root_anomalies_wraith_fnc_Wraith3DEN";
 		functionPriority = 1;
 		isGlobal = 2;
 		isTriggerActivated = 0;

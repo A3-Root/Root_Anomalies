@@ -55,7 +55,7 @@ private _avoid = {
 
 private _vehicleDmg = {
     params ["_vehicle", "_dmg"];
-    if !([_vehicle] call Root_fnc_isAffectable) exitWith {};
+    if !([_vehicle] call root_anomalies_main_fnc_isAffectable) exitWith {};
     {_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + random _dmg]} forEach ((getAllHitPointsDamage _vehicle) param [0, []]);
     {_vehicle setHitPointDamage [_x, 1]} forEach ["HitLight", "HitBatteries"];
 };
@@ -85,8 +85,8 @@ while {_hidden} do {
         _hidden = false;
         private _tgt = selectRandom _near;
         ([(([getPos _head, _tgt] call BIS_fnc_dirTo) + 45)] call _pressDir) params ["_px", "_py"];
-        [_head, _tail, _tail2] remoteExec ["Root_fnc_WormEffect", [0, -2] select isDedicated, true];
-        [_head, _tail] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
+        [_head, _tail, _tail2] remoteExec ["root_anomalies_worm_fnc_WormEffect", [0, -2] select isDedicated, true];
+        [_head, _tail] remoteExec ["root_anomalies_worm_fnc_WormAttack", [0, -2] select isDedicated];
         _head setPosATL [getPosATL _head select 0, getPosATL _head select 1, 2];
         _head setVelocity [_px * 5, _py * 5, 20 + random 10];
         uiSleep 1;
@@ -99,8 +99,8 @@ resetCamShake;
 waitUntil {(getPosATL _head select 2) < 1};
 [_head, ["bump", 500]] remoteExec ["say3D"];
 addCamShake [1, 4, 23];
-[_head, _tail] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
-[_head] remoteExec ["Root_fnc_WormBump", [0, -2] select isDedicated];
+[_head, _tail] remoteExec ["root_anomalies_worm_fnc_WormAttack", [0, -2] select isDedicated];
+[_head] remoteExec ["root_anomalies_worm_fnc_WormBump", [0, -2] select isDedicated];
 uiSleep 1;
 
 while {!isNull _head} do {
@@ -115,7 +115,7 @@ while {!isNull _head} do {
             [_tail, [selectRandom ["salt_08", "salt_05"], 500]] remoteExec ["say3D"];
             uiSleep 0.5;
             waitUntil {(getPosATL _head select 2) < 1};
-            [_head, _tail] remoteExec ["Root_fnc_WormAttack", [0, -2] select isDedicated];
+            [_head, _tail] remoteExec ["root_anomalies_worm_fnc_WormAttack", [0, -2] select isDedicated];
 
             {
                 if ((_x != _head) && {_x != _tail} && {_x != _tail2} && {!(surfaceIsWater getPos _x)}) then {
@@ -126,7 +126,7 @@ while {!isNull _head} do {
                         if ((typeOf _x != "VirtualCurator_F") && {_x isKindOf "CAManBase"}) then {
                             [_x, [_px * 5, _py * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                             for "_h" from 1 to 5 do {
-                                [_x, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"]] call Root_fnc_applyDamage;
+                                [_x, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"]] call root_anomalies_main_fnc_applyDamage;
                             };
                         };
                     };

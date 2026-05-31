@@ -42,7 +42,7 @@ private _dmgClose = _logic getVariable ["ROOT_SCREAMER_DMGCLOSE", 0.8];
 private _dmgMedium = _logic getVariable ["ROOT_SCREAMER_DMGMED", 0.4];
 private _dmgFar = _logic getVariable ["ROOT_SCREAMER_DMGFAR", 0.2];
 
-private _hostiles = ([_hostilesStr] call Root_fnc_parseClassList) apply {[_x] call _toSide};
+private _hostiles = ([_hostilesStr] call root_anomalies_main_fnc_parseClassList) apply {[_x] call _toSide};
 if (_hostiles isEqualTo []) then {_hostiles = [east, west, civilian, resistance]};
 
 private _spawnSide = if (_aiEngage) then {[_spawnSideStr] call _toSide} else {civilian};
@@ -57,4 +57,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Screamer3DEN activating marker %1",_markerName);
 
-[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health] call Root_fnc_ScreamerMain;
+[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health] call root_anomalies_screamer_fnc_ScreamerMain;

@@ -25,7 +25,7 @@ private _hop = {
     uiSleep 2;
     waitUntil {isNil {player getVariable QGVAR(tele)}};
     player setVariable [QGVAR(tele), true];
-    if !(_noseize) then {[] spawn Root_fnc_SmugglerVidEffect};
+    if !(_noseize) then {[] spawn root_anomalies_smuggler_fnc_SmugglerVidEffect};
     ["zoomin"] remoteExec ["playSound", _unit];
     [selectRandom ["halu_1", "halu_2", "halu_3", "halu_4", "halu_5", "halu_6", "halu_7", "halu_8", "halu_9", "halu_91", "halu_92", "halu_93", "halu_94", "halu_95", "halu_96", "halu_97", "halu_98", "halu_99", "halu_991", "halu_992", "halu_993", "halu_994", "halu_995", "halu_996", "halu_997", "halu_998", "halu_999", "halu_9999"]] remoteExec ["playSound", _unit];
     uiSleep 0.5;
@@ -47,7 +47,7 @@ for "_i" from 1 to _count do {
 };
 
 uiSleep 0.3;
-[_unit, _damage, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call Root_fnc_applyDamage;
+[_unit, _damage, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
 
 waitUntil {isNil {player getVariable QGVAR(tele)}};
 [_unit, [selectRandom ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"], 300]] remoteExec ["say3D"];

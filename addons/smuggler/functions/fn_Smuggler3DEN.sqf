@@ -33,7 +33,7 @@ private _noseize = _logic getVariable ["ROOT_SMUGGLER_SEIZURESAFE", false];
 
 if (!_detectable) then {_detector = ""};
 if (!_protectable) then {_protector = ""};
-private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call Root_fnc_parseClassList};
+private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call root_anomalies_main_fnc_parseClassList};
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_SMUGGLER_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_SMUGGLER_IDX", _idx + 1];
@@ -42,4 +42,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Smuggler3DEN activating marker %1",_markerName);
 
-[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] call Root_fnc_SmugglerMain;
+[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize] call root_anomalies_smuggler_fnc_SmugglerMain;

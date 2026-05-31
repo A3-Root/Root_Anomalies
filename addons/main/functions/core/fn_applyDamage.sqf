@@ -3,27 +3,28 @@
  * Author: Root
  * Description: Applies damage to an entity, using ACE Medical when available and
  *              falling back to vanilla setDamage otherwise. Respects the affect
- *              whitelist/blacklist via Root_fnc_isAffectable.
+ *              whitelist/blacklist via root_anomalies_fnc_isAffectable.
  *
  * Arguments:
  * 0: Entity <OBJECT>
  * 1: Damage amount (0..1, additive) <NUMBER>
  * 2: Body part (ACE only) <STRING> (default "body")
  * 3: Damage type (ACE only) <STRING> (default "stab")
+ * 4: Anomaly (optional, for hostile-side filtering) <OBJECT>
  *
  * Return Value:
  * Damage was applied <BOOL>
  *
  * Example:
- * [_unit, 0.5, "body", "stab"] call Root_fnc_applyDamage;
+ * [_unit, 0.5, "body", "stab"] call EFUNC(main,applyDamage);
  *
  * Public: No
  */
 
-params [["_entity", objNull, [objNull]], ["_amount", 0, [0]], ["_bodyPart", "body", [""]], ["_dmgType", "stab", [""]]];
+params [["_entity", objNull, [objNull]], ["_amount", 0, [0]], ["_bodyPart", "body", [""]], ["_dmgType", "stab", [""]], ["_anomaly", objNull, [objNull]]];
 
 if (isNull _entity || {!alive _entity} || {_amount <= 0}) exitWith {false};
-if !([_entity] call Root_fnc_isAffectable) exitWith {false};
+if !([_entity, _anomaly] call FUNC(isAffectable)) exitWith {false};
 
 private _isAce = !isNil "ace_medical_fnc_addDamageToUnit";
 

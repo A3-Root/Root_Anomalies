@@ -64,7 +64,7 @@ for "_i" from 1 to 20 do {
         player setVelocity [_jumpDir select 0, _jumpDir select 1, 3];
         private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
         if !(player isKindOf "VirtualCurator_F") then {
-            [player, _damageFarmer, _bodyPart, "falling"] call Root_fnc_applyDamage;
+            [player, _damageFarmer, _bodyPart, "falling"] call root_anomalies_main_fnc_applyDamage;
         };
     };
     uiSleep 0.05;
@@ -73,7 +73,7 @@ for "_i" from 1 to 20 do {
 if ((player distance _farmer) < 20) then {
     private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
     if !(player isKindOf "VirtualCurator_F") then {
-        [player, _damageFarmer, _bodyPart, "falling"] call Root_fnc_applyDamage;
+        [player, _damageFarmer, _bodyPart, "falling"] call root_anomalies_main_fnc_applyDamage;
     };
 };
 

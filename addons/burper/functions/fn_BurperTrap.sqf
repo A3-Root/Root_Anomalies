@@ -29,7 +29,7 @@ while {alive _obj} do {
         private _victim = _x;
         private _protected = (typeOf _victim == "VirtualCurator_F")
             || {_protector != "" && {[_victim, _protector] call BIS_fnc_hasItem}}
-            || {!([_victim] call Root_fnc_isAffectable)};
+            || {!([_victim] call root_anomalies_main_fnc_isAffectable)};
 
         if (!_protected) then {
             private _scream = selectRandom _screams;
@@ -44,7 +44,7 @@ while {alive _obj} do {
             private _skeleton = createVehicle ["Land_HumanSkeleton_F", [_bonePos select 0, _bonePos select 1, 1.5], [], 0, "CAN_COLLIDE"];
             _skeleton setDir (random 360);
             _skeleton setVectorUp [0, -1, 1];
-            [_skeleton] remoteExec ["Root_fnc_BurperSplash", [0, -2] select isDedicated];
+            [_skeleton] remoteExec ["root_anomalies_burper_fnc_BurperSplash", [0, -2] select isDedicated];
 
             private _splat = createVehicle ["BloodSplatter_01_Medium_New_F", [_bonePos select 0, _bonePos select 1, 0], [], 0, "CAN_COLLIDE"];
             [_obj, ["blood_splash", 100]] remoteExec ["say3D"];

@@ -2,7 +2,7 @@
 /*
  * Author: Root
  * Description: 3DEN Editor front-end for the Burper. Reads the module attributes and
- *              hands off to Root_fnc_BurperMain on the server.
+ *              hands off to root_anomalies_burper_fnc_BurperMain on the server.
  *
  * Arguments:
  * 0: Module logic <OBJECT>
@@ -44,4 +44,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Burper3DEN activating marker %1",_markerName);
 
-[_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] call Root_fnc_BurperMain;
+[_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] call root_anomalies_burper_fnc_BurperMain;

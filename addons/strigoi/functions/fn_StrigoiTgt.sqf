@@ -20,7 +20,7 @@ params [["_damageStrig", 0.6, [0]], ["_noseize", false, [false]]];
 
 private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 if (typeOf player != "VirtualCurator_F") then {
-    [player, _damageStrig, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call Root_fnc_applyDamage;
+    [player, _damageStrig, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
 };
 
 playSound "puls";

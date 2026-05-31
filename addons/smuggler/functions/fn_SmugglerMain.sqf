@@ -42,19 +42,19 @@ _sursa setVariable [QGVAR(protector), _protector, true];
 _sursa setVariable [QGVAR(detector), _detector, true];
 
 if (_detector != "") then {
-    [_sursa] spawn Root_fnc_SmugglerAIAvoid;
+    [_sursa] spawn root_anomalies_smuggler_fnc_SmugglerAIAvoid;
 } else {
-    [_sursa] spawn Root_fnc_SmugglerAIVisible;
+    [_sursa] spawn root_anomalies_smuggler_fnc_SmugglerAIVisible;
 };
 
-[_sursa, _core] remoteExec ["Root_fnc_SmugglerSfx", [0, -2] select isDedicated, true];
-[_sursa, _core, _damage, _noseize] remoteExec ["Root_fnc_SmugglerTeleport", [0, -2] select isDedicated, true];
+[_sursa, _core] remoteExec ["root_anomalies_smuggler_fnc_SmugglerSfx", [0, -2] select isDedicated, true];
+[_sursa, _core, _damage, _noseize] remoteExec ["root_anomalies_smuggler_fnc_SmugglerTeleport", [0, -2] select isDedicated, true];
 
 LOG_DEBUG_1("SmugglerMain spawned at %1",_pos);
 
 if (_spawnList isNotEqualTo []) then {
     if (_spawnDelay <= 0) then {_spawnDelay = 10};
-    [_spawnList, _core, _spawnDelay] spawn Root_fnc_SmugglerSpawn;
+    [_spawnList, _core, _spawnDelay] spawn root_anomalies_smuggler_fnc_SmugglerSpawn;
 };
 
 if (_roaming) then {

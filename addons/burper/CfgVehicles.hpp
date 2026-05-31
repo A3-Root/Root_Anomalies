@@ -5,7 +5,7 @@ class CfgVehicles {
 		author = "Root";
 		_generalMacro = "ROOT_Burper_ModuleZeus";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_BurperZeus";
+		function = "root_anomalies_burper_fnc_BurperZeus";
 		displayName = "Burper Anomaly";
 		curatorCanAttach = 1;
 	};
@@ -25,7 +25,7 @@ class CfgVehicles {
 		scope = 2;
 		displayName = "Burper Anomaly";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_Burper3DEN";
+		function = "root_anomalies_burper_fnc_Burper3DEN";
 		functionPriority = 1;
 		isGlobal = 2;
 		isTriggerActivated = 0;

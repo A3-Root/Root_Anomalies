@@ -24,7 +24,7 @@ private _killHives = {
         if (!isNil {_x getVariable QGVAR(isHive)}) then {
             uiSleep 5;
             _x setDamage 1;
-            [_x] remoteExec ["Root_fnc_SwarmerDead", [0, -2] select isDedicated];
+            [_x] remoteExec ["root_anomalies_swarmer_fnc_SwarmerDead", [0, -2] select isDedicated];
         };
     } forEach _candidates;
 };

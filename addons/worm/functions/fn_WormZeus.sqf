@@ -45,7 +45,7 @@ deleteVehicle _logic;
         if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        [_markerName, _damage, _territory, _aiPanic, _diffuser] remoteExec ["Root_fnc_WormMain", 2];
+        [_markerName, _damage, _territory, _aiPanic, _diffuser] remoteExec ["root_anomalies_worm_fnc_WormMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

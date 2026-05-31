@@ -36,4 +36,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Steamer3DEN activating marker %1",_markerName);
 
-[_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath] call Root_fnc_SteamerMain;
+[_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath] call root_anomalies_steamer_fnc_SteamerMain;

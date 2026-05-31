@@ -46,7 +46,7 @@ deleteVehicle _logic;
         private _twins = _twinsClass createVehicle _pos;
 
         ["Twins Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _noseize] remoteExec ["Root_fnc_TwinsMain", 2];
+        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _noseize] remoteExec ["root_anomalies_twins_fnc_TwinsMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

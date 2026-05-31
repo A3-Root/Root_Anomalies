@@ -2,7 +2,7 @@
 /*
  * Author: Root, Aliascartoons
  * Description: Zeus (ZEN) front-end for the Burper. Opens a configuration dialog and
- *              hands off to Root_fnc_BurperMain on the server.
+ *              hands off to root_anomalies_burper_fnc_BurperMain on the server.
  *
  * Arguments:
  * 0: Module logic <OBJECT>
@@ -61,7 +61,7 @@ deleteVehicle _logic;
         };
 
         ["Burper Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] remoteExec ["Root_fnc_BurperMain", 2];
+        [_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic] remoteExec ["root_anomalies_burper_fnc_BurperMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

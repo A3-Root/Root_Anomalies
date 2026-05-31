@@ -80,7 +80,7 @@ while {(_flamer getVariable [QGVAR(visible), false]) && {alive _flamer}} do {
         call BIS_fnc_indicateBleeding;
         private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
         if (typeOf player != "VirtualCurator_F") then {
-            [player, _damageFlamer, _bodyPart, "burn"] call Root_fnc_applyDamage;
+            [player, _damageFlamer, _bodyPart, "burn"] call root_anomalies_main_fnc_applyDamage;
         };
     };
 };

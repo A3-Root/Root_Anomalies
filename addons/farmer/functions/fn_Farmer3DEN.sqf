@@ -36,4 +36,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Farmer3DEN activating marker %1",_markerName);
 
-[_markerName, _territory, _damage, _recharge, round _health, _aiPanic] call Root_fnc_FarmerMain;
+[_markerName, _territory, _damage, _recharge, round _health, _aiPanic] call root_anomalies_farmer_fnc_FarmerMain;

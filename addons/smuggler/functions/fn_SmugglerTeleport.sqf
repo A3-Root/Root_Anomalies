@@ -45,10 +45,10 @@ while {alive _obj} do {
             [_obj, ["tele_message", 100]] remoteExec ["say3D"];
             [_unit] call _blink;
             if (isPlayer _unit) then {
-                [_unit, _obj, _noseize, _damage] remoteExec ["Root_fnc_SmugglerTeleEffect", _unit];
+                [_unit, _obj, _noseize, _damage] remoteExec ["root_anomalies_smuggler_fnc_SmugglerTeleEffect", _unit];
             } else {
                 _unit setPos ([getPos _obj, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
-                [_unit, _damage, "body", "stab"] call Root_fnc_applyDamage;
+                [_unit, _damage, "body", "stab"] call root_anomalies_main_fnc_applyDamage;
             };
         };
     } forEach ((position _obj) nearEntities ["CAManBase", 15]);
@@ -59,7 +59,7 @@ while {alive _obj} do {
             [_obj, ["tele_message", 100]] remoteExec ["say3D"];
             [_veh] call _blink;
             _veh setPos ([getPos _obj, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
-            if ([_veh] call Root_fnc_isAffectable) then {_veh setDamage ((damage _veh) + _damage)};
+            if ([_veh] call root_anomalies_main_fnc_isAffectable) then {_veh setDamage ((damage _veh) + _damage)};
         };
     } forEach ((position _obj) nearEntities ["LandVehicle", 15]);
 

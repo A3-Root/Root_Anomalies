@@ -21,7 +21,7 @@ if (!hasInterface) exitWith {};
         params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile"];
         private _pesticide = missionNamespace getVariable ["ROOT_ANOMALIES_SWARMER_PESTICIDE", ""];
         if ((_pesticide != "") && {typeOf _projectile == _pesticide}) then {
-            [_projectile, false] remoteExec ["Root_fnc_SwarmerKill", 2];
+            [_projectile, false] remoteExec ["root_anomalies_swarmer_fnc_SwarmerKill", 2];
         };
     }];
 };

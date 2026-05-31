@@ -58,7 +58,7 @@ _obj addEventHandler ["HandleDamage", {
     0
 }];
 
-[_obj, _fearRadius, _noseize] remoteExec ["Root_fnc_WraithSfx", 0, true];
+[_obj, _fearRadius, _noseize] remoteExec ["root_anomalies_wraith_fnc_WraithSfx", 0, true];
 
 // Hover.
 [_obj] spawn {
@@ -86,7 +86,7 @@ while {alive _obj} do {
 
         {
             if ((typeOf _x != "VirtualCurator_F") && {alive _x} && {_x != _obj}) then {
-                [_x, _damage, "body", "burn"] call Root_fnc_applyDamage;
+                [_x, _damage, "body", "burn"] call root_anomalies_main_fnc_applyDamage;
             };
         } forEach ((position _obj) nearEntities ["CAManBase", _fearRadius]);
     };

@@ -35,4 +35,4 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Wraith3DEN activating marker %1",_markerName);
 
-[_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _noseize] call Root_fnc_WraithMain;
+[_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _noseize] call root_anomalies_wraith_fnc_WraithMain;

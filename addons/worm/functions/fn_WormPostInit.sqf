@@ -21,7 +21,7 @@ if (!hasInterface) exitWith {};
         params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile"];
         private _diffuser = missionNamespace getVariable ["ROOT_ANOMALIES_WORM_DIFFUSER", ""];
         if ((_diffuser != "") && {typeOf _projectile == _diffuser}) then {
-            [_projectile, false] remoteExec ["Root_fnc_WormKill", 2];
+            [_projectile, false] remoteExec ["root_anomalies_worm_fnc_WormKill", 2];
         };
     }];
 };

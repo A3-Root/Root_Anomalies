@@ -45,7 +45,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Steamer Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        [_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath] remoteExec ["Root_fnc_SteamerMain", 2];
+        [_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath] remoteExec ["root_anomalies_steamer_fnc_SteamerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

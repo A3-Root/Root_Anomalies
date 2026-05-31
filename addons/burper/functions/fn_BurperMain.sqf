@@ -51,21 +51,21 @@ _obj setVariable [QGVAR(active), true, true];
 LOG_DEBUG_2("BurperMain spawned at %1 (radius %2)",_pos,_radius);
 
 if (_killDevice != "") then {
-    [_obj, _killDevice, _killRange] spawn Root_fnc_BurperRemove;
+    [_obj, _killDevice, _killRange] spawn root_anomalies_burper_fnc_BurperRemove;
 };
 
 if (_detector != "") then {
     if (_aiPanic) then {
-        [_obj] spawn Root_fnc_BurperAI;
+        [_obj] spawn root_anomalies_burper_fnc_BurperAI;
     };
 } else {
     if (_aiPanic) then {
-        [_obj] spawn Root_fnc_BurperViz;
+        [_obj] spawn root_anomalies_burper_fnc_BurperViz;
     };
 };
 
-[_obj, _radius, _vehicleAllowed] spawn Root_fnc_BurperTrap;
-[_obj] remoteExec ["Root_fnc_BurperSfx", [0, -2] select isDedicated, true];
+[_obj, _radius, _vehicleAllowed] spawn root_anomalies_burper_fnc_BurperTrap;
+[_obj] remoteExec ["root_anomalies_burper_fnc_BurperSfx", [0, -2] select isDedicated, true];
 
 if (_roaming) then {
     [_obj] spawn {

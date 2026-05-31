@@ -58,7 +58,7 @@ deleteVehicle _logic;
         if (_territory < (_atkRadius * 2)) then {_territory = _atkRadius * 2};
 
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health] remoteExec ["Root_fnc_ScreamerMain", 2];
+        [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health] remoteExec ["root_anomalies_screamer_fnc_ScreamerMain", 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

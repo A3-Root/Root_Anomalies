@@ -53,7 +53,7 @@ _wave setDropInterval 0.002;
 [_wave] spawn {params ["_p"]; uiSleep 0.5; deleteVehicle _p};
 
 _blow hideObjectGlobal false;
-if (_craterBool) then {[_blow] spawn Root_fnc_SteamerChimney};
+if (_craterBool) then {[_blow] spawn root_anomalies_steamer_fnc_SteamerChimney};
 
 private _column = "#particlesource" createVehicleLocal (getPos _blow);
 _column setParticleCircle [0, [0, 0, 0]];

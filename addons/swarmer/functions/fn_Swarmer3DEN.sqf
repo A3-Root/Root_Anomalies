@@ -36,4 +36,4 @@ private _hive = _hiveClass createVehicle getPosATL _logic;
 
 LOG_DEBUG_1("Swarmer3DEN activating hive %1",_hiveClass);
 
-[_hive, _territory, _pesticide, _damage] call Root_fnc_SwarmerMain;
+[_hive, _territory, _pesticide, _damage] call root_anomalies_swarmer_fnc_SwarmerMain;

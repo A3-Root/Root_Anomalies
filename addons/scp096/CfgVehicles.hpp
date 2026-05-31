@@ -1,3 +1,5 @@
+#include "\z\root_anomalies\addons\main\module_attributes.hpp"
+
 class CfgVehicles {
 	// ---- Zeus (ZEN) module ----
 	class zen_modules_moduleBase;
@@ -5,7 +7,7 @@ class CfgVehicles {
 		author = "Root";
 		_generalMacro = "ROOT_SCP096_ModuleZeus";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_SCP096Zeus";
+		function = "root_anomalies_scp096_fnc_moduleZeus";
 		displayName = "SCP-096 (The Shy Guy)";
 		curatorCanAttach = 1;
 	};
@@ -25,7 +27,7 @@ class CfgVehicles {
 		scope = 2;
 		displayName = "SCP-096 (The Shy Guy)";
 		category = "ROOT_ANOMALIES";
-		function = "Root_fnc_SCP0963DEN";
+		function = "root_anomalies_scp096_fnc_module3DEN";
 		functionPriority = 1;
 		isGlobal = 2;
 		isTriggerActivated = 0;
@@ -44,14 +46,21 @@ class CfgVehicles {
 			class ROOT_SCP096_TRIGGER: Edit {
 				property = "ROOT_SCP096_TRIGGER";
 				displayName = "Trigger Range (m)";
-				tooltip = "Distance within which seeing SCP-096's face enrages it.";
+				tooltip = "Distance within which viewing SCP-096 counts (any means: eyes, binos, UAV, cameras).";
 				typeName = "NUMBER";
 				defaultValue = "200";
+			};
+			class ROOT_SCP096_VIEWTIME: Edit {
+				property = "ROOT_SCP096_VIEWTIME";
+				displayName = "View Time (s)";
+				tooltip = "Seconds of continuous viewing before a viewer becomes a target and it enrages.";
+				typeName = "NUMBER";
+				defaultValue = "5";
 			};
 			class ROOT_SCP096_SPEED: Edit {
 				property = "ROOT_SCP096_SPEED";
 				displayName = "Rage Speed (m/s)";
-				tooltip = "How fast SCP-096 sprints toward its victims while enraged.";
+				tooltip = "How fast SCP-096 sprints (real pathfinding) toward its victims while enraged.";
 				typeName = "NUMBER";
 				defaultValue = "11";
 			};
@@ -69,17 +78,24 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "1";
 			};
-			class ROOT_SCP096_AI: Checkbox {
-				property = "ROOT_SCP096_AI";
-				displayName = "Affect AI";
-				tooltip = "If checked, AI that damage SCP-096 also become targets.";
-				typeName = "BOOL";
-				defaultValue = "true";
-			};
+			ROOT_COMMON_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};
 		class ModuleDescription: ModuleDescription {
-			description = "Spawns SCP-096 at the module position. It cowers harmlessly until someone sees its face, then sprints to that person and kills them before calming down.";
+			description = "Spawns SCP-096. It cowers harmlessly until a unit views it for the set time (by any means), then sprints to that unit (and anyone else who looks) and kills them before calming down.";
 		};
+	};
+
+	// ---- Player-controlled SCP-096P unit ----
+	class Man;
+	class CAManBase: Man {};
+	class C_man_1: CAManBase {};
+	class ROOT_SCP096P: C_man_1 {
+		scope = 2;
+		scopeCurator = 2;
+		displayName = "SCP-096P (The Shy Guy - Playable)";
+		author = "Root";
+		faction = "ROOT_ANOMALIES";
+		editorSubcategory = "EdSubcat_Personnel";
 	};
 };

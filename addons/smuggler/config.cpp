@@ -19,5 +19,15 @@ class CfgPatches {
 	};
 };
 
-#include "CfgFunctions.hpp"
+class Extended_PreInit_EventHandlers {
+	class ROOT_Anomalies_Smuggler {
+		init = QUOTE(call COMPILE_FILE(XEH_preInit));
+	};
+};
+
+class Extended_PostInit_EventHandlers {
+	class ROOT_Anomalies_Smuggler {
+		init = QUOTE(call COMPILE_FILE(XEH_postInit));
+	};
+};
 #include "CfgVehicles.hpp"
