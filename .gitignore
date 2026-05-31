@@ -1,12 +1,12 @@
 releases/*
 keys/*
 *.biprivatekey
+.hemttprivatekey
+*.hemttprivatekey
 .hemttout
 *.logs
 *.log
 *.packing.log
 *.log.*
-/Anomalies Workspace/temp
-/Anomalies Workspace/temp/
-Anomalies Workspace/temp
-Anomalies Workspace/temp/
+reference_files
+*.md

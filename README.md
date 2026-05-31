@@ -1,89 +1,82 @@
-# Heavily Reworked Zeus Module of Aliascartoon's Anomalies
+# Root's Anomalies
 
-For use in missions without needing the Eden Editor. Found under tabs "Root's Anomalies" in the "Modules" section.
+A modular framework of anomalies, creatures and SCP-style entities for Arma 3, usable from
+**both the 3DEN Editor and Zeus (Game Master)**. Originally based on the 3DEN showcase by
+Aliascartoons; fully refactored, modernised and expanded by Root.
 
-**Current Version**: 4.0.0
+## Highlights
 
-## Required Additional Addons (Dependencies):
-- [CBA A3](https://steamcommunity.com/workshop/filedetails/?id=450814997)
-- [Zeus Enhanced (ZEN)](https://steamcommunity.com/sharedfiles/filedetails/?id=1779063631)
+- **Dual interface** — every entity ships as a **3DEN Editor module** *and* a **Zeus (ZEN) module**,
+  driven by the same server backend.
+- **Per-PBO modular** — each anomaly is its own PBO. Don't want the Swarmer? Delete
+  `root_anomalies_swarmer.pbo` and everything else keeps working. Only `root_anomalies_main` is
+  always required.
+- **Works with or without ACE** — damage routes through ACE Medical when present and falls back to
+  vanilla otherwise.
+- **Fully parameterised** — territory, damage, health, devices, behaviour toggles, etc. exposed per
+  module.
+- **CBA settings** — verbose debug logging, global affect whitelist / immune blacklist, default
+  device classnames and a global seizure-safe override (Game / Addon Options → *Root's Anomalies*).
+- **Accessibility** — per-module and global "disable sensitive lights" options for photosensitive
+  players.
 
-## Optional Addons (Supplemental):
-- [Root's Effects](https://steamcommunity.com/sharedfiles/filedetails/?id=2797232351)
+## Requirements
 
----
+- [CBA_A3](https://github.com/CBATeam/CBA_A3)
+- [Zeus Enhanced (ZEN)](https://github.com/zen-mod/ZEN) — required for the Zeus modules
+- ACE3 — **optional** (enhances damage/medical integration when loaded)
 
-Signed and tested for dedicated servers. Works out-of-the-box with both Vanilla Medical and ACE Medical systems.
+## Entities
 
-**Requires EVERYONE** (Client, Server, and all connected Machines/Players) to have this addon installed and loaded due to custom textures and sounds.
+| PBO | Entity | Summary |
+|-----|--------|---------|
+| `burper`   | Burper   | Invisible destroyer; detector/protection/killswitch devices. |
+| `farmer`   | Farmer   | Burrowing shockwave creature that teleports to its prey. |
+| `flamer`   | Flamer   | Burning, leaping creature that ignites everything nearby. |
+| `screamer` | Screamer | Static/living entity emitting a directional sonic blast. |
+| `smuggler` | Smuggler | Invisible teleporter that scrambles units/vehicles and conjures objects. |
+| `steamer`  | Steamer  | Invisible entity erupting geyser bursts beneath targets. |
+| `strigoi`  | Strigoi  | Spectral stamina-drainer that hops between trees (night-only option). |
+| `swarmer`  | Swarmer  | Insect hive whose fly swarm devours victims; killed with pesticide. |
+| `twins`    | Twins    | Electric anomaly with a vulnerable "heart"; freezes when observed; EMP on death. |
+| `worm`     | Worm     | Burrowing creature that erupts and flings/strikes targets; killed with a diffuser. |
+| `scp173`   | SCP-173  | Cannot move while observed; blinks to the nearest victim and snaps their neck. |
+| `scp096`   | SCP-096  | Docile until its face is seen, then sprints to and kills the viewer. |
+| `wraith`   | Wraith   | Floating demon that teleport-stalks the living, burning them and radiating dread. |
 
-![Example GIF](https://i.imgur.com/EWy3dQc.gif)
+> New creatures (SCP-173, SCP-096, Wraith) use the default VR soldier as a placeholder model.
 
-Useful for **Stalker**, **SCP**, **Halloween**, **F.E.A.R**, **Horror**, **Sci-Fi**, **Alien**, **Anomalies**, **Prototype**, **Monster**, or any other themed Missions.
+## Usage
 
----
+- **3DEN Editor**: Systems (F5) → *Root's Anomalies* → place a module, double-click to set its
+  attributes. Anomalies activate on mission start.
+- **Zeus**: open the Game Master interface → *Root's Anomalies* category → place a module to open its
+  configuration dialog.
 
-#  Anomalies 
+## Building
 
-All anomalies are made with customization in mind. It is highly recommended to read through each option to tweak them as per your requirement. Health is calculated by the number of 'hits' received from other units. 10 Health = Hits from projectiles required to 'neutralize' the anomaly. Some anomalies have special termination properties. Please read carefully.
+Built with [HEMTT](https://hemtt.dev):
 
-### **Burper Anomaly**
-- Instantly kills all objects within the configured radius.
-- Can be made visible/detectable only for units with 'Detection Device' configured (Default: Vanilla Mine Detector).
-- Can be made evaded by units wearing the 'Protection Device' (Default: Kitbag (MTP)).
-- Can be killed/destroyed via the configured "Killswitch" vehicle within the 'Kill-Range' (Default: CSAT Typhoon Device Truck).
+```powershell
+hemtt check -p -Lc14 -e   # lint (must be clean)
+hemtt build               # dev/test build  -> .hemttout/build
+hemtt release             # signed release  -> .hemttout/release
+```
 
-### **Farmer Anomaly**
-- Travels underground to a random target within its territory and causes a massive shockwave for 25 meters.
-- Targets ground-based infantry and vehicles.
+## Repository layout
 
-### **Flamer Anomaly**
-- Uses fire to burn and kill units within its territory. 
-- Targets ground and air units.
-- Does not like water.
+```
+addons/
+  main/                    core: CBA settings, shared functions, sounds, macros
+  <entity>/                one PBO per anomaly/creature (config + functions/)
+include/x/cba/...          CBA macro header for compilation
+.hemtt/project.toml        HEMTT project + lint configuration
+```
 
-### **Screamer Anomaly**
-- Uses high-pitch sound to push back things.
-- Can be customized to use custom models (including live AI).
-- Requires heavy explosives to neutralize, depending on the chosen model.
+Each entity PBO exposes `Root_fnc_<Name>Main` (server backend) plus a `…Zeus` and `…3DEN` front-end.
+Shared helpers live in `main`: `Root_fnc_applyDamage`, `Root_fnc_isAffectable`,
+`Root_fnc_parseClassList`, `Root_fnc_initSettings`.
 
-### **Smuggler Anomaly**
-- 'Teleports' / 'Smuggles' objects and units to and from various random places.
-- Can be customized to spawn random/specific objects including AI.
-- Spawned AI are **always** hostile to players regardless of their side.
-- Can be made visible/detectable only for units with 'Detection Device' configured (Default: Vanilla Mine Detector).
-- Can be made evaded by units wearing the 'Protection Device' (Default: Kitbag (MTP)).
-- Customizable to disable 'Flashing Lights' to accommodate players with epilepsy or similar conditions.
-> **Note:** Highly recommended **NOT** to manually delete the entity after being placed.
+## License
 
-### **Steamer Anomaly**
-- Uses underground gas pipes to move to a random target within its territory and burst out.
-- Can only be neutralized with explosives near its location.
-- Customizable to provide a 'visible' pathing to its position for a short period, aiding in locating its position.
-
-### **Strigoi Anomaly**
-- Uses electric current to disorient, confuse, drain stamina, and kill units within its territory.
-- Customizable to be active only during nighttime.
-- Can disable 'Flashing Lights' in settings to help players with epilepsy or other conditions.
-
-### **Swarmer Anomaly**
-- Deadly flies that leech off nearby units until the unit is dead or escapes its territory.
-- Neutralized by throwing the configured 'Pesticide' object.
-
-### **Twins Anomaly**
-- An anomaly that plays with the mind and vision of its target, slowly killing them.
-- Can be neutralized by shooting its "Heart."
-- Customizable to turn off 'Flashing Lights' for players with epilepsy or similar conditions.
-
-### **Worm Anomaly**
-- A gaseous entity in the shape of a worm attacking its target by slamming to the ground.
-- Can confuse the anomaly by having multiple units near it, running in different directions.
-- Neutralized by throwing the configured 'Worm Diffuser' object.
-
----
-
-#  LICENSE 
-
-![License](https://i.imgur.com/jUUdDUu.png)
-
-Project is now open-sourced under the [Arma Public License Share Alike (APL-SA) License!](https://www.bohemia.net/community/licenses/arma-public-license-share-alike)
+See [LICENSE](LICENSE).

@@ -1,0 +1,15 @@
+name = "Root's Anomalies";
+author = "Root";
+tooltip = "Root's Anomalies";
+tooltipOwned = "Root's Anomalies";
+picture = "root_anomalies_logo.paa";
+logo = "root_anomalies_logo.paa";
+logoOver = "root_anomalies_logo.paa";
+logoSmall = "root_anomalies_logo.paa";
+action = "https://github.com/A3-Root/Root_Anomalies";
+actionName = "Github";
+overview = "Modular anomaly/creature framework for 3DEN Editor and Zeus. Each anomaly is its own PBO - delete any you don't want and the rest keep working. Works with or without ACE.";
+hidePicture = 0;
+hideName = 0;
+overviewText = "Root's Anomalies";
+overviewFootnote = "Anomalies originally based on the 3DEN showcase by Aliascartoons. Imported, refactored, expanded and maintained by Root.";

@@ -1,0 +1,50 @@
+name = "Root's Anomalies"
+prefix = "root_anomalies"
+mainprefix = "z"
+
+[files]
+include = [
+    "mod.cpp",
+    "meta.cpp",
+    "LICENSE",
+    "root_anomalies_logo.paa",
+    "README*.md",
+]
+exclude = [
+    ".gitignore",
+    ".gitattributes",
+    ".editorconfig",
+    "*.md",
+    "*.json",
+]
+
+[properties]
+author = "Root"
+url = "https://github.com/A3-Root/Root_Anomalies"
+
+[lints.sqf.banned_commands]
+options.banned = [
+    "execVM",
+]
+
+[config.config_this_call]
+enabled = true
+
+[sqf.undefined]
+enabled = true
+options.check_orphan_code = true
+
+[sqf.if_not_else]
+enabled = true
+
+[sqf.shadowed]
+enabled = true
+
+[sqf.not_private]
+enabled = true
+
+[sqf.short_circuit_bool_var]
+enabled = true
+
+[version]
+git_hash = 0
