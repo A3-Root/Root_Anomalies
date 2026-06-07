@@ -49,26 +49,26 @@ _obj setVariable [QGVAR(protector), _protector, true];
 _obj setVariable [QGVAR(killDevice), _killDevice, true];
 _obj setVariable [QGVAR(active), true, true];
 
-[_obj, _config] call root_anomalies_main_fnc_finalizeInstance;
+[_obj, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("BurperMain spawned at %1 (radius %2)",_pos,_radius);
 
 if (_killDevice != "") then {
-    [_obj, _killDevice, _killRange] spawn root_anomalies_burper_fnc_BurperRemove;
+    [_obj, _killDevice, _killRange] spawn FUNC(BurperRemove);
 };
 
 if (_detector != "") then {
     if (_aiPanic) then {
-        [_obj] spawn root_anomalies_burper_fnc_BurperAI;
+        [_obj] spawn FUNC(BurperAI);
     };
 } else {
     if (_aiPanic) then {
-        [_obj] spawn root_anomalies_burper_fnc_BurperViz;
+        [_obj] spawn FUNC(BurperViz);
     };
 };
 
-[_obj, _radius, _vehicleAllowed] spawn root_anomalies_burper_fnc_BurperTrap;
-[_obj] remoteExec ["root_anomalies_burper_fnc_BurperSfx", [0, -2] select isDedicated, true];
+[_obj, _radius, _vehicleAllowed] spawn FUNC(BurperTrap);
+[_obj] remoteExec [QFUNC(BurperSfx), [0, -2] select isDedicated, true];
 
 if (_roaming) then {
     [_obj] spawn {

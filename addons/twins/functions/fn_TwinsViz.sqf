@@ -20,16 +20,16 @@ if (!hasInterface) exitWith {};
 
 waitUntil {time > 0};
 
-params ["_twins", ["_dmgRange", 75, [0]], ["_noseize", false, [false]]];
+params ["_twins", ["_dmgRange", 75, [0]], ["_seizureSafe", false, [false]]];
 
 // Proximity disorientation + damage.
-[_twins, _dmgRange, _noseize] spawn {
-    params ["_twins", "_dmgRange", "_noseize"];
+[_twins, _dmgRange, _seizureSafe] spawn {
+    params ["_twins", "_dmgRange", "_seizureSafe"];
     private _canDamage = true;
     while {alive _twins} do {
         waitUntil {uiSleep 0.2; player distance _twins < _dmgRange};
         if (typeOf player != "VirtualCurator_F") then {
-            if !(_noseize || SEIZURE_SAFE) then {
+            if !(_seizureSafe || SEIZURE_SAFE) then {
                 [_twins, _dmgRange] spawn {
                     params ["_twins", "_dmgRange"];
                     private _aberration = ppEffectCreate ["ChromAberration", 250];
@@ -53,7 +53,7 @@ params ["_twins", ["_dmgRange", 75, [0]], ["_noseize", false, [false]]];
             if (_canDamage) then {
                 _canDamage = false;
                 playSound "sound_twin";
-                [player, random 0.33, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
+                [player, random 0.33, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
                 uiSleep 5;
                 _canDamage = true;
             };

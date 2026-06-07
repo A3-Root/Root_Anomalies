@@ -45,40 +45,6 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
-private _avoidScreamer = {
-    params ["_origin", "_terr", "_targets"];
-    {
-        private _u = _x;
-        if ((_u isKindOf "LandVehicle") || {_u isKindOf "Air"} || {_u isKindOf "CAManBase"}) then {
-            if (_u != _origin) then {
-                private _relDir = [_u, getPos _origin] call BIS_fnc_dirTo;
-                private _fct = selectRandom [30, -30];
-                private _opDir = if (_relDir < 180) then {_relDir + 180 + _fct} else {_relDir - 180 + _fct};
-                private _fleePos = [getPosATL _u, 30 + random 10, _opDir] call BIS_fnc_relPos;
-                _u doMove _fleePos;
-                _u setSkill ["commanding", 1];
-            };
-        };
-    } forEach (_origin nearEntities [_targets, _terr]);
-};
-
-private _vehicleDmg = {
-    params ["_vehicle", "_dmg"];
-    if !([_vehicle] call root_anomalies_main_fnc_isAffectable) exitWith {};
-    {_vehicle setHitPointDamage [_x, 1]} forEach ["HitLight", "HitBatteries"];
-    if (_vehicle isKindOf "Air") then {
-        [_vehicle, (_vehicle vectorModelToWorld [10, 10, 10])] remoteExec ["addTorque", _vehicle];
-        [_vehicle, [25, -10, -10]] remoteExec ["setVelocity", _vehicle];
-    };
-    private _hp = (getAllHitPointsDamage _vehicle) param [0, []];
-    private _d = _dmg;
-    {
-        [_vehicle, [_x, (_vehicle getHitPointDamage _x) + _d]] remoteExec ["setHitPointDamage", _vehicle];
-        _d = random _d;
-    } forEach _hp;
-    _vehicle setDamage ((damage _vehicle) + _d);
-};
-
 uiSleep 3;
 
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
@@ -158,7 +124,7 @@ _hpHolder addEventHandler ["Hit", {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec ["root_anomalies_screamer_fnc_ScreamerSplash", [0, -2] select isDedicated];
+        [_unit] remoteExec [QFUNC(ScreamerSplash), [0, -2] select isDedicated];
     };
 }];
 _hpHolder addEventHandler ["Killed", {
@@ -171,7 +137,7 @@ uiSleep 1;
 private _entityObj = [_anomaly, _entity] select _isAlive;
 
 // Register with the unified API (capture / sedation / getInstances).
-[_entityObj, _config] call root_anomalies_main_fnc_finalizeInstance;
+[_entityObj, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("ScreamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
@@ -190,10 +156,10 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do
             private _tgt = (_near select {((side _x) in _hostiles) && {typeOf _x != "VirtualCurator_F"} && {alive _x} && {(lifeState _x) != "INCAPACITATED"} && {_x != _entity} && {_x != _anomaly}}) param [0, _entity];
             if ((isNull _tgt) || {_tgt == _entity}) then {continue};
 
-            private _pozTgt = getPosATL _tgt;
+            private _targetPos = getPosATL _tgt;
             private _wave = createVehicle ["Land_Battery_F", position _entityObj, [], 0, "CAN_COLLIDE"];
             _wave setMass 10;
-            _entityObj doMove _pozTgt;
+            _entityObj doMove _targetPos;
             [_entityObj, ["miscare_screamer", 300]] remoteExec ["say3D"];
             uiSleep 3;
 
@@ -212,7 +178,7 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do
             if ((_dir > 180) && {_dir < 270}) then {_px = linearConversion [0, 90, _dir - 180, 0, -1, true]; _py = (-1 * _px) - 1};
             if ((_dir > 270) && {_dir < 360}) then {_px = linearConversion [0, 90, _dir - 270, -1, 0, true]; _py = 1 + _px};
 
-            if (_aiPanic) then {[_entity, _territory, _screamTargets] call _avoidScreamer};
+            if (_aiPanic) then {[_entity, _territory, _screamTargets] call FUNC(ScreamerAvoid)};
 
             private _anomalyPos = position _entityObj;
             private _overall = nearestObjects [_anomalyPos, _screamDmgTypes, _radius];
@@ -241,7 +207,7 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do
             uiSleep 1;
             _wave attachTo [_entity, [0, -1, 1.5]];
             detach _wave;
-            if (alive _entity) then {[_wave, _entityObj] remoteExec ["root_anomalies_screamer_fnc_ScreamerEffect", [0, -2] select isDedicated]};
+            if (alive _entity) then {[_wave, _entityObj] remoteExec [QFUNC(ScreamerEffect), [0, -2] select isDedicated]};
 
             // Apply blast to the three range bands.
             private _bands = [[_r1, 2, [(_px * _pressure) / 2, (_py * _pressure) / 2], _dmgClose, 3], [_r2, 4, [(_px * _pressure) / 4, (_py * _pressure) / 4], _dmgMedium, 2], [_r3, 6, [(_px * _pressure) / 6, (_py * _pressure) / 6], _dmgFar, 1]];
@@ -256,11 +222,11 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do
                     [_u, (_u vectorModelToWorld [_torqueScale, _torqueScale, _torqueScale])] remoteExec ["addTorque", _u];
                     if ((_u isKindOf "CAManBase") && {typeOf _u != "VirtualCurator_F"}) then {
                         for "_h" from 1 to _hits do {
-                            [_u, _bandDmg, selectRandom _bodyParts, "backblast"] call root_anomalies_main_fnc_applyDamage;
+                            [_u, _bandDmg, selectRandom _bodyParts, "backblast"] call EFUNC(main,applyDamage);
                         };
                     };
                     if (_affectVehicles && {(_u isKindOf "LandVehicle") || {_u isKindOf "Air"}}) then {
-                        [_u, random _bandDmg] call _vehicleDmg;
+                        [_u, random _bandDmg] call FUNC(ScreamerVehicleDamage);
                     };
                     [_u, _tempMass] remoteExec ["setMass", _u];
                 } forEach _band;
@@ -278,7 +244,7 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do
     uiSleep 5;
 };
 
-[_entityObj] remoteExec ["root_anomalies_screamer_fnc_ScreamerTeleport", [0, -2] select isDedicated];
+[_entityObj] remoteExec [QFUNC(ScreamerTeleport), [0, -2] select isDedicated];
 uiSleep 4;
 {deleteVehicle _x} forEach _bobs;
 if (!isNull _anomaly) then {deleteVehicle _anomaly};

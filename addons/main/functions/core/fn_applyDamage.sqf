@@ -23,7 +23,7 @@
 
 params [["_entity", objNull, [objNull]], ["_amount", 0, [0]], ["_bodyPart", "body", [""]], ["_dmgType", "stab", [""]], ["_anomaly", objNull, [objNull]]];
 
-if (isNull _entity || {!alive _entity} || {_amount <= 0}) exitWith {false};
+if (isNull _entity || {_amount <= 0} || {!([_entity] call FUNC(isDamageable))}) exitWith {false};
 if !([_entity, _anomaly] call FUNC(isAffectable)) exitWith {false};
 
 private _isAce = !isNil "ace_medical_fnc_addDamageToUnit";

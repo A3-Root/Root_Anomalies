@@ -28,7 +28,7 @@ while {(alive _obj) && (_taskTime < 7)} do {
     _devices = nearestObjects [position _obj, [_killDevice], _killRange, false];
     if (_devices isNotEqualTo []) then {
         _taskTime = _taskTime + 1;
-        [_obj] remoteExec ["root_anomalies_burper_fnc_BurperDisable", [0, -2] select isDedicated];
+        [_obj] remoteExec [QFUNC(BurperDisable), [0, -2] select isDedicated];
     } else {
         _taskTime = 0;
     };
@@ -37,7 +37,7 @@ while {(alive _obj) && (_taskTime < 7)} do {
 
 if (!alive _obj) exitWith {};
 
-[_obj] remoteExec ["root_anomalies_burper_fnc_BurperBlast", [0, -2] select isDedicated];
+[_obj] remoteExec [QFUNC(BurperBlast), [0, -2] select isDedicated];
 ["charge_b"] remoteExec ["playSound", [0, -2] select isDedicated];
 _obj setVariable [QGVAR(active), false, true];
 uiSleep 1;

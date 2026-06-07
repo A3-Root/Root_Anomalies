@@ -18,21 +18,7 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_unit", "_obj", ["_noseize", false, [false]], ["_damage", 0.1, [0]]];
-
-private _hop = {
-    params ["_unit", "_pos", "_noseize"];
-    uiSleep 2;
-    waitUntil {isNil {player getVariable QGVAR(tele)}};
-    player setVariable [QGVAR(tele), true];
-    if !(_noseize) then {[] spawn root_anomalies_smuggler_fnc_SmugglerVidEffect};
-    ["zoomin"] remoteExec ["playSound", _unit];
-    [selectRandom ["halu_1", "halu_2", "halu_3", "halu_4", "halu_5", "halu_6", "halu_7", "halu_8", "halu_9", "halu_91", "halu_92", "halu_93", "halu_94", "halu_95", "halu_96", "halu_97", "halu_98", "halu_99", "halu_991", "halu_992", "halu_993", "halu_994", "halu_995", "halu_996", "halu_997", "halu_998", "halu_999", "halu_9999"]] remoteExec ["playSound", _unit];
-    uiSleep 0.5;
-    _unit setPos [_pos select 0, _pos select 1, 2];
-    uiSleep (3 + random 6);
-    player setVariable [QGVAR(tele), nil];
-};
+params ["_unit", "_obj", ["_seizureSafe", false, [false]], ["_damage", 0.1, [0]]];
 
 uiSleep 2;
 
@@ -43,11 +29,11 @@ private _count = floor (random 6);
 if (_count < 1) then {_count = 1};
 
 for "_i" from 1 to _count do {
-    [_unit, ([getPos _obj, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos), _noseize] call _hop;
+    [_unit, ([getPos _obj, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos), _seizureSafe] call FUNC(SmugglerHop);
 };
 
 uiSleep 0.3;
-[_unit, _damage, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
+[_unit, _damage, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
 
 waitUntil {isNil {player getVariable QGVAR(tele)}};
 [_unit, [selectRandom ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"], 300]] remoteExec ["say3D"];

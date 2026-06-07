@@ -35,113 +35,6 @@ params [
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
 private _weights = [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 
-// Burn everything within 20m: ACE-aware for people, hitpoint damage for vehicles.
-private _burnNearby = {
-    params ["_flamer", "_dmg", "_bodyParts", "_weights"];
-    private _near = ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20]) - [_flamer];
-    {
-        private _v = _x;
-        if ((typeOf _v != "VirtualCurator_F") && {_v isKindOf "Man"}) then {
-            private _bp = _bodyParts selectRandomWeighted _weights;
-            [_v, _dmg, _bp, "burn"] call root_anomalies_main_fnc_applyDamage;
-            [_v, [selectRandom ["04", "burned", "02", "03"], 200]] remoteExec ["say3D"];
-        } else {
-            if ((_v isKindOf "LandVehicle") || {_v isKindOf "Air"}) then {
-                if ([_v] call root_anomalies_main_fnc_isAffectable) then {
-                    {_v setHitPointDamage [_x, (_v getHitPointDamage _x) + random 0.3]} forEach ((getAllHitPointsDamage _v) param [0, []]);
-                };
-            };
-        };
-    } forEach _near;
-};
-
-private _findTarget = {
-    params ["_flamer", "_terr"];
-    ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], _terr]) - [_flamer]
-};
-
-private _hideFlamer = {
-    params ["_flamer"];
-    _flamer setVariable [QGVAR(visible), false, true];
-    [_flamer getVariable [QGVAR(cap), _flamer], ["foc_initial", 1000]] remoteExec ["say3D"];
-    _flamer enableSimulationGlobal false;
-    _flamer hideObjectGlobal true;
-};
-
-private _showFlamer = {
-    params ["_flamer", "_pozOrig", "_terr", "_dmg"];
-    private _p = [_pozOrig, 1, _terr / 10, 3, 0, 20, 0] call BIS_fnc_findSafePos;
-    _flamer setPos _p;
-    _flamer setVariable [QGVAR(visible), true, true];
-    [_flamer, _dmg, _pozOrig] remoteExec ["root_anomalies_flamer_fnc_FlamerSfx", [0, -2] select isDedicated];
-    _flamer enableSimulationGlobal true;
-    _flamer hideObjectGlobal false;
-    {_flamer reveal _x} forEach (_flamer nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 100]);
-    [_flamer getVariable [QGVAR(cap), _flamer], ["foc_initial", 1000]] remoteExec ["say3D"];
-};
-
-private _avoidFlamer = {
-    params ["_flamer", "_chased"];
-    if (isPlayer _chased) exitWith {};
-    private _rel = _chased getPos [30, (_flamer getDir _chased) + (random 33) * (selectRandom [1, -1])];
-    _chased doMove _rel;
-    _chased setSkill ["commanding", 1];
-};
-
-private _attkFlamer = {
-    params ["_flamer", "_tgt", "_dmg", "_bodyParts", "_weights"];
-    private _shootDir = (getPosATL _flamer vectorFromTo getPosATL _tgt) vectorMultiply 15;
-    [_flamer getVariable [QGVAR(cap), _flamer], ["foc_initial", 500]] remoteExec ["say3D"];
-    [_flamer, _shootDir] remoteExec ["root_anomalies_flamer_fnc_FlamerPlasma", [0, -2] select isDedicated];
-    uiSleep 0.5;
-    private _near = ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20]) - [_flamer];
-    {
-        private _v = _x;
-        if ((typeOf _v != "VirtualCurator_F") && {_v isKindOf "Man"}) then {
-            private _bp = _bodyParts selectRandomWeighted _weights;
-            [_v, _dmg, _bp, "burn"] call root_anomalies_main_fnc_applyDamage;
-            [_v, [selectRandom ["04", "burned", "02", "03"], 200]] remoteExec ["say3D"];
-        } else {
-            if ((_v isKindOf "LandVehicle") || {_v isKindOf "Air"}) then {
-                if ([_v] call root_anomalies_main_fnc_isAffectable) then {
-                    {_v setHitPointDamage [_x, (_v getHitPointDamage _x) + random _dmg]} forEach ((getAllHitPointsDamage _v) param [0, []]);
-                };
-            };
-        };
-    } forEach _near;
-    private _nearVik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 7, false];
-    {_x setDamage (damage _x + (_dmg * 5))} forEach (_nearVik - [_flamer]);
-    uiSleep 4;
-    _flamer setVariable [QGVAR(atk), false];
-};
-
-private _jumpFlamer = {
-    params ["_flamer", "_tgt", "_dmg", "_bodyParts", "_weights"];
-    private _jumpDir = (getPosATL _flamer vectorFromTo getPosATL _tgt) vectorMultiply round (10 + random 10);
-    private _blastSound = selectRandom ["01_blast", "02_blast", "03_blast"];
-    private _veg = nearestTerrainObjects [position _flamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
-    private _nearVik = nearestObjects [position _flamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air"], 20, false];
-    [_flamer getVariable [QGVAR(cap), _flamer], [_blastSound, 200]] remoteExec ["say3D"];
-    private _near = ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle"], 20]) - [_flamer];
-    {
-        private _v = _x;
-        if ((typeOf _v != "VirtualCurator_F") && {_v isKindOf "Man"}) then {
-            private _bp = _bodyParts selectRandomWeighted _weights;
-            [_v, _dmg, _bp, "burn"] call root_anomalies_main_fnc_applyDamage;
-            [_v, [selectRandom ["04", "burned", "02", "03"], 200]] remoteExec ["say3D"];
-        } else {
-            if ((_v isKindOf "LandVehicle") || {_v isKindOf "Air"}) then {
-                if ([_v] call root_anomalies_main_fnc_isAffectable) then {
-                    {_v setHitPointDamage [_x, (_v getHitPointDamage _x) + random _dmg]} forEach ((getAllHitPointsDamage _v) param [0, []]);
-                };
-            };
-        };
-    } forEach _near;
-    _flamer setVelocity [_jumpDir select 0, _jumpDir select 1, round (10 + random 15)];
-    {_x setDamage [1, false]; _x hideObjectGlobal true} forEach _veg;
-    {_x setDamage (damage _x + _dmg)} forEach (_nearVik - [_flamer]);
-};
-
 uiSleep 2;
 
 private _markerPos = getMarkerPos _marker;
@@ -169,7 +62,7 @@ _flamer addEventHandler ["Hit", {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec ["root_anomalies_flamer_fnc_FlamerSplash"];
+        [_unit] remoteExec [QFUNC(FlamerSplash)];
     };
 }];
 _flamer addEventHandler ["Killed", {
@@ -193,10 +86,10 @@ for "_i" from 0 to 5 do {
 };
 
 _flamer setVariable [QGVAR(atk), false];
-[_flamer] call _hideFlamer;
-[_flamer, _deathDamage] spawn root_anomalies_flamer_fnc_FlamerEnd;
+[_flamer] call FUNC(FlamerHide);
+[_flamer, _deathDamage] spawn FUNC(FlamerEnd);
 
-[_flamer, _config] call root_anomalies_main_fnc_finalizeInstance;
+[_flamer, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("FlamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
@@ -208,49 +101,43 @@ while {!_ckPl} do {
 
 private _inRange = [];
 while {alive _flamer && {!(_flamer getVariable [QGVAR(captured), false])}} do {
-    while {_inRange isEqualTo []} do {_inRange = [_flamer, _territory] call _findTarget; uiSleep 5};
+    while {_inRange isEqualTo []} do {_inRange = [_flamer, _territory] call FUNC(FlamerFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {typeOf _x != "VirtualCurator_F"});
-    [_flamer, _markerPos, _territory, _damage] call _showFlamer;
+    [_flamer, _markerPos, _territory, _damage] call FUNC(FlamerShow);
 
     while {(!isNil "_tgt") && {(alive _flamer) && {(_flamer distance _markerPos) < _territory}}} do {
         uiSleep _recharge;
-        [_flamer, 0.03, _bodyParts, _weights] call _burnNearby;
+        [_flamer, 0.03, _bodyParts, _weights] call FUNC(FlamerBurn);
 
         if (selectRandom [true, false, true, true, false]) then {
             _flamer moveTo AGLToASL (_tgt getRelPos [10, 180]);
-            if (_aiPanic) then {[_flamer, _tgt] call _avoidFlamer};
+            if (_aiPanic) then {[_flamer, _tgt] call FUNC(FlamerAvoid)};
         } else {
-            [_flamer, 0.03, _bodyParts, _weights] call _burnNearby;
-            [_flamer] remoteExec ["root_anomalies_flamer_fnc_FlamerJump", [0, -2] select isDedicated];
-            [_flamer, _tgt, _damage, _bodyParts, _weights, _jumpFlamer] spawn {
-                params ["_a", "_b", "_c", "_d", "_e", "_code"];
-                [_a, _b, _c, _d, _e] call _code;
-            };
+            [_flamer, 0.03, _bodyParts, _weights] call FUNC(FlamerBurn);
+            [_flamer] remoteExec [QFUNC(FlamerJump), [0, -2] select isDedicated];
+            [_flamer, _tgt, _damage, _bodyParts, _weights] spawn FUNC(FlamerLeap);
         };
 
         uiSleep _recharge;
-        [_flamer, 0.03, _bodyParts, _weights] call _burnNearby;
+        [_flamer, 0.03, _bodyParts, _weights] call FUNC(FlamerBurn);
 
         if ((_flamer distance _tgt < 15) && {!(_flamer getVariable [QGVAR(atk), false])}) then {
             _flamer setVariable [QGVAR(atk), true];
-            [_flamer, _tgt, _damage, _bodyParts, _weights, _attkFlamer] spawn {
-                params ["_a", "_b", "_c", "_d", "_e", "_code"];
-                [_a, _b, _c, _d, _e] call _code;
-            };
+            [_flamer, _tgt, _damage, _bodyParts, _weights] spawn FUNC(FlamerAttack);
             uiSleep 0.5;
-            [_tgt] remoteExec ["root_anomalies_flamer_fnc_FlamerAtk"];
+            [_tgt] remoteExec [QFUNC(FlamerAtk)];
         };
 
         uiSleep _recharge;
-        [_flamer, 0.03, _bodyParts, _weights] call _burnNearby;
+        [_flamer, 0.03, _bodyParts, _weights] call FUNC(FlamerBurn);
 
         if ((!alive _tgt) || {_tgt distance _markerPos > _territory}) then {
-            _inRange = [_flamer, _territory] call _findTarget;
+            _inRange = [_flamer, _territory] call FUNC(FlamerFindTarget);
             if (_inRange isNotEqualTo []) then {_tgt = selectRandom _inRange} else {_tgt = nil};
         };
     };
 
-    [_flamer] call _hideFlamer;
+    [_flamer] call FUNC(FlamerHide);
     _tgt = nil;
     _inRange = [];
     uiSleep (_recharge + 2);

@@ -41,13 +41,13 @@ deleteVehicle _logic;
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_health", "_override", "_territory", "_damage", "_aiPanic", "_nightOnly", "_noseize"];
+        _results params ["_health", "_override", "_territory", "_damage", "_aiPanic", "_nightOnly", "_seizureSafe"];
 
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Strigoi Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "strigoi"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _territory, _nightOnly, _damage, round _health, _noseize, _aiPanic, _config] remoteExec ["root_anomalies_strigoi_fnc_StrigoiMain", 2];
+        [_markerName, _territory, _nightOnly, _damage, round _health, _seizureSafe, _aiPanic, _config] remoteExec [QFUNC(StrigoiMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

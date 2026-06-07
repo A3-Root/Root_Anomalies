@@ -31,7 +31,7 @@ params [
     ["_affectAI", true, [false]],
     ["_emp", true, [false]],
     ["_heartClass", "B_UAV_06_F", [""]],
-    ["_noseize", false, [false]],
+    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
@@ -39,7 +39,7 @@ if (isNull _twins) exitWith {};
 
 private _heart = _heartClass createVehicle [0, 0, 0];
 _heart attachTo [_twins, [-0.5, 0, 1.5]];
-[_heart] remoteExec ["root_anomalies_twins_fnc_TwinsInima", [0, -2] select isDedicated];
+[_heart] remoteExec [QFUNC(TwinsInima), [0, -2] select isDedicated];
 
 private _sparkBall = objNull;
 if (_sparks) then {
@@ -47,19 +47,19 @@ if (_sparks) then {
     [_sparkBall, true] remoteExec ["hideObject", 0, true];
 };
 
-if (_affectAI) then {[_twins, _dmgRange] remoteExec ["root_anomalies_twins_fnc_TwinsDamage", 2]};
+if (_affectAI) then {[_twins, _dmgRange] remoteExec [QFUNC(TwinsDamage), 2]};
 
 _twins setVariable [QGVAR(visible), 0, true];
-[_twins, _dmgRange, _noseize] remoteExec ["root_anomalies_twins_fnc_TwinsViz", [0, -2] select isDedicated, true];
+[_twins, _dmgRange, _seizureSafe] remoteExec [QFUNC(TwinsViz), [0, -2] select isDedicated, true];
 
 _twins setVariable [QGVAR(extraDelete), [_heart], true];
-[_twins, _config] call root_anomalies_main_fnc_finalizeInstance;
+[_twins, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 
 // Movement / observation-freeze loop.
-[_twins, _trackDist, _dmgRange, _heart, _emp, _noseize] spawn {
-    params ["_twins", "_trackDist", "_dmgRange", "_heart", "_emp", "_noseize"];
+[_twins, _trackDist, _dmgRange, _heart, _emp, _seizureSafe] spawn {
+    params ["_twins", "_trackDist", "_dmgRange", "_heart", "_emp", "_seizureSafe"];
     private _allowMove = 15;
     private _incr = 0;
 
@@ -85,7 +85,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
     };
 
     if (_emp) then {
-        [_twins, _noseize, _trackDist] remoteExec ["root_anomalies_twins_fnc_TwinsEmp", [0, -2] select isDedicated, true];
+        [_twins, _seizureSafe, _trackDist] remoteExec [QFUNC(TwinsEmp), [0, -2] select isDedicated, true];
         uiSleep 2;
     };
     deleteVehicle _twins;
@@ -105,7 +105,7 @@ if (_sparks) then {
         uiSleep 5;
         for "_n" from 1 to _flashes do {
             private _gap = 0.1 + (random 2);
-            [_sparkBall, _gap] remoteExec ["root_anomalies_twins_fnc_TwinsEffect", [0, -2] select isDedicated];
+            [_sparkBall, _gap] remoteExec [QFUNC(TwinsEffect), [0, -2] select isDedicated];
             uiSleep _gap;
         };
     };

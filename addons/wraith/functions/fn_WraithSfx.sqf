@@ -17,9 +17,9 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_obj", ["_fearRadius", 25, [0]], ["_noseize", false, [false]]];
+params ["_obj", ["_fearRadius", 25, [0]], ["_seizureSafe", false, [false]]];
 
-private _seizureSafe = _noseize || SEIZURE_SAFE;
+_seizureSafe = _seizureSafe || SEIZURE_SAFE;
 
 // Ambient murmur.
 [_obj] spawn {

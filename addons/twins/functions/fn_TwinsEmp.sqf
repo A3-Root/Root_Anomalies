@@ -15,7 +15,7 @@
  * Public: No
  */
 
-params ["_twins", ["_noseize", false, [false]], ["_aoe", 100, [0]]];
+params ["_twins", ["_seizureSafe", false, [false]], ["_aoe", 100, [0]]];
 
 if (!hasInterface) exitWith {};
 
@@ -46,7 +46,7 @@ _light setLightDayLight true;
 _light setLightAttenuation [10, 10, 50, 0, 50, 2000];
 
 uiSleep 0.1;
-if !(_noseize || SEIZURE_SAFE) then {
+if !(_seizureSafe || SEIZURE_SAFE) then {
     private _hndl = ppEffectCreate ["ColorInversion", 1501];
     _hndl ppEffectEnable true;
     _hndl ppEffectAdjust [0.75, 0.75, 0.75];

@@ -37,5 +37,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Flamer3DEN activating marker %1",_markerName);
 
-private _config = [_logic, "flamer"] call root_anomalies_main_fnc_cfgCapture;
-[_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] call root_anomalies_flamer_fnc_FlamerMain;
+private _config = [_logic, "flamer"] call EFUNC(main,cfgCapture);
+[_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] call FUNC(FlamerMain);

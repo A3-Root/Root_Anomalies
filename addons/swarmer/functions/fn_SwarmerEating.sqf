@@ -19,17 +19,6 @@ params ["_victim", "_hive"];
 
 if (!alive _hive) exitWith {};
 
-private _blood = {
-    params ["_spot"];
-    private _splash = "#particlesource" createVehicleLocal (getPosATL _spot);
-    _splash setParticleCircle [0, [0, 0, 0]];
-    _splash setParticleRandom [0.1, [0.2, 0.2, 0.2], [0, 0, 0.1], 0, 0.2, [0, 0, 0, 0.1], 1, 0];
-    _splash setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d", 16, 13, 1], "", "Billboard", 1, 0.15, [0, 0, 0], [0, 0, 0], 2, 10, 7.9, 0, [0.2, 0.8], [[1, 0, 0.1, 1], [1, 1, 0.1, 1]], [1], 1, 0, "", "", _spot];
-    _splash setDropInterval 0.2;
-    uiSleep 10;
-    deleteVehicle _splash;
-};
-
 private _bones = ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];
 private _anchors = [];
 {
@@ -37,7 +26,7 @@ private _anchors = [];
     _anchor attachTo [_victim, [0, 0, 0], _x];
     _anchors pushBack _anchor;
 } forEach _bones;
-{[_x] spawn _blood} forEach _anchors;
+{[_x] spawn FUNC(SwarmerBlood)} forEach _anchors;
 (_anchors select 0) say3D ["eating", 300];
 _victim say3D ["strigat_92", 300];
 

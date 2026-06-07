@@ -23,7 +23,7 @@ while {alive _twins} do {
     private _runPos = [getPosATL _twins, 1000, random 360] call BIS_fnc_relPos;
     {
         if (typeOf _x != "VirtualCurator_F") then {
-            [_x, 0.1, "body", "stab"] call root_anomalies_main_fnc_applyDamage;
+            [_x, 0.1, "body", "stab"] call EFUNC(main,applyDamage);
             _x doMove _runPos;
             _x setSkill ["commanding", 1];
             uiSleep 0.1;

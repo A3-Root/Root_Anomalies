@@ -4,9 +4,13 @@
 
 PREP(Worm3DEN);
 PREP(WormAttack);
+PREP(WormAvoid);
 PREP(WormBump);
 PREP(WormEffect);
 PREP(WormKill);
+PREP(WormKillNearby);
 PREP(WormMain);
 PREP(WormPostInit);
+PREP(WormPressDir);
+PREP(WormVehicleDamage);
 PREP(WormZeus);

@@ -17,21 +17,7 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_flamer", ["_damageFlamer", 0.4, [0]]];
-
-private _makeFlames = {
-    params ["_parts"];
-    private _sources = [];
-    {
-        private _src = "#particlesource" createVehicleLocal (getPosATL _x);
-        _src setParticleCircle [0, [0, 0, 0]];
-        _src setParticleRandom [0.1, [0.1, 0.1, 0.5], [0, 0, 0.2], 1, 0.1, [0, 0, 0, 0], 1, 0];
-        _src setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02.p3d", 16, 15, 10, 1], "", "Billboard", 1, 0.3, [0, 0, 0], [0, 0, 0], 15, 7, 7.9, 1, [0.5, 0.5, 0.1], [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], [2], 1, 0, "", "", _x];
-        _src setDropInterval 0.05;
-        _sources pushBackUnique _src;
-    } forEach _parts;
-    _sources
-};
+params ["_flamer", ["_damage", 0.4, [0]]];
 
 player setSpeaker "NoVoice";
 enableCamShake true;
@@ -52,7 +38,7 @@ private _anchors = [];
     _anchors pushBack _anchor;
     _anchor attachTo [_flamer, [0, 0, 0], _x];
 } forEach _bones;
-private _flames = [_anchors] call _makeFlames;
+private _flames = [_anchors] call FUNC(FlamerFlames);
 
 private _haze = "#particlesource" createVehicleLocal (getPosATL _flamer);
 _haze setParticleCircle [0, [0, 0, 0]];
@@ -80,7 +66,7 @@ while {(_flamer getVariable [QGVAR(visible), false]) && {alive _flamer}} do {
         call BIS_fnc_indicateBleeding;
         private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
         if (typeOf player != "VirtualCurator_F") then {
-            [player, _damageFlamer, _bodyPart, "burn"] call root_anomalies_main_fnc_applyDamage;
+            [player, _damage, _bodyPart, "burn"] call EFUNC(main,applyDamage);
         };
     };
 };

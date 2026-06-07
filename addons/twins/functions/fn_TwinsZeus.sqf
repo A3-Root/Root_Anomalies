@@ -37,7 +37,7 @@ deleteVehicle _logic;
     ],
     {
         params ["_results", "_pos"];
-        _results params ["_twinsClass", "_heartClass", "_trackDist", "_sparks", "_dmgRange", "_affectAI", "_emp", "_noseize"];
+        _results params ["_twinsClass", "_heartClass", "_trackDist", "_sparks", "_dmgRange", "_affectAI", "_emp", "_seizureSafe"];
 
         if (getNumber (configFile >> "CfgVehicles" >> _heartClass >> "scope") <= 0) then {_heartClass = "B_UAV_06_F"};
         if (getNumber (configFile >> "CfgVehicles" >> _twinsClass >> "scope") <= 0) then {_twinsClass = "Land_HighVoltageTower_large_F"};
@@ -47,7 +47,7 @@ deleteVehicle _logic;
 
         ["Twins Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "twins"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _noseize, _config] remoteExec ["root_anomalies_twins_fnc_TwinsMain", 2];
+        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _seizureSafe, _config] remoteExec [QFUNC(TwinsMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

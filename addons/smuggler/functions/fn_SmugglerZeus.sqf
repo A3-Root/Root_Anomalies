@@ -44,15 +44,15 @@ deleteVehicle _logic;
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_roaming", "_detectable", "_protectable", "_disableSpawn", "_detector", "_protector", "_spawnStr", "_spawnDelay", "_damage", "_noseize"];
+        _results params ["_roaming", "_detectable", "_protectable", "_disableSpawn", "_detector", "_protector", "_spawnStr", "_spawnDelay", "_damage", "_seizureSafe"];
 
         if (!_detectable) then {_detector = ""};
         if (!_protectable) then {_protector = ""};
-        private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call root_anomalies_main_fnc_parseClassList};
+        private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call EFUNC(main,parseClassList)};
 
         ["Smuggler Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "smuggler"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _noseize, _config] remoteExec ["root_anomalies_smuggler_fnc_SmugglerMain", 2];
+        [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _seizureSafe, _config] remoteExec [QFUNC(SmugglerMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

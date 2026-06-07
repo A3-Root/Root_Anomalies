@@ -29,33 +29,23 @@ if (_incoming <= 0) exitWith {0};
 private _cfg = _unit getVariable [QGVAR(config), createHashMap];
 
 // Does this hit's ammo/projectile match any class in _list (CfgAmmo isKindOf, or exact)?
-private _ammoCls = _ammo;
+private _ammoCls = [_ammo, ""] select (_ammo isEqualType 0);
 private _projCls = _projectile;
-private _matchFn = {
-    params ["_list"];
-    private _hit = false;
-    {
-        private _cls = _x;
-        if (_ammoCls isEqualType "" && {_ammoCls != ""} && {_ammoCls isKindOf [_cls, configFile >> "CfgAmmo"]}) exitWith {_hit = true};
-        if (_projCls isEqualType "" && {_projCls != ""} && {_projCls isKindOf [_cls, configFile >> "CfgAmmo"]}) exitWith {_hit = true};
-    } forEach _list;
-    _hit
-};
 
 // Killswitch: instant kill.
 private _killClasses = _cfg getOrDefault ["killClassnames", []];
-if (_killClasses isNotEqualTo [] && {[_killClasses] call _matchFn}) exitWith {
+if (_killClasses isNotEqualTo [] && {[_killClasses, _ammoCls, _projCls] call FUNC(matchDamageType)}) exitWith {
     [_unit, false] call FUNC(doCapture);
     0
 };
 
 // Blacklist: ignored entirely.
 private _blacklist = _cfg getOrDefault ["dmgTypeBlacklist", []];
-if (_blacklist isNotEqualTo [] && {[_blacklist] call _matchFn}) exitWith {0};
+if (_blacklist isNotEqualTo [] && {[_blacklist, _ammoCls, _projCls] call FUNC(matchDamageType)}) exitWith {0};
 
 // Whitelist (if set): only listed ammo hurts.
 private _whitelist = _cfg getOrDefault ["dmgTypeWhitelist", []];
-if (_whitelist isNotEqualTo [] && {!([_whitelist] call _matchFn)}) exitWith {0};
+if (_whitelist isNotEqualTo [] && {!([_whitelist, _ammoCls, _projCls] call FUNC(matchDamageType))}) exitWith {0};
 
 // Optional: record the attacker so a driver can retaliate (e.g. SCP-096 enrages).
 if (_cfg getOrDefault ["enrageOnDamage", false]) then {

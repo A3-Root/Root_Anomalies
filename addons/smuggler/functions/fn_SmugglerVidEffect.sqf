@@ -23,19 +23,6 @@ if (SEIZURE_SAFE) exitWith {};
 cutText ["", "WHITE OUT", 1];
 titleCut ["", "WHITE IN", 1];
 
-private _ppRun = {
-    params ["_name", "_priority", "_effect"];
-    private _handle = -1;
-    while {_handle = ppEffectCreate [_name, _priority]; _handle < 0} do {_priority = _priority + 1};
-    _handle ppEffectEnable true;
-    _handle ppEffectAdjust _effect;
-    _handle ppEffectCommit 5;
-    waitUntil {ppEffectCommitted _handle};
-    uiSleep 3;
-    _handle ppEffectEnable false;
-    ppEffectDestroy _handle;
-};
-
 switch (selectRandom ["blur", "colorinv", "chrom", "colorcor"]) do {
     case "blur": {
         "dynamicBlur" ppEffectEnable true;
@@ -46,7 +33,7 @@ switch (selectRandom ["blur", "colorinv", "chrom", "colorcor"]) do {
         uiSleep 3;
         "dynamicBlur" ppEffectEnable false;
     };
-    case "colorinv": {["ColorInversion", 2500, [0, 1, 0]] spawn _ppRun};
-    case "chrom": {["ChromAberration", 200, [0.93, 0.86, true]] spawn _ppRun};
-    default {["ColorCorrections", 1500, [1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn _ppRun};
+    case "colorinv": {["ColorInversion", 2500, [0, 1, 0]] spawn FUNC(SmugglerPpRun)};
+    case "chrom": {["ChromAberration", 200, [0.93, 0.86, true]] spawn FUNC(SmugglerPpRun)};
+    default {["ColorCorrections", 1500, [1, 1, 0, [0, 0, 0, 0], [1.8, 1.8, 0.3, -5], [0.2, 0.59, 0.11, -1.83]]] spawn FUNC(SmugglerPpRun)};
 };

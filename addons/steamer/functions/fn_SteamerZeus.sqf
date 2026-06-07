@@ -46,7 +46,7 @@ deleteVehicle _logic;
 
         ["Steamer Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "steamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath, _config] remoteExec ["root_anomalies_steamer_fnc_SteamerMain", 2];
+        [_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath, _config] remoteExec [QFUNC(SteamerMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

@@ -1,3 +1,8 @@
+# Changelog for Root Anomalies 07 Jun 2026
+## Version: 5.0.0.3 - Updates, Fixes, and Refactor
+- More fixes, updates and refactoring
+
+
 # Changelog for Root Anomalies 01 Jun 2026
 ## Version: 5.0.0 - Major Release and Refactor
 - Rebuilt from ground up with HEMTT and CBA

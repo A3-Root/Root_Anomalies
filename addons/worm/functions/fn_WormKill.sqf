@@ -18,20 +18,12 @@ if (!isServer) exitWith {};
 
 params ["_diffuser", ["_forceKill", false, [false]]];
 
-private _killWorms = {
-    params ["_candidates"];
-    {
-        if (!isNil {_x getVariable QGVAR(isWorm)}) then {uiSleep 4; deleteVehicle _x};
-        if (typeOf _x == "land_CanOpener_F") then {deleteVehicle _x};
-    } forEach _candidates;
-};
-
 if (_forceKill) then {
-    [8 allObjects 1] call _killWorms;
+    [8 allObjects 1] call FUNC(WormKillNearby);
 } else {
     while {alive _diffuser} do {
         private _near = nearestObjects [position _diffuser, [], 15];
-        if (_near isNotEqualTo []) then {[_near] call _killWorms};
+        if (_near isNotEqualTo []) then {[_near] call FUNC(WormKillNearby)};
         uiSleep 2;
     };
 };

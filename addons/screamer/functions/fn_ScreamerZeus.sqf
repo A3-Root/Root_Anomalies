@@ -59,7 +59,7 @@ deleteVehicle _logic;
 
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] remoteExec ["root_anomalies_screamer_fnc_ScreamerMain", 2];
+        [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] remoteExec [QFUNC(ScreamerMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

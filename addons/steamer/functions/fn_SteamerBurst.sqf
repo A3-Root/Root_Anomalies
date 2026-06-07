@@ -15,9 +15,9 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_tgtPoz", ["_craterBool", false, [false]]];
+params ["_tgtPos", ["_craterBool", false, [false]]];
 
-private _blow = "CraterLong_small" createVehicleLocal [_tgtPoz select 0, _tgtPoz select 1, -0.5];
+private _blow = "CraterLong_small" createVehicleLocal [_tgtPos select 0, _tgtPos select 1, -0.5];
 _blow hideObjectGlobal true;
 _blow setDir (round (random 360));
 _blow setVectorUp surfaceNormal getPosATL _blow;
@@ -53,7 +53,7 @@ _wave setDropInterval 0.002;
 [_wave] spawn {params ["_p"]; uiSleep 0.5; deleteVehicle _p};
 
 _blow hideObjectGlobal false;
-if (_craterBool) then {[_blow] spawn root_anomalies_steamer_fnc_SteamerChimney};
+if (_craterBool) then {[_blow] spawn FUNC(SteamerChimney)};
 
 private _column = "#particlesource" createVehicleLocal (getPos _blow);
 _column setParticleCircle [0, [0, 0, 0]];

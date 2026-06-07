@@ -18,24 +18,13 @@ if (!isServer) exitWith {};
 
 params ["_gren", ["_forceKill", false, [false]]];
 
-private _killHives = {
-    params ["_candidates"];
-    {
-        if (!isNil {_x getVariable QGVAR(isHive)}) then {
-            uiSleep 5;
-            _x setDamage 1;
-            [_x] remoteExec ["root_anomalies_swarmer_fnc_SwarmerDead", [0, -2] select isDedicated];
-        };
-    } forEach _candidates;
-};
-
 if (_forceKill) then {
-    [8 allObjects 1] call _killHives;
+    [8 allObjects 1] call FUNC(SwarmerKillNearby);
     uiSleep 2;
 } else {
     while {alive _gren} do {
         private _near = (position _gren) nearEntities ["CAManBase", 15];
-        if (_near isNotEqualTo []) then {[_near] call _killHives};
+        if (_near isNotEqualTo []) then {[_near] call FUNC(SwarmerKillNearby)};
         uiSleep 2;
     };
 };

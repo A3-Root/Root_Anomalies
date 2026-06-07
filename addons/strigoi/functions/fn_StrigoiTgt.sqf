@@ -16,16 +16,16 @@
 
 if (!hasInterface) exitWith {};
 
-params [["_damageStrig", 0.6, [0]], ["_noseize", false, [false]]];
+params [["_damage", 0.6, [0]], ["_seizureSafe", false, [false]]];
 
 private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 if (typeOf player != "VirtualCurator_F") then {
-    [player, _damageStrig, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call root_anomalies_main_fnc_applyDamage;
+    [player, _damage, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
 };
 
 playSound "puls";
 
-if (_noseize || SEIZURE_SAFE) exitWith {};
+if (_seizureSafe || SEIZURE_SAFE) exitWith {};
 
 ["DynamicBlur", 400, [10]] spawn {
     params ["_name", "_priority", "_effect"];

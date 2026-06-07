@@ -47,7 +47,7 @@ deleteVehicle _logic;
 
         ["Flamer Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "flamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] remoteExec ["root_anomalies_flamer_fnc_FlamerMain", 2];
+        [_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] remoteExec [QFUNC(FlamerMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

@@ -42,14 +42,31 @@ if (_whitelist isNotEqualTo [] && {_whitelist findIf {_entity isKindOf _x} == -1
     false
 };
 
-// Per-instance hostile-side filter (set via root_anomalies_fnc_setHostileSides).
+// Per-instance targeting filter: sides + explicit unit/group include & exclude.
+// Precedence: exclude wins; empty positive lists = no constraint; any positive
+// include (unit OR group OR side) makes the entity affectable (an explicit unit/group
+// include thus overrides the side filter). Set via the setTarget*/setHostileSides API.
 private _ok = true;
 if (!isNull _anomaly) then {
-    private _sides = (_anomaly getVariable [QGVAR(config), createHashMap]) getOrDefault ["hostileSides", []];
-    if (_sides isNotEqualTo [] && {!((side group _entity) in _sides)}) then {
-        LOG_DEBUG_1("isAffectable: %1 filtered by hostile sides",_type);
+    private _config = _anomaly getVariable [QGVAR(config), createHashMap];
+    private _sides = _config getOrDefault ["hostileSides", []];
+    private _units = _config getOrDefault ["targetUnits", []];
+    private _groups = _config getOrDefault ["targetGroups", []];
+    private _exUnits = _config getOrDefault ["excludeUnits", []];
+    private _exGroups = _config getOrDefault ["excludeGroups", []];
+    private _grp = group _entity;
+
+    if (_entity in _exUnits || {_grp in _exGroups}) exitWith {
+        LOG_DEBUG_1("isAffectable: %1 excluded",_type);
         _ok = false;
     };
+
+    if (_sides isEqualTo [] && {_units isEqualTo []} && {_groups isEqualTo []}) exitWith {};
+
+    _ok = (_units isNotEqualTo [] && {_entity in _units})
+        || {_groups isNotEqualTo [] && {_grp in _groups}}
+        || {_sides isNotEqualTo [] && {(side _grp) in _sides}};
+    if (!_ok) then {LOG_DEBUG_1("isAffectable: %1 filtered by targeting",_type)};
 };
 
 _ok

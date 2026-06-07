@@ -30,42 +30,42 @@ params [
     ["_spawnDelay", 10, [0]],
     ["_protector", "", [""]],
     ["_damage", 0.1, [0]],
-    ["_noseize", false, [false]],
+    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
 private _pos = getMarkerPos _marker;
-private _sursa = createVehicle ["Land_HelipadEmpty_F", [_pos select 0, _pos select 1, 2], [], 0, "CAN_COLLIDE"];
+private _source = createVehicle ["Land_HelipadEmpty_F", [_pos select 0, _pos select 1, 2], [], 0, "CAN_COLLIDE"];
 private _core = createVehicle ["Land_HelipadEmpty_F", [_pos select 0, _pos select 1, 2], [], 0, "CAN_COLLIDE"];
-_core attachTo [_sursa, [0, 0, 0]];
+_core attachTo [_source, [0, 0, 0]];
 
-_sursa setVariable [QGVAR(protector), _protector, true];
-_sursa setVariable [QGVAR(detector), _detector, true];
+_source setVariable [QGVAR(protector), _protector, true];
+_source setVariable [QGVAR(detector), _detector, true];
 
 if (_detector != "") then {
-    [_sursa] spawn root_anomalies_smuggler_fnc_SmugglerAIAvoid;
+    [_source] spawn FUNC(SmugglerAIAvoid);
 } else {
-    [_sursa] spawn root_anomalies_smuggler_fnc_SmugglerAIVisible;
+    [_source] spawn FUNC(SmugglerAIVisible);
 };
 
-[_sursa, _core] remoteExec ["root_anomalies_smuggler_fnc_SmugglerSfx", [0, -2] select isDedicated, true];
-[_sursa, _core, _damage, _noseize] remoteExec ["root_anomalies_smuggler_fnc_SmugglerTeleport", [0, -2] select isDedicated, true];
+[_source, _core] remoteExec [QFUNC(SmugglerSfx), [0, -2] select isDedicated, true];
+[_source, _core, _damage, _seizureSafe] remoteExec [QFUNC(SmugglerTeleport), [0, -2] select isDedicated, true];
 
-_sursa setVariable [QGVAR(extraDelete), [_core], true];
-[_sursa, _config] call root_anomalies_main_fnc_finalizeInstance;
+_source setVariable [QGVAR(extraDelete), [_core], true];
+[_source, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_1("SmugglerMain spawned at %1",_pos);
 
 if (_spawnList isNotEqualTo []) then {
     if (_spawnDelay <= 0) then {_spawnDelay = 10};
-    [_spawnList, _core, _spawnDelay] spawn root_anomalies_smuggler_fnc_SmugglerSpawn;
+    [_spawnList, _core, _spawnDelay] spawn FUNC(SmugglerSpawn);
 };
 
 if (_roaming) then {
-    while {!isNull _sursa} do {
-        private _cur = getPosATL _sursa;
+    while {!isNull _source} do {
+        private _cur = getPosATL _source;
         private _new = [_cur, 0.01, 0.3, 1, 0, -1, 0] call BIS_fnc_findSafePos;
-        _sursa setPos [_new select 0, _new select 1, _cur select 2];
+        _source setPos [_new select 0, _new select 1, _cur select 2];
         uiSleep (3 + random 30);
     };
 };

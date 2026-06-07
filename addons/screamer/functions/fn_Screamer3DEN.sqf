@@ -20,15 +20,6 @@ if (!_activated) exitWith {};
 if (!isServer) exitWith {};
 if (is3DEN) exitWith {};
 
-private _toSide = {
-    params ["_s"];
-    private _u = toUpper _s;
-    if (_u == "EAST") exitWith {east};
-    if (_u == "WEST") exitWith {west};
-    if (_u in ["GUER", "RESISTANCE", "INDEPENDENT"]) exitWith {resistance};
-    civilian
-};
-
 private _model = _logic getVariable ["ROOT_SCREAMER_MODEL", "Land_AncientStatue_01_F"];
 private _health = _logic getVariable ["ROOT_SCREAMER_HEALTH", 400];
 private _territory = _logic getVariable ["ROOT_SCREAMER_RADIUS", 100];
@@ -42,10 +33,10 @@ private _dmgClose = _logic getVariable ["ROOT_SCREAMER_DMGCLOSE", 0.8];
 private _dmgMedium = _logic getVariable ["ROOT_SCREAMER_DMGMED", 0.4];
 private _dmgFar = _logic getVariable ["ROOT_SCREAMER_DMGFAR", 0.2];
 
-private _hostiles = ([_hostilesStr] call root_anomalies_main_fnc_parseClassList) apply {[_x] call _toSide};
+private _hostiles = [_hostilesStr] call EFUNC(main,parseSides);
 if (_hostiles isEqualTo []) then {_hostiles = [east, west, civilian, resistance]};
 
-private _spawnSide = if (_aiEngage) then {[_spawnSideStr] call _toSide} else {civilian};
+private _spawnSide = if (_aiEngage) then {([_spawnSideStr] call EFUNC(main,parseSides)) param [0, civilian]} else {civilian};
 
 if (_atkRadius > (_territory / 2)) then {_atkRadius = _territory / 2};
 if (_territory < (_atkRadius * 2)) then {_territory = _atkRadius * 2};
@@ -57,5 +48,5 @@ createMarker [_markerName, getPosATL _logic];
 
 LOG_DEBUG_1("Screamer3DEN activating marker %1",_markerName);
 
-private _config = [_logic, "screamer"] call root_anomalies_main_fnc_cfgCapture;
-[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] call root_anomalies_screamer_fnc_ScreamerMain;
+private _config = [_logic, "screamer"] call EFUNC(main,cfgCapture);
+[_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] call FUNC(ScreamerMain);

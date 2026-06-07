@@ -37,7 +37,7 @@ if (_detect) then {
         uiSleep 0.1;
         _sphere hideObjectGlobal true;
 
-        [_workObj, _sphere] spawn root_anomalies_burper_fnc_BurperFxSecondary;
+        [_workObj, _sphere] spawn FUNC(BurperFxSecondary);
 
         // Detector check: reveal when the player carries the detection device.
         [_workObj] spawn {
@@ -53,8 +53,8 @@ if (_detect) then {
         waitUntil {(_workObj getVariable [QGVAR(cycSimple), 1]) != (_workObj getVariable [QGVAR(cycCompli), 1])};
 
         _sphere hideObjectGlobal false;
-        [_workObj, _sphere] spawn root_anomalies_burper_fnc_BurperFxPrimary;
-        [_sphere, _workObj] call root_anomalies_burper_fnc_BurperFxAnim;
+        [_workObj, _sphere] spawn FUNC(BurperFxPrimary);
+        [_sphere, _workObj] call FUNC(BurperFxAnim);
 
         deleteVehicle _sphere;
         _workObj setVariable [QGVAR(cycCompli), 3];
@@ -72,9 +72,9 @@ if (_detect) then {
         _sphere setObjectTextureGlobal [0, BURPER_TEXTURE];
         uiSleep 0.1;
 
-        [_workObj, _sphere] spawn root_anomalies_burper_fnc_BurperFxPrimary;
-        [_workObj, _sphere] spawn root_anomalies_burper_fnc_BurperFxSecondary;
-        [_sphere, _workObj] call root_anomalies_burper_fnc_BurperFxAnim;
+        [_workObj, _sphere] spawn FUNC(BurperFxPrimary);
+        [_workObj, _sphere] spawn FUNC(BurperFxSecondary);
+        [_sphere, _workObj] call FUNC(BurperFxAnim);
 
         deleteVehicle _sphere;
     };

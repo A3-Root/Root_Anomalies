@@ -30,7 +30,7 @@ params [
     ["_interval", 8, [0]],
     ["_damage", 0.4, [0]],
     ["_fearRadius", 25, [0]],
-    ["_noseize", false, [false]],
+    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
@@ -59,7 +59,7 @@ _obj addEventHandler ["HandleDamage", {
     0
 }];
 
-[_obj, _fearRadius, _noseize] remoteExec ["root_anomalies_wraith_fnc_WraithSfx", 0, true];
+[_obj, _fearRadius, _seizureSafe] remoteExec [QFUNC(WraithSfx), 0, true];
 
 // Hover.
 [_obj] spawn {
@@ -71,7 +71,7 @@ _obj addEventHandler ["HandleDamage", {
     };
 };
 
-[_obj, _config] call root_anomalies_main_fnc_finalizeInstance;
+[_obj, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("WraithMain spawned at %1 (territory %2)",_pos,_territory);
 
@@ -89,7 +89,7 @@ while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])}} do {
 
         {
             if ((typeOf _x != "VirtualCurator_F") && {alive _x} && {_x != _obj}) then {
-                [_x, _damage, "body", "burn"] call root_anomalies_main_fnc_applyDamage;
+                [_x, _damage, "body", "burn"] call EFUNC(main,applyDamage);
             };
         } forEach ((position _obj) nearEntities ["CAManBase", _fearRadius]);
     };

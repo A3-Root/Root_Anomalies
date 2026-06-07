@@ -20,7 +20,7 @@ params ["_flamer", ["_deathDamage", 1, [0]]];
 
 waitUntil {uiSleep 1; !alive _flamer};
 
-[_flamer] remoteExec ["root_anomalies_flamer_fnc_FlamerEndSfx", [0, -2] select isDedicated];
+[_flamer] remoteExec [QFUNC(FlamerEndSfx), [0, -2] select isDedicated];
 
 private _crater = "Crater" createVehicle [getPosATL _flamer select 0, getPosATL _flamer select 1, 0];
 _crater say3D ["close_bomb", 300];
@@ -31,4 +31,4 @@ private _builds = nearestObjects [position _flamer, ["BUILDING", "HOUSE", "CHURC
 
 {_x setDamage [_deathDamage, false]} forEach (_builds - [_crater]);
 {_x setDamage [_deathDamage, false]} forEach _veg;
-{[_x, _deathDamage, "body", "burn"] call root_anomalies_main_fnc_applyDamage} forEach _men;
+{[_x, _deathDamage, "body", "burn"] call EFUNC(main,applyDamage)} forEach _men;

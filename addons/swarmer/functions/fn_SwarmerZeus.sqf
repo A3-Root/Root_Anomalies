@@ -46,7 +46,7 @@ deleteVehicle _logic;
 
         ["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "swarmer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_hive, _territory, _pesticide, _damage, _config] remoteExec ["root_anomalies_swarmer_fnc_SwarmerMain", 2];
+        [_hive, _territory, _pesticide, _damage, _config] remoteExec [QFUNC(SwarmerMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

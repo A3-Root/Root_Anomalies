@@ -8,6 +8,7 @@
 PREP(initSettings);
 PREP(parseClassList);
 PREP(isAffectable);
+PREP(isDamageable);
 PREP(applyDamage);
 PREP(isObserving);
 PREP(mergeConfig);
@@ -23,6 +24,7 @@ PREP(finalizeInstance);
 
 PREP(initDamage);
 PREP(handleDamage);
+PREP(matchDamageType);
 PREP(sedationWatch);
 PREP(addCaptureInteraction);
 PREP(doCapture);
@@ -37,6 +39,11 @@ PREP_API(getInstances);
 PREP_API(setWaypoints);
 PREP_API(addWaypoint);
 PREP_API(setHostileSides);
+PREP_API(setTargetUnits);
+PREP_API(setTargetGroups);
+PREP_API(setExcludeUnits);
+PREP_API(setExcludeGroups);
+PREP_API(setTargets);
 PREP_API(setState);
 PREP_API(setHealth);
 PREP_API(setDamageMult);

@@ -46,7 +46,7 @@ deleteVehicle _logic;
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] remoteExec ["root_anomalies_worm_fnc_WormMain", 2];
+        [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] remoteExec [QFUNC(WormMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;
