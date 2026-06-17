@@ -37,7 +37,7 @@ deleteVehicle _logic;
         ["SLIDER:PERCENT", ["Strigoi Damage", "Fraction of damage the Strigoi does to its target."], [0.01, 1, 0.6, 2]],
         ["TOOLBOX:YESNO", ["AI Panic", "If true, AI flee from the Strigoi during attacks."], false],
         ["TOOLBOX:YESNO", ["Night Mode Only", "If true, the Strigoi is only active during the night."], false],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]],
+        ["SIDES", ["Hostile Sides", "Sides the Strigoi attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Strigoi."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
@@ -47,7 +47,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Strigoi Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "strigoi"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", [_sides] call EFUNC(main,parseSides)], ["activationRange", _activation]];
+        private _config = createHashMapFromArray [["type", "strigoi"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation]];
         [_markerName, _territory, _nightOnly, _damage, round _health, _aiPanic, _config] remoteExec [QFUNC(StrigoiMain), 2];
     },
     {

@@ -37,7 +37,7 @@ deleteVehicle _logic;
         ["SLIDER", ["Steamer Recharge Delay", "Seconds between Steamer bursts."], [5, 60, 10, 0]],
         ["SLIDER:PERCENT", ["Steamer Damage on Death", "Fraction of damage the Steamer does on death."], [0.01, 1, 0.6, 2]],
         ["TOOLBOX:YESNO", ["Enable Travel Path", "If true, the Steamer digs a visible mud trail toward its target."], false],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]],
+        ["SIDES", ["Hostile Sides", "Sides the Steamer attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Steamer."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
@@ -47,7 +47,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Steamer Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "steamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", [_sides] call EFUNC(main,parseSides)], ["activationRange", _activation]];
+        private _config = createHashMapFromArray [["type", "steamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation]];
         [_markerName, _territory, _damage, _recharge, _deathDamage, _travelPath, _config] remoteExec [QFUNC(SteamerMain), 2];
     },
     {

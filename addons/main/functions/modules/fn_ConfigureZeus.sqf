@@ -29,7 +29,7 @@ deleteVehicle _logic;
     "Reconfigure Anomalies",
     [
         ["SLIDER:RADIUS", ["Radius (m)", "Apply to every anomaly in range. Drop directly on a single anomaly to retune only that one."], [0, 2000, 50, 0, _pos, [40, 120, 200, 1]]],
-        ["EDIT", ["Hostile Sides (CSV)", "Comma-separated sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]],
+        ["SIDES", ["Hostile Sides", "Sides the anomaly attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the anomaly."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]],
         ["SLIDER:PERCENT", ["Damage", "Fraction of damage the anomaly deals per hit."], [0, 1, 0.4, 2]],
         ["TOOLBOX:YESNO", ["Capturable", "Allow the sedation + capture interaction."], true]
@@ -38,7 +38,7 @@ deleteVehicle _logic;
         params ["_results", "_pos"];
         _results params ["_radius", "_sides", "_activation", "_damage", "_capture"];
         private _override = createHashMapFromArray [
-            ["hostileSides", [_sides] call EFUNC(main,parseSides)],
+            ["hostileSides", _sides],
             ["activationRange", _activation],
             ["damage", _damage],
             ["captureEnabled", _capture]

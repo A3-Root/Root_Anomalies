@@ -91,7 +91,7 @@
 [
     SETTING_SENS_LIGHTS,
     "CHECKBOX",
-    ["Disable Sensitivity Lights", "Locally disable all flashing/strobing light effects from every anomaly. Per-player only - does not affect other players, Zeus or gameplay. Recommended for players with photosensitivity."],
+    ["Disable Sensitivity Lights", "Locally disable all flashing/strobing light effects from every anomaly. Recommended for if you have photosensitivity."],
     [SETTING_CATEGORY, "Accessibility"],
     false,
     0,

@@ -34,7 +34,7 @@ deleteVehicle _logic;
         ["TOOLBOX:YESNO", ["Enable Effects on AI", "If true, AI entities are also affected."], true],
         ["TOOLBOX:YESNO", ["Enable EMP", "If true, the Twins emits an EMP when killed."], true],
         ["SLIDER:PERCENT", ["Damage", "Damage dealt to nearby units per attack. 0 = disorientation effects only."], [0, 1, 0, 2]],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]]
+        ["SIDES", ["Hostile Sides", "Sides the Twins affect. None selected = all."], []]
     ],
     {
         params ["_results", "_pos"];
@@ -47,7 +47,7 @@ deleteVehicle _logic;
         private _twins = _twinsClass createVehicle _pos;
 
         ["Twins Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "twins"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["trackDist", _trackDist], ["hostileSides", [_sides] call EFUNC(main,parseSides)]];
+        private _config = createHashMapFromArray [["type", "twins"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["trackDist", _trackDist], ["hostileSides", _sides]];
         [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _config] remoteExec [QFUNC(TwinsMain), 2];
     },
     {

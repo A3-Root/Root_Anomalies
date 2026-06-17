@@ -38,7 +38,7 @@ deleteVehicle _logic;
         ["SLIDER:PERCENT", ["Worm Damage", "Fraction of damage the Worm does to its target."], [0.01, 1, 0.6, 2]],
         ["EDIT", ["Forceful Target", "Classname (e.g. an IR grenade) the Worm will fixate on when thrown, for its next attacks. Empty = none."], [""]],
         ["SLIDER", ["Forceful Target Attacks", "How many attacks the Worm spends on a thrown forceful target."], [1, 10, 3, 0]],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]]
+        ["SIDES", ["Hostile Sides", "Sides the Worm attacks. None selected = all."], []]
     ],
     {
         params ["_results", "_markerName"];
@@ -48,7 +48,7 @@ deleteVehicle _logic;
         if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["forceTarget", _forceTgt], ["forceN", _forceN], ["hostileSides", [_sides] call EFUNC(main,parseSides)]];
+        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["forceTarget", _forceTgt], ["forceN", _forceN], ["hostileSides", _sides]];
         [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] remoteExec [QFUNC(WormMain), 2];
     },
     {

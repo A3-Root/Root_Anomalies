@@ -41,7 +41,7 @@ deleteVehicle _logic;
         ["SLIDER", ["Spawn Objects Delay", "Additional delay in seconds between spawns (10s base always added)."], [0, 600, 10, 0]],
         ["SLIDER:PERCENT", ["Smuggler Damage", "Fraction of damage per teleport. 0 = no damage."], [0, 1, 0.1, 2]],
         ["SLIDER:RADIUS", ["Teleport Range (m)", "Maximum distance a teleported unit is sent from the Smuggler."], [10, 2000, 300, 0, _pos, [120, 40, 200, 1]]],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to teleport: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]]
+        ["SIDES", ["Hostile Sides", "Sides the Smuggler teleports. None selected = all."], []]
     ],
     {
         params ["_results", "_markerName"];
@@ -52,7 +52,7 @@ deleteVehicle _logic;
         private _spawnList = if (_disableSpawn) then {[]} else {[_spawnStr] call EFUNC(main,parseClassList)};
 
         ["Smuggler Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "smuggler"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["tpRange", _tpRange], ["hostileSides", [_sides] call EFUNC(main,parseSides)]];
+        private _config = createHashMapFromArray [["type", "smuggler"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["tpRange", _tpRange], ["hostileSides", _sides]];
         [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _config] remoteExec [QFUNC(SmugglerMain), 2];
     },
     {

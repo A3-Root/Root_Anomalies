@@ -38,7 +38,7 @@ deleteVehicle _logic;
         ["TOOLBOX:YESNO", ["AI Panic", "If true, AI flee from the Farmer during attacks."], false],
         ["SLIDER:PERCENT", ["Farmer Damage", "Fraction of damage the Farmer does to its target."], [0.01, 1, 0.6, 2]],
         ["SLIDER", ["Farmer Recharge Delay", "Seconds between Farmer attacks."], [3, 60, 5, 0]],
-        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]],
+        ["SIDES", ["Hostile Sides", "Sides the Farmer attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Farmer."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
@@ -48,7 +48,7 @@ deleteVehicle _logic;
         if (!_override && {_territory < 75}) then {_territory = 75};
 
         ["Farmer Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "farmer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", [_sides] call EFUNC(main,parseSides)], ["activationRange", _activation]];
+        private _config = createHashMapFromArray [["type", "farmer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation]];
         [_markerName, _territory, _damage, _recharge, round _health, _aiPanic, _config] remoteExec [QFUNC(FarmerMain), 2];
     },
     {
