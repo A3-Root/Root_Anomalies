@@ -29,7 +29,7 @@ private _protector = _logic getVariable ["ROOT_SMUGGLER_PROTECTOR", "B_Kitbag_mc
 private _spawnStr = _logic getVariable ["ROOT_SMUGGLER_SPAWNLIST", ""];
 private _spawnDelay = _logic getVariable ["ROOT_SMUGGLER_SPAWNDELAY", 10];
 private _damage = _logic getVariable ["ROOT_SMUGGLER_DAMAGE", 0.1];
-private _seizureSafe = _logic getVariable ["ROOT_SMUGGLER_SEIZURESAFE", false];
+private _tpRange = _logic getVariable ["ROOT_SMUGGLER_TPRANGE", 300];
 
 if (!_detectable) then {_detector = ""};
 if (!_protectable) then {_protector = ""};
@@ -43,4 +43,5 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Smuggler3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "smuggler"] call EFUNC(main,cfgCapture);
-[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _seizureSafe, _config] call FUNC(SmugglerMain);
+_config set ["tpRange", _tpRange];
+[_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _config] call FUNC(SmugglerMain);

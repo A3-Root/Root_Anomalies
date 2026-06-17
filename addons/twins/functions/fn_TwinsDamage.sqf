@@ -18,12 +18,14 @@ if (!isServer) exitWith {};
 
 params ["_twins", ["_aiRange", 75, [0]]];
 
-while {alive _twins} do {
+while {alive _twins && {!(_twins getVariable [QGVAR(terminate), false])}} do {
     private _units = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _aiRange];
     private _runPos = [getPosATL _twins, 1000, random 360] call BIS_fnc_relPos;
+    private _dmg = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", 0];
     {
-        if (typeOf _x != "VirtualCurator_F") then {
-            [_x, 0.1, "body", "stab"] call EFUNC(main,applyDamage);
+        if ((typeOf _x != "VirtualCurator_F") && {[_x, _twins] call EFUNC(main,isAffectable)}) then {
+            // Damage is opt-in: 0 (default) = scatter/disorient only.
+            if (_dmg > 0) then {[_x, _dmg, "body", "stab", _twins] call EFUNC(main,applyDamage)};
             _x doMove _runPos;
             _x setSkill ["commanding", 1];
             uiSleep 0.1;

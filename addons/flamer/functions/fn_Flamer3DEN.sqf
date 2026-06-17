@@ -38,4 +38,9 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Flamer3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "flamer"] call EFUNC(main,cfgCapture);
+_config set ["protGear", [_logic getVariable ["ROOT_FLAMER_PROTGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["protPct", _logic getVariable ["ROOT_FLAMER_PROTPCT", 0.5]];
+_config set ["immGear", [_logic getVariable ["ROOT_FLAMER_IMMGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["immMode", _logic getVariable ["ROOT_FLAMER_IMMMODE", "Infinite"]];
+_config set ["immValue", _logic getVariable ["ROOT_FLAMER_IMMVALUE", 0]];
 [_markerName, _territory, _damage, _recharge, round _health, _deathDamage, _aiPanic, _config] call FUNC(FlamerMain);

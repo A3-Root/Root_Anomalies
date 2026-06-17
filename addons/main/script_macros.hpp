@@ -28,8 +28,9 @@
 #ifndef SETTING_DEFAULT_PROTECTOR
     #define SETTING_DEFAULT_PROTECTOR "ROOT_ANOMALIES_DEFAULT_PROTECTOR"
 #endif
-#ifndef SETTING_SEIZURE_SAFE
-    #define SETTING_SEIZURE_SAFE "ROOT_ANOMALIES_SEIZURE_SAFE"
+// Client-side (per-player, NOT global) toggle for flashing/strobing light FX.
+#ifndef SETTING_SENS_LIGHTS
+    #define SETTING_SENS_LIGHTS "ROOT_ANOMALIES_SENS_LIGHTS_OFF"
 #endif
 
 // Default base model for spawned humanoid creatures.
@@ -66,11 +67,12 @@
 #endif
 
 // ============================================================================
-// Seizure-safe helper
+// Sensitivity-lights helper
 // ============================================================================
-// True when flashing-light FX must be suppressed (global override or per-call flag).
-#ifndef SEIZURE_SAFE
-    #define SEIZURE_SAFE (missionNamespace getVariable [SETTING_SEIZURE_SAFE, false])
+// True when flashing/strobing light FX must be suppressed. Purely client-side:
+// each player controls it locally via the SETTING_SENS_LIGHTS CBA setting.
+#ifndef SENS_LIGHTS_OFF
+    #define SENS_LIGHTS_OFF (missionNamespace getVariable [SETTING_SENS_LIGHTS, false])
 #endif
 
 // ============================================================================
@@ -117,6 +119,11 @@
 #endif
 #ifndef ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME
     #define ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME 30
+#endif
+
+// Default activation range (m): players within this distance wake the anomaly's routine.
+#ifndef ROOT_ANOMALIES_DEFAULT_ACTIVATION
+    #define ROOT_ANOMALIES_DEFAULT_ACTIVATION 1000
 #endif
 
 // CBA event raised (global) when an anomaly instance is captured: args [anomaly].

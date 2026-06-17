@@ -25,6 +25,8 @@ private _override = _logic getVariable ["ROOT_WORM_OVERRIDE", false];
 private _aiPanic = _logic getVariable ["ROOT_WORM_AIPANIC", false];
 private _diffuser = _logic getVariable ["ROOT_WORM_DIFFUSER", "SmokeShellGreen"];
 private _damage = _logic getVariable ["ROOT_WORM_DAMAGE", 0.6];
+private _forceTgt = _logic getVariable ["ROOT_WORM_FORCETGT", ""];
+private _forceN = _logic getVariable ["ROOT_WORM_FORCEN", 3];
 
 if (!_override && {_territory < 200}) then {_territory = 200};
 if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
@@ -37,4 +39,7 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Worm3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "worm"] call EFUNC(main,cfgCapture);
+_config set ["damage", _damage];
+_config set ["forceTarget", _forceTgt];
+_config set ["forceN", _forceN];
 [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] call FUNC(WormMain);

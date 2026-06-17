@@ -21,7 +21,6 @@
         _config getOrDefault ["spawnDelay", 10],
         _config getOrDefault ["protector", ""],
         _config getOrDefault ["damage", 0.1],
-        _config getOrDefault ["noseize", false],
         _config
     ] spawn FUNC(SmugglerMain);
     objNull

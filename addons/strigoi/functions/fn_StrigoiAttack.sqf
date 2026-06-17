@@ -9,7 +9,6 @@
  * 0: Strigoi object <OBJECT>
  * 1: Target <OBJECT>
  * 2: Damage fraction <NUMBER>
- * 3: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -17,11 +16,11 @@
  * Public: No
  */
 
-params ["_strigoi", "_tgt", "_dmg", "_seizureSafe"];
+params ["_strigoi", "_tgt", "_dmg"];
 
-[_strigoi, _tgt, _seizureSafe] remoteExec [QFUNC(StrigoiViz), [0, -2] select isDedicated];
+[_strigoi, _tgt] remoteExec [QFUNC(StrigoiViz), [0, -2] select isDedicated];
 if ((isPlayer _tgt) && {typeOf _tgt != "VirtualCurator_F"}) then {
-    [_dmg, _seizureSafe] remoteExec [QFUNC(StrigoiTgt), _tgt];
+    [_dmg] remoteExec [QFUNC(StrigoiTgt), _tgt];
 } else {
     if ((_tgt isKindOf "Man") && {_tgt != _strigoi} && {typeOf _tgt != "VirtualCurator_F"}) then {
         [_tgt, _dmg, ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65], selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);

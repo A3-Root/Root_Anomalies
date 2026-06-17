@@ -55,14 +55,15 @@ _farmer addEventHandler ["Hit", {
     if (_unit != _source) then {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
-        if (_curr > 1) then {_unit setDamage 1};
-        [_unit] remoteExec [QFUNC(FarmerSplash), [0, -2] select isDedicated];
+        if (_curr > 1) then {
+            if !(_unit getVariable [QGVAR(dying), false]) then {
+                _unit setVariable [QGVAR(dying), true, true];
+                [_unit, "Unconscious", 1, true] call EFUNC(main,deathBlast);
+            };
+        } else {
+            [_unit] remoteExec [QFUNC(FarmerSplash), [0, -2] select isDedicated];
+        };
     };
-}];
-_farmer addEventHandler ["Killed", {
-    params ["_unit", "_killer"];
-    _unit hideObjectGlobal true;
-    _killer addRating 2000;
 }];
 
 for "_i" from 0 to 5 do {
@@ -87,27 +88,37 @@ _farmer enableSimulationGlobal false;
 
 LOG_DEBUG_2("FarmerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])}} do {
+while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _farmer getVariable [QGVAR(config), createHashMap];
+    _territory = _cfg getOrDefault ["territory", _territory];
+    _damage = _cfg getOrDefault ["damage", _damage];
+    _recharge = _cfg getOrDefault ["recharge", _recharge];
+    _aiPanic = _cfg getOrDefault ["aiPanic", _aiPanic];
+    private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
     private _ckPl = false;
     _farmer setUnitPos "UP";
-    while {!_ckPl} do {
+    while {!_ckPl && {!(_farmer getVariable [QGVAR(terminate), false])}} do {
         {
-            if (_x distance _markerPos < 1000) exitWith {_ckPl = true};
+            if (_x distance _markerPos < _activation) exitWith {_ckPl = true};
         } forEach allPlayers;
         uiSleep 5;
     };
 
     private _inRange = [_farmer, _territory] call FUNC(FarmerFindTarget);
     private _tgt = selectRandom (_inRange select {
-        (typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"}
+        (typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"} && {[_x, _farmer] call EFUNC(main,isAffectable)}
     });
     _farmer enableSimulationGlobal true;
     _farmer setUnitPos "UP";
     [_farmer, _markerPos] call FUNC(FarmerShow);
 
     while {
-        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory}}
+        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [QGVAR(captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QGVAR(terminate), false])}}
     } do {
+        _cfg = _farmer getVariable [QGVAR(config), createHashMap];
+        _territory = _cfg getOrDefault ["territory", _territory];
+        _damage = _cfg getOrDefault ["damage", _damage];
+        _recharge = _cfg getOrDefault ["recharge", _recharge];
         _farmer setDir (_farmer getRelDir _tgt);
         if ((_farmer distance _tgt) > 15) then {
             [_farmer] call FUNC(FarmerHide);
@@ -134,7 +145,7 @@ while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])}} do {
         if ((!alive _tgt) || {_tgt distance _markerPos > _territory}) then {
             _inRange = [_farmer, _territory] call FUNC(FarmerFindTarget);
             if (_inRange isNotEqualTo []) then {
-                _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"}});
+                _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"} && {[_x, _farmer] call EFUNC(main,isAffectable)}});
             } else {
                 _tgt = nil;
             };
@@ -148,7 +159,11 @@ while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])}} do {
     _farmer setPos _markerPos;
 };
 
-[_farmer, ["eko", 100]] remoteExec ["say3D"];
-deleteVehicle _farmer;
+// Death by damage runs its own cinematic (deathBlast deletes the entity); only clean up
+// here for the capture / terminate exits.
+if !(_farmer getVariable [QGVAR(dying), false]) then {
+    [_farmer, ["eko", 100]] remoteExec ["say3D"];
+    deleteVehicle _farmer;
+};
 
 _farmer

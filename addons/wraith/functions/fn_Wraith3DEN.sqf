@@ -26,7 +26,6 @@ private _territory = _logic getVariable ["ROOT_WRAITH_RADIUS", 150];
 private _interval = _logic getVariable ["ROOT_WRAITH_INTERVAL", 8];
 private _damage = _logic getVariable ["ROOT_WRAITH_DAMAGE", 0.4];
 private _fearRadius = _logic getVariable ["ROOT_WRAITH_FEAR", 25];
-private _seizureSafe = _logic getVariable ["ROOT_WRAITH_SEIZURESAFE", false];
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_WRAITH_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_WRAITH_IDX", _idx + 1];
@@ -36,4 +35,4 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Wraith3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "wraith"] call EFUNC(main,cfgCapture);
-[_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _seizureSafe, _config] call FUNC(WraithMain);
+[_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _config] call FUNC(WraithMain);

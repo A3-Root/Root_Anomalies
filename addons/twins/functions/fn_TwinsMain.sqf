@@ -13,7 +13,6 @@
  * 4: Affect AI <BOOL>
  * 5: EMP on death <BOOL>
  * 6: Heart classname <STRING>
- * 7: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -31,7 +30,6 @@ params [
     ["_affectAI", true, [false]],
     ["_emp", true, [false]],
     ["_heartClass", "B_UAV_06_F", [""]],
-    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
@@ -50,7 +48,7 @@ if (_sparks) then {
 if (_affectAI) then {[_twins, _dmgRange] remoteExec [QFUNC(TwinsDamage), 2]};
 
 _twins setVariable [QGVAR(visible), 0, true];
-[_twins, _dmgRange, _seizureSafe] remoteExec [QFUNC(TwinsViz), [0, -2] select isDedicated, true];
+[_twins, _dmgRange] remoteExec [QFUNC(TwinsViz), [0, -2] select isDedicated, true];
 
 _twins setVariable [QGVAR(extraDelete), [_heart], true];
 [_twins, _config] call EFUNC(main,finalizeInstance);
@@ -58,12 +56,13 @@ _twins setVariable [QGVAR(extraDelete), [_heart], true];
 LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 
 // Movement / observation-freeze loop.
-[_twins, _trackDist, _dmgRange, _heart, _emp, _seizureSafe] spawn {
-    params ["_twins", "_trackDist", "_dmgRange", "_heart", "_emp", "_seizureSafe"];
+[_twins, _trackDist, _dmgRange, _heart, _emp] spawn {
+    params ["_twins", "_trackDist", "_dmgRange", "_heart", "_emp"];
     private _allowMove = 15;
     private _incr = 0;
 
-    while {alive _heart} do {
+    while {alive _heart && {!(_twins getVariable [QGVAR(terminate), false])}} do {
+        _trackDist = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["trackDist", _trackDist];
         private _closest = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _trackDist];
         if ((_twins getVariable [QGVAR(visible), 0]) < 1) then {
             if ((_closest isNotEqualTo []) && {_allowMove > 10}) then {
@@ -84,8 +83,14 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
         uiSleep 2;
     };
 
+    // Terminated: remove cleanly, no death EMP/explosion.
+    if (_twins getVariable [QGVAR(terminate), false]) exitWith {};
+
+    // Cinematic GBU-strength blast on death (heart destroyed).
+    [getPosATL _twins, "", 1, false] call EFUNC(main,deathBlast);
+
     if (_emp) then {
-        [_twins, _seizureSafe, _trackDist] remoteExec [QFUNC(TwinsEmp), [0, -2] select isDedicated, true];
+        [_twins, _trackDist] remoteExec [QFUNC(TwinsEmp), [0, -2] select isDedicated, true];
         uiSleep 2;
     };
     deleteVehicle _twins;
@@ -94,7 +99,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 
 // Spark visuals.
 if (_sparks) then {
-    while {alive _twins} do {
+    while {alive _twins && {!(_twins getVariable [QGVAR(terminate), false])}} do {
         switch (selectRandom ["st", "dr", "ct"]) do {
             case "st": {_sparkBall attachTo [_twins, [-12, 0, 12.35]]};
             case "dr": {_sparkBall attachTo [_twins, [11.5, 0, 12.35]]};

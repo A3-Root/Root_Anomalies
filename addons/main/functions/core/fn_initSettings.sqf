@@ -86,18 +86,18 @@
     false
 ] call CBA_fnc_addSetting;
 
-// Global seizure-safe override - disables all flashing-light FX when on.
+// Client-side sensitivity-lights toggle - each player disables flashing-light FX
+// locally without affecting Zeus, gameplay or other players. NOT global (isGlobal 0).
 [
-    SETTING_SEIZURE_SAFE,
+    SETTING_SENS_LIGHTS,
     "CHECKBOX",
-    ["Seizure-Safe Mode (Global)", "Force-disable all flashing/strobing light effects from every anomaly, overriding per-module settings. Recommended for players with photosensitivity."],
+    ["Disable Sensitivity Lights", "Locally disable all flashing/strobing light effects from every anomaly. Per-player only - does not affect other players, Zeus or gameplay. Recommended for players with photosensitivity."],
     [SETTING_CATEGORY, "Accessibility"],
     false,
-    1,
+    0,
     {
-        missionNamespace setVariable [SETTING_SEIZURE_SAFE, _this, true];
-    },
-    false
+        missionNamespace setVariable [SETTING_SENS_LIGHTS, _this];
+    }
 ] call CBA_fnc_addSetting;
 
 LOG_INFO("CBA settings registered");

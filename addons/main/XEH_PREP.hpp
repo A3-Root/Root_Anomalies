@@ -8,7 +8,10 @@
 PREP(initSettings);
 PREP(parseClassList);
 PREP(isAffectable);
+PREP(isWhitelisted);
 PREP(isDamageable);
+PREP(deathBlast);
+PREP(deathBlastFx);
 PREP(applyDamage);
 PREP(isObserving);
 PREP(mergeConfig);
@@ -52,5 +55,17 @@ PREP_API(setKillswitch);
 PREP_API(setSedationClasses);
 PREP_API(capture);
 PREP_API(uncapture);
+PREP_API(terminate);
 PREP_API(addBait);
 PREP_API(addTrap);
+
+// ---- modules
+#undef PREP
+#define PREP(fncName) [QPATHTOF(functions\modules\DOUBLES(fn,fncName).sqf),QFUNC(fncName)] call CBA_fnc_compileFunction
+
+PREP(doTerminate);
+PREP(doConfigure);
+PREP(Terminate3DEN);
+PREP(TerminateZeus);
+PREP(Configure3DEN);
+PREP(ConfigureZeus);

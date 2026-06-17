@@ -18,7 +18,7 @@ enableCamShake true;
 addCamShake [3 + random 7, 3, 13 + random 33];
 playSound "puls";
 
-if (SEIZURE_SAFE) exitWith {};
+if (SENS_LIGHTS_OFF) exitWith {};
 
 cutText ["", "WHITE OUT", 1];
 titleCut ["", "WHITE IN", 1];

@@ -7,7 +7,6 @@
  * Arguments:
  * 0: Wraith object <OBJECT>
  * 1: Fear radius <NUMBER>
- * 2: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -17,9 +16,9 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_obj", ["_fearRadius", 25, [0]], ["_seizureSafe", false, [false]]];
+params ["_obj", ["_fearRadius", 25, [0]]];
 
-_seizureSafe = _seizureSafe || SEIZURE_SAFE;
+private _seizureSafe = SENS_LIGHTS_OFF;
 
 // Ambient murmur.
 [_obj] spawn {

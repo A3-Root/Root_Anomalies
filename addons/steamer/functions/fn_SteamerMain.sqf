@@ -34,9 +34,10 @@ private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightAr
 private _weights = [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 
 private _markerPos = getMarkerPos _marker;
+private _activation = (_config getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION]);
 private _ckPl = false;
 while {!_ckPl} do {
-    {if (_x distance _markerPos < 1000) exitWith {_ckPl = true}} forEach allPlayers;
+    {if (_x distance _markerPos < _activation) exitWith {_ckPl = true}} forEach allPlayers;
     uiSleep 5;
 };
 
@@ -50,12 +51,19 @@ _steamer enableSimulationGlobal false;
 LOG_DEBUG_2("SteamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])}} do {
-    while {_inRange isEqualTo []} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
-    private _tgt = selectRandom (_inRange select {typeOf _x != "VirtualCurator_F"});
+while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])} && {!(_steamer getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _steamer getVariable [QGVAR(config), createHashMap];
+    _territory = _cfg getOrDefault ["territory", _territory];
+    _damage = _cfg getOrDefault ["damage", _damage];
+    _recharge = _cfg getOrDefault ["recharge", _recharge];
+    while {_inRange isEqualTo [] && {!(_steamer getVariable [QGVAR(terminate), false])}} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
+    private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {[_x, _steamer] call EFUNC(main,isAffectable)}});
     uiSleep 0.5;
 
-    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QGVAR(captured), false])}} do {
+    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QGVAR(captured), false])} && {!(_steamer getVariable [QGVAR(terminate), false])}} do {
+        _cfg = _steamer getVariable [QGVAR(config), createHashMap];
+        _damage = _cfg getOrDefault ["damage", _damage];
+        _recharge = _cfg getOrDefault ["recharge", _recharge];
         if (_travelPath) then {[_steamer, _tgt] call FUNC(SteamerTravelPath)};
         private _burstPos = ASLToAGL getPosATL _tgt;
         private _blowUnits = (_burstPos nearEntities [["CAManBase", "LandVehicle", "Air"], 10]) - [_steamer];
@@ -63,13 +71,15 @@ while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])}} do 
 
         {
             private _u = _x;
-            if (_u isKindOf "CAManBase") then {
-                [_u, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+            if ([_u, _steamer] call EFUNC(main,isAffectable)) then {
+                if (_u isKindOf "CAManBase") then {
+                    [_u, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade"], _steamer] call EFUNC(main,applyDamage);
+                };
+                if ((_u isKindOf "LandVehicle") || {_u isKindOf "Air"}) then {
+                    [_u, _damage] call FUNC(SteamerKillVehicle);
+                };
+                if (isPlayer _u) then {[_burstPos, _u] remoteExec [QFUNC(SteamerRagdoll), _u]} else {[_burstPos, _u] spawn FUNC(SteamerRagdoll)};
             };
-            if ((_u isKindOf "LandVehicle") || {_u isKindOf "Air"}) then {
-                [_u, _damage] call FUNC(SteamerKillVehicle);
-            };
-            if (isPlayer _u) then {[_burstPos, _u] remoteExec [QFUNC(SteamerRagdoll), _u]} else {[_burstPos, _u] spawn FUNC(SteamerRagdoll)};
         } forEach _blowUnits;
 
         {[_x] call FUNC(SteamerAvoid)} forEach _inRange;
@@ -80,6 +90,9 @@ while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])}} do 
     _tgt = nil;
     _inRange = [];
 };
+
+// Terminate API removes the Steamer cleanly, without the death geyser/area damage.
+if (_steamer getVariable [QGVAR(terminate), false]) exitWith {};
 
 waitUntil {!alive _steamer};
 [getPosATL _steamer] remoteExec [QFUNC(SteamerEnd), [0, -2] select isDedicated];

@@ -6,8 +6,7 @@
  *
  * Arguments:
  * 0: Twins object <OBJECT>
- * 1: Seizure-safe <BOOL>
- * 2: Area of effect radius <NUMBER>
+ * 1: Area of effect radius <NUMBER>
  *
  * Return Value:
  * None
@@ -15,7 +14,7 @@
  * Public: No
  */
 
-params ["_twins", ["_seizureSafe", false, [false]], ["_aoe", 100, [0]]];
+params ["_twins", ["_aoe", 100, [0]]];
 
 if (!hasInterface) exitWith {};
 
@@ -46,7 +45,7 @@ _light setLightDayLight true;
 _light setLightAttenuation [10, 10, 50, 0, 50, 2000];
 
 uiSleep 0.1;
-if !(_seizureSafe || SEIZURE_SAFE) then {
+if !(SENS_LIGHTS_OFF) then {
     private _hndl = ppEffectCreate ["ColorInversion", 1501];
     _hndl ppEffectEnable true;
     _hndl ppEffectAdjust [0.75, 0.75, 0.75];

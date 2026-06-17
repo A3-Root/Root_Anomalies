@@ -8,7 +8,6 @@
  * Arguments:
  * 0: Twins object <OBJECT>
  * 1: Damage range <NUMBER>
- * 2: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -20,16 +19,16 @@ if (!hasInterface) exitWith {};
 
 waitUntil {time > 0};
 
-params ["_twins", ["_dmgRange", 75, [0]], ["_seizureSafe", false, [false]]];
+params ["_twins", ["_dmgRange", 75, [0]]];
 
 // Proximity disorientation + damage.
-[_twins, _dmgRange, _seizureSafe] spawn {
-    params ["_twins", "_dmgRange", "_seizureSafe"];
+[_twins, _dmgRange] spawn {
+    params ["_twins", "_dmgRange"];
     private _canDamage = true;
     while {alive _twins} do {
         waitUntil {uiSleep 0.2; player distance _twins < _dmgRange};
         if (typeOf player != "VirtualCurator_F") then {
-            if !(_seizureSafe || SEIZURE_SAFE) then {
+            if !(SENS_LIGHTS_OFF) then {
                 [_twins, _dmgRange] spawn {
                     params ["_twins", "_dmgRange"];
                     private _aberration = ppEffectCreate ["ChromAberration", 250];
@@ -53,7 +52,11 @@ params ["_twins", ["_dmgRange", 75, [0]], ["_seizureSafe", false, [false]]];
             if (_canDamage) then {
                 _canDamage = false;
                 playSound "sound_twin";
-                [player, random 0.33, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+                // Damage is opt-in: 0 (default) = disorientation effects only.
+                private _dmg = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", 0];
+                if (_dmg > 0 && {!([player, "twins"] call EFUNC(main,isWhitelisted))}) then {
+                    [player, _dmg, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+                };
                 uiSleep 5;
                 _canDamage = true;
             };

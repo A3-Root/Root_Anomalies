@@ -85,6 +85,41 @@ class CfgVehicles {
 				typeName = "BOOL";
 				defaultValue = "false";
 			};
+			class ROOT_FLAMER_PROTGEAR: Edit {
+				property = "ROOT_FLAMER_PROTGEAR";
+				displayName = "Protective Gear (CSV)";
+				tooltip = "Comma-separated gear classnames that reduce Flamer damage by the protection percentage. Empty = none.";
+				typeName = "STRING";
+				defaultValue = """""";
+			};
+			class ROOT_FLAMER_PROTPCT: Edit {
+				property = "ROOT_FLAMER_PROTPCT";
+				displayName = "Protection (0-1)";
+				tooltip = "Fraction of damage removed while wearing protective gear (0.5 = halved).";
+				typeName = "NUMBER";
+				defaultValue = "0.5";
+			};
+			class ROOT_FLAMER_IMMGEAR: Edit {
+				property = "ROOT_FLAMER_IMMGEAR";
+				displayName = "Immunity Gear (CSV)";
+				tooltip = "Comma-separated gear classnames that grant full immunity until their durability is spent. Empty = none.";
+				typeName = "STRING";
+				defaultValue = """""";
+			};
+			class ROOT_FLAMER_IMMMODE: Edit {
+				property = "ROOT_FLAMER_IMMMODE";
+				displayName = "Immunity Mode";
+				tooltip = "How immunity gear wears out: Infinite (never), Time (seconds), or Damage (total damage absorbed).";
+				typeName = "STRING";
+				defaultValue = """Infinite""";
+			};
+			class ROOT_FLAMER_IMMVALUE: Edit {
+				property = "ROOT_FLAMER_IMMVALUE";
+				displayName = "Immunity Value";
+				tooltip = "Seconds (Time) or total damage (Damage) the immunity gear lasts. 0 or Infinite mode = never fails.";
+				typeName = "NUMBER";
+				defaultValue = "0";
+			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

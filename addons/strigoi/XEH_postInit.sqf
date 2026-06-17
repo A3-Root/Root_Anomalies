@@ -19,7 +19,6 @@
         _config getOrDefault ["nightOnly", false],
         _config getOrDefault ["damage", 0.6],
         _config getOrDefault ["health", 400],
-        _config getOrDefault ["noseize", false],
         _config getOrDefault ["aiPanic", false],
         _config
     ] spawn FUNC(StrigoiMain);

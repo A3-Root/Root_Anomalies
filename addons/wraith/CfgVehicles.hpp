@@ -78,13 +78,6 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "25";
 			};
-			class ROOT_WRAITH_SEIZURESAFE: Checkbox {
-				property = "ROOT_WRAITH_SEIZURESAFE";
-				displayName = "Disable Sensitive Lights";
-				tooltip = "If checked, the Wraith's flickering light/dread visuals are disabled.";
-				typeName = "BOOL";
-				defaultValue = "false";
-			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

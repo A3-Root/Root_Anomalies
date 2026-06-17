@@ -35,7 +35,7 @@ _light setLightFlareMaxDistance 1500;
 _light setLightAttenuation [0, 0, 50, 1000, 1, 50];
 _light setLightDayLight true;
 
-private _seizureSafe = SEIZURE_SAFE;
+private _seizureSafe = SENS_LIGHTS_OFF;
 while {(player distance _obj < 1000) && {player getVariable [QGVAR(detected), false]}} do {
     uiSleep (0.5 + random 1);
     if (_seizureSafe) then {

@@ -35,17 +35,20 @@ deleteVehicle _logic;
         ["SLIDER:RADIUS", ["Worm Territory", "Radius in meters of the Worm's territory."], [50, 1000, 200, 0, _pos, [7, 120, 32, 1]]],
         ["TOOLBOX:YESNO", ["AI Panic", "If true, AI flee from the Worm during attacks."], false],
         ["EDIT", ["Worm Diffuser", "Classname of the throwable used to kill the Worm."], ["SmokeShellGreen"]],
-        ["SLIDER:PERCENT", ["Worm Damage", "Fraction of damage the Worm does to its target."], [0.01, 1, 0.6, 2]]
+        ["SLIDER:PERCENT", ["Worm Damage", "Fraction of damage the Worm does to its target."], [0.01, 1, 0.6, 2]],
+        ["EDIT", ["Forceful Target", "Classname (e.g. an IR grenade) the Worm will fixate on when thrown, for its next attacks. Empty = none."], [""]],
+        ["SLIDER", ["Forceful Target Attacks", "How many attacks the Worm spends on a thrown forceful target."], [1, 10, 3, 0]],
+        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]]
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_override", "_territory", "_aiPanic", "_diffuser", "_damage"];
+        _results params ["_override", "_territory", "_aiPanic", "_diffuser", "_damage", "_forceTgt", "_forceN", "_sides"];
 
         if (!_override && {_territory < 200}) then {_territory = 200};
         if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["forceTarget", _forceTgt], ["forceN", _forceN], ["hostileSides", [_sides] call EFUNC(main,parseSides)]];
         [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] remoteExec [QFUNC(WormMain), 2];
     },
     {

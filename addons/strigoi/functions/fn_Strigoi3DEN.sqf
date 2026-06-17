@@ -26,7 +26,6 @@ private _override = _logic getVariable ["ROOT_STRIGOI_OVERRIDE", false];
 private _damage = _logic getVariable ["ROOT_STRIGOI_DAMAGE", 0.6];
 private _aiPanic = _logic getVariable ["ROOT_STRIGOI_AIPANIC", false];
 private _nightOnly = _logic getVariable ["ROOT_STRIGOI_NIGHTONLY", false];
-private _seizureSafe = _logic getVariable ["ROOT_STRIGOI_SEIZURESAFE", false];
 
 if (!_override && {_territory < 75}) then {_territory = 75};
 
@@ -38,4 +37,4 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Strigoi3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "strigoi"] call EFUNC(main,cfgCapture);
-[_markerName, _territory, _nightOnly, _damage, round _health, _seizureSafe, _aiPanic, _config] call FUNC(StrigoiMain);
+[_markerName, _territory, _nightOnly, _damage, round _health, _aiPanic, _config] call FUNC(StrigoiMain);

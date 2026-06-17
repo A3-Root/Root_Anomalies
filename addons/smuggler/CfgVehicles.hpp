@@ -99,12 +99,12 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "0.1";
 			};
-			class ROOT_SMUGGLER_SEIZURESAFE: Checkbox {
-				property = "ROOT_SMUGGLER_SEIZURESAFE";
-				displayName = "Disable Sensitive Lights";
-				tooltip = "If checked, the bright screen effects during teleport are disabled.";
-				typeName = "BOOL";
-				defaultValue = "false";
+			class ROOT_SMUGGLER_TPRANGE: Edit {
+				property = "ROOT_SMUGGLER_TPRANGE";
+				displayName = "Teleport Range (m)";
+				tooltip = "Maximum distance a teleported unit is sent from the Smuggler. Keeps victims within an intended area.";
+				typeName = "NUMBER";
+				defaultValue = "300";
 			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};

@@ -63,14 +63,18 @@ _agent setVariable [QGVAR(extraDelete), [_hiveObj], true];
 
 LOG_DEBUG_2("SwarmerMain spawned hive at %1 (territory %2)",position _hiveObj,_radius);
 
-while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])}} do {
-    while {!(_agent getVariable [QGVAR(isHive), false])} do {
-        {if (_x distance getPos _agent < 1000) exitWith {_agent setVariable [QGVAR(isHive), true, true]}} forEach allPlayers;
+while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])} && {!(_agent getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _agent getVariable [QGVAR(config), createHashMap];
+    _radius = _cfg getOrDefault ["territory", _radius];
+    _damage = _cfg getOrDefault ["damage", _damage];
+    private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
+    while {!(_agent getVariable [QGVAR(isHive), false]) && {!(_agent getVariable [QGVAR(terminate), false])}} do {
+        {if (_x distance getPos _agent < _activation) exitWith {_agent setVariable [QGVAR(isHive), true, true]}} forEach allPlayers;
         uiSleep 10;
     };
     _agent setVariable [QGVAR(tgt), objNull, true];
 
-    private _inRange = ([_agent, _radius, _hiveObj] call FUNC(SwarmerFindTarget)) select {typeOf _x != "VirtualCurator_F"};
+    private _inRange = ([_agent, _radius, _hiveObj] call FUNC(SwarmerFindTarget)) select {(typeOf _x != "VirtualCurator_F") && {[_x, _agent] call EFUNC(main,isAffectable)}};
     if (_inRange isNotEqualTo []) then {
         private _tgt = selectRandom _inRange;
         _agent setVariable [QGVAR(tgt), _tgt, true];
@@ -123,5 +127,8 @@ while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])}} do {
     };
 };
 
-uiSleep 10;
-deleteVehicle _agent;
+// Terminate API deletes the agent (+ hive) itself.
+if !(_agent getVariable [QGVAR(terminate), false]) then {
+    uiSleep 10;
+    deleteVehicle _agent;
+};

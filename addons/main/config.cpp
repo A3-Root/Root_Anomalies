@@ -3,7 +3,12 @@
 class CfgPatches {
 	class ROOT_Anomalies {
 		name = "Root's Anomalies";
-		units[] = {};
+		units[] = {
+			"ROOT_Terminate_ModuleZeus",
+			"ROOT_Terminate_Module3DEN",
+			"ROOT_Configure_ModuleZeus",
+			"ROOT_Configure_Module3DEN"
+		};
 		weapons[] = {};
 		requiredAddons[] = {
 			"A3_Modules_F_Curator",
@@ -37,3 +42,4 @@ class Extended_PostInit_EventHandlers {
 #include "CfgSounds.hpp"
 #include "CfgAmmo.hpp"
 #include "CfgMagazines.hpp"
+#include "CfgVehicles.hpp"

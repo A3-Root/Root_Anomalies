@@ -6,7 +6,6 @@
  *
  * Arguments:
  * 0: Damage fraction <NUMBER>
- * 1: Seizure-safe (per-module) <BOOL>
  *
  * Return Value:
  * None
@@ -16,7 +15,7 @@
 
 if (!hasInterface) exitWith {};
 
-params [["_damage", 0.6, [0]], ["_seizureSafe", false, [false]]];
+params [["_damage", 0.6, [0]]];
 
 private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 if (typeOf player != "VirtualCurator_F") then {
@@ -25,7 +24,7 @@ if (typeOf player != "VirtualCurator_F") then {
 
 playSound "puls";
 
-if (_seizureSafe || SEIZURE_SAFE) exitWith {};
+if (SENS_LIGHTS_OFF) exitWith {};
 
 ["DynamicBlur", 400, [10]] spawn {
     params ["_name", "_priority", "_effect"];
@@ -60,5 +59,7 @@ if (_seizureSafe || SEIZURE_SAFE) exitWith {};
     ppEffectDestroy _handle;
 };
 
+// Tinnitus ring: suppressed entirely when sensitivity lights are off (handled by the
+// exit above) and only an occasional chance otherwise, to cut its frequency.
 uiSleep 4;
-playSound "tiuit";
+if (random 1 < 0.3) then {playSound "tiuit"};

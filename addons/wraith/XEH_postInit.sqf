@@ -21,7 +21,6 @@
         _config getOrDefault ["interval", 8],
         _config getOrDefault ["damage", 0.4],
         _config getOrDefault ["fearRadius", 25],
-        _config getOrDefault ["noseize", false],
         _config
     ] spawn FUNC(WraithMain);
     objNull

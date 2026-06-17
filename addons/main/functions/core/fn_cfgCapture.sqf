@@ -21,6 +21,8 @@ params [["_logic", objNull, [objNull]], ["_type", "", [""]]];
 private _cfg = createHashMapFromArray [
     ["type", _type],
     ["manageDamage", false],
+    ["hostileSides", [_logic getVariable ["ROOT_SIDES", ""]] call FUNC(parseSides)],
+    ["activationRange", _logic getVariable ["ROOT_ACTIVATION", ROOT_ANOMALIES_DEFAULT_ACTIVATION]],
     ["captureEnabled", _logic getVariable ["ROOT_CAPTURE", true]],
     ["captureTime", _logic getVariable ["ROOT_CAPTURETIME", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME]],
     ["captureRadius", 15]

@@ -12,7 +12,6 @@
  * 4: Attack interval <NUMBER>
  * 5: Damage fraction <NUMBER>
  * 6: Fear radius <NUMBER>
- * 7: Seizure-safe <BOOL>
  *
  * Return Value:
  * Wraith object <OBJECT>
@@ -30,7 +29,6 @@ params [
     ["_interval", 8, [0]],
     ["_damage", 0.4, [0]],
     ["_fearRadius", 25, [0]],
-    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
@@ -59,7 +57,7 @@ _obj addEventHandler ["HandleDamage", {
     0
 }];
 
-[_obj, _fearRadius, _seizureSafe] remoteExec [QFUNC(WraithSfx), 0, true];
+[_obj, _fearRadius] remoteExec [QFUNC(WraithSfx), 0, true];
 
 // Hover.
 [_obj] spawn {
@@ -75,29 +73,42 @@ _obj addEventHandler ["HandleDamage", {
 
 LOG_DEBUG_2("WraithMain spawned at %1 (territory %2)",_pos,_territory);
 
-while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])}} do {
-    private _candidates = ((position _obj) nearEntities ["CAManBase", _territory]) select {
-        (alive _x) && {typeOf _x != "VirtualCurator_F"} && {_x != _obj}
-    };
-    if (_candidates isNotEqualTo []) then {
-        _candidates = [_candidates, [], {_obj distance _x}, "ASCEND"] call BIS_fnc_sortBy;
-        private _tgt = _candidates select 0;
-        private _dest = [getPosATL _tgt, 3 + random 4, random 360] call BIS_fnc_relPos;
-        _obj setPosATL [_dest select 0, _dest select 1, 1.2];
-        _obj setDir (_obj getRelDir _tgt);
-        [_obj, ["furnal", 400]] remoteExec ["say3D"];
+while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])} && {!(_obj getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _obj getVariable [QGVAR(config), createHashMap];
+    _territory = _cfg getOrDefault ["territory", _territory];
+    _damage = _cfg getOrDefault ["damage", _damage];
+    _interval = _cfg getOrDefault ["interval", _interval];
+    _fearRadius = _cfg getOrDefault ["fearRadius", _fearRadius];
+    private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
 
-        {
-            if ((typeOf _x != "VirtualCurator_F") && {alive _x} && {_x != _obj}) then {
-                [_x, _damage, "body", "burn"] call EFUNC(main,applyDamage);
-            };
-        } forEach ((position _obj) nearEntities ["CAManBase", _fearRadius]);
+    if (allPlayers findIf {_x distance _obj < _activation} != -1) then {
+        private _candidates = ((position _obj) nearEntities ["CAManBase", _territory]) select {
+            (alive _x) && {typeOf _x != "VirtualCurator_F"} && {_x != _obj} && {[_x, _obj] call EFUNC(main,isAffectable)}
+        };
+        LOG_DEBUG_2("WraithMain tick: %1 candidate(s) within %2m",count _candidates,_territory);
+        if (_candidates isNotEqualTo []) then {
+            _candidates = [_candidates, [], {_obj distance _x}, "ASCEND"] call BIS_fnc_sortBy;
+            private _tgt = _candidates select 0;
+            private _dest = [getPosATL _tgt, 3 + random 4, random 360] call BIS_fnc_relPos;
+            _obj setPosATL [_dest select 0, _dest select 1, 1.2];
+            _obj setDir (_obj getRelDir _tgt);
+            [_obj, ["furnal", 400]] remoteExec ["say3D"];
+
+            {
+                if ((typeOf _x != "VirtualCurator_F") && {alive _x} && {_x != _obj} && {[_x, _obj] call EFUNC(main,isAffectable)}) then {
+                    [_x, _damage, "body", "burn", _obj] call EFUNC(main,applyDamage);
+                };
+            } forEach ((position _obj) nearEntities ["CAManBase", _fearRadius]);
+        };
     };
     uiSleep _interval;
 };
 
-[_obj, ["explozie_2", 600]] remoteExec ["say3D"];
-uiSleep 3;
-deleteVehicle _obj;
+// Terminate API deletes the Wraith itself; only run the death sound/cleanup otherwise.
+if !(_obj getVariable [QGVAR(terminate), false]) then {
+    [_obj, ["explozie_2", 600]] remoteExec ["say3D"];
+    uiSleep 3;
+    deleteVehicle _obj;
+};
 
 _obj

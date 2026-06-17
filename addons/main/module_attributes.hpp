@@ -31,6 +31,13 @@
         typeName = "STRING"; \
         defaultValue = """"""; \
     }; \
+    class ROOT_ACTIVATION: Edit { \
+        property = "ROOT_ACTIVATION"; \
+        displayName = "Activation Range (m)"; \
+        tooltip = "Players within this distance wake the anomaly's routine. Default 1000."; \
+        typeName = "NUMBER"; \
+        defaultValue = "1000"; \
+    }; \
     class ROOT_CAPTURE: Checkbox { \
         property = "ROOT_CAPTURE"; \
         displayName = "Capturable"; \
@@ -63,6 +70,20 @@
 // Capture-only subset for the legacy creatures (they keep their own health/damage model
 // and targeting, so only the sedation/capture options are exposed).
 #define ROOT_CAPTURE_MODULE_ATTRIBUTES \
+    class ROOT_SIDES: Edit { \
+        property = "ROOT_SIDES"; \
+        displayName = "Hostile Sides (CSV)"; \
+        tooltip = "Comma-separated sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."; \
+        typeName = "STRING"; \
+        defaultValue = """"""; \
+    }; \
+    class ROOT_ACTIVATION: Edit { \
+        property = "ROOT_ACTIVATION"; \
+        displayName = "Activation Range (m)"; \
+        tooltip = "Players within this distance wake the anomaly's routine. Default 1000."; \
+        typeName = "NUMBER"; \
+        defaultValue = "1000"; \
+    }; \
     class ROOT_CAPTURE: Checkbox { \
         property = "ROOT_CAPTURE"; \
         displayName = "Capturable"; \

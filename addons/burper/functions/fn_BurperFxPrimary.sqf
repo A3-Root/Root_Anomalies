@@ -40,7 +40,7 @@ _light setLightFlareSize 1;
 _light setLightFlareMaxDistance 1500;
 _light setLightAttenuation [0, 0, 50, 1000, 1, 50];
 
-private _seizureSafe = SEIZURE_SAFE;
+private _seizureSafe = SENS_LIGHTS_OFF;
 
 while {((player distance _workObj) < 1500) && {(_workObj getVariable [QGVAR(cycSimple), 1]) != (_workObj getVariable [QGVAR(cycCompli), 1])}} do {
     private _r = random 1;

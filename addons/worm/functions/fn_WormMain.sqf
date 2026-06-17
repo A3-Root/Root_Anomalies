@@ -55,9 +55,9 @@ LOG_DEBUG_2("WormMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 // Emergence: wait for a target, then erupt.
 private _hidden = true;
-while {_hidden} do {
+while {_hidden && {!(_head getVariable [QGVAR(terminate), false])}} do {
     uiSleep 2;
-    private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]);
+    private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]) select {[_x, _head] call EFUNC(main,isAffectable)};
     if (_near isNotEqualTo []) then {
         _hidden = false;
         private _tgt = selectRandom _near;
@@ -71,19 +71,47 @@ while {_hidden} do {
     };
 };
 
+if (isNull _head || {_head getVariable [QGVAR(terminate), false]}) exitWith {};
+
 uiSleep 1;
 resetCamShake;
-waitUntil {(getPosATL _head select 2) < 1};
+waitUntil {isNull _head || {(getPosATL _head select 2) < 1}};
 [_head, ["bump", 500]] remoteExec ["say3D"];
 addCamShake [1, 4, 23];
 [_head, _tail] remoteExec [QFUNC(WormAttack), [0, -2] select isDedicated];
 [_head] remoteExec [QFUNC(WormBump), [0, -2] select isDedicated];
 uiSleep 1;
 
-while {!isNull _head} do {
-    private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]) select {typeOf _x != "VirtualCurator_F"};
-    if (_near isNotEqualTo []) then {
-        private _tgt = selectRandom _near;
+while {!isNull _head && {!(_head getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _head getVariable [QGVAR(config), createHashMap];
+    _damage = _cfg getOrDefault ["damage", _damage];
+    _territory = _cfg getOrDefault ["territory", _territory];
+    private _forceCls = _cfg getOrDefault ["forceTarget", ""];
+    private _forceN = _cfg getOrDefault ["forceN", 3];
+    private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]) select {(typeOf _x != "VirtualCurator_F") && {[_x, _head] call EFUNC(main,isAffectable)}};
+
+    // Forceful target: a thrown object of the configured class hijacks the worm's aim for
+    // the next few attacks, letting players bait it away from themselves.
+    private _forceObj = _head getVariable [QGVAR(forceObj), objNull];
+    private _forceCount = _head getVariable [QGVAR(forceCount), 0];
+    if (_forceCls isNotEqualTo "" && {isNull _forceObj || {_forceCount <= 0}}) then {
+        private _found = nearestObjects [_markerPos, [_forceCls], _territory];
+        if (_found isNotEqualTo []) then {
+            _forceObj = _found select 0;
+            _forceCount = _forceN max 1;
+            _head setVariable [QGVAR(forceObj), _forceObj, true];
+            _head setVariable [QGVAR(forceCount), _forceCount, true];
+        };
+    };
+    if (!isNull _forceObj && {_forceCount <= 0}) then {
+        _forceObj = objNull;
+        _head setVariable [QGVAR(forceObj), objNull, true];
+    };
+
+    if (_near isNotEqualTo [] || {!isNull _forceObj}) then {
+        private _tgt = objNull;
+        if (isNull _forceObj) then {_tgt = selectRandom _near} else {_tgt = _forceObj};
+        private _isForce = (!isNull _forceObj) && {_tgt isEqualTo _forceObj};
 
         if ((_tgt distance _head < 15) && {!(surfaceIsWater getPos _tgt)}) then {
             if (_aiPanic) then {[_head, _near] call FUNC(WormAvoid)};
@@ -100,7 +128,7 @@ while {!isNull _head} do {
                         [_x, [_px * 5, _py * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                         [_x, _damage] call FUNC(WormVehicleDamage);
                     } else {
-                        if ((typeOf _x != "VirtualCurator_F") && {_x isKindOf "CAManBase"}) then {
+                        if ((typeOf _x != "VirtualCurator_F") && {_x isKindOf "CAManBase"} && {[_x, _head] call EFUNC(main,isAffectable)}) then {
                             [_x, [_px * 5, _py * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                             for "_h" from 1 to 5 do {
                                 [_x, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"]] call EFUNC(main,applyDamage);
@@ -117,6 +145,12 @@ while {!isNull _head} do {
             };
             uiSleep 8;
             _head setPosATL [getPosATL _head select 0, getPosATL _head select 1, 2];
+
+            if (_isForce) then {
+                _forceCount = _forceCount - 1;
+                _head setVariable [QGVAR(forceCount), _forceCount, true];
+                if (_forceCount <= 0) then {_head setVariable [QGVAR(forceObj), objNull, true]};
+            };
         };
 
         if ((_tgt distance _head > 15) && {!(surfaceIsWater getPos _tgt)}) then {

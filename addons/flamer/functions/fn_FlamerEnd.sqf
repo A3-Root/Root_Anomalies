@@ -31,4 +31,10 @@ private _builds = nearestObjects [position _flamer, ["BUILDING", "HOUSE", "CHURC
 
 {_x setDamage [_deathDamage, false]} forEach (_builds - [_crater]);
 {_x setDamage [_deathDamage, false]} forEach _veg;
-{[_x, _deathDamage, "body", "burn"] call EFUNC(main,applyDamage)} forEach _men;
+{
+    private _gdmg = [_flamer, _x, _deathDamage] call FUNC(FlamerGear);
+    if (_gdmg > 0) then {[_x, _gdmg, "body", "burn"] call EFUNC(main,applyDamage)};
+} forEach _men;
+
+// Cinematic GBU-strength blast (deletion handled by FlamerMain).
+[getPosATL _flamer, "", 1, false] call EFUNC(main,deathBlast);

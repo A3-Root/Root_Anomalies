@@ -7,8 +7,7 @@
  * Arguments:
  * 0: Unit being teleported <OBJECT>
  * 1: Anomaly object <OBJECT>
- * 2: Seizure-safe <BOOL>
- * 3: Teleport damage fraction <NUMBER>
+ * 2: Teleport damage fraction <NUMBER>
  *
  * Return Value:
  * None
@@ -18,18 +17,19 @@
 
 if (!hasInterface) exitWith {};
 
-params ["_unit", "_obj", ["_seizureSafe", false, [false]], ["_damage", 0.1, [0]]];
+params ["_unit", "_obj", ["_damage", 0.1, [0]]];
 
 uiSleep 2;
 
 if (_unit != player) exitWith {};
 if (typeOf _unit == "VirtualCurator_F") exitWith {};
 
+private _tpRange = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["tpRange", 300];
 private _count = floor (random 6);
 if (_count < 1) then {_count = 1};
 
 for "_i" from 1 to _count do {
-    [_unit, ([getPos _obj, 300, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos), _seizureSafe] call FUNC(SmugglerHop);
+    [_unit, ([getPos _obj, _tpRange, -1, 5, 0, -1, 0] call BIS_fnc_findSafePos)] call FUNC(SmugglerHop);
 };
 
 uiSleep 0.3;

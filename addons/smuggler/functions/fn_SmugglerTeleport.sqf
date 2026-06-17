@@ -8,7 +8,6 @@
  * 0: Anomaly object <OBJECT>
  * 1: Core object <OBJECT>
  * 2: Teleport damage fraction <NUMBER>
- * 3: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -18,32 +17,35 @@
 
 if (!isServer) exitWith {};
 
-params ["_obj", "_core", ["_damage", 0.1, [0]], ["_seizureSafe", false, [false]]];
+params ["_obj", "_core", ["_damage", 0.1, [0]]];
 
-while {alive _obj} do {
+while {alive _obj && {!(_obj getVariable [QGVAR(terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
+    private _cfg = _obj getVariable [QGVAR(config), createHashMap];
+    private _damageLive = _cfg getOrDefault ["damage", _damage];
+    private _tpRange = _cfg getOrDefault ["tpRange", 300];
 
     {
         private _unit = _x;
-        if (!([_unit, _protector] call FUNC(SmugglerProtected)) && {isNil {_unit getVariable QGVAR(teleportedIn)}}) then {
+        if (!([_unit, _protector] call FUNC(SmugglerProtected)) && {isNil {_unit getVariable QGVAR(teleportedIn)}} && {[_unit, _obj] call EFUNC(main,isAffectable)}) then {
             [_obj, ["tele_message", 100]] remoteExec ["say3D"];
             [_unit] call FUNC(SmugglerBlink);
             if (isPlayer _unit) then {
-                [_unit, _obj, _seizureSafe, _damage] remoteExec [QFUNC(SmugglerTeleEffect), _unit];
+                [_unit, _obj, _damageLive] remoteExec [QFUNC(SmugglerTeleEffect), _unit];
             } else {
-                _unit setPos ([getPos _obj, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
-                [_unit, _damage, "body", "stab"] call EFUNC(main,applyDamage);
+                _unit setPos ([getPos _obj, _tpRange, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
+                [_unit, _damageLive, "body", "stab"] call EFUNC(main,applyDamage);
             };
         };
     } forEach ((position _obj) nearEntities ["CAManBase", 15]);
 
     {
         private _veh = _x;
-        if (isNil {_veh getVariable QGVAR(teleportedIn)}) then {
+        if ((isNil {_veh getVariable QGVAR(teleportedIn)}) && {[_veh, _obj] call EFUNC(main,isAffectable)}) then {
             [_obj, ["tele_message", 100]] remoteExec ["say3D"];
             [_veh] call FUNC(SmugglerBlink);
-            _veh setPos ([getPos _obj, 300, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
-            [_veh, _damage] call EFUNC(main,applyDamage);
+            _veh setPos ([getPos _obj, _tpRange, -1, 5, 0, 0.5, 0] call BIS_fnc_findSafePos);
+            [_veh, _damageLive] call EFUNC(main,applyDamage);
         };
     } forEach ((position _obj) nearEntities ["LandVehicle", 15]);
 

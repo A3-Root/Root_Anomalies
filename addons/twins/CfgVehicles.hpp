@@ -85,12 +85,12 @@ class CfgVehicles {
 				typeName = "BOOL";
 				defaultValue = "true";
 			};
-			class ROOT_TWINS_SEIZURESAFE: Checkbox {
-				property = "ROOT_TWINS_SEIZURESAFE";
-				displayName = "Disable Sensitive Lights";
-				tooltip = "If checked, the Twins' flashing/seizure visuals are disabled.";
-				typeName = "BOOL";
-				defaultValue = "false";
+			class ROOT_TWINS_DAMAGE: Edit {
+				property = "ROOT_TWINS_DAMAGE";
+				displayName = "Damage (0-1)";
+				tooltip = "Damage dealt to nearby units per attack. 0 = disorientation effects only (default).";
+				typeName = "NUMBER";
+				defaultValue = "0";
 			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};

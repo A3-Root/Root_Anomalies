@@ -28,9 +28,12 @@ private _near = ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandV
 {
     private _v = _x;
     if ((typeOf _v != "VirtualCurator_F") && {_v isKindOf "Man"}) then {
-        private _bp = _bodyParts selectRandomWeighted _weights;
-        [_v, _dmg, _bp, "burn"] call EFUNC(main,applyDamage);
-        [_v, [selectRandom ["04", "burned", "02", "03"], 200]] remoteExec ["say3D"];
+        private _gdmg = [_flamer, _v, _dmg] call FUNC(FlamerGear);
+        if (_gdmg > 0) then {
+            private _bp = _bodyParts selectRandomWeighted _weights;
+            [_v, _gdmg, _bp, "burn"] call EFUNC(main,applyDamage);
+            [_v, [selectRandom ["04", "burned", "02", "03"], 200]] remoteExec ["say3D"];
+        };
     } else {
         if ((_v isKindOf "LandVehicle") || {_v isKindOf "Air"}) then {
             if ([_v] call EFUNC(main,isAffectable) && {[_v] call EFUNC(main,isDamageable)}) then {

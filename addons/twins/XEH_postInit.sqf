@@ -18,7 +18,6 @@
         _config getOrDefault ["affectAI", true],
         _config getOrDefault ["emp", true],
         _config getOrDefault ["heartClass", "B_UAV_06_F"],
-        _config getOrDefault ["noseize", false],
         _config
     ] spawn FUNC(TwinsMain);
     objNull

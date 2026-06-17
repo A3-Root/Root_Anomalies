@@ -33,11 +33,12 @@ deleteVehicle _logic;
         ["SLIDER:RADIUS", ["Damage Range", "Radius in meters within which the Twins damages and disorients entities."], [10, 1000, 75, 0, _pos, [7, 120, 32, 1]]],
         ["TOOLBOX:YESNO", ["Enable Effects on AI", "If true, AI entities are also affected."], true],
         ["TOOLBOX:YESNO", ["Enable EMP", "If true, the Twins emits an EMP when killed."], true],
-        ["TOOLBOX:YESNO", ["Disable Sensitive Lights", "If true, the Twins' flashing/seizure visuals are disabled."], false]
+        ["SLIDER:PERCENT", ["Damage", "Damage dealt to nearby units per attack. 0 = disorientation effects only."], [0, 1, 0, 2]],
+        ["EDIT", ["Hostile Sides (CSV)", "Sides to attack: WEST,EAST,INDEPENDENT,CIVILIAN. Empty = all."], [""]]
     ],
     {
         params ["_results", "_pos"];
-        _results params ["_twinsClass", "_heartClass", "_trackDist", "_sparks", "_dmgRange", "_affectAI", "_emp", "_seizureSafe"];
+        _results params ["_twinsClass", "_heartClass", "_trackDist", "_sparks", "_dmgRange", "_affectAI", "_emp", "_damage", "_sides"];
 
         if (getNumber (configFile >> "CfgVehicles" >> _heartClass >> "scope") <= 0) then {_heartClass = "B_UAV_06_F"};
         if (getNumber (configFile >> "CfgVehicles" >> _twinsClass >> "scope") <= 0) then {_twinsClass = "Land_HighVoltageTower_large_F"};
@@ -46,8 +47,8 @@ deleteVehicle _logic;
         private _twins = _twinsClass createVehicle _pos;
 
         ["Twins Anomaly configured and created!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "twins"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
-        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _seizureSafe, _config] remoteExec [QFUNC(TwinsMain), 2];
+        private _config = createHashMapFromArray [["type", "twins"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["trackDist", _trackDist], ["hostileSides", [_sides] call EFUNC(main,parseSides)]];
+        [_twins, _trackDist, _sparks, _dmgRange, _affectAI, _emp, _heartClass, _config] remoteExec [QFUNC(TwinsMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

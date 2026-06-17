@@ -21,15 +21,16 @@ params ["_obj", ["_radius", 10, [0]], ["_vehicleAllowed", true, [false]]];
 private _types = if (_vehicleAllowed) then {["Man", "LandVehicle"]} else {["Man"]};
 private _screams = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"];
 
-while {alive _obj} do {
+while {alive _obj && {!(_obj getVariable [QGVAR(terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
-    private _victims = (position _obj) nearEntities [_types, _radius];
+    private _radiusLive = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["territory", _radius];
+    private _victims = (position _obj) nearEntities [_types, _radiusLive];
 
     {
         private _victim = _x;
         private _protected = (typeOf _victim == "VirtualCurator_F")
             || {_protector != "" && {[_victim, _protector] call BIS_fnc_hasItem}}
-            || {!([_victim] call EFUNC(main,isAffectable))}
+            || {!([_victim, _obj] call EFUNC(main,isAffectable))}
             || {!([_victim] call EFUNC(main,isDamageable))};
 
         if (!_protected) then {

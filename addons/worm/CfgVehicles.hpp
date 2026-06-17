@@ -71,6 +71,20 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "0.6";
 			};
+			class ROOT_WORM_FORCETGT: Edit {
+				property = "ROOT_WORM_FORCETGT";
+				displayName = "Forceful Target";
+				tooltip = "Classname (e.g. an IR grenade) the Worm fixates on when thrown into its territory, for its next few attacks. Empty = none.";
+				typeName = "STRING";
+				defaultValue = """""";
+			};
+			class ROOT_WORM_FORCEN: Edit {
+				property = "ROOT_WORM_FORCEN";
+				displayName = "Forceful Target Attacks";
+				tooltip = "How many attacks the Worm spends on a thrown forceful target before resuming normal targeting.";
+				typeName = "NUMBER";
+				defaultValue = "3";
+			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

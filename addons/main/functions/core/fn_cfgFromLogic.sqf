@@ -22,6 +22,7 @@ private _cfg = createHashMapFromArray [
     ["health", _logic getVariable ["ROOT_HEALTH", ROOT_ANOMALIES_DEFAULT_HEALTH]],
     ["damageMult", _logic getVariable ["ROOT_DMGMULT", ROOT_ANOMALIES_DEFAULT_DMGMULT]],
     ["hostileSides", [_logic getVariable ["ROOT_SIDES", ""]] call FUNC(parseSides)],
+    ["activationRange", _logic getVariable ["ROOT_ACTIVATION", ROOT_ANOMALIES_DEFAULT_ACTIVATION]],
     ["captureEnabled", _logic getVariable ["ROOT_CAPTURE", true]],
     ["captureTime", _logic getVariable ["ROOT_CAPTURETIME", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME]]
 ];

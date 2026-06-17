@@ -30,6 +30,16 @@ if (isNull _entity) exitWith {false};
 
 private _type = typeOf _entity;
 
+// Per-unit whitelist opt-out (global or this anomaly's type).
+private _anomType = "";
+if (!isNull _anomaly) then {
+    _anomType = (_anomaly getVariable [QGVAR(config), createHashMap]) getOrDefault ["type", ""];
+};
+if ([_entity, _anomType] call FUNC(isWhitelisted)) exitWith {
+    LOG_DEBUG_1("isAffectable: %1 whitelisted",_type);
+    false
+};
+
 private _blacklist = [missionNamespace getVariable [SETTING_IMMUNE_BLACKLIST, ""]] call FUNC(parseClassList);
 if (_blacklist findIf {_entity isKindOf _x} != -1) exitWith {
     LOG_DEBUG_1("isAffectable: %1 blocked by blacklist",_type);

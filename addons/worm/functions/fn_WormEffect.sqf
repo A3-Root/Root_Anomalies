@@ -35,7 +35,7 @@ while {!isNull _head} do {
     _smoke setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 11, [0, 0, 0], [0, 0, 1], 7, 11, 7.9, 0.0001, [4, 3, 0.5], [[0, 0, 0, 1], [0, 0, 0, 1], [0, 0, 0, 1]], [0.08], 1, 0, "", "", _head, 0, true, 0.1, [[0, 0, 0, 0]]];
     _smoke setDropInterval 0.01;
 
-    if ((sunOrMoon < 1) && {!SEIZURE_SAFE}) then {
+    if ((sunOrMoon < 1) && {!SENS_LIGHTS_OFF}) then {
         private _light = "#lightpoint" createVehicle (getPosATL _head);
         _light lightAttachObject [_head, [0.1, 0.1, 5]];
         _light setLightUseFlare false;

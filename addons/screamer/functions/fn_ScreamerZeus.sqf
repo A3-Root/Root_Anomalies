@@ -42,11 +42,12 @@ deleteVehicle _logic;
         ["TOOLBOX:YESNO", ["AI Panic", "If true, AI flee from the Screamer during attacks."], false],
         ["SLIDER:PERCENT", ["Screamer Damage (Close)", "Fraction of damage at close range."], [0.01, 1, 0.8, 2]],
         ["SLIDER:PERCENT", ["Screamer Damage (Medium)", "Fraction of damage at mid range."], [0.01, 1, 0.4, 2]],
-        ["SLIDER:PERCENT", ["Screamer Damage (Far)", "Fraction of damage at far range."], [0.01, 1, 0.2, 2]]
+        ["SLIDER:PERCENT", ["Screamer Damage (Far)", "Fraction of damage at far range."], [0.01, 1, 0.2, 2]],
+        ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Screamer."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_spawnSide", "_hostiles", "_model", "_health", "_territory", "_atkRadius", "_affectVehicles", "_aiEngage", "_aiPanic", "_dmgClose", "_dmgMedium", "_dmgFar"];
+        _results params ["_spawnSide", "_hostiles", "_model", "_health", "_territory", "_atkRadius", "_affectVehicles", "_aiEngage", "_aiPanic", "_dmgClose", "_dmgMedium", "_dmgFar", "_activation"];
 
         if (_hostiles isEqualTo []) then {_hostiles = [east, west, civilian, resistance]};
         if (_aiEngage) then {
@@ -58,7 +59,7 @@ deleteVehicle _logic;
         if (_territory < (_atkRadius * 2)) then {_territory = _atkRadius * 2};
 
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["activationRange", _activation]];
         [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] remoteExec [QFUNC(ScreamerMain), 2];
     },
     {

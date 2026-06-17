@@ -12,7 +12,6 @@
  * 4: Spawn delay <NUMBER>
  * 5: Protection device classname ("" disables protection) <STRING>
  * 6: Teleport damage fraction <NUMBER>
- * 7: Seizure-safe <BOOL>
  *
  * Return Value:
  * None
@@ -30,7 +29,6 @@ params [
     ["_spawnDelay", 10, [0]],
     ["_protector", "", [""]],
     ["_damage", 0.1, [0]],
-    ["_seizureSafe", false, [false]],
     ["_config", createHashMap, [createHashMap]]
 ];
 
@@ -49,7 +47,7 @@ if (_detector != "") then {
 };
 
 [_source, _core] remoteExec [QFUNC(SmugglerSfx), [0, -2] select isDedicated, true];
-[_source, _core, _damage, _seizureSafe] remoteExec [QFUNC(SmugglerTeleport), [0, -2] select isDedicated, true];
+[_source, _core, _damage] remoteExec [QFUNC(SmugglerTeleport), [0, -2] select isDedicated, true];
 
 _source setVariable [QGVAR(extraDelete), [_core], true];
 [_source, _config] call EFUNC(main,finalizeInstance);
@@ -62,7 +60,7 @@ if (_spawnList isNotEqualTo []) then {
 };
 
 if (_roaming) then {
-    while {!isNull _source} do {
+    while {!isNull _source && {!(_source getVariable [QGVAR(terminate), false])}} do {
         private _cur = getPosATL _source;
         private _new = [_cur, 0.01, 0.3, 1, 0, -1, 0] call BIS_fnc_findSafePos;
         _source setPos [_new select 0, _new select 1, _cur select 2];

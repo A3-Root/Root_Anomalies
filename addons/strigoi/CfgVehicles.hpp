@@ -78,13 +78,6 @@ class CfgVehicles {
 				typeName = "BOOL";
 				defaultValue = "false";
 			};
-			class ROOT_STRIGOI_SEIZURESAFE: Checkbox {
-				property = "ROOT_STRIGOI_SEIZURESAFE";
-				displayName = "Disable Sensitive Lights";
-				tooltip = "If checked, the Strigoi's flashing/seizure visual is disabled.";
-				typeName = "BOOL";
-				defaultValue = "false";
-			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

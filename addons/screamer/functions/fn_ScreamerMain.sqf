@@ -141,25 +141,40 @@ private _entityObj = [_anomaly, _entity] select _isAlive;
 
 LOG_DEBUG_2("ScreamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])}} do {
+while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])} && {!(_entityObj getVariable [QGVAR(terminate), false])}} do {
+    private _cfg = _entityObj getVariable [QGVAR(config), createHashMap];
+    _territory = _cfg getOrDefault ["territory", _territory];
+    private _cfgSides = _cfg getOrDefault ["hostileSides", []];
+    if (_cfgSides isNotEqualTo []) then {_hostiles = _cfgSides};
+    private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
+    if (allPlayers findIf {_x distance _markerPos < _activation} == -1) then {
+        uiSleep 5;
+        continue;
+    };
     _entity setUnitPos "UP";
     _entity doWatch objNull;
     private _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
 
     if (count _near > 1) then {
         private _teleport = false;
-        while {!_teleport && {alive _entity} && {!(_entityObj getVariable [QGVAR(captured), false])}} do {
+        while {!_teleport && {alive _entity} && {!(_entityObj getVariable [QGVAR(captured), false])} && {!(_entityObj getVariable [QGVAR(terminate), false])}} do {
             _entity setUnitPos "UP";
             _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
             if (count _near < 2) then {_teleport = true};
 
-            private _tgt = (_near select {((side _x) in _hostiles) && {typeOf _x != "VirtualCurator_F"} && {alive _x} && {(lifeState _x) != "INCAPACITATED"} && {_x != _entity} && {_x != _anomaly}}) param [0, _entity];
+            private _tgt = (_near select {((side _x) in _hostiles) && {typeOf _x != "VirtualCurator_F"} && {alive _x} && {(lifeState _x) != "INCAPACITATED"} && {_x != _entity} && {_x != _anomaly} && {!([_x, "screamer"] call EFUNC(main,isWhitelisted))}}) param [0, _entity];
             if ((isNull _tgt) || {_tgt == _entity}) then {continue};
 
             private _targetPos = getPosATL _tgt;
             private _wave = createVehicle ["Land_Battery_F", position _entityObj, [], 0, "CAN_COLLIDE"];
             _wave setMass 10;
-            _entityObj doMove _targetPos;
+            // The controller unit (_entity) is the mover; the visible statue (_anomaly) is
+            // attached to it. Moving _entityObj (the statue) does nothing - that is why the
+            // Screamer never repositioned. Path the controller instead.
+            _entity enableAI "PATH";
+            _entity enableAI "MOVE";
+            _entity forceSpeed -1;
+            _entity doMove _targetPos;
             [_entityObj, ["miscare_screamer", 300]] remoteExec ["say3D"];
             uiSleep 3;
 
