@@ -37,4 +37,9 @@ private _hive = _hiveClass createVehicle getPosATL _logic;
 LOG_DEBUG_1("Swarmer3DEN activating hive %1",_hiveClass);
 
 private _config = [_logic, "swarmer"] call EFUNC(main,cfgCapture);
+_config set ["protGear", [_logic getVariable ["ROOT_PROTGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["protPct", _logic getVariable ["ROOT_PROTPCT", 0.5]];
+_config set ["immGear", [_logic getVariable ["ROOT_IMMGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["immMode", _logic getVariable ["ROOT_IMMMODE", "Infinite"]];
+_config set ["immValue", _logic getVariable ["ROOT_IMMVALUE", 0]];
 [_hive, _territory, _pesticide, _damage, _config] call FUNC(SwarmerMain);

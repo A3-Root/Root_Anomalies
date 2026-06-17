@@ -25,8 +25,11 @@ if (_all isEqualTo []) exitWith {
     0
 };
 
-private _onTop = _all select {(getPosATL _x) distance _pos <= 6};
-private _targets = [_all select {(getPosATL _x) distance _pos <= _radius}, _onTop] select (_onTop isNotEqualTo []);
+// Radius 0 = "dropped directly on one anomaly" -> only the one within 6m. Otherwise
+// terminate every anomaly within the radius (a nearby anomaly must never be skipped just
+// because some other anomaly happens to sit within the 6m drop-on threshold).
+private _reach = [_radius, 6] select (_radius <= 0);
+private _targets = _all select {(getPosATL _x) distance _pos <= _reach};
 
 {[_x] call API(terminate)} forEach _targets;
 

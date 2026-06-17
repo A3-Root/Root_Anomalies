@@ -61,7 +61,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
     private _allowMove = 15;
     private _incr = 0;
 
-    while {alive _heart && {!(_twins getVariable [QGVAR(terminate), false])}} do {
+    while {alive _heart && {!(_twins getVariable [EGVAR(main,terminate), false])}} do {
         _trackDist = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["trackDist", _trackDist];
         private _closest = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _trackDist];
         if ((_twins getVariable [QGVAR(visible), 0]) < 1) then {
@@ -84,10 +84,10 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
     };
 
     // Terminated: remove cleanly, no death EMP/explosion.
-    if (_twins getVariable [QGVAR(terminate), false]) exitWith {};
+    if (_twins getVariable [EGVAR(main,terminate), false]) exitWith {};
 
     // Cinematic GBU-strength blast on death (heart destroyed).
-    [getPosATL _twins, "", 1, false] call EFUNC(main,deathBlast);
+    [_twins, "", 1, false] call EFUNC(main,deathBlast);
 
     if (_emp) then {
         [_twins, _trackDist] remoteExec [QFUNC(TwinsEmp), [0, -2] select isDedicated, true];
@@ -99,7 +99,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 
 // Spark visuals.
 if (_sparks) then {
-    while {alive _twins && {!(_twins getVariable [QGVAR(terminate), false])}} do {
+    while {alive _twins && {!(_twins getVariable [EGVAR(main,terminate), false])}} do {
         switch (selectRandom ["st", "dr", "ct"]) do {
             case "st": {_sparkBall attachTo [_twins, [-12, 0, 12.35]]};
             case "dr": {_sparkBall attachTo [_twins, [11.5, 0, 12.35]]};

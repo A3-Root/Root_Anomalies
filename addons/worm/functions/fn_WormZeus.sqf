@@ -38,17 +38,22 @@ deleteVehicle _logic;
         ["SLIDER:PERCENT", ["Worm Damage", "Fraction of damage the Worm does to its target."], [0.01, 1, 0.6, 2]],
         ["EDIT", ["Forceful Target", "Classname (e.g. an IR grenade) the Worm will fixate on when thrown, for its next attacks. Empty = none."], [""]],
         ["SLIDER", ["Forceful Target Attacks", "How many attacks the Worm spends on a thrown forceful target."], [1, 10, 3, 0]],
+        ["EDIT", ["Protective Gear (CSV)", "Gear classnames that reduce the Worm's damage. Empty = none."], [""]],
+        ["SLIDER:PERCENT", ["Protection", "Fraction of damage removed while wearing protective gear."], [0, 1, 0.5, 2]],
+        ["EDIT", ["Immunity Gear (CSV)", "Gear classnames granting full immunity until durability is spent. Empty = none."], [""]],
+        ["COMBO", ["Immunity Mode", "How immunity gear wears out."], [["Infinite", "Time", "Damage"], ["Infinite (never fails)", "Time (seconds)", "Damage (absorbed)"], 0]],
+        ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]],
         ["SIDES", ["Hostile Sides", "Sides the Worm attacks. None selected = all."], []]
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_override", "_territory", "_aiPanic", "_diffuser", "_damage", "_forceTgt", "_forceN", "_sides"];
+        _results params ["_override", "_territory", "_aiPanic", "_diffuser", "_damage", "_forceTgt", "_forceN", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides"];
 
         if (!_override && {_territory < 200}) then {_territory = 200};
         if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["forceTarget", _forceTgt], ["forceN", _forceN], ["hostileSides", _sides]];
+        private _config = createHashMapFromArray [["type", "worm"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["damage", _damage], ["forceTarget", _forceTgt], ["forceN", _forceN], ["hostileSides", _sides], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
         [_markerName, _damage, _territory, _aiPanic, _diffuser, _config] remoteExec [QFUNC(WormMain), 2];
     },
     {

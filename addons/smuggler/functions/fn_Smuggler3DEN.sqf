@@ -30,6 +30,8 @@ private _spawnStr = _logic getVariable ["ROOT_SMUGGLER_SPAWNLIST", ""];
 private _spawnDelay = _logic getVariable ["ROOT_SMUGGLER_SPAWNDELAY", 10];
 private _damage = _logic getVariable ["ROOT_SMUGGLER_DAMAGE", 0.1];
 private _tpRange = _logic getVariable ["ROOT_SMUGGLER_TPRANGE", 300];
+private _staticLimit = _logic getVariable ["ROOT_SMUGGLER_STATICLIMIT", 10];
+private _dynLimit = _logic getVariable ["ROOT_SMUGGLER_DYNLIMIT", 10];
 
 if (!_detectable) then {_detector = ""};
 if (!_protectable) then {_protector = ""};
@@ -44,4 +46,6 @@ LOG_DEBUG_1("Smuggler3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "smuggler"] call EFUNC(main,cfgCapture);
 _config set ["tpRange", _tpRange];
+_config set ["staticLimit", _staticLimit];
+_config set ["dynLimit", _dynLimit];
 [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _config] call FUNC(SmugglerMain);

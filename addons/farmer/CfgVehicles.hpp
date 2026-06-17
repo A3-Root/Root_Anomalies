@@ -78,6 +78,7 @@ class CfgVehicles {
 				typeName = "BOOL";
 				defaultValue = "false";
 			};
+			ROOT_GEAR_MODULE_ATTRIBUTES
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

@@ -21,7 +21,7 @@ params ["_obj", ["_radius", 10, [0]], ["_vehicleAllowed", true, [false]]];
 private _types = if (_vehicleAllowed) then {["Man", "LandVehicle"]} else {["Man"]};
 private _screams = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"];
 
-while {alive _obj && {!(_obj getVariable [QGVAR(terminate), false])}} do {
+while {alive _obj && {!(_obj getVariable [EGVAR(main,terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
     private _radiusLive = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["territory", _radius];
     private _victims = (position _obj) nearEntities [_types, _radiusLive];

@@ -49,4 +49,9 @@ createMarker [_markerName, getPosATL _logic];
 LOG_DEBUG_1("Screamer3DEN activating marker %1",_markerName);
 
 private _config = [_logic, "screamer"] call EFUNC(main,cfgCapture);
+_config set ["protGear", [_logic getVariable ["ROOT_PROTGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["protPct", _logic getVariable ["ROOT_PROTPCT", 0.5]];
+_config set ["immGear", [_logic getVariable ["ROOT_IMMGEAR", ""]] call EFUNC(main,parseClassList)];
+_config set ["immMode", _logic getVariable ["ROOT_IMMMODE", "Infinite"]];
+_config set ["immValue", _logic getVariable ["ROOT_IMMVALUE", 0]];
 [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] call FUNC(ScreamerMain);

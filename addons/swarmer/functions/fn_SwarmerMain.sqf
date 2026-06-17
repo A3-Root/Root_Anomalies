@@ -63,12 +63,12 @@ _agent setVariable [QGVAR(extraDelete), [_hiveObj], true];
 
 LOG_DEBUG_2("SwarmerMain spawned hive at %1 (territory %2)",position _hiveObj,_radius);
 
-while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])} && {!(_agent getVariable [QGVAR(terminate), false])}} do {
+while {alive _agent && {!(_agent getVariable [EGVAR(main,captured), false])} && {!(_agent getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _agent getVariable [QGVAR(config), createHashMap];
     _radius = _cfg getOrDefault ["territory", _radius];
     _damage = _cfg getOrDefault ["damage", _damage];
     private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
-    while {!(_agent getVariable [QGVAR(isHive), false]) && {!(_agent getVariable [QGVAR(terminate), false])}} do {
+    while {!(_agent getVariable [QGVAR(isHive), false]) && {!(_agent getVariable [EGVAR(main,terminate), false])}} do {
         {if (_x distance getPos _agent < _activation) exitWith {_agent setVariable [QGVAR(isHive), true, true]}} forEach allPlayers;
         uiSleep 10;
     };
@@ -89,7 +89,7 @@ while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])} && {!(_a
                 _agent moveTo AGLToASL (_tgt modelToWorld [0, 0, 0]);
                 [_tgt, _agent] remoteExec [QFUNC(SwarmerEating), [0, -2] select isDedicated];
                 for "_h" from 1 to 5 do {
-                    [_tgt, _damage, selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"], selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"]] call EFUNC(main,applyDamage);
+                    [_tgt, _damage, selectRandom ["head", "body", "hand_l", "hand_r", "leg_l", "leg_r"], selectRandom ["bullet", "explosive", "grenade", "punch", "ropeburn", "shell", "stab", "burn"], _agent] call EFUNC(main,applyDamage);
                 };
                 {[_agent, _x] spawn FUNC(SwarmerAvoid)} forEach _inRange;
                 uiSleep 2;
@@ -128,7 +128,7 @@ while {alive _agent && {!(_agent getVariable [QGVAR(captured), false])} && {!(_a
 };
 
 // Terminate API deletes the agent (+ hive) itself.
-if !(_agent getVariable [QGVAR(terminate), false]) then {
+if !(_agent getVariable [EGVAR(main,terminate), false]) then {
     uiSleep 10;
     deleteVehicle _agent;
 };

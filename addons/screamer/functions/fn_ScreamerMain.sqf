@@ -141,7 +141,7 @@ private _entityObj = [_anomaly, _entity] select _isAlive;
 
 LOG_DEBUG_2("ScreamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])} && {!(_entityObj getVariable [QGVAR(terminate), false])}} do {
+while {alive _entity && {!(_entityObj getVariable [EGVAR(main,captured), false])} && {!(_entityObj getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _entityObj getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     private _cfgSides = _cfg getOrDefault ["hostileSides", []];
@@ -157,7 +157,7 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])} && 
 
     if (count _near > 1) then {
         private _teleport = false;
-        while {!_teleport && {alive _entity} && {!(_entityObj getVariable [QGVAR(captured), false])} && {!(_entityObj getVariable [QGVAR(terminate), false])}} do {
+        while {!_teleport && {alive _entity} && {!(_entityObj getVariable [EGVAR(main,captured), false])} && {!(_entityObj getVariable [EGVAR(main,terminate), false])}} do {
             _entity setUnitPos "UP";
             _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
             if (count _near < 2) then {_teleport = true};
@@ -237,7 +237,7 @@ while {alive _entity && {!(_entityObj getVariable [QGVAR(captured), false])} && 
                     [_u, (_u vectorModelToWorld [_torqueScale, _torqueScale, _torqueScale])] remoteExec ["addTorque", _u];
                     if ((_u isKindOf "CAManBase") && {typeOf _u != "VirtualCurator_F"}) then {
                         for "_h" from 1 to _hits do {
-                            [_u, _bandDmg, selectRandom _bodyParts, "backblast"] call EFUNC(main,applyDamage);
+                            [_u, _bandDmg, selectRandom _bodyParts, "backblast", _entityObj] call EFUNC(main,applyDamage);
                         };
                     };
                     if (_affectVehicles && {(_u isKindOf "LandVehicle") || {_u isKindOf "Air"}}) then {

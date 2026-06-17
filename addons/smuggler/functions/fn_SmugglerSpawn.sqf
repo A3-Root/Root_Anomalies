@@ -2,12 +2,15 @@
 /*
  * Author: Root, Aliascartoons
  * Description: Server loop that periodically conjures random units/objects out of the
- *              Smuggler when players are near.
+ *              Smuggler when players are near. Tracks what it spawns and enforces optional
+ *              caps on the number of live static objects and dynamic (alive AI) units,
+ *              deleting the oldest of each kind once its limit is exceeded.
  *
  * Arguments:
  * 0: Spawn classnames <ARRAY of STRING>
  * 1: Smuggler core object <OBJECT>
  * 2: Spawn delay <NUMBER>
+ * 3: Smuggler source object (carries config + terminate flag) <OBJECT>
  *
  * Return Value:
  * None
@@ -17,16 +20,36 @@
 
 if (!isServer) exitWith {};
 
-params ["_spawnList", "_core", ["_spawnDelay", 10, [0]]];
+params ["_spawnList", "_core", ["_spawnDelay", 10, [0]], ["_source", objNull, [objNull]]];
+
+// Prune a tracking array to its limit, deleting the oldest entries. 0/negative = unlimited.
+private _fnPrune = {
+    params ["_arr", "_limit"];
+    private _live = _arr select {!isNull _x};
+    if (_limit > 0) then {
+        while {count _live > _limit} do {
+            private _old = _live deleteAt 0;
+            if (!isNull _old) then {deleteVehicle _old};
+        };
+    };
+    _live
+};
 
 _core setVariable [QGVAR(active), false, true];
+_core setVariable [QGVAR(staticObjs), [], true];
+_core setVariable [QGVAR(dynUnits), [], true];
 
-while {!isNull _core} do {
-    while {!(_core getVariable [QGVAR(active), false])} do {
+while {!isNull _core && {!isNull _source} && {!(_source getVariable [EGVAR(main,terminate), false])}} do {
+    while {!(_core getVariable [QGVAR(active), false]) && {!(_source getVariable [EGVAR(main,terminate), false])}} do {
         {if (_x distance getPos _core < 1100) exitWith {_core setVariable [QGVAR(active), true, true]}} forEach allPlayers;
         uiSleep 10;
     };
+    if (_source getVariable [EGVAR(main,terminate), false]) exitWith {};
     _core setVariable [QGVAR(active), false, true];
+
+    private _cfg = _source getVariable [EGVAR(main,config), createHashMap];
+    private _staticLimit = _cfg getOrDefault ["staticLimit", 0];
+    private _dynLimit = _cfg getOrDefault ["dynLimit", 0];
 
     private _class = selectRandom _spawnList;
     if (getNumber (configFile >> "CfgVehicles" >> _class >> "scope") > 0) then {
@@ -59,6 +82,12 @@ while {!isNull _core} do {
             _unit setDamage (damage _unit + (random 0.15));
             _unit doMove ([getPosATL _core, 100 + random 500, random 360] call BIS_fnc_relPos);
             [_unit] spawn {params ["_u"]; uiSleep 120; _u setVariable [QGVAR(teleportedIn), nil, true]};
+
+            // Track and cap dynamic (alive AI) spawns, deleting the oldest beyond the limit.
+            private _dyn = _core getVariable [QGVAR(dynUnits), []];
+            _dyn pushBack _unit;
+            _core setVariable [QGVAR(dynUnits), [_dyn, _dynLimit] call _fnPrune, true];
+
             uiSleep (10 + random _spawnDelay);
         } else {
             private _bounceObj = createVehicle ["Land_CanOpener_F", getPosATL _core, [], 0, "CAN_COLLIDE"];
@@ -75,6 +104,13 @@ while {!isNull _core} do {
             deleteVehicle _bounceObj;
             uiSleep (10 + random _spawnDelay);
             if ((_obj distance _core < 10) && {local _obj}) then {deleteVehicle _obj};
+
+            // Track and cap surviving static objects, deleting the oldest beyond the limit.
+            if (!isNull _obj) then {
+                private _stat = _core getVariable [QGVAR(staticObjs), []];
+                _stat pushBack _obj;
+                _core setVariable [QGVAR(staticObjs), [_stat, _staticLimit] call _fnPrune, true];
+            };
         };
     };
 };

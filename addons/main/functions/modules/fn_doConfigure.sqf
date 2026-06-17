@@ -26,8 +26,9 @@ if (_all isEqualTo []) exitWith {
     0
 };
 
-private _onTop = _all select {(getPosATL _x) distance _pos <= 6};
-private _targets = [_all select {(getPosATL _x) distance _pos <= _radius}, _onTop] select (_onTop isNotEqualTo []);
+// Radius 0 = "dropped directly on one anomaly"; otherwise reconfigure every anomaly in range.
+private _reach = [_radius, 6] select (_radius <= 0);
+private _targets = _all select {(getPosATL _x) distance _pos <= _reach};
 
 {[_x, _override] call API(configure)} forEach _targets;
 

@@ -67,6 +67,47 @@
         defaultValue = """"""; \
     };
 
+// Protective/immunity gear options shared by the attack-layer creatures. Include inside a
+// Module_F "Attributes" block via ROOT_GEAR_MODULE_ATTRIBUTES. Read back into config keys
+// protGear/protPct/immGear/immMode/immValue and honoured by EFUNC(main,gearMitigate) via
+// EFUNC(main,applyDamage).
+#define ROOT_GEAR_MODULE_ATTRIBUTES \
+    class ROOT_PROTGEAR: Edit { \
+        property = "ROOT_PROTGEAR"; \
+        displayName = "Protective Gear (CSV)"; \
+        tooltip = "Comma-separated gear classnames that reduce this anomaly's damage by the protection percentage. Empty = none."; \
+        typeName = "STRING"; \
+        defaultValue = """"""; \
+    }; \
+    class ROOT_PROTPCT: Edit { \
+        property = "ROOT_PROTPCT"; \
+        displayName = "Protection (0-1)"; \
+        tooltip = "Fraction of damage removed while wearing protective gear (0.5 = halved)."; \
+        typeName = "NUMBER"; \
+        defaultValue = "0.5"; \
+    }; \
+    class ROOT_IMMGEAR: Edit { \
+        property = "ROOT_IMMGEAR"; \
+        displayName = "Immunity Gear (CSV)"; \
+        tooltip = "Comma-separated gear classnames that grant full immunity until their durability is spent. Empty = none."; \
+        typeName = "STRING"; \
+        defaultValue = """"""; \
+    }; \
+    class ROOT_IMMMODE: Edit { \
+        property = "ROOT_IMMMODE"; \
+        displayName = "Immunity Mode"; \
+        tooltip = "How immunity gear wears out: Infinite (never), Time (seconds), or Damage (total damage absorbed)."; \
+        typeName = "STRING"; \
+        defaultValue = """Infinite"""; \
+    }; \
+    class ROOT_IMMVALUE: Edit { \
+        property = "ROOT_IMMVALUE"; \
+        displayName = "Immunity Value"; \
+        tooltip = "Seconds (Time) or total damage (Damage) the immunity gear lasts. 0 or Infinite mode = never fails."; \
+        typeName = "NUMBER"; \
+        defaultValue = "0"; \
+    };
+
 // Capture-only subset for the legacy creatures (they keep their own health/damage model
 // and targeting, so only the sedation/capture options are exposed).
 #define ROOT_CAPTURE_MODULE_ATTRIBUTES \

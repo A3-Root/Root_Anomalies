@@ -24,4 +24,14 @@ if (!hasInterface) exitWith {};
             [_projectile, false] remoteExec [QFUNC(SwarmerKill), 2];
         };
     }];
+
+    // ACE advanced throwing bypasses the "Fired" EH; it fires this CBA event instead.
+    // The handler simply never triggers when ACE is absent, so it is always safe to add.
+    ["ace_throwableThrown", {
+        params ["_unit", "_throwable"];
+        private _pesticide = missionNamespace getVariable ["ROOT_ANOMALIES_SWARMER_PESTICIDE", ""];
+        if ((_pesticide != "") && {typeOf _throwable == _pesticide}) then {
+            [_throwable, false] remoteExec [QFUNC(SwarmerKill), 2];
+        };
+    }] call CBA_fnc_addEventHandler;
 };

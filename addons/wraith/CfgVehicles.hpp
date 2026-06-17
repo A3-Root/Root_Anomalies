@@ -78,6 +78,7 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "25";
 			};
+			ROOT_GEAR_MODULE_ATTRIBUTES
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

@@ -58,7 +58,13 @@ _farmer addEventHandler ["Hit", {
         if (_curr > 1) then {
             if !(_unit getVariable [QGVAR(dying), false]) then {
                 _unit setVariable [QGVAR(dying), true, true];
-                [_unit, "Unconscious", 1, true] call EFUNC(main,deathBlast);
+                // Warp-sound warning beat (like the Screamer) so players can flee the GBU.
+                [_unit] spawn {
+                    params ["_unit"];
+                    [_unit, ["miscare_screamer", 300]] remoteExec ["say3D"];
+                    uiSleep 3;
+                    [_unit, "Unconscious", 1, true] call EFUNC(main,deathBlast);
+                };
             };
         } else {
             [_unit] remoteExec [QFUNC(FarmerSplash), [0, -2] select isDedicated];
@@ -88,7 +94,7 @@ _farmer enableSimulationGlobal false;
 
 LOG_DEBUG_2("FarmerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QGVAR(terminate), false])}} do {
+while {alive _farmer && {!(_farmer getVariable [EGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _farmer getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -97,7 +103,7 @@ while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])} && {!(
     private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
     private _ckPl = false;
     _farmer setUnitPos "UP";
-    while {!_ckPl && {!(_farmer getVariable [QGVAR(terminate), false])}} do {
+    while {!_ckPl && {!(_farmer getVariable [EGVAR(main,terminate), false])}} do {
         {
             if (_x distance _markerPos < _activation) exitWith {_ckPl = true};
         } forEach allPlayers;
@@ -113,7 +119,7 @@ while {alive _farmer && {!(_farmer getVariable [QGVAR(captured), false])} && {!(
     [_farmer, _markerPos] call FUNC(FarmerShow);
 
     while {
-        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [QGVAR(captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QGVAR(terminate), false])}}
+        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [EGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [EGVAR(main,terminate), false])}}
     } do {
         _cfg = _farmer getVariable [QGVAR(config), createHashMap];
         _territory = _cfg getOrDefault ["territory", _territory];

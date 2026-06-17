@@ -34,6 +34,7 @@ private _weights = [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 uiSleep 2;
 
 missionNamespace setVariable ["ROOT_ANOMALIES_WORM_DIFFUSER", _diffuser, true];
+missionNamespace setVariable ["ROOT_ANOMALIES_WORM_FORCETGT", _config getOrDefault ["forceTarget", ""], true];
 
 private _markerPos = getMarkerPos _marker;
 private _head = createVehicle ["land_CanOpener_F", _markerPos, [], 0, "CAN_COLLIDE"];
@@ -55,7 +56,7 @@ LOG_DEBUG_2("WormMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 // Emergence: wait for a target, then erupt.
 private _hidden = true;
-while {_hidden && {!(_head getVariable [QGVAR(terminate), false])}} do {
+while {_hidden && {!(_head getVariable [EGVAR(main,terminate), false])}} do {
     uiSleep 2;
     private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]) select {[_x, _head] call EFUNC(main,isAffectable)};
     if (_near isNotEqualTo []) then {
@@ -71,7 +72,7 @@ while {_hidden && {!(_head getVariable [QGVAR(terminate), false])}} do {
     };
 };
 
-if (isNull _head || {_head getVariable [QGVAR(terminate), false]}) exitWith {};
+if (isNull _head || {_head getVariable [EGVAR(main,terminate), false]}) exitWith {};
 
 uiSleep 1;
 resetCamShake;
@@ -82,8 +83,8 @@ addCamShake [1, 4, 23];
 [_head] remoteExec [QFUNC(WormBump), [0, -2] select isDedicated];
 uiSleep 1;
 
-while {!isNull _head && {!(_head getVariable [QGVAR(terminate), false])}} do {
-    private _cfg = _head getVariable [QGVAR(config), createHashMap];
+while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} do {
+    private _cfg = _head getVariable [EGVAR(main,config), createHashMap];
     _damage = _cfg getOrDefault ["damage", _damage];
     _territory = _cfg getOrDefault ["territory", _territory];
     private _forceCls = _cfg getOrDefault ["forceTarget", ""];
@@ -131,7 +132,7 @@ while {!isNull _head && {!(_head getVariable [QGVAR(terminate), false])}} do {
                         if ((typeOf _x != "VirtualCurator_F") && {_x isKindOf "CAManBase"} && {[_x, _head] call EFUNC(main,isAffectable)}) then {
                             [_x, [_px * 5, _py * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                             for "_h" from 1 to 5 do {
-                                [_x, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"]] call EFUNC(main,applyDamage);
+                                [_x, _damage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade", "falling"], _head] call EFUNC(main,applyDamage);
                             };
                         };
                     };

@@ -18,7 +18,7 @@ if (!isServer) exitWith {};
 
 params ["_twins", ["_aiRange", 75, [0]]];
 
-while {alive _twins && {!(_twins getVariable [QGVAR(terminate), false])}} do {
+while {alive _twins && {!(_twins getVariable [EGVAR(main,terminate), false])}} do {
     private _units = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _aiRange];
     private _runPos = [getPosATL _twins, 1000, random 360] call BIS_fnc_relPos;
     private _dmg = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", 0];

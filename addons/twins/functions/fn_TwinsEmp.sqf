@@ -85,10 +85,11 @@ private _vehicleClasses = ["Car", "Motorcycle", "UAV", "Tank", "Air", "Ship", "A
 {
     _x say3D selectRandom ["spark1", "spark11", "spark2", "spark22"];
     private _eStatic = "#particlesource" createVehicleLocal (getPosATL _x);
-    _eStatic setParticleFire [0.5, 3, 60];
     _eStatic setParticleCircle [1.5, [0, 0, 0]];
     _eStatic setParticleRandom [0.2, [3.5, 3.5, 0], [0.175, 0.175, 0], 0, 0.2, [0, 0, 0, 1], 1, 0];
     _eStatic setParticleParams [["\A3\data_f\blesk1", 1, 0, 1], "", "SpaceObject", 1, 0.05, [0, 0, 0], [0, 0, 0], 0, 10, 7.9, 0, [0.003, 0.003], [[1, 1, 0.1, 1], [1, 1, 1, 1]], [0.08], 1, 0, "", "", _x];
+    // setParticleFire requires the size array to already be set (via setParticleParams above).
+    _eStatic setParticleFire [0.5, 3, 60];
     _eStatic setDropInterval 0.025;
     uiSleep 0.5;
     deleteVehicle _eStatic;

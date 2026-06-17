@@ -19,7 +19,7 @@ if (!isServer) exitWith {};
 
 params ["_obj", "_core", ["_damage", 0.1, [0]]];
 
-while {alive _obj && {!(_obj getVariable [QGVAR(terminate), false])}} do {
+while {alive _obj && {!(_obj getVariable [EGVAR(main,terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
     private _cfg = _obj getVariable [QGVAR(config), createHashMap];
     private _damageLive = _cfg getOrDefault ["damage", _damage];

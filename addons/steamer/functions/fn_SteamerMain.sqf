@@ -51,16 +51,16 @@ _steamer enableSimulationGlobal false;
 LOG_DEBUG_2("SteamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])} && {!(_steamer getVariable [QGVAR(terminate), false])}} do {
+while {alive _steamer && {!(_steamer getVariable [EGVAR(main,captured), false])} && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _steamer getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
-    while {_inRange isEqualTo [] && {!(_steamer getVariable [QGVAR(terminate), false])}} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
+    while {_inRange isEqualTo [] && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {[_x, _steamer] call EFUNC(main,isAffectable)}});
     uiSleep 0.5;
 
-    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QGVAR(captured), false])} && {!(_steamer getVariable [QGVAR(terminate), false])}} do {
+    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [EGVAR(main,captured), false])} && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {
         _cfg = _steamer getVariable [QGVAR(config), createHashMap];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];
@@ -92,7 +92,7 @@ while {alive _steamer && {!(_steamer getVariable [QGVAR(captured), false])} && {
 };
 
 // Terminate API removes the Steamer cleanly, without the death geyser/area damage.
-if (_steamer getVariable [QGVAR(terminate), false]) exitWith {};
+if (_steamer getVariable [EGVAR(main,terminate), false]) exitWith {};
 
 waitUntil {!alive _steamer};
 [getPosATL _steamer] remoteExec [QFUNC(SteamerEnd), [0, -2] select isDedicated];
@@ -101,7 +101,7 @@ waitUntil {!alive _steamer};
 {_x setDamage [_deathDamage, false]} forEach nearestObjects [position _steamer, ["BUILDING", "HOUSE", "CHURCH", "CHAPEL", "FUELSTATION", "HOSPITAL", "RUIN", "BUNKER", "Land_fs_roof_F", "Land_TTowerBig_2_F", "Land_TTowerBig_1_F", "Lamps_base_F", "PowerLines_base_F", "PowerLines_Small_base_F", "Land_LampStreet_small_F"], 20, false];
 {
     if (typeOf _x != "VirtualCurator_F") then {
-        [_x, _deathDamage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+        [_x, _deathDamage, _bodyParts selectRandomWeighted _weights, selectRandom ["backblast", "bullet", "explosive", "grenade"], _steamer] call EFUNC(main,applyDamage);
     };
 } forEach (_steamer nearEntities ["CAManBase", 20]);
 {_x setDamage ((damage _x) + random [0, _deathDamage, 1])} forEach nearestObjects [position _steamer, ["CAR", "TANK", "PLANE", "HELICOPTER", "Motorcycle", "Air", "Ship"], 20, false];

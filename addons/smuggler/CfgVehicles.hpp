@@ -106,6 +106,20 @@ class CfgVehicles {
 				typeName = "NUMBER";
 				defaultValue = "300";
 			};
+			class ROOT_SMUGGLER_STATICLIMIT: Edit {
+				property = "ROOT_SMUGGLER_STATICLIMIT";
+				displayName = "Static Object Limit";
+				tooltip = "Maximum live static objects the Smuggler keeps spawned; the oldest are deleted past this. 0 = unlimited.";
+				typeName = "NUMBER";
+				defaultValue = "10";
+			};
+			class ROOT_SMUGGLER_DYNLIMIT: Edit {
+				property = "ROOT_SMUGGLER_DYNLIMIT";
+				displayName = "Dynamic Unit Limit";
+				tooltip = "Maximum live spawned AI units the Smuggler keeps; the oldest are deleted past this. 0 = unlimited.";
+				typeName = "NUMBER";
+				defaultValue = "10";
+			};
 			ROOT_CAPTURE_MODULE_ATTRIBUTES
 			class ModuleDescription: ModuleDescription {};
 		};

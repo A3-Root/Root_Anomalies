@@ -43,11 +43,16 @@ deleteVehicle _logic;
         ["SLIDER:PERCENT", ["Screamer Damage (Close)", "Fraction of damage at close range."], [0.01, 1, 0.8, 2]],
         ["SLIDER:PERCENT", ["Screamer Damage (Medium)", "Fraction of damage at mid range."], [0.01, 1, 0.4, 2]],
         ["SLIDER:PERCENT", ["Screamer Damage (Far)", "Fraction of damage at far range."], [0.01, 1, 0.2, 2]],
+        ["EDIT", ["Protective Gear (CSV)", "Gear classnames that reduce the Screamer's damage. Empty = none."], [""]],
+        ["SLIDER:PERCENT", ["Protection", "Fraction of damage removed while wearing protective gear."], [0, 1, 0.5, 2]],
+        ["EDIT", ["Immunity Gear (CSV)", "Gear classnames granting full immunity until durability is spent. Empty = none."], [""]],
+        ["COMBO", ["Immunity Mode", "How immunity gear wears out."], [["Infinite", "Time", "Damage"], ["Infinite (never fails)", "Time (seconds)", "Damage (absorbed)"], 0]],
+        ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Screamer."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_spawnSide", "_hostiles", "_model", "_health", "_territory", "_atkRadius", "_affectVehicles", "_aiEngage", "_aiPanic", "_dmgClose", "_dmgMedium", "_dmgFar", "_activation"];
+        _results params ["_spawnSide", "_hostiles", "_model", "_health", "_territory", "_atkRadius", "_affectVehicles", "_aiEngage", "_aiPanic", "_dmgClose", "_dmgMedium", "_dmgFar", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_activation"];
 
         if (_hostiles isEqualTo []) then {_hostiles = [east, west, civilian, resistance]};
         if (_aiEngage) then {
@@ -59,7 +64,7 @@ deleteVehicle _logic;
         if (_territory < (_atkRadius * 2)) then {_territory = _atkRadius * 2};
 
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["activationRange", _activation]];
+        private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
         [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] remoteExec [QFUNC(ScreamerMain), 2];
     },
     {

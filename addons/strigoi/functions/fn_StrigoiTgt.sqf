@@ -6,6 +6,7 @@
  *
  * Arguments:
  * 0: Damage fraction <NUMBER>
+ * 1: Strigoi (for protective/immunity gear) <OBJECT>
  *
  * Return Value:
  * None
@@ -15,11 +16,11 @@
 
 if (!hasInterface) exitWith {};
 
-params [["_damage", 0.6, [0]]];
+params [["_damage", 0.6, [0]], ["_strigoi", objNull, [objNull]]];
 
 private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 if (typeOf player != "VirtualCurator_F") then {
-    [player, _damage, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+    [player, _damage, _bodyPart, selectRandom ["backblast", "bullet", "explosive", "grenade"], _strigoi] call EFUNC(main,applyDamage);
 };
 
 playSound "puls";

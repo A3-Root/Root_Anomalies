@@ -101,22 +101,22 @@ LOG_DEBUG_2("FlamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _activation = (_flamer getVariable [QGVAR(config), createHashMap]) getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
 private _ckPl = false;
-while {!_ckPl && {!(_flamer getVariable [QGVAR(terminate), false])}} do {
+while {!_ckPl && {!(_flamer getVariable [EGVAR(main,terminate), false])}} do {
     {if (_x distance _markerPos < _activation) exitWith {_ckPl = true}} forEach allPlayers;
     uiSleep 5;
 };
 
 private _inRange = [];
-while {alive _flamer && {!(_flamer getVariable [QGVAR(captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [QGVAR(terminate), false])}} do {
+while {alive _flamer && {!(_flamer getVariable [EGVAR(main,captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _flamer getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
-    while {_inRange isEqualTo [] && {!(_flamer getVariable [QGVAR(terminate), false])}} do {_inRange = [_flamer, _territory] call FUNC(FlamerFindTarget); uiSleep 5};
+    while {_inRange isEqualTo [] && {!(_flamer getVariable [EGVAR(main,terminate), false])}} do {_inRange = [_flamer, _territory] call FUNC(FlamerFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {[_x, _flamer] call EFUNC(main,isAffectable)}});
     [_flamer, _markerPos, _territory, _damage] call FUNC(FlamerShow);
 
-    while {(!isNil "_tgt") && {(alive _flamer) && {(_flamer distance _markerPos) < _territory} && {!(_flamer getVariable [QGVAR(captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [QGVAR(terminate), false])}}} do {
+    while {(!isNil "_tgt") && {(alive _flamer) && {(_flamer distance _markerPos) < _territory} && {!(_flamer getVariable [EGVAR(main,captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [EGVAR(main,terminate), false])}}} do {
         _cfg = _flamer getVariable [QGVAR(config), createHashMap];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];

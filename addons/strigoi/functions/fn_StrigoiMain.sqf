@@ -65,7 +65,13 @@ _strigoi addEventHandler ["Hit", {
         if (_curr > 1) then {
             if !(_unit getVariable [QGVAR(dying), false]) then {
                 _unit setVariable [QGVAR(dying), true, true];
-                [_unit, "Unconscious", 1, true] call EFUNC(main,deathBlast);
+                // Warp-sound warning beat (like the Screamer) so players can flee the GBU.
+                [_unit] spawn {
+                    params ["_unit"];
+                    [_unit, ["miscare_screamer", 300]] remoteExec ["say3D"];
+                    uiSleep 3;
+                    [_unit, "Unconscious", 1, true] call EFUNC(main,deathBlast);
+                };
             };
         } else {
             [_unit] remoteExec [QFUNC(StrigoiSplash), [0, -2] select isDedicated];
@@ -93,7 +99,7 @@ for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)pe
 LOG_DEBUG_2("StrigoiMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _strigoi && {!(_strigoi getVariable [QGVAR(captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QGVAR(terminate), false])}} do {
+while {alive _strigoi && {!(_strigoi getVariable [EGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _strigoi getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -111,11 +117,11 @@ while {alive _strigoi && {!(_strigoi getVariable [QGVAR(captured), false])} && {
         continue;
     };
 
-    while {_inRange isEqualTo [] && {!(_strigoi getVariable [QGVAR(terminate), false])}} do {_inRange = [_strigoi, _territory] call FUNC(StrigoiFindTarget); uiSleep 5};
+    while {_inRange isEqualTo [] && {!(_strigoi getVariable [EGVAR(main,terminate), false])}} do {_inRange = [_strigoi, _territory] call FUNC(StrigoiFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"} && {[_x, _strigoi] call EFUNC(main,isAffectable)}});
     [_strigoi, _markerPos, _territory] call FUNC(StrigoiShow);
 
-    while {(!isNil "_tgt") && {(alive _strigoi) && {(_strigoi distance _markerPos) < _territory} && {!(_strigoi getVariable [QGVAR(captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QGVAR(terminate), false])}}} do {
+    while {(!isNil "_tgt") && {(alive _strigoi) && {(_strigoi distance _markerPos) < _territory} && {!(_strigoi getVariable [EGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [EGVAR(main,terminate), false])}}} do {
         _damage = (_strigoi getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", _damage];
         [_inRange] call FUNC(StrigoiDrain);
         _strigoi moveTo AGLToASL (_tgt getRelPos [10, 180]);

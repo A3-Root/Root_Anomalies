@@ -26,6 +26,10 @@ params [["_entity", objNull, [objNull]], ["_amount", 0, [0]], ["_bodyPart", "bod
 if (isNull _entity || {_amount <= 0} || {!([_entity] call FUNC(isDamageable))}) exitWith {false};
 if !([_entity, _anomaly] call FUNC(isAffectable)) exitWith {false};
 
+// Protective/immunity gear mitigation (no-op unless the anomaly defines gear in its config).
+if (!isNull _anomaly) then {_amount = [_anomaly, _entity, _amount] call FUNC(gearMitigate)};
+if (_amount <= 0) exitWith {false};
+
 private _isAce = !isNil "ace_medical_fnc_addDamageToUnit";
 
 if (_isAce && {_entity isKindOf "CAManBase"}) then {

@@ -37,15 +37,20 @@ deleteVehicle _logic;
         ["SLIDER", ["Attack Interval (s)", "Seconds between the Wraith's teleport strikes."], [2, 60, 8, 0]],
         ["SLIDER:PERCENT", ["Damage", "Fraction of fire damage dealt to victims per strike."], [0.01, 1, 0.4, 2]],
         ["SLIDER:RADIUS", ["Fear Radius", "Radius in meters within which the Wraith inflicts dread effects."], [5, 200, 25, 0, _pos, [7, 120, 32, 1]]],
+        ["EDIT", ["Protective Gear (CSV)", "Gear classnames that reduce the Wraith's damage. Empty = none."], [""]],
+        ["SLIDER:PERCENT", ["Protection", "Fraction of damage removed while wearing protective gear."], [0, 1, 0.5, 2]],
+        ["EDIT", ["Immunity Gear (CSV)", "Gear classnames granting full immunity until durability is spent. Empty = none."], [""]],
+        ["COMBO", ["Immunity Mode", "How immunity gear wears out."], [["Infinite", "Time", "Damage"], ["Infinite (never fails)", "Time (seconds)", "Damage (absorbed)"], 0]],
+        ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]],
         ["SIDES", ["Hostile Sides", "Sides the Wraith attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Wraith."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
     ],
     {
         params ["_results", "_markerName"];
-        _results params ["_model", "_health", "_territory", "_interval", "_damage", "_fearRadius", "_sides", "_activation"];
+        _results params ["_model", "_health", "_territory", "_interval", "_damage", "_fearRadius", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides", "_activation"];
 
         ["Wraith Anomaly configured and summoned!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "wraith"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation]];
+        private _config = createHashMapFromArray [["type", "wraith"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
         [_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _config] remoteExec [QFUNC(WraithMain), 2];
     },
     {

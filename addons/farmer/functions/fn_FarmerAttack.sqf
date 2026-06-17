@@ -29,7 +29,7 @@ uiSleep 1.2;
         private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
         if ((typeOf _victim != "VirtualCurator_F") && {_victim isKindOf "CAManBase"}) then {
             _victim setVelocity [_jumpDir select 0, _jumpDir select 1, 9];
-            [_victim, _damage, _bodyPart, "falling"] call EFUNC(main,applyDamage);
+            [_victim, _damage, _bodyPart, "falling", _farmer] call EFUNC(main,applyDamage);
         };
     };
     if ((_victim isKindOf "LandVehicle") && {_victim != _farmer}) then {

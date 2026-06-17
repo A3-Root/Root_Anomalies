@@ -37,4 +37,4 @@ private _builds = nearestObjects [position _flamer, ["BUILDING", "HOUSE", "CHURC
 } forEach _men;
 
 // Cinematic GBU-strength blast (deletion handled by FlamerMain).
-[getPosATL _flamer, "", 1, false] call EFUNC(main,deathBlast);
+[_flamer, "", 1, false] call EFUNC(main,deathBlast);

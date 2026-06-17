@@ -56,11 +56,11 @@ LOG_DEBUG_1("SmugglerMain spawned at %1",_pos);
 
 if (_spawnList isNotEqualTo []) then {
     if (_spawnDelay <= 0) then {_spawnDelay = 10};
-    [_spawnList, _core, _spawnDelay] spawn FUNC(SmugglerSpawn);
+    [_spawnList, _core, _spawnDelay, _source] spawn FUNC(SmugglerSpawn);
 };
 
 if (_roaming) then {
-    while {!isNull _source && {!(_source getVariable [QGVAR(terminate), false])}} do {
+    while {!isNull _source && {!(_source getVariable [EGVAR(main,terminate), false])}} do {
         private _cur = getPosATL _source;
         private _new = [_cur, 0.01, 0.3, 1, 0, -1, 0] call BIS_fnc_findSafePos;
         _source setPos [_new select 0, _new select 1, _cur select 2];

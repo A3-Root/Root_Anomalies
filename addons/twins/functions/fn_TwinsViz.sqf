@@ -55,7 +55,7 @@ params ["_twins", ["_dmgRange", 75, [0]]];
                 // Damage is opt-in: 0 (default) = disorientation effects only.
                 private _dmg = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", 0];
                 if (_dmg > 0 && {!([player, "twins"] call EFUNC(main,isWhitelisted))}) then {
-                    [player, _dmg, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"]] call EFUNC(main,applyDamage);
+                    [player, _dmg, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"], _twins] call EFUNC(main,applyDamage);
                 };
                 uiSleep 5;
                 _canDamage = true;

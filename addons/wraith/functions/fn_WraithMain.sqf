@@ -38,10 +38,11 @@ _obj setVariable ["BIS_fnc_animalBehaviour_disable", true];
 _obj setSpeaker "NoVoice";
 _obj disableConversation true;
 _obj setBehaviour "CARELESS";
-_obj setCaptive true;
+_obj addRating -10000;
 _obj enableFatigue false;
 _obj disableAI "ALL";
-_obj enableSimulationGlobal false;
+_obj enableSimulationGlobal true;
+_obj setUnitPos "UP";
 _obj setSkill ["courage", 1];
 {_obj setObjectTextureGlobal [_x, "#(argb,8,8,3)color(0,0,0,0.55)"]} forEach [0, 1, 2, 3, 4, 5];
 _obj setVariable [QGVAR(dmgTotal), 0];
@@ -73,7 +74,7 @@ _obj addEventHandler ["HandleDamage", {
 
 LOG_DEBUG_2("WraithMain spawned at %1 (territory %2)",_pos,_territory);
 
-while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])} && {!(_obj getVariable [QGVAR(terminate), false])}} do {
+while {alive _obj && {!(_obj getVariable [EGVAR(main,captured), false])} && {!(_obj getVariable [EGVAR(main,terminate), false])}} do {
     private _cfg = _obj getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -105,7 +106,7 @@ while {alive _obj && {!(_obj getVariable [QGVAR(captured), false])} && {!(_obj g
 };
 
 // Terminate API deletes the Wraith itself; only run the death sound/cleanup otherwise.
-if !(_obj getVariable [QGVAR(terminate), false]) then {
+if !(_obj getVariable [EGVAR(main,terminate), false]) then {
     [_obj, ["explozie_2", 600]] remoteExec ["say3D"];
     uiSleep 3;
     deleteVehicle _obj;
