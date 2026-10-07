@@ -39,15 +39,15 @@ _core setVariable [QGVAR(active), false, true];
 _core setVariable [QGVAR(staticObjs), [], true];
 _core setVariable [QGVAR(dynUnits), [], true];
 
-while {!isNull _core && {!isNull _source} && {!(_source getVariable [EGVAR(main,terminate), false])}} do {
-    while {!(_core getVariable [QGVAR(active), false]) && {!(_source getVariable [EGVAR(main,terminate), false])}} do {
+while {!isNull _core && {!isNull _source} && {!(_source getVariable [QEGVAR(main,terminate), false])}} do {
+    while {!(_core getVariable [QGVAR(active), false]) && {!(_source getVariable [QEGVAR(main,terminate), false])}} do {
         {if (_x distance getPos _core < 1100) exitWith {_core setVariable [QGVAR(active), true, true]}} forEach allPlayers;
         uiSleep 10;
     };
-    if (_source getVariable [EGVAR(main,terminate), false]) exitWith {};
+    if (_source getVariable [QEGVAR(main,terminate), false]) exitWith {};
     _core setVariable [QGVAR(active), false, true];
 
-    private _cfg = _source getVariable [EGVAR(main,config), createHashMap];
+    private _cfg = _source getVariable [QEGVAR(main,config), createHashMap];
     private _staticLimit = _cfg getOrDefault ["staticLimit", 0];
     private _dynLimit = _cfg getOrDefault ["dynLimit", 0];
 

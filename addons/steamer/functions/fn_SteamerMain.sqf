@@ -51,16 +51,16 @@ _steamer enableSimulationGlobal false;
 LOG_DEBUG_2("SteamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _steamer && {!(_steamer getVariable [EGVAR(main,captured), false])} && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {
+while {alive _steamer && {!(_steamer getVariable [QEGVAR(main,captured), false])} && {!(_steamer getVariable [QEGVAR(main,terminate), false])}} do {
     private _cfg = _steamer getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
-    while {_inRange isEqualTo [] && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
+    while {_inRange isEqualTo [] && {!(_steamer getVariable [QEGVAR(main,terminate), false])}} do {_inRange = [_steamer, _territory] call FUNC(SteamerFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {[_x, _steamer] call EFUNC(main,isAffectable)}});
     uiSleep 0.5;
 
-    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [EGVAR(main,captured), false])} && {!(_steamer getVariable [EGVAR(main,terminate), false])}} do {
+    while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QEGVAR(main,captured), false])} && {!(_steamer getVariable [QEGVAR(main,terminate), false])}} do {
         _cfg = _steamer getVariable [QGVAR(config), createHashMap];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];
@@ -91,7 +91,7 @@ while {alive _steamer && {!(_steamer getVariable [EGVAR(main,captured), false])}
 };
 
 // Terminate API removes the Steamer cleanly, without the death geyser/area damage.
-if (_steamer getVariable [EGVAR(main,terminate), false]) exitWith {};
+if (_steamer getVariable [QEGVAR(main,terminate), false]) exitWith {};
 
 waitUntil {!alive _steamer};
 [getPosATL _steamer] remoteExec [QFUNC(SteamerEnd), [0, -2] select isDedicated];

@@ -74,7 +74,7 @@ _obj addEventHandler ["HandleDamage", {
 
 LOG_DEBUG_2("WraithMain spawned at %1 (territory %2)",_pos,_territory);
 
-while {alive _obj && {!(_obj getVariable [EGVAR(main,captured), false])} && {!(_obj getVariable [EGVAR(main,terminate), false])}} do {
+while {alive _obj && {!(_obj getVariable [QEGVAR(main,captured), false])} && {!(_obj getVariable [QEGVAR(main,terminate), false])}} do {
     private _cfg = _obj getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -106,7 +106,7 @@ while {alive _obj && {!(_obj getVariable [EGVAR(main,captured), false])} && {!(_
 };
 
 // Terminate API deletes the Wraith itself; only run the death sound/cleanup otherwise.
-if !(_obj getVariable [EGVAR(main,terminate), false]) then {
+if !(_obj getVariable [QEGVAR(main,terminate), false]) then {
     [_obj, ["explozie_2", 600]] remoteExec ["say3D"];
     uiSleep 3;
     deleteVehicle _obj;

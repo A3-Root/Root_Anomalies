@@ -23,7 +23,7 @@ if (isNull _proj) exitWith {};
 
 {
     private _head = _x;
-    private _cfg = _head getVariable [EGVAR(main,config), createHashMap];
+    private _cfg = _head getVariable [QEGVAR(main,config), createHashMap];
     private _terr = _cfg getOrDefault ["territory", 200];
     if (_proj distance _head <= _terr) then {
         private _forceN = _cfg getOrDefault ["forceN", 3];

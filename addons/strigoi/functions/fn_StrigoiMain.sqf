@@ -99,7 +99,7 @@ for "_i" from 0 to 5 do {_strigoi setObjectTextureGlobal [_i, "#(ai,512,512,1)pe
 LOG_DEBUG_2("StrigoiMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
-while {alive _strigoi && {!(_strigoi getVariable [EGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [EGVAR(main,terminate), false])}} do {
+while {alive _strigoi && {!(_strigoi getVariable [QEGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QEGVAR(main,terminate), false])}} do {
     private _cfg = _strigoi getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -117,11 +117,11 @@ while {alive _strigoi && {!(_strigoi getVariable [EGVAR(main,captured), false])}
         continue;
     };
 
-    while {_inRange isEqualTo [] && {!(_strigoi getVariable [EGVAR(main,terminate), false])}} do {_inRange = [_strigoi, _territory] call FUNC(StrigoiFindTarget); uiSleep 5};
+    while {_inRange isEqualTo [] && {!(_strigoi getVariable [QEGVAR(main,terminate), false])}} do {_inRange = [_strigoi, _territory] call FUNC(StrigoiFindTarget); uiSleep 5};
     private _tgt = selectRandom (_inRange select {(typeOf _x != "VirtualCurator_F") && {lifeState _x != "INCAPACITATED"} && {[_x, _strigoi] call EFUNC(main,isAffectable)}});
     [_strigoi, _markerPos, _territory] call FUNC(StrigoiShow);
 
-    while {(!isNil "_tgt") && {(alive _strigoi) && {(_strigoi distance _markerPos) < _territory} && {!(_strigoi getVariable [EGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [EGVAR(main,terminate), false])}}} do {
+    while {(!isNil "_tgt") && {(alive _strigoi) && {(_strigoi distance _markerPos) < _territory} && {!(_strigoi getVariable [QEGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QEGVAR(main,terminate), false])}}} do {
         _damage = (_strigoi getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", _damage];
         [_inRange] call FUNC(StrigoiDrain);
         _strigoi moveTo AGLToASL (_tgt getRelPos [10, 180]);

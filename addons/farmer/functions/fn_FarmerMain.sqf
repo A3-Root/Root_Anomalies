@@ -94,7 +94,7 @@ _farmer enableSimulationGlobal false;
 
 LOG_DEBUG_2("FarmerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-while {alive _farmer && {!(_farmer getVariable [EGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [EGVAR(main,terminate), false])}} do {
+while {alive _farmer && {!(_farmer getVariable [QEGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QEGVAR(main,terminate), false])}} do {
     private _cfg = _farmer getVariable [QGVAR(config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
@@ -103,7 +103,7 @@ while {alive _farmer && {!(_farmer getVariable [EGVAR(main,captured), false])} &
     private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
     private _ckPl = false;
     _farmer setUnitPos "UP";
-    while {!_ckPl && {!(_farmer getVariable [EGVAR(main,terminate), false])}} do {
+    while {!_ckPl && {!(_farmer getVariable [QEGVAR(main,terminate), false])}} do {
         {
             if (_x distance _markerPos < _activation) exitWith {_ckPl = true};
         } forEach allPlayers;
@@ -119,7 +119,7 @@ while {alive _farmer && {!(_farmer getVariable [EGVAR(main,captured), false])} &
     [_farmer, _markerPos] call FUNC(FarmerShow);
 
     while {
-        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [EGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [EGVAR(main,terminate), false])}}
+        (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [QEGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QEGVAR(main,terminate), false])}}
     } do {
         _cfg = _farmer getVariable [QGVAR(config), createHashMap];
         _territory = _cfg getOrDefault ["territory", _territory];

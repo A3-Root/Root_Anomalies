@@ -56,7 +56,7 @@ LOG_DEBUG_2("WormMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 // Emergence: wait for a target, then erupt.
 private _hidden = true;
-while {_hidden && {!(_head getVariable [EGVAR(main,terminate), false])}} do {
+while {_hidden && {!(_head getVariable [QEGVAR(main,terminate), false])}} do {
     uiSleep 2;
     private _near = (_markerPos nearEntities [["CAManBase", "LandVehicle"], _territory]) select {[_x, _head] call EFUNC(main,isAffectable)};
     if (_near isNotEqualTo []) then {
@@ -72,7 +72,7 @@ while {_hidden && {!(_head getVariable [EGVAR(main,terminate), false])}} do {
     };
 };
 
-if (isNull _head || {_head getVariable [EGVAR(main,terminate), false]}) exitWith {};
+if (isNull _head || {_head getVariable [QEGVAR(main,terminate), false]}) exitWith {};
 
 uiSleep 1;
 resetCamShake;
@@ -83,8 +83,8 @@ addCamShake [1, 4, 23];
 [_head] remoteExec [QFUNC(WormBump), [0, -2] select isDedicated];
 uiSleep 1;
 
-while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} do {
-    private _cfg = _head getVariable [EGVAR(main,config), createHashMap];
+while {!isNull _head && {!(_head getVariable [QEGVAR(main,terminate), false])}} do {
+    private _cfg = _head getVariable [QEGVAR(main,config), createHashMap];
     _damage = _cfg getOrDefault ["damage", _damage];
     _territory = _cfg getOrDefault ["territory", _territory];
     private _forceCls = _cfg getOrDefault ["forceTarget", ""];
