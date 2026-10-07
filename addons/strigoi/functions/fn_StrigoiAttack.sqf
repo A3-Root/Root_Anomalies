@@ -22,7 +22,7 @@ params ["_strigoi", "_tgt", "_dmg"];
 if ((isPlayer _tgt) && {typeOf _tgt != "VirtualCurator_F"}) then {
     [_dmg, _strigoi] remoteExec [QFUNC(StrigoiTgt), _tgt];
 } else {
-    if ((_tgt isKindOf "Man") && {_tgt != _strigoi} && {typeOf _tgt != "VirtualCurator_F"}) then {
+    if ((_tgt isKindOf "Man") && _tgt != _strigoi && {typeOf _tgt != "VirtualCurator_F"}) then {
         [_tgt, _dmg, ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65], selectRandom ["backblast", "bullet", "explosive", "grenade"], _strigoi] call EFUNC(main,applyDamage);
     };
 };

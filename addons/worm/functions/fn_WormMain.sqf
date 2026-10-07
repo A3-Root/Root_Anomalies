@@ -95,7 +95,7 @@ while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} d
     // the next few attacks, letting players bait it away from themselves.
     private _forceObj = _head getVariable [QGVAR(forceObj), objNull];
     private _forceCount = _head getVariable [QGVAR(forceCount), 0];
-    if (_forceCls isNotEqualTo "" && {isNull _forceObj || {_forceCount <= 0}}) then {
+    if (_forceCls isNotEqualTo "" && {isNull _forceObj || _forceCount <= 0}) then {
         private _found = nearestObjects [_markerPos, [_forceCls], _territory];
         if (_found isNotEqualTo []) then {
             _forceObj = _found select 0;
@@ -104,7 +104,7 @@ while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} d
             _head setVariable [QGVAR(forceCount), _forceCount, true];
         };
     };
-    if (!isNull _forceObj && {_forceCount <= 0}) then {
+    if (!isNull _forceObj && _forceCount <= 0) then {
         _forceObj = objNull;
         _head setVariable [QGVAR(forceObj), objNull, true];
     };
@@ -112,7 +112,7 @@ while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} d
     if (_near isNotEqualTo [] || {!isNull _forceObj}) then {
         private _tgt = objNull;
         if (isNull _forceObj) then {_tgt = selectRandom _near} else {_tgt = _forceObj};
-        private _isForce = (!isNull _forceObj) && {_tgt isEqualTo _forceObj};
+        private _isForce = (!isNull _forceObj) && _tgt isEqualTo _forceObj;
 
         if ((_tgt distance _head < 15) && {!(surfaceIsWater getPos _tgt)}) then {
             if (_aiPanic) then {[_head, _near] call FUNC(WormAvoid)};
@@ -124,7 +124,7 @@ while {!isNull _head && {!(_head getVariable [EGVAR(main,terminate), false])}} d
             [_head, _tail] remoteExec [QFUNC(WormAttack), [0, -2] select isDedicated];
 
             {
-                if ((_x != _head) && {_x != _tail} && {_x != _tail2} && {!(surfaceIsWater getPos _x)}) then {
+                if ((_x != _head) && _x != _tail && _x != _tail2 && {!(surfaceIsWater getPos _x)}) then {
                     if ((_x isKindOf "LandVehicle") || {_x isKindOf "Air"}) then {
                         [_x, [_px * 5, _py * 5, 15 + random 10]] remoteExec ["setVelocityModelSpace", _x];
                         [_x, _damage] call FUNC(WormVehicleDamage);

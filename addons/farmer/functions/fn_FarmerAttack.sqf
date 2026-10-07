@@ -24,7 +24,7 @@ private _targets = ((ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "La
 uiSleep 1.2;
 {
     private _victim = _x;
-    if (!(isPlayer _victim) && {_victim != _farmer}) then {
+    if (!(isPlayer _victim) && _victim != _farmer) then {
         private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _victim) vectorMultiply 3;
         private _bodyPart = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"] selectRandomWeighted [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
         if ((typeOf _victim != "VirtualCurator_F") && {_victim isKindOf "CAManBase"}) then {
@@ -32,7 +32,7 @@ uiSleep 1.2;
             [_victim, _damage, _bodyPart, "falling", _farmer] call EFUNC(main,applyDamage);
         };
     };
-    if ((_victim isKindOf "LandVehicle") && {_victim != _farmer}) then {
+    if ((_victim isKindOf "LandVehicle") && _victim != _farmer) then {
         private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _victim) vectorMultiply 5;
         _victim setVelocity [_jumpDir select 0, _jumpDir select 1, 7];
         if ([_victim] call EFUNC(main,isAffectable) && {[_victim] call EFUNC(main,isDamageable)}) then {

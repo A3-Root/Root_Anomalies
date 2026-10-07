@@ -50,7 +50,7 @@ deleteVehicle _logic;
         params ["_results", "_markerName"];
         _results params ["_health", "_override", "_territory", "_aiPanic", "_damage", "_recharge", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides", "_activation"];
 
-        if (!_override && {_territory < 75}) then {_territory = 75};
+        if (!_override && _territory < 75) then {_territory = 75};
 
         ["Farmer Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "farmer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];

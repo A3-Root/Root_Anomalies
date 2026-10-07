@@ -65,7 +65,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
         _trackDist = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["trackDist", _trackDist];
         private _closest = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _trackDist];
         if ((_twins getVariable [QGVAR(visible), 0]) < 1) then {
-            if ((_closest isNotEqualTo []) && {_allowMove > 10}) then {
+            if ((_closest isNotEqualTo []) && _allowMove > 10) then {
                 private _closer = _closest select 0;
                 if ((_closer distance _twins) > _dmgRange) then {
                     private _dir = [_closer, _twins] call BIS_fnc_dirTo;

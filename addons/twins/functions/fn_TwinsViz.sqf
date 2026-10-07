@@ -24,7 +24,6 @@ params ["_twins", ["_dmgRange", 75, [0]]];
 // Proximity disorientation + damage.
 [_twins, _dmgRange] spawn {
     params ["_twins", "_dmgRange"];
-    private _canDamage = true;
     while {alive _twins} do {
         waitUntil {uiSleep 0.2; player distance _twins < _dmgRange};
         if (typeOf player != "VirtualCurator_F") then {
@@ -49,8 +48,8 @@ params ["_twins", ["_dmgRange", 75, [0]]];
                     resetCamShake;
                 };
             };
-            if (_canDamage) then {
-                _canDamage = false;
+            // the cooldown sleep below runs in this scheduled loop, so hits never overlap
+            call {
                 playSound "sound_twin";
                 // Damage is opt-in: 0 (default) = disorientation effects only.
                 private _dmg = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", 0];
@@ -58,7 +57,6 @@ params ["_twins", ["_dmgRange", 75, [0]]];
                     [player, _dmg, "body", selectRandom ["backblast", "bullet", "explosive", "grenade"], _twins] call EFUNC(main,applyDamage);
                 };
                 uiSleep 5;
-                _canDamage = true;
             };
         };
     };
@@ -80,7 +78,7 @@ while {alive _twins} do {
             };
         } else {
             private _metalSound = selectRandom ["metalic1", "metalic2", "metalic3", "metalic4", "metalic5"];
-            if ((_sunIni != _metalSound) && {_token > 12}) then {_twins say3D [_metalSound, 1500]; _token = 0};
+            if ((_sunIni != _metalSound) && _token > 12) then {_twins say3D [_metalSound, 1500]; _token = 0};
             _token = _token + 0.2;
             _sunIni = _metalSound;
             if (_vizFct > 0) then {

@@ -18,7 +18,7 @@ params ["_dir"];
 private _px = 0;
 private _py = 0;
 if (_dir <= 90) then {_px = linearConversion [0, 90, _dir, 0, 1, true]; _py = 1 - _px};
-if ((_dir > 90) && {_dir < 180}) then {_px = linearConversion [0, 90, _dir - 90, 1, 0, true]; _py = _px - 1};
-if ((_dir > 180) && {_dir < 270}) then {_px = linearConversion [0, 90, _dir - 180, 0, -1, true]; _py = (-1 * _px) - 1};
-if ((_dir > 270) && {_dir < 360}) then {_px = linearConversion [0, 90, _dir - 270, -1, 0, true]; _py = 1 + _px};
+if ((_dir > 90) && _dir < 180) then {_px = linearConversion [0, 90, _dir - 90, 1, 0, true]; _py = _px - 1};
+if ((_dir > 180) && _dir < 270) then {_px = linearConversion [0, 90, _dir - 180, 0, -1, true]; _py = (-1 * _px) - 1};
+if ((_dir > 270) && _dir < 360) then {_px = linearConversion [0, 90, _dir - 270, -1, 0, true]; _py = 1 + _px};
 [_px, _py]

@@ -51,7 +51,7 @@ if (_whitelist isNotEqualTo [] && {!([_whitelist, _ammoCls, _projCls] call FUNC(
 if (_cfg getOrDefault ["enrageOnDamage", false]) then {
     private _attacker = _instigator;
     if (isNull _attacker) then { _attacker = _source; };
-    if (!isNull _attacker && {_attacker != _unit}) then {
+    if (!isNull _attacker && _attacker != _unit) then {
         _unit setVariable [QGVAR(pendingAttacker), _attacker, true];
     };
 };

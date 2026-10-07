@@ -27,7 +27,7 @@ private _damage = _logic getVariable ["ROOT_STRIGOI_DAMAGE", 0.6];
 private _aiPanic = _logic getVariable ["ROOT_STRIGOI_AIPANIC", false];
 private _nightOnly = _logic getVariable ["ROOT_STRIGOI_NIGHTONLY", false];
 
-if (!_override && {_territory < 75}) then {_territory = 75};
+if (!_override && _territory < 75) then {_territory = 75};
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_STRIGOI_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_STRIGOI_IDX", _idx + 1];

@@ -28,7 +28,7 @@ private _damage = _logic getVariable ["ROOT_WORM_DAMAGE", 0.6];
 private _forceTgt = _logic getVariable ["ROOT_WORM_FORCETGT", ""];
 private _forceN = _logic getVariable ["ROOT_WORM_FORCEN", 3];
 
-if (!_override && {_territory < 200}) then {_territory = 200};
+if (!_override && _territory < 200) then {_territory = 200};
 if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_WORM_IDX", 0];

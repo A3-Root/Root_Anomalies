@@ -28,7 +28,7 @@ private _recharge = _logic getVariable ["ROOT_FLAMER_RECHARGE", 1];
 private _deathDamage = _logic getVariable ["ROOT_FLAMER_DEATHDMG", 1];
 private _aiPanic = _logic getVariable ["ROOT_FLAMER_AIPANIC", false];
 
-if (!_override && {_territory < 75}) then {_territory = 75};
+if (!_override && _territory < 75) then {_territory = 75};
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_FLAMER_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_FLAMER_IDX", _idx + 1];

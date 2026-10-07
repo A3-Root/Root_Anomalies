@@ -27,7 +27,7 @@ private _recharge = _logic getVariable ["ROOT_STEAMER_RECHARGE", 10];
 private _deathDamage = _logic getVariable ["ROOT_STEAMER_DEATHDMG", 0.6];
 private _travelPath = _logic getVariable ["ROOT_STEAMER_TRAVELPATH", false];
 
-if (!_override && {_territory < 75}) then {_territory = 75};
+if (!_override && _territory < 75) then {_territory = 75};
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_STEAMER_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_STEAMER_IDX", _idx + 1];

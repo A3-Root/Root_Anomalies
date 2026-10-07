@@ -87,7 +87,6 @@ while {alive _steamer && {!(_steamer getVariable [EGVAR(main,captured), false])}
         _inRange = [_steamer, _territory] call FUNC(SteamerFindTarget);
         if (_inRange isNotEqualTo []) then {_tgt = selectRandom _inRange} else {_tgt = nil};
     };
-    _tgt = nil;
     _inRange = [];
 };
 

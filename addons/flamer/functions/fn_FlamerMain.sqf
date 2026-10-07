@@ -153,7 +153,6 @@ while {alive _flamer && {!(_flamer getVariable [EGVAR(main,captured), false])} &
     };
 
     [_flamer] call FUNC(FlamerHide);
-    _tgt = nil;
     _inRange = [];
     uiSleep (_recharge + 2);
 };

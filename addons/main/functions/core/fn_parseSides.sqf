@@ -28,7 +28,7 @@ private _result = [];
     private _key = toUpper _x;
     if (_key in _map) then {
         private _s = _map get _key;
-        if (!(_s in _result)) then { _result pushBack _s; };
+        _result pushBackUnique _s;
     };
 } forEach ([_csv] call FUNC(parseClassList));
 

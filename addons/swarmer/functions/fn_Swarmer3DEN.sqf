@@ -30,7 +30,7 @@ private _damage = _logic getVariable ["ROOT_SWARMER_DAMAGE", 0.6];
 if (getNumber (configFile >> "CfgVehicles" >> _hiveClass >> "scope") <= 0) then {_hiveClass = "Land_GarbageBags_F"};
 if (getNumber (configFile >> "CfgVehicles" >> _pesticide >> "scope") <= 0) then {_pesticide = "SmokeShellGreen"};
 if (_disablePesticide) then {_pesticide = ""};
-if (!_override && {_territory < 75}) then {_territory = 75};
+if (!_override && _territory < 75) then {_territory = 75};
 
 private _hive = _hiveClass createVehicle getPosATL _logic;
 

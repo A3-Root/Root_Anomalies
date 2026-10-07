@@ -31,7 +31,7 @@ private _bestDist = 1e11;
     if (_target isEqualType objNull) then { _pos = getPosATL _target; };
     if (_pos isNotEqualTo []) then {
         private _d = _objPos distance _pos;
-        if (_d <= _radius && {_d < _bestDist}) then { _bestDist = _d; _best = _pos; };
+        if (_d <= _radius && _d < _bestDist) then { _bestDist = _d; _best = _pos; };
     };
 } forEach GVAR(baits);
 

@@ -28,7 +28,7 @@ while {
 } do {
     if ((_height < 0.61) && {!_descending}) then {_height = _height + 0.01};
     if (_height > 0.61) then {_descending = true};
-    if (_descending && {_height > 0.2}) then {_height = _height - 0.01};
+    if (_descending && _height > 0.2) then {_height = _height - 0.01};
     if (_height < 0.2) then {_descending = false};
     _dir = _dir + 2;
     _sphere setDir _dir;

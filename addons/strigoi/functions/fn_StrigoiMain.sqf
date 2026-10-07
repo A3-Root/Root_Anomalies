@@ -164,7 +164,6 @@ while {alive _strigoi && {!(_strigoi getVariable [EGVAR(main,captured), false])}
     };
 
     [_strigoi] call FUNC(StrigoiHide);
-    _tgt = nil;
     _inRange = [];
     _strigoi moveTo _markerPos;
     uiSleep 5;

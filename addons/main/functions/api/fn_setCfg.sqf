@@ -20,5 +20,5 @@
 
 params [["_obj", objNull, [objNull]], ["_key", "", [""]], ["_value", 0]];
 
-if (isNull _obj || {_key isEqualTo ""}) exitWith {};
+if (isNull _obj || _key isEqualTo "") exitWith {};
 [_obj, createHashMapFromArray [[_key, _value]]] call API(configure);

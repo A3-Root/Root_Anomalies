@@ -162,8 +162,8 @@ while {alive _entity && {!(_entityObj getVariable [EGVAR(main,captured), false])
             _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
             if (count _near < 2) then {_teleport = true};
 
-            private _tgt = (_near select {((side _x) in _hostiles) && {typeOf _x != "VirtualCurator_F"} && {alive _x} && {(lifeState _x) != "INCAPACITATED"} && {_x != _entity} && {_x != _anomaly} && {!([_x, "screamer"] call EFUNC(main,isWhitelisted))}}) param [0, _entity];
-            if ((isNull _tgt) || {_tgt == _entity}) then {continue};
+            private _tgt = (_near select {((side _x) in _hostiles) && {typeOf _x != "VirtualCurator_F"} && {alive _x} && {(lifeState _x) != "INCAPACITATED"} && _x != _entity && _x != _anomaly && {!([_x, "screamer"] call EFUNC(main,isWhitelisted))}}) param [0, _entity];
+            if ((isNull _tgt) || _tgt == _entity) then {continue};
 
             private _targetPos = getPosATL _tgt;
             private _wave = createVehicle ["Land_Battery_F", position _entityObj, [], 0, "CAN_COLLIDE"];
@@ -189,16 +189,16 @@ while {alive _entity && {!(_entityObj getVariable [EGVAR(main,captured), false])
             private _px = 0;
             private _py = 0;
             if (_dir <= 90) then {_px = linearConversion [0, 90, _dir, 0, 1, true]; _py = 1 - _px};
-            if ((_dir > 90) && {_dir < 180}) then {_px = linearConversion [0, 90, _dir - 90, 1, 0, true]; _py = _px - 1};
-            if ((_dir > 180) && {_dir < 270}) then {_px = linearConversion [0, 90, _dir - 180, 0, -1, true]; _py = (-1 * _px) - 1};
-            if ((_dir > 270) && {_dir < 360}) then {_px = linearConversion [0, 90, _dir - 270, -1, 0, true]; _py = 1 + _px};
+            if ((_dir > 90) && _dir < 180) then {_px = linearConversion [0, 90, _dir - 90, 1, 0, true]; _py = _px - 1};
+            if ((_dir > 180) && _dir < 270) then {_px = linearConversion [0, 90, _dir - 180, 0, -1, true]; _py = (-1 * _px) - 1};
+            if ((_dir > 270) && _dir < 360) then {_px = linearConversion [0, 90, _dir - 270, -1, 0, true]; _py = 1 + _px};
 
             if (_aiPanic) then {[_entity, _territory, _screamTargets] call FUNC(ScreamerAvoid)};
 
             private _anomalyPos = position _entityObj;
             private _overall = nearestObjects [_anomalyPos, _screamDmgTypes, _radius];
             private _front = _overall select {
-                (_x != _anomaly) && {_x != _entity} && {
+                (_x != _anomaly) && _x != _entity && {
                     ((_entity getRelDir _x > 299) && {_entity getRelDir _x < 361}) || {(_entity getRelDir _x > -1) && {_entity getRelDir _x < 61}}
                 }
             };

@@ -50,7 +50,7 @@ _obj setVariable [QGVAR(dmgIncr), 1 / _health];
 _obj allowDamage true;
 _obj addEventHandler ["HandleDamage", {
     params ["_unit", "_sel", "_dmg", "_source"];
-    if ((!isNull _source) && {_source != _unit}) then {
+    if ((!isNull _source) && _source != _unit) then {
         private _curr = (_unit getVariable [QGVAR(dmgTotal), 0]) + (_unit getVariable [QGVAR(dmgIncr), 0]);
         _unit setVariable [QGVAR(dmgTotal), _curr];
         if (_curr > 1) then {_unit setDamage 1};
@@ -84,7 +84,7 @@ while {alive _obj && {!(_obj getVariable [EGVAR(main,captured), false])} && {!(_
 
     if (allPlayers findIf {_x distance _obj < _activation} != -1) then {
         private _candidates = ((position _obj) nearEntities ["CAManBase", _territory]) select {
-            (alive _x) && {typeOf _x != "VirtualCurator_F"} && {_x != _obj} && {[_x, _obj] call EFUNC(main,isAffectable)}
+            (alive _x) && {typeOf _x != "VirtualCurator_F"} && _x != _obj && {[_x, _obj] call EFUNC(main,isAffectable)}
         };
         LOG_DEBUG_2("WraithMain tick: %1 candidate(s) within %2m",count _candidates,_territory);
         if (_candidates isNotEqualTo []) then {
@@ -96,7 +96,7 @@ while {alive _obj && {!(_obj getVariable [EGVAR(main,captured), false])} && {!(_
             [_obj, ["furnal", 400]] remoteExec ["say3D"];
 
             {
-                if ((typeOf _x != "VirtualCurator_F") && {alive _x} && {_x != _obj} && {[_x, _obj] call EFUNC(main,isAffectable)}) then {
+                if ((typeOf _x != "VirtualCurator_F") && {alive _x} && _x != _obj && {[_x, _obj] call EFUNC(main,isAffectable)}) then {
                     [_x, _damage, "body", "burn", _obj] call EFUNC(main,applyDamage);
                 };
             } forEach ((position _obj) nearEntities ["CAManBase", _fearRadius]);

@@ -49,7 +49,7 @@ deleteVehicle _logic;
         params ["_results", "_markerName"];
         _results params ["_override", "_territory", "_aiPanic", "_diffuser", "_damage", "_forceTgt", "_forceN", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides"];
 
-        if (!_override && {_territory < 200}) then {_territory = 200};
+        if (!_override && _territory < 200) then {_territory = 200};
         if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
 
         ["Worm Anomaly configured and active!"] call zen_common_fnc_showMessage;

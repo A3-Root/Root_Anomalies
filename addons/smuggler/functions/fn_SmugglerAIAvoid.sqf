@@ -20,7 +20,7 @@ while {alive _obj} do {
     private _detector = _obj getVariable [QGVAR(detector), ""];
     {
         private _unit = _x;
-        if ((local _unit) && {_detector != ""} && {[_unit, _detector] call BIS_fnc_hasItem}) then {
+        if ((local _unit) && _detector != "" && {[_unit, _detector] call BIS_fnc_hasItem}) then {
             private _relDir = [_unit, getPos _obj] call BIS_fnc_dirTo;
             private _fct = selectRandom [30, -30];
             private _opDir = if (_relDir < 180) then {_relDir + 180 + _fct} else {_relDir - 180 + _fct};

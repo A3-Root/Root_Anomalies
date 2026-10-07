@@ -35,7 +35,7 @@ private _h = [{
         private _t = typeOf _x;
         {
             private _cls = _x;
-            if ((_t isKindOf [_cls, configFile >> "CfgAmmo"]) || {_t == _cls}) exitWith { _found = true; };
+            if ((_t isKindOf [_cls, configFile >> "CfgAmmo"]) || _t == _cls) exitWith { _found = true; };
         } forEach _classes;
         if (_found) exitWith {};
     } forEach ((getPosATL _obj) nearObjects _radius);

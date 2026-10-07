@@ -61,7 +61,7 @@ while {alive _obj} do {
 
     if (player distance _obj < _fearRadius) then {
         addCamShake [2 + random 3, 2, 30];
-        if (!_seizureSafe && {_aberration < 0}) then {
+        if (!_seizureSafe && _aberration < 0) then {
             _aberration = ppEffectCreate ["ChromAberration", 220];
             _aberration ppEffectEnable true;
             _aberration ppEffectAdjust [0.6, 0.5, true];
