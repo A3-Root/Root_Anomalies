@@ -45,6 +45,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("ScreamerMain entry: called with %1",_this);
+
 uiSleep 3;
 
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];

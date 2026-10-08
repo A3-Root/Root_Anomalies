@@ -17,6 +17,8 @@
 
 params ["_logic", "_units", "_activated"];
 
+LOG_DEBUG_1("Burper3DEN entry: called with %1",_this);
+
 if (!_activated) exitWith {};
 if (!isServer) exitWith {};
 if (is3DEN) exitWith {};

@@ -18,6 +18,8 @@ if (!isServer) exitWith {};
 
 params ["_obj", ["_radius", 10, [0]], ["_vehicleAllowed", true, [false]]];
 
+LOG_DEBUG_1("BurperTrap entry: called with %1",_this);
+
 private _types = if (_vehicleAllowed) then {["Man", "LandVehicle"]} else {["Man"]};
 private _screams = ["strigat_1", "strigat_2", "strigat_3", "strigat_4", "strigat_5", "strigat_6", "strigat_7", "strigat_8", "strigat_9", "strigat_91", "strigat_92"];
 

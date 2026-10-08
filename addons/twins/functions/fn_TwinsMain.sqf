@@ -33,6 +33,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("TwinsMain entry: called with %1",_this);
+
 if (isNull _twins) exitWith {};
 
 private _heart = _heartClass createVehicle [0, 0, 0];

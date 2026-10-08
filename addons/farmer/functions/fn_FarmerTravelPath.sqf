@@ -16,6 +16,8 @@
 
 params ["_farmer", "_tgt"];
 
+LOG_DEBUG_1("FarmerTravelPath entry: called with %1",_this);
+
 _farmer setUnitPos "DOWN";
 private _ragProp = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, getPosATL _farmer select 1, 3000];
 private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _tgt) vectorMultiply 20;

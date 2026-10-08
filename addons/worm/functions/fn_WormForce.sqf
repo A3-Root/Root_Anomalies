@@ -19,6 +19,8 @@ if (!isServer) exitWith {};
 
 params [["_proj", objNull, [objNull]]];
 
+LOG_DEBUG_1("WormForce entry: called with %1",_this);
+
 if (isNull _proj) exitWith {};
 
 {

@@ -36,6 +36,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("BurperMain entry: called with %1",_this);
+
 private _pos = getMarkerPos _marker;
 private _obj = "Land_HelipadEmpty_F" createVehicle [_pos select 0, _pos select 1, 2];
 

@@ -16,6 +16,8 @@ if (!hasInterface) exitWith {};
 
 params ["_objEff"];
 
+LOG_DEBUG_1("ScreamerTeleport entry: called with %1",_this);
+
 _objEff say3D ["teleport_screamer", 500];
 addCamShake [1, 5, 25];
 

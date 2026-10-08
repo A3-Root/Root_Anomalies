@@ -19,6 +19,8 @@
 
 params [["_target", objNull, [objNull]], ["_strength", 1, [0]]];
 
+LOG_DEBUG_1("SteamerFling entry: called with %1",_this);
+
 if (isNull _target) exitWith {};
 
 // Mostly upward with a lateral kick, so the pile comes apart as it rises.

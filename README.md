@@ -1,6 +1,6 @@
 # Root's Anomalies
 
-![version](https://img.shields.io/badge/version-5.0.0.8-blue) ![build](https://img.shields.io/badge/build-passing-green)
+![version](https://img.shields.io/badge/version-5.0.0.9-blue) ![build](https://img.shields.io/badge/build-passing-green)
 
 A modular framework of anomalies, creatures and SCP-style entities for Arma 3, usable from
 **both the 3DEN Editor and Zeus (Game Master)**. Originally based on the 3DEN showcase by
@@ -17,7 +17,7 @@ Aliascartoons; fully refactored, modernised and expanded by Root.
   vanilla otherwise.
 - **Fully parameterised** — territory, damage, health, devices, behaviour toggles, etc. exposed per
   module.
-- **CBA settings** — verbose debug logging, global affect whitelist / immune blacklist, default
+- **CBA settings** — debug logging (on by default: every module use, spawn, attack, damage, sedation and capture is written to the RPT with the machine, mission time and player; optional chat relay for Zeus), global affect whitelist / immune blacklist, default
   device classnames and a global seizure-safe override (Game / Addon Options → *Root's Anomalies*).
 - **Accessibility** — per-module and global "disable sensitive lights" options for photosensitive
   players.

@@ -32,6 +32,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("FlamerMain entry: called with %1",_this);
+
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
 private _weights = [0.47, 0.69, 0.59, 0.55, 0.61, 0.58];
 

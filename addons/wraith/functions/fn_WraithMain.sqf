@@ -40,6 +40,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("WraithMain entry: called with %1",_this);
+
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
 private _weights = [0.4, 0.6, 0.6, 0.7, 0.6, 0.6];
 private _markerPos = getMarkerPos _marker;

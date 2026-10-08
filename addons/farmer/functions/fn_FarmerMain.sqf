@@ -30,6 +30,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("FarmerMain entry: called with %1",_this);
+
 private _markerPos = getMarkerPos _marker;
 private _farmer = createAgent ["C_Soldier_VR_F", _markerPos, [], 0, "NONE"];
 _farmer setVariable ["BIS_fnc_animalbehaviour_disable", true];

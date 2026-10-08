@@ -19,6 +19,8 @@ if (!isServer) exitWith {};
 
 params ["_obj", ["_killDevice", "", [""]], ["_killRange", 20, [0]]];
 
+LOG_DEBUG_1("BurperRemove entry: called with %1",_this);
+
 if (_killDevice == "") exitWith {};
 
 private _taskTime = 0;

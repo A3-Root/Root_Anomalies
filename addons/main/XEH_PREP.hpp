@@ -6,6 +6,7 @@
 #define PREP(fncName) [QPATHTOF(functions\core\DOUBLES(fn,fncName).sqf),QFUNC(fncName)] call CBA_fnc_compileFunction
 
 PREP(initSettings);
+PREP(log);
 PREP(parseClassList);
 PREP(resolveThrowable);
 PREP(isPacified);

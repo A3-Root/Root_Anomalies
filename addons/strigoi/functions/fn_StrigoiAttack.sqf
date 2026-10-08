@@ -18,6 +18,8 @@
 
 params ["_strigoi", "_tgt", "_dmg"];
 
+LOG_DEBUG_1("StrigoiAttack entry: called with %1",_this);
+
 [_strigoi, _tgt] remoteExec [QFUNC(StrigoiViz), [0, -2] select isDedicated];
 if ((isPlayer _tgt) && {typeOf _tgt != "VirtualCurator_F"}) then {
     [_dmg, _strigoi] remoteExec [QFUNC(StrigoiTgt), _tgt];

@@ -22,6 +22,8 @@ if (!isServer) exitWith {};
 
 params ["_spawnList", "_core", ["_spawnDelay", 10, [0]], ["_source", objNull, [objNull]]];
 
+LOG_DEBUG_1("SmugglerSpawn entry: called with %1",_this);
+
 // Prune a tracking array to its limit, deleting the oldest entries. 0/negative = unlimited.
 private _fnPrune = {
     params ["_arr", "_limit"];

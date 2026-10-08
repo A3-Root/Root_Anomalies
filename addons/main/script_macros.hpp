@@ -43,20 +43,23 @@
 // ============================================================================
 // Runtime debug flag, controlled by CBA setting SETTING_DEBUG.
 #ifndef DEBUG_MODE
-    #define DEBUG_MODE (missionNamespace getVariable [SETTING_DEBUG, false])
+    #define DEBUG_MODE (missionNamespace getVariable [SETTING_DEBUG, true])
 #endif
 
+// Every debug line goes through root_anomalies_main_fnc_log, which stamps it with the
+// source file, the machine (host/server/HC/client), mission time and local player.
+// The message is formatted with the caller's arguments first, so %1 is the first value.
 #ifndef LOG_DEBUG
-    #define LOG_DEBUG(msg) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) %2", __FILE__, msg] }
+    #define LOG_DEBUG(msg) if (DEBUG_MODE) then { [__FILE__, msg] call root_anomalies_main_fnc_log }
 #endif
 #ifndef LOG_DEBUG_1
-    #define LOG_DEBUG_1(msg,a1) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) " + msg, __FILE__, a1] }
+    #define LOG_DEBUG_1(msg,a1) if (DEBUG_MODE) then { [__FILE__, format [msg, a1]] call root_anomalies_main_fnc_log }
 #endif
 #ifndef LOG_DEBUG_2
-    #define LOG_DEBUG_2(msg,a1,a2) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) " + msg, __FILE__, a1, a2] }
+    #define LOG_DEBUG_2(msg,a1,a2) if (DEBUG_MODE) then { [__FILE__, format [msg, a1, a2]] call root_anomalies_main_fnc_log }
 #endif
 #ifndef LOG_DEBUG_3
-    #define LOG_DEBUG_3(msg,a1,a2,a3) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) " + msg, __FILE__, a1, a2, a3] }
+    #define LOG_DEBUG_3(msg,a1,a2,a3) if (DEBUG_MODE) then { [__FILE__, format [msg, a1, a2, a3]] call root_anomalies_main_fnc_log }
 #endif
 
 #ifndef LOG_ERROR
@@ -99,7 +102,7 @@
 // Additional debug logging arities
 // ============================================================================
 #ifndef LOG_DEBUG_4
-    #define LOG_DEBUG_4(msg,a1,a2,a3,a4) if (DEBUG_MODE) then { diag_log text format ["[ROOT_ANOMALIES] (%1) " + msg, __FILE__, a1, a2, a3, a4] }
+    #define LOG_DEBUG_4(msg,a1,a2,a3,a4) if (DEBUG_MODE) then { [__FILE__, format [msg, a1, a2, a3, a4]] call root_anomalies_main_fnc_log }
 #endif
 
 // ============================================================================

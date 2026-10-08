@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_victim", "_hive"];
 
+LOG_DEBUG_1("SwarmerEating entry: called with %1",_this);
+
 if (!alive _hive) exitWith {};
 
 private _bones = ["spine3", "leftshoulder", "leftforearmroll", "leftleg", "leftfoot", "leftupleg", "rightshoulder", "rightforearmroll", "rightupleg", "rightleg", "rightfoot", "pelvis", "neck", "leftforearm", "rightforearm"];

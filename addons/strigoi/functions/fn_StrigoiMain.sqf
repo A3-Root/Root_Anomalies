@@ -30,6 +30,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("StrigoiMain entry: called with %1",_this);
+
 uiSleep 2;
 
 private _markerPos = getMarkerPos _marker;

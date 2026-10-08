@@ -32,6 +32,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("SmugglerMain entry: called with %1",_this);
+
 private _pos = getMarkerPos _marker;
 private _source = createVehicle ["Land_HelipadEmpty_F", [_pos select 0, _pos select 1, 2], [], 0, "CAN_COLLIDE"];
 private _core = createVehicle ["Land_HelipadEmpty_F", [_pos select 0, _pos select 1, 2], [], 0, "CAN_COLLIDE"];

@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_objEff", "_emit"];
 
+LOG_DEBUG_1("ScreamerEffect entry: called with %1",_this);
+
 _emit say3D ["scream", 500];
 _objEff say3D ["stones_scream", 500];
 

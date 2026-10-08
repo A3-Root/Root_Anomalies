@@ -16,6 +16,8 @@ if (!hasInterface) exitWith {};
 
 params ["_project"];
 
+LOG_DEBUG_1("FarmerTravel entry: called with %1",_this);
+
 private _burst = "#particlesource" createVehicleLocal (getPosATL _project);
 _burst setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16, 12, 9, 0], "", "BillBoard", 1, 1, [0, 0, 0.5], [0, 0, 2], 0, 13, 0.01, 0, [0.5, 8], [[0.1, 0.1, 0.1, 1], [0.1, 0.1, 0.1, 0]], [1000], 1, 0, "", "", _project];
 _burst setParticleRandom [0.5, [1, 1, 0.5], [1, 1, 2], 20, 0.1, [0, 0, 0, 0.5], 1, 0, 1, 0];

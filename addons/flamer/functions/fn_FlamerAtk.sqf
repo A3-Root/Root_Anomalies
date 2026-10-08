@@ -16,6 +16,8 @@ if (!hasInterface) exitWith {};
 
 params ["_flamer"];
 
+LOG_DEBUG_1("FlamerAtk entry: called with %1",_this);
+
 private _burnGround = "Land_HelipadEmpty_F" createVehicleLocal [getPosATL _flamer select 0, getPosATL _flamer select 1, 0];
 _burnGround say3D ["furnal", 300];
 enableCamShake true;

@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_tgtPos", ["_craterBool", false, [false]]];
 
+LOG_DEBUG_1("SteamerBurst entry: called with %1",_this);
+
 private _blow = "CraterLong_small" createVehicleLocal [_tgtPos select 0, _tgtPos select 1, -0.5];
 _blow hideObjectGlobal true;
 _blow setDir (round (random 360));

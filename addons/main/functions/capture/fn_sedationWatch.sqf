@@ -35,13 +35,15 @@ private _h = [{
     private _duration = _cfg getOrDefault ["sedationTime", ROOT_ANOMALIES_DEFAULT_SEDATION_TIME];
     private _centre = _obj getVariable [QGVAR(sedationCentre), getPosATL _obj];
 
+    // The candidate object is captured before the inner loop, whose _x is a class name.
     private _found = objNull;
     {
-        private _t = typeOf _x;
+        private _candidate = _x;
+        private _t = typeOf _candidate;
         if !(_t in _exclude) then {
-            {
-                if (_t == _x || {_t isKindOf [_x, configFile >> "CfgAmmo"]}) exitWith { _found = _x; };
-            } forEach _classes;
+            if (_classes findIf {_t == _x || {_t isKindOf [_x, configFile >> "CfgAmmo"]}} != -1) then {
+                _found = _candidate;
+            };
         };
         if (!isNull _found) exitWith {};
     } forEach (_centre nearObjects _radius);

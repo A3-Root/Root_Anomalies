@@ -16,6 +16,8 @@
 
 params ["_twins", ["_aoe", 100, [0]]];
 
+LOG_DEBUG_1("TwinsEmp entry: called with %1",_this);
+
 if (!hasInterface) exitWith {};
 
 private _bangSource = "#particlesource" createVehicleLocal getPosATL _twins;

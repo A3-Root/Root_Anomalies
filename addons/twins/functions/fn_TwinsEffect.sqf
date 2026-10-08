@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_emit", ["_pause", 1, [0]]];
 
+LOG_DEBUG_1("TwinsEffect entry: called with %1",_this);
+
 private _sparkSound = selectRandom ["spark1", "spark11", "spark2", "spark22", "spark5", "spark4"];
 private _drop = 0.001 + (random 0.05);
 private _spark = "#particlesource" createVehicleLocal (getPosATL _emit);

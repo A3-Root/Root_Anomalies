@@ -17,6 +17,8 @@
 
 params [["_logic", objNull, [objNull]], ["_units", [], [[]]], ["_activated", true, [true]]];
 
+LOG_DEBUG_1("Wraith3DEN entry: called with %1",_this);
+
 if (!_activated) exitWith {};
 if (!isServer) exitWith {};
 if (is3DEN) exitWith {};

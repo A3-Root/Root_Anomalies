@@ -19,6 +19,8 @@ if (!hasInterface) exitWith {};
 
 params ["_head", "_tail", "_voice"];
 
+LOG_DEBUG_1("WormEffect entry: called with %1",_this);
+
 [_voice, true] remoteExec ["hideObject", 0, true];
 [_voice] spawn {
     params ["_v"];

@@ -17,6 +17,8 @@
 
 params ["_farmer", "_damage"];
 
+LOG_DEBUG_1("FarmerAttack entry: called with %1",_this);
+
 // Nothing lands while the anomaly is sedated or groggy.
 if ([_farmer] call EFUNC(main,isPacified)) exitWith {};
 

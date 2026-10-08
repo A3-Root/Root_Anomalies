@@ -18,6 +18,8 @@ if (!isServer) exitWith {};
 
 params ["_twins", ["_aiRange", 75, [0]]];
 
+LOG_DEBUG_1("TwinsDamage entry: called with %1",_this);
+
 while {alive _twins && {!(_twins getVariable [QEGVAR(main,terminate), false])}} do {
     private _units = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _aiRange];
     private _runPos = [getPosATL _twins, 1000, random 360] call BIS_fnc_relPos;

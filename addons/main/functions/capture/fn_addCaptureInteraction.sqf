@@ -21,6 +21,8 @@ params [["_obj", objNull, [objNull]]];
 if (isNull _obj || {!hasInterface}) exitWith {};
 
 private _captureTime = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME];
+private _aceLoaded = !isNil "ace_interact_menu_fnc_addActionToObject";
+LOG_DEBUG_3("addCaptureInteraction: adding to %1 (%2), ACE %3",typeOf _obj,netId _obj,_aceLoaded);
 
 if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
     private _action = [
@@ -33,8 +35,14 @@ if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
             [
                 _t,
                 [_target],
-                { (_this select 0) params ["_target"]; [_target] call API(capture); },
-                {},
+                {
+                    (_this select 0) params ["_target"];
+                    LOG_DEBUG_2("capture: %1 captured by %2 (ACE)",typeOf _target,profileName);
+                    [_target] call API(capture);
+                },
+                {
+                    LOG_DEBUG_1("capture: aborted by %1 (ACE)",profileName);
+                },
                 "Capturing anomaly...",
                 { ((_this select 0) select 0) getVariable [QGVAR(sedated), false] }
             ] call ace_common_fnc_progressBar;
@@ -44,7 +52,11 @@ if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
             (_target getVariable [QGVAR(sedated), false]) &&
             {!(_target getVariable [QGVAR(captured), false])} &&
             {(_target getVariable [QGVAR(config), createHashMap]) getOrDefault ["captureEnabled", true]}
-        }
+        },
+        {},
+        [],
+        [0, 0, 1],
+        5
     ] call ace_interact_menu_fnc_createAction;
     // Men carry ACE's main interaction node; props (worm head, hives) do not, so the
     // action sits on the object itself there.

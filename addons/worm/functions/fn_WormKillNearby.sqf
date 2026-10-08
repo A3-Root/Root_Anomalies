@@ -14,6 +14,8 @@
 
 params ["_candidates"];
 
+LOG_DEBUG_1("WormKillNearby entry: called with %1",_this);
+
 {
     if (!isNil {_x getVariable QGVAR(isWorm)}) then {uiSleep 4; deleteVehicle _x};
     if (typeOf _x == "land_CanOpener_F") then {deleteVehicle _x};

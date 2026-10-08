@@ -26,6 +26,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("SwarmerMain entry: called with %1",_this);
+
 if (isNull _hiveObj) exitWith {};
 
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_PESTICIDE", _pesticide, true];

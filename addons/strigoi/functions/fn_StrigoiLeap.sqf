@@ -18,6 +18,8 @@
 
 params ["_strigoi", "_tgt", "_walker", "_anchor", "_cap"];
 
+LOG_DEBUG_1("StrigoiLeap entry: called with %1",_this);
+
 private _jumpDir = (getPosATL _strigoi vectorFromTo getPosATL _tgt) vectorMultiply 10;
 _strigoi attachTo [_walker, [0, 0, ((boundingCenter _anchor) select 2) * 2]];
 [_cap, [selectRandom ["01_salt", "02_salt", "03_salt"], 200]] remoteExec ["say3D"];

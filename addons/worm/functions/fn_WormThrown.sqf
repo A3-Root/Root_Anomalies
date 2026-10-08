@@ -18,6 +18,8 @@
 
 params [["_proj", objNull, [objNull]]];
 
+LOG_DEBUG_1("WormThrown entry: called with %1",_this);
+
 if (isNull _proj) exitWith {};
 
 private _type = typeOf _proj;

@@ -19,6 +19,8 @@ if (!isServer) exitWith {};
 
 params ["_obj", "_core", ["_damage", 0.1, [0]]];
 
+LOG_DEBUG_1("SmugglerTeleport entry: called with %1",_this);
+
 while {alive _obj && {!(_obj getVariable [QEGVAR(main,terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
     private _cfg = _obj getVariable [QEGVAR(main,config), createHashMap];

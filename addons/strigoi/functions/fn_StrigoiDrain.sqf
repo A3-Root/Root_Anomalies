@@ -14,4 +14,6 @@
 
 params ["_units"];
 
+LOG_DEBUG_1("StrigoiDrain entry: called with %1",_this);
+
 {_x setFatigue ((getFatigue _x) + 0.1)} forEach _units;

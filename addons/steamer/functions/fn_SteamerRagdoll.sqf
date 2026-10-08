@@ -15,6 +15,8 @@
 
 params ["_blowPoz", "_unit"];
 
+LOG_DEBUG_1("SteamerRagdoll entry: called with %1",_this);
+
 // Strong upward kick (like the Worm) so units are flung into the air, plus an outward
 // shove away from the burst. World-space velocity: [x, y] outward, z = launch.
 private _pressure = 8 + round (random 6);

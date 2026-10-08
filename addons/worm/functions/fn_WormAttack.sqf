@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_head", "_tail"];
 
+LOG_DEBUG_1("WormAttack entry: called with %1",_this);
+
 enableCamShake true;
 _head say3D [selectRandom ["impact_30", "impact_27"], 500];
 

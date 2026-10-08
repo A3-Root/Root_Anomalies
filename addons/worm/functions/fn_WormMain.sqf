@@ -28,6 +28,8 @@ params [
     ["_config", createHashMap, [createHashMap]]
 ];
 
+LOG_DEBUG_1("WormMain entry: called with %1",_this);
+
 private _bodyParts = ["Head", "RightLeg", "LeftArm", "Body", "LeftLeg", "RightArm"];
 private _weights = [0.3, 0.8, 0.65, 0.5, 0.8, 0.65];
 

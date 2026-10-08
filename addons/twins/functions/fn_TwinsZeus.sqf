@@ -14,6 +14,8 @@
 
 params ["_logic"];
 
+LOG_DEBUG_1("TwinsZeus entry: called with %1",_this);
+
 if (!hasInterface) exitWith {};
 
 if !(isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) exitWith {

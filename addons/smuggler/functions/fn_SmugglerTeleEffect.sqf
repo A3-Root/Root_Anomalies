@@ -19,6 +19,8 @@ if (!hasInterface) exitWith {};
 
 params ["_unit", "_obj", ["_damage", 0.1, [0]]];
 
+LOG_DEBUG_1("SmugglerTeleEffect entry: called with %1",_this);
+
 uiSleep 2;
 
 if (_unit != player) exitWith {};

@@ -16,6 +16,8 @@
 
 params ["_candidates"];
 
+LOG_DEBUG_1("SwarmerKillNearby entry: called with %1",_this);
+
 {
     if (!isNil {_x getVariable QGVAR(isHive)}) then {
         uiSleep 5;

@@ -18,6 +18,8 @@
 
 params ["_vehicle", "_dmg"];
 
+LOG_DEBUG_1("ScreamerVehicleDamage entry: called with %1",_this);
+
 if !([_vehicle] call EFUNC(main,isAffectable) && {[_vehicle] call EFUNC(main,isDamageable)}) exitWith {};
 {_vehicle setHitPointDamage [_x, 1]} forEach ["HitLight", "HitBatteries"];
 if (_vehicle isKindOf "Air") then {

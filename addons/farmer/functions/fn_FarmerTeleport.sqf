@@ -16,6 +16,8 @@ if (!hasInterface) exitWith {};
 
 params ["_crater"];
 
+LOG_DEBUG_1("FarmerTeleport entry: called with %1",_this);
+
 enableCamShake true;
 
 private _ground = "#particlesource" createVehicleLocal (getPos _crater);

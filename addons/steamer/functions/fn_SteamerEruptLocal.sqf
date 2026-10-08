@@ -30,7 +30,7 @@ _src setPosATL _pos;
 private _vortex = "#particlesource" createVehicleLocal _pos;
 _vortex setParticleCircle [_radius, [-25, -25, 0]];
 _vortex setParticleRandom [2, [_radius / 4, _radius / 4, 3], [5, 5, 2], 0, 0.4, [0, 0, 0, 0.1], 0, 0];
-_vortex setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d", 16, 12, 13], "", "Billboard", 1, 4, [0, 0, 1], [0, 0, 4], 0, 10, 7.5, 0.03, [4, 12, 2], [[0.3, 0.28, 0.26, 0.5], [0.35, 0.3, 0.3, 0.3], [0.4, 0.35, 0.35, 0]], [0.3, 0.8], 1, 0, "", "", _src];
+_vortex setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d", 16, 12, 9, 0], "", "Billboard", 1, 4, [0, 0, 1], [0, 0, 4], 0, 10, 7.5, 0.03, [4, 12, 2], [[0.3, 0.28, 0.26, 0.5], [0.35, 0.3, 0.3, 0.3], [0.4, 0.35, 0.35, 0]], [0.3, 0.8], 1, 0, "", "", _src];
 _vortex setDropInterval 0.006;
 
 // Ground ripple racing outwards.

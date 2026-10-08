@@ -18,6 +18,8 @@ if (!isServer) exitWith {};
 
 params ["_diffuser", ["_forceKill", false, [false]]];
 
+LOG_DEBUG_1("WormKill entry: called with %1",_this);
+
 if (_forceKill) then {
     [8 allObjects 1] call FUNC(WormKillNearby);
 } else {

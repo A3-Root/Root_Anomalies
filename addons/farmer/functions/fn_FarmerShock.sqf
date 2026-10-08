@@ -17,6 +17,8 @@ if (!hasInterface) exitWith {};
 
 params ["_farmer", ["_damage", 0.6, [0]]];
 
+LOG_DEBUG_1("FarmerShock entry: called with %1",_this);
+
 enableCamShake true;
 
 _farmer setAnimSpeedCoef 0.1;

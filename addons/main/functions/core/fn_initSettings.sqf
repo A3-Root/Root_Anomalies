@@ -22,12 +22,21 @@
 [
     SETTING_DEBUG,
     "CHECKBOX",
-    ["Verbose Debug Logging", "Log detailed anomaly diagnostics to the RPT file. Enable when troubleshooting; disable for normal play."],
+    ["Debug Logging (RPT)", "Log what every anomaly does to the RPT of each machine: module use (who, where, settings), spawns, targets, attacks, damage, sedation, capture, kills. On by default so problems can be traced afterwards."],
     [SETTING_CATEGORY, "Core"],
-    false,
+    true,
     1,
     {},
     false
+] call CBA_fnc_addSetting;
+
+[
+    "ROOT_ANOMALIES_DEBUG_CHAT",
+    "CHECKBOX",
+    ["Debug Chat for Zeus", "Also show every debug line in system chat for Zeus users, including lines from the server and headless clients."],
+    [SETTING_CATEGORY, "Core"],
+    false,
+    1
 ] call CBA_fnc_addSetting;
 
 // Affect whitelist - if non-empty, only these classes/kinds may be harmed by anomalies.

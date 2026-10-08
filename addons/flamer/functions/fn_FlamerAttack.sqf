@@ -20,6 +20,8 @@
 
 params ["_flamer", "_tgt", "_dmg", "_bodyParts", "_weights"];
 
+LOG_DEBUG_1("FlamerAttack entry: called with %1",_this);
+
 // Nothing lands while the anomaly is sedated or groggy.
 if ([_flamer] call EFUNC(main,isPacified)) exitWith {};
 

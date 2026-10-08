@@ -16,6 +16,8 @@
 
 params ["_steamer", "_tgt"];
 
+LOG_DEBUG_1("SteamerTravelPath entry: called with %1",_this);
+
 private _ragProp = "Land_PenBlack_F" createVehicle [getPosATL _steamer select 0, getPosATL _steamer select 1, 3000];
 private _dir = (getPosATL _steamer vectorFromTo getPosATL _tgt) vectorMultiply 20;
 _ragProp setVelocity [_dir select 0, _dir select 1, 5];

@@ -17,6 +17,8 @@
 
 params ["_vehicle", "_dmg"];
 
+LOG_DEBUG_1("WormVehicleDamage entry: called with %1",_this);
+
 if !([_vehicle] call EFUNC(main,isAffectable) && {[_vehicle] call EFUNC(main,isDamageable)}) exitWith {};
 {_vehicle setHitPointDamage [_x, (_vehicle getHitPointDamage _x) + random _dmg]} forEach ((getAllHitPointsDamage _vehicle) param [0, []]);
 {_vehicle setHitPointDamage [_x, 1]} forEach ["HitLight", "HitBatteries"];
