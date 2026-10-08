@@ -62,7 +62,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
     private _incr = 0;
 
     while {alive _heart && {!(_twins getVariable [QEGVAR(main,terminate), false])}} do {
-        _trackDist = (_twins getVariable [QGVAR(config), createHashMap]) getOrDefault ["trackDist", _trackDist];
+        _trackDist = (_twins getVariable [QEGVAR(main,config), createHashMap]) getOrDefault ["trackDist", _trackDist];
         private _closest = (position _twins) nearEntities [["CAManBase", "LandVehicle"], _trackDist];
         if ((_twins getVariable [QGVAR(visible), 0]) < 1) then {
             if ((_closest isNotEqualTo []) && _allowMove > 10) then {
@@ -100,6 +100,7 @@ LOG_DEBUG_2("TwinsMain spawned (track %1, dmgRange %2)",_trackDist,_dmgRange);
 // Spark visuals.
 if (_sparks) then {
     while {alive _twins && {!(_twins getVariable [QEGVAR(main,terminate), false])}} do {
+        [_twins] call EFUNC(main,sedationHold);
         switch (selectRandom ["st", "dr", "ct"]) do {
             case "st": {_sparkBall attachTo [_twins, [-12, 0, 12.35]]};
             case "dr": {_sparkBall attachTo [_twins, [11.5, 0, 12.35]]};

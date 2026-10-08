@@ -17,6 +17,6 @@ params ["_farmer"];
 _farmer setAnimSpeedCoef 0.8;
 _farmer switchMove "AmovPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon";
 _farmer setVariable [QGVAR(visible), false, true];
-[_farmer, ["pietre", 1000]] remoteExec ["say3D"];
+[_farmer getVariable [QGVAR(voice), _farmer], ["pietre", 1000]] remoteExec ["say3D"];
 [_farmer] remoteExec [QFUNC(FarmerTeleport), [0, -2] select isDedicated];
 _farmer hideObjectGlobal true;

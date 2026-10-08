@@ -99,7 +99,7 @@ _flamer setVariable [QGVAR(atk), false];
 
 LOG_DEBUG_2("FlamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
-private _activation = (_flamer getVariable [QGVAR(config), createHashMap]) getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
+private _activation = (_flamer getVariable [QEGVAR(main,config), createHashMap]) getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
 private _ckPl = false;
 while {!_ckPl && {!(_flamer getVariable [QEGVAR(main,terminate), false])}} do {
     {if (_x distance _markerPos < _activation) exitWith {_ckPl = true}} forEach allPlayers;
@@ -108,7 +108,8 @@ while {!_ckPl && {!(_flamer getVariable [QEGVAR(main,terminate), false])}} do {
 
 private _inRange = [];
 while {alive _flamer && {!(_flamer getVariable [QEGVAR(main,captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _flamer getVariable [QGVAR(config), createHashMap];
+    [_flamer] call EFUNC(main,sedationHold);
+    private _cfg = _flamer getVariable [QEGVAR(main,config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
@@ -117,7 +118,8 @@ while {alive _flamer && {!(_flamer getVariable [QEGVAR(main,captured), false])} 
     [_flamer, _markerPos, _territory, _damage] call FUNC(FlamerShow);
 
     while {(!isNil "_tgt") && {(alive _flamer) && {(_flamer distance _markerPos) < _territory} && {!(_flamer getVariable [QEGVAR(main,captured), false])} && {!(_flamer getVariable [QGVAR(dying), false])} && {!(_flamer getVariable [QEGVAR(main,terminate), false])}}} do {
-        _cfg = _flamer getVariable [QGVAR(config), createHashMap];
+        [_flamer] call EFUNC(main,sedationHold);
+        _cfg = _flamer getVariable [QEGVAR(main,config), createHashMap];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];
         uiSleep _recharge;

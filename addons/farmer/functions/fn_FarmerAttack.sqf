@@ -17,8 +17,12 @@
 
 params ["_farmer", "_damage"];
 
+// Nothing lands while the anomaly is sedated or groggy.
+if ([_farmer] call EFUNC(main,isPacified)) exitWith {};
+
 _farmer setUnitPos "UP";
 [_farmer, _damage] remoteExec [QFUNC(FarmerShock), [0, -2] select isDedicated];
+[_farmer getVariable [QGVAR(voice), _farmer], [selectRandom ["01_blast", "02_blast", "03_blast"], 600]] remoteExec ["say3D", [0, -2] select isDedicated];
 private _targets = ((ASLToAGL getPosATL _farmer) nearEntities [["CAManBase", "LandVehicle"], 20]) - [_farmer];
 
 uiSleep 1.2;

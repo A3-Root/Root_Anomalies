@@ -46,13 +46,19 @@ _steamer hideObjectGlobal true;
 _steamer enableSimulationGlobal false;
 [_steamer] remoteExec [QFUNC(SteamerVoice), 0, true];
 
+// The steamer is an invisible agent parked at its marker and strikes anywhere in its
+// territory, so its sedative counts across the whole territory and it materialises where
+// the smoke landed.
+if !("sedationRadius" in _config) then {_config set ["sedationRadius", _territory]};
+_config set ["sedationMoveToSmoke", true];
 [_steamer, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("SteamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
 while {alive _steamer && {!(_steamer getVariable [QEGVAR(main,captured), false])} && {!(_steamer getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _steamer getVariable [QGVAR(config), createHashMap];
+    [_steamer] call EFUNC(main,sedationHold);
+    private _cfg = _steamer getVariable [QEGVAR(main,config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
@@ -61,7 +67,8 @@ while {alive _steamer && {!(_steamer getVariable [QEGVAR(main,captured), false])
     uiSleep 0.5;
 
     while {(!isNil "_tgt") && {alive _steamer} && {!(_steamer getVariable [QEGVAR(main,captured), false])} && {!(_steamer getVariable [QEGVAR(main,terminate), false])}} do {
-        _cfg = _steamer getVariable [QGVAR(config), createHashMap];
+        [_steamer] call EFUNC(main,sedationHold);
+        _cfg = _steamer getVariable [QEGVAR(main,config), createHashMap];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];
         if (_travelPath) then {[_steamer, _tgt] call FUNC(SteamerTravelPath)};
@@ -94,7 +101,20 @@ while {alive _steamer && {!(_steamer getVariable [QEGVAR(main,captured), false])
 if (_steamer getVariable [QEGVAR(main,terminate), false]) exitWith {};
 
 waitUntil {!alive _steamer};
-[getPosATL _steamer] remoteExec [QFUNC(SteamerEnd), [0, -2] select isDedicated];
+private _deathPos = getPosATL _steamer;
+_deathPos set [2, 0];
+[_deathPos, 30] remoteExec [QFUNC(SteamerEruptLocal), [0, -2] select isDedicated];
+LOG_DEBUG_1("SteamerMain: steamer died, erupting at %1",mapGridPosition _steamer);
+
+// Everything loose around the vent is thrown clear, on the machine that owns it.
+private _thrown = nearestObjects [_deathPos, ["CAManBase", "LandVehicle", "Ship", "StaticWeapon", "ThingX", "ReammoBox_F"], 30];
+{
+    if (_x != _steamer && {!(_x isKindOf "VirtualMan_F")}) then {
+        private _falloff = linearConversion [0, 30, _x distance2D _deathPos, 1, 0.25, true];
+        [QGVAR(fling), [_x, _falloff], _x] call CBA_fnc_targetEvent;
+    };
+} forEach _thrown;
+LOG_DEBUG_1("SteamerMain: eruption threw %1 objects",count _thrown);
 
 {_x setDamage [_deathDamage, true]} forEach nearestTerrainObjects [position _steamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];
 {_x setDamage [_deathDamage, false]} forEach nearestObjects [position _steamer, ["BUILDING", "HOUSE", "CHURCH", "CHAPEL", "FUELSTATION", "HOSPITAL", "RUIN", "BUNKER", "Land_fs_roof_F", "Land_TTowerBig_2_F", "Land_TTowerBig_1_F", "Lamps_base_F", "PowerLines_base_F", "PowerLines_Small_base_F", "Land_LampStreet_small_F"], 20, false];

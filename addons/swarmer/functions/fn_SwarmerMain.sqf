@@ -55,16 +55,19 @@ _agent setVariable [QGVAR(isHive), false, true];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_AGENT", _agent, true];
 missionNamespace setVariable ["ROOT_ANOMALIES_SWARMER_ATK", false, true];
 
-if !("sedationClassnames" in _config) then {
-    _config set ["sedationClassnames", [_pesticide, ROOT_ANOMALIES_SEDATIVE_SMOKE]];
+// The pesticide kills the hive; it must never also count as a sedative.
+if (_pesticide isNotEqualTo "") then {
+    _config set ["killClassnames", [_pesticide]];
+    _config set ["sedationClassnames", (_config getOrDefault ["sedationClassnames", [ROOT_ANOMALIES_SEDATIVE_SMOKE]]) - [_pesticide]];
 };
 _agent setVariable [QGVAR(extraDelete), [_hiveObj], true];
 [_agent, _config] call EFUNC(main,finalizeInstance);
 
-LOG_DEBUG_2("SwarmerMain spawned hive at %1 (territory %2)",position _hiveObj,_radius);
+LOG_DEBUG_3("SwarmerMain spawned hive at %1 (territory %2, pesticide %3)",position _hiveObj,_radius,_pesticide);
 
 while {alive _agent && {!(_agent getVariable [QEGVAR(main,captured), false])} && {!(_agent getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _agent getVariable [QGVAR(config), createHashMap];
+    [_agent] call EFUNC(main,sedationHold);
+    private _cfg = _agent getVariable [QEGVAR(main,config), createHashMap];
     _radius = _cfg getOrDefault ["territory", _radius];
     _damage = _cfg getOrDefault ["damage", _damage];
     private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
@@ -82,6 +85,7 @@ while {alive _agent && {!(_agent getVariable [QEGVAR(main,captured), false])} &&
         _agent disableCollisionWith _tgt;
 
         while {(alive _tgt) && {_tgt distance _hiveObj <= _radius}} do {
+            [_agent] call EFUNC(main,sedationHold);
             if (_tgt distance _agent > 10) then {_agent moveTo AGLToASL (_tgt modelToWorld [0, 7, 0])};
             uiSleep 4;
             if ((_tgt distance _agent <= 10) && {alive _agent}) then {

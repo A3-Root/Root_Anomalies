@@ -33,7 +33,7 @@ class CfgVehicles {
 		isTriggerActivated = 0;
 		isDisposable = 1;
 		is3DEN = 0;
-		icon = "\A3\Modules_F_Curator\Data\portraitEffectsZeus_ca.paa";
+		icon = "\a3\Modules_F_Curator\Data\iconLightning_ca.paa";
 		class AttributeValues {};
 		class Attributes: AttributesBase {
 			class ROOT_WORM_RADIUS: Edit {
@@ -73,15 +73,15 @@ class CfgVehicles {
 			};
 			class ROOT_WORM_FORCETGT: Edit {
 				property = "ROOT_WORM_FORCETGT";
-				displayName = "Forceful Target";
-				tooltip = "Classname (e.g. an IR grenade) the Worm fixates on when thrown into its territory, for its next few attacks. Empty = none.";
+				displayName = "Diversion Device";
+				tooltip = "Throwable classname (magazine or ammo, e.g. SmokeShellBlue or a chemlight) the Worm fixates on when it lands in its territory. It attacks that spot instead of people for the configured number of attacks, even after the device burns out. Empty = none.";
 				typeName = "STRING";
 				defaultValue = """""";
 			};
 			class ROOT_WORM_FORCEN: Edit {
 				property = "ROOT_WORM_FORCEN";
-				displayName = "Forceful Target Attacks";
-				tooltip = "How many attacks the Worm spends on a thrown forceful target before resuming normal targeting.";
+				displayName = "Diversion Device Attacks";
+				tooltip = "How many attacks the Worm spends on a thrown diversion device before it goes back to hunting people.";
 				typeName = "NUMBER";
 				defaultValue = "3";
 			};

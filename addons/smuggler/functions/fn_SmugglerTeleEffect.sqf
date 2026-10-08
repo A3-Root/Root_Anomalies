@@ -24,7 +24,7 @@ uiSleep 2;
 if (_unit != player) exitWith {};
 if (typeOf _unit == "VirtualCurator_F") exitWith {};
 
-private _tpRange = (_obj getVariable [QGVAR(config), createHashMap]) getOrDefault ["tpRange", 300];
+private _tpRange = (_obj getVariable [QEGVAR(main,config), createHashMap]) getOrDefault ["tpRange", 300];
 private _count = floor (random 6);
 if (_count < 1) then {_count = 1};
 

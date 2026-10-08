@@ -27,7 +27,7 @@ _farmer setAnimSpeedCoef 1.8;
 _farmer switchMove "AmovPercMstpSnonWnonDnon_AmovPknlMstpSnonWnonDnon";
 uiSleep 0.2;
 
-_farmer say3D ["explozie_3", 100];
+(_farmer getVariable [QGVAR(voice), _farmer]) say3D ["explozie_3", 600];
 
 private _burst = "#particlesource" createVehicleLocal getPosATL _farmer;
 _burst setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16, 12, 9, 0], "", "BillBoard", 1, 1, [0, 0, 0.5], [0, 0, 4], 0, 13, 0.01, 0, [0.5, 8], [[0.1, 0.1, 0.1, 1], [0.1, 0.1, 0.1, 0]], [1000], 1, 0, "", "", _farmer];
@@ -51,7 +51,7 @@ _dust setParticleParams [["\A3\data_f\cl_basic", 1, 0, 1], "", "Billboard", 1, 8
 _dust setDropInterval 0.01;
 [_dust] spawn {params ["_p"]; uiSleep 1; deleteVehicle _p};
 
-_farmer say3D ["pietre", 5000];
+(_farmer getVariable [QGVAR(voice), _farmer]) say3D ["pietre", 5000];
 for "_i" from 1 to 20 do {
     _burst setParticleCircle [_i, [0, 0, 0]];
     _rocks setParticleCircle [_i, [0, 0, 0]];
@@ -82,4 +82,4 @@ deleteVehicle _burst;
 deleteVehicle _blastWave;
 uiSleep 1;
 _farmer switchMove "";
-_farmer say3D ["eko", 100];
+(_farmer getVariable [QGVAR(voice), _farmer]) say3D ["eko", 400];

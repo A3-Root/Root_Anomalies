@@ -55,9 +55,23 @@
     class ROOT_SEDATION: Edit { \
         property = "ROOT_SEDATION"; \
         displayName = "Sedation Classes (CSV)"; \
-        tooltip = "Custom smoke/throwable classnames that sedate this anomaly. Empty = default sedative smoke."; \
+        tooltip = "Custom smoke/throwable classnames (magazine or ammo) that sedate this anomaly. Empty = default sedative smoke."; \
         typeName = "STRING"; \
         defaultValue = """"""; \
+    }; \
+    class ROOT_SEDATIONTIME: Edit { \
+        property = "ROOT_SEDATIONTIME"; \
+        displayName = "Sedation Time (s)"; \
+        tooltip = "Seconds the anomaly stays sedated (visible, frozen, harmless) after the last sedative smoke clears."; \
+        typeName = "NUMBER"; \
+        defaultValue = "20"; \
+    }; \
+    class ROOT_SEDATIONCOOLDOWN: Edit { \
+        property = "ROOT_SEDATIONCOOLDOWN"; \
+        displayName = "Post-Sedation Cooldown (s)"; \
+        tooltip = "Seconds the anomaly stays docile and cannot attack after waking up."; \
+        typeName = "NUMBER"; \
+        defaultValue = "10"; \
     }; \
     class ROOT_KILLSWITCH: Edit { \
         property = "ROOT_KILLSWITCH"; \
@@ -142,7 +156,21 @@
     class ROOT_SEDATION: Edit { \
         property = "ROOT_SEDATION"; \
         displayName = "Sedation Classes (CSV)"; \
-        tooltip = "Custom smoke/throwable classnames that sedate this anomaly. Empty = default sedative smoke."; \
+        tooltip = "Custom smoke/throwable classnames (magazine or ammo) that sedate this anomaly. Empty = default sedative smoke."; \
         typeName = "STRING"; \
         defaultValue = """"""; \
+    }; \
+    class ROOT_SEDATIONTIME: Edit { \
+        property = "ROOT_SEDATIONTIME"; \
+        displayName = "Sedation Time (s)"; \
+        tooltip = "Seconds the anomaly stays sedated (visible, frozen, harmless) after the last sedative smoke clears."; \
+        typeName = "NUMBER"; \
+        defaultValue = "20"; \
+    }; \
+    class ROOT_SEDATIONCOOLDOWN: Edit { \
+        property = "ROOT_SEDATIONCOOLDOWN"; \
+        displayName = "Post-Sedation Cooldown (s)"; \
+        tooltip = "Seconds the anomaly stays docile and cannot attack after waking up."; \
+        typeName = "NUMBER"; \
+        defaultValue = "10"; \
     };

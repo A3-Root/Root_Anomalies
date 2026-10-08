@@ -37,13 +37,14 @@ deleteVehicle _logic;
         ["EDIT", ["Immunity Gear (CSV)", "Gear classnames granting full immunity until durability is spent. Empty = none."], [""]],
         ["COMBO", ["Immunity Mode", "How immunity gear wears out."], [["Infinite", "Time", "Damage"], ["Infinite (never fails)", "Time (seconds)", "Damage (absorbed)"], 0]],
         ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]]
-    ],
+    ] + ([] call EFUNC(main,zeusCaptureRows)),
     {
         params ["_results", "_pos"];
         _results params ["_hiveClass", "_override", "_territory", "_disablePesticide", "_pesticide", "_damage", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue"];
 
         if (getNumber (configFile >> "CfgVehicles" >> _hiveClass >> "scope") <= 0) then {_hiveClass = "Land_GarbageBags_F"};
-        if (getNumber (configFile >> "CfgVehicles" >> _pesticide >> "scope") <= 0) then {_pesticide = "SmokeShellGreen"};
+        _pesticide = [_pesticide] call EFUNC(main,resolveThrowable);
+        if (_pesticide isEqualTo "") then {_pesticide = "SmokeShellGreen"};
         if (_disablePesticide) then {_pesticide = ""};
         if (!_override && _territory < 75) then {_territory = 75};
 
@@ -51,6 +52,7 @@ deleteVehicle _logic;
 
         ["Swarmer Anomaly configured and active!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "swarmer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
+        [_config, _results] call EFUNC(main,zeusCaptureApply);
         [_hive, _territory, _pesticide, _damage, _config] remoteExec [QFUNC(SwarmerMain), 2];
     },
     {

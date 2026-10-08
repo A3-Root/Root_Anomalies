@@ -7,6 +7,8 @@
 
 PREP(initSettings);
 PREP(parseClassList);
+PREP(resolveThrowable);
+PREP(isPacified);
 PREP(isAffectable);
 PREP(isWhitelisted);
 PREP(isDamageable);
@@ -32,6 +34,7 @@ PREP(initDamage);
 PREP(handleDamage);
 PREP(matchDamageType);
 PREP(sedationWatch);
+PREP(sedationHold);
 PREP(addCaptureInteraction);
 PREP(doCapture);
 
@@ -72,3 +75,5 @@ PREP(Terminate3DEN);
 PREP(TerminateZeus);
 PREP(Configure3DEN);
 PREP(ConfigureZeus);
+PREP(zeusCaptureRows);
+PREP(zeusCaptureApply);

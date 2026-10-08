@@ -31,12 +31,12 @@ deleteVehicle _logic;
 [
     "Wraith Anomaly Settings",
     [
-        ["EDIT", ["Model", "Classname of the unit used as the Wraith."], ["B_VR_Soldier_F"]],
-        ["SLIDER", ["Health", "Damage the Wraith takes before being killed."], [10, 5000, 400, 0]],
-        ["SLIDER:RADIUS", ["Territory", "Radius in meters within which the Wraith stalks."], [20, 1000, 150, 0, _pos, [7, 120, 32, 1]]],
-        ["SLIDER", ["Attack Interval (s)", "Seconds between the Wraith's teleport strikes."], [2, 60, 8, 0]],
-        ["SLIDER:PERCENT", ["Damage", "Fraction of fire damage dealt to victims per strike."], [0.01, 1, 0.4, 2]],
-        ["SLIDER:RADIUS", ["Fear Radius", "Radius in meters within which the Wraith inflicts dread effects."], [5, 200, 25, 0, _pos, [7, 120, 32, 1]]],
+        ["SLIDER", ["Wraith Health", "Hits the Wraith takes before it dies."], [10, 5000, 400, 0]],
+        ["SLIDER:RADIUS", ["Wraith Territory", "Radius in meters the Wraith hunts in."], [20, 1000, 150, 0, _pos, [120, 20, 20, 1]]],
+        ["SLIDER", ["Attack Interval (s)", "Seconds between claw attacks."], [1, 30, 4, 0]],
+        ["SLIDER:PERCENT", ["Wraith Damage", "Damage per claw."], [0.01, 1, 0.3, 2]],
+        ["COMBO", ["Visible Through", "Which optics reveal the Wraith. To the naked eye it is invisible."], [[0, 1, 2], ["Night vision only", "Thermal only", "Night vision or thermal"], 2]],
+        ["SLIDER", ["Run Speed", "Animation speed multiplier while it walks and runs."], [0.6, 2, 1.2, 1]],
         ["EDIT", ["Protective Gear (CSV)", "Gear classnames that reduce the Wraith's damage. Empty = none."], [""]],
         ["SLIDER:PERCENT", ["Protection", "Fraction of damage removed while wearing protective gear."], [0, 1, 0.5, 2]],
         ["EDIT", ["Immunity Gear (CSV)", "Gear classnames granting full immunity until durability is spent. Empty = none."], [""]],
@@ -44,14 +44,15 @@ deleteVehicle _logic;
         ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]],
         ["SIDES", ["Hostile Sides", "Sides the Wraith attacks. None selected = all."], []],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Wraith."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
-    ],
+    ] + ([] call EFUNC(main,zeusCaptureRows)),
     {
         params ["_results", "_markerName"];
-        _results params ["_model", "_health", "_territory", "_interval", "_damage", "_fearRadius", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides", "_activation"];
+        _results params ["_health", "_territory", "_interval", "_damage", "_vision", "_speed", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_sides", "_activation"];
 
-        ["Wraith Anomaly configured and summoned!"] call zen_common_fnc_showMessage;
-        private _config = createHashMapFromArray [["type", "wraith"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["hostileSides", _sides], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
-        [_markerName, _model, round _health, _territory, _interval, _damage, _fearRadius, _config] remoteExec [QFUNC(WraithMain), 2];
+        ["Wraith Anomaly configured and created!"] call zen_common_fnc_showMessage;
+        private _config = createHashMapFromArray [["type", "wraith"], ["manageDamage", false], ["territory", _territory], ["damage", _damage], ["interval", _interval], ["hostileSides", _sides], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
+        [_config, _results] call EFUNC(main,zeusCaptureApply);
+        [_markerName, round _health, _territory, round _interval, _damage, _vision, _speed, _config] remoteExec [QFUNC(WraithMain), 2];
     },
     {
         ["Aborted"] call zen_common_fnc_showMessage;

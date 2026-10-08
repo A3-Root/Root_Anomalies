@@ -20,6 +20,9 @@
 
 params ["_flamer", "_tgt", "_dmg", "_bodyParts", "_weights"];
 
+// Nothing lands while the anomaly is sedated or groggy.
+if ([_flamer] call EFUNC(main,isPacified)) exitWith {};
+
 private _shootDir = (getPosATL _flamer vectorFromTo getPosATL _tgt) vectorMultiply 15;
 [_flamer getVariable [QGVAR(cap), _flamer], ["foc_initial", 500]] remoteExec ["say3D"];
 [_flamer, _shootDir] remoteExec [QFUNC(FlamerPlasma), [0, -2] select isDedicated];

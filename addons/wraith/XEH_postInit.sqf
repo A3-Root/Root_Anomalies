@@ -15,12 +15,12 @@
     createMarker [_mk, _pos];
     [
         _mk,
-        _config getOrDefault ["model", ROOT_ANOMALIES_VR_BASE],
         _config getOrDefault ["health", 400],
         _config getOrDefault ["territory", 150],
-        _config getOrDefault ["interval", 8],
-        _config getOrDefault ["damage", 0.4],
-        _config getOrDefault ["fearRadius", 25],
+        _config getOrDefault ["interval", 4],
+        _config getOrDefault ["damage", 0.3],
+        _config getOrDefault ["visionMode", 2],
+        _config getOrDefault ["speed", 1.2],
         _config
     ] spawn FUNC(WraithMain);
     objNull

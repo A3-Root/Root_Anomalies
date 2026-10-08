@@ -41,7 +41,7 @@ class CfgVehicles {
         isTriggerActivated = 0;
         isDisposable = 1;
         is3DEN = 0;
-        icon = "\A3\Modules_F_Curator\Data\portraitEffectsZeus_ca.paa";
+        icon = "\a3\Modules_F_Curator\Data\iconLightning_ca.paa";
         class AttributeValues {};
         class Attributes: AttributesBase {
             class ROOT_TERM_RADIUS: Edit {
@@ -68,7 +68,7 @@ class CfgVehicles {
         isTriggerActivated = 0;
         isDisposable = 1;
         is3DEN = 0;
-        icon = "\A3\Modules_F_Curator\Data\portraitEffectsZeus_ca.paa";
+        icon = "\a3\Modules_F_Curator\Data\iconLightning_ca.paa";
         class AttributeValues {};
         class Attributes: AttributesBase {
             class ROOT_CFG_RADIUS: Edit {

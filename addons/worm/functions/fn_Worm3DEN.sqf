@@ -29,7 +29,9 @@ private _forceTgt = _logic getVariable ["ROOT_WORM_FORCETGT", ""];
 private _forceN = _logic getVariable ["ROOT_WORM_FORCEN", 3];
 
 if (!_override && _territory < 200) then {_territory = 200};
-if (getNumber (configFile >> "CfgVehicles" >> _diffuser >> "scope") <= 0) then {_diffuser = "SmokeShellGreen"};
+_diffuser = [_diffuser] call EFUNC(main,resolveThrowable);
+if (_diffuser isEqualTo "") then {_diffuser = "SmokeShellGreen"};
+_forceTgt = [_forceTgt] call EFUNC(main,resolveThrowable);
 
 private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_WORM_IDX", 0];
 missionNamespace setVariable ["ROOT_ANOMALIES_WORM_IDX", _idx + 1];

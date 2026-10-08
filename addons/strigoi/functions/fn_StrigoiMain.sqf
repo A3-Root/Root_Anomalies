@@ -100,7 +100,8 @@ LOG_DEBUG_2("StrigoiMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 private _inRange = [];
 while {alive _strigoi && {!(_strigoi getVariable [QEGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _strigoi getVariable [QGVAR(config), createHashMap];
+    [_strigoi] call EFUNC(main,sedationHold);
+    private _cfg = _strigoi getVariable [QEGVAR(main,config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     private _activation = _cfg getOrDefault ["activationRange", ROOT_ANOMALIES_DEFAULT_ACTIVATION];
@@ -122,7 +123,8 @@ while {alive _strigoi && {!(_strigoi getVariable [QEGVAR(main,captured), false])
     [_strigoi, _markerPos, _territory] call FUNC(StrigoiShow);
 
     while {(!isNil "_tgt") && {(alive _strigoi) && {(_strigoi distance _markerPos) < _territory} && {!(_strigoi getVariable [QEGVAR(main,captured), false])} && {!(_strigoi getVariable [QGVAR(dying), false])} && {!(_strigoi getVariable [QEGVAR(main,terminate), false])}}} do {
-        _damage = (_strigoi getVariable [QGVAR(config), createHashMap]) getOrDefault ["damage", _damage];
+        [_strigoi] call EFUNC(main,sedationHold);
+        _damage = (_strigoi getVariable [QEGVAR(main,config), createHashMap]) getOrDefault ["damage", _damage];
         [_inRange] call FUNC(StrigoiDrain);
         _strigoi moveTo AGLToASL (_tgt getRelPos [10, 180]);
         if (_aiPanic) then {[_strigoi, _tgt] call FUNC(StrigoiAvoid)};

@@ -19,6 +19,9 @@
 
 params ["_flamer", "_dmg", "_bodyParts", "_weights"];
 
+// Nothing lands while the anomaly is sedated or groggy.
+if ([_flamer] call EFUNC(main,isPacified)) exitWith {};
+
 private _near = ((ASLToAGL getPosATL _flamer) nearEntities [["CAManBase", "LandVehicle", "Helicopter"], 20]) - [_flamer];
 {
     private _v = _x;

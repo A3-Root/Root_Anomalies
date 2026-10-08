@@ -43,7 +43,7 @@ deleteVehicle _logic;
         ["EDIT", ["Detection Device", "Classname of the detection device. Can be the same item as the protection device."], ["MineDetector"]],
         ["EDIT", ["Protection Device", "Classname of the protection device. Can be the same item as the detection device."], ["B_Kitbag_mcamo"]],
         ["EDIT", ["Killswitch Device", "Classname of the killswitch device (default: CSAT Typhoon Device)."], ["O_Truck_03_device_F"]]
-    ],
+    ] + ([] call EFUNC(main,zeusCaptureRows)),
     {
         params ["_results", "_markerName"];
         _results params ["_radius", "_vehicleAllowed", "_roaming", "_detectable", "_protectable", "_killable", "_aiPanic", "_killRange", "_detector", "_protector", "_killDevice"];
@@ -62,6 +62,7 @@ deleteVehicle _logic;
 
         ["Burper Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "burper"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15]];
+        [_config, _results] call EFUNC(main,zeusCaptureApply);
         [_markerName, _roaming, _detector, _protector, _killDevice, _radius, _vehicleAllowed, _killRange, _aiPanic, _config] remoteExec [QFUNC(BurperMain), 2];
     },
     {

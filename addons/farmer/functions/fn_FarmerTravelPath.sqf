@@ -21,6 +21,12 @@ private _ragProp = "Land_PenBlack_F" createVehicle [getPosATL _farmer select 0, 
 private _jumpDir = (getPosATL _farmer vectorFromTo getPosATL _tgt) vectorMultiply 20;
 _ragProp setVelocity [_jumpDir select 0, _jumpDir select 1, 5];
 [_ragProp] remoteExec [QFUNC(FarmerTravel), [0, -2] select isDedicated];
-uiSleep (round (2 + random 2));
+// Underground rumble following the burrow, audible well beyond the old 50 m.
+private _travelEnd = time + round (2 + random 2);
+private _rumble = ["pietre", "earthquake_02"];
+while {time < _travelEnd} do {
+    [_ragProp, [selectRandom _rumble, 400]] remoteExec ["say3D", [0, -2] select isDedicated];
+    uiSleep 1;
+};
 _farmer setVariable [QGVAR(newPos), getPos _ragProp];
 deleteVehicle _ragProp;

@@ -20,6 +20,9 @@
 
 params ["_flamer", "_tgt", "_dmg", "_bodyParts", "_weights"];
 
+// Nothing lands while the anomaly is sedated or groggy.
+if ([_flamer] call EFUNC(main,isPacified)) exitWith {};
+
 private _jumpDir = (getPosATL _flamer vectorFromTo getPosATL _tgt) vectorMultiply round (10 + random 10);
 private _blastSound = selectRandom ["01_blast", "02_blast", "03_blast"];
 private _veg = nearestTerrainObjects [position _flamer, ["TREE", "SMALL TREE", "BUSH", "FOREST BORDER", "FOREST TRIANGLE", "FOREST SQUARE", "FOREST"], 20, false];

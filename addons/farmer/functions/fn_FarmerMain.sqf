@@ -87,15 +87,24 @@ for "_i" from 0 to 5 do {
     uiSleep 0.1;
 };
 
+private _voice = createVehicle ["Land_HelipadEmpty_F", _markerPos, [], 0, "CAN_COLLIDE"];
+_voice attachTo [_farmer, [0, 0, 1]];
+_farmer setVariable [QGVAR(voice), _voice, true];
+_farmer setVariable [QEGVAR(main,extraDelete), [_voice], true];
+
 [_farmer] call FUNC(FarmerHide);
 _farmer enableSimulationGlobal false;
 
+// A burrowed farmer is only reachable while it surfaces, so its sedation catches smoke
+// in a wider ring than the default.
+if !("sedationRadius" in _config) then {_config set ["sedationRadius", 25]};
 [_farmer, _config] call EFUNC(main,finalizeInstance);
 
 LOG_DEBUG_2("FarmerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 while {alive _farmer && {!(_farmer getVariable [QEGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _farmer getVariable [QGVAR(config), createHashMap];
+    [_farmer] call EFUNC(main,sedationHold);
+    private _cfg = _farmer getVariable [QEGVAR(main,config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     _damage = _cfg getOrDefault ["damage", _damage];
     _recharge = _cfg getOrDefault ["recharge", _recharge];
@@ -121,11 +130,12 @@ while {alive _farmer && {!(_farmer getVariable [QEGVAR(main,captured), false])} 
     while {
         (!isNil "_tgt") && {(alive _farmer) && {(_farmer distance _markerPos) < _territory} && {!(_farmer getVariable [QEGVAR(main,captured), false])} && {!(_farmer getVariable [QGVAR(dying), false])} && {!(_farmer getVariable [QEGVAR(main,terminate), false])}}
     } do {
-        _cfg = _farmer getVariable [QGVAR(config), createHashMap];
+        _cfg = _farmer getVariable [QEGVAR(main,config), createHashMap];
         _territory = _cfg getOrDefault ["territory", _territory];
         _damage = _cfg getOrDefault ["damage", _damage];
         _recharge = _cfg getOrDefault ["recharge", _recharge];
         _farmer setDir (_farmer getRelDir _tgt);
+        [_farmer] call EFUNC(main,sedationHold);
         if ((_farmer distance _tgt) > 15) then {
             [_farmer] call FUNC(FarmerHide);
             [_farmer, _tgt] call FUNC(FarmerTravelPath);
@@ -136,8 +146,10 @@ while {alive _farmer && {!(_farmer getVariable [QEGVAR(main,captured), false])} 
             uiSleep 1;
         };
         _farmer setUnitPos "UP";
+        [_farmer] call EFUNC(main,sedationHold);
         if ((_farmer distance _tgt) <= 15) then {
             uiSleep 1;
+            [_farmer] call EFUNC(main,sedationHold);
             [_farmer, _damage] call FUNC(FarmerAttack);
             if (_aiPanic) then {
                 {[_farmer, _x] spawn FUNC(FarmerAvoid)} forEach _inRange;
@@ -168,7 +180,8 @@ while {alive _farmer && {!(_farmer getVariable [QEGVAR(main,captured), false])} 
 // Death by damage runs its own cinematic (deathBlast deletes the entity); only clean up
 // here for the capture / terminate exits.
 if !(_farmer getVariable [QGVAR(dying), false]) then {
-    [_farmer, ["eko", 100]] remoteExec ["say3D"];
+    [_farmer getVariable [QGVAR(voice), _farmer], ["eko", 300]] remoteExec ["say3D"];
+    [{deleteVehicle _this}, _farmer getVariable [QGVAR(voice), objNull], 5] call CBA_fnc_waitAndExecute;
     deleteVehicle _farmer;
 };
 

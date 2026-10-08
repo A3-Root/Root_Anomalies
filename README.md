@@ -1,6 +1,6 @@
 # Root's Anomalies
 
-![version](https://img.shields.io/badge/version-5.0.0.2-blue) ![build](https://img.shields.io/badge/build-passing-green)
+![version](https://img.shields.io/badge/version-5.0.0.8-blue) ![build](https://img.shields.io/badge/build-passing-green)
 
 A modular framework of anomalies, creatures and SCP-style entities for Arma 3, usable from
 **both the 3DEN Editor and Zeus (Game Master)**. Originally based on the 3DEN showcase by
@@ -37,16 +37,41 @@ Aliascartoons; fully refactored, modernised and expanded by Root.
 | `flamer`   | Flamer   | Burning, leaping creature that ignites everything nearby. |
 | `screamer` | Screamer | Static/living entity emitting a directional sonic blast. |
 | `smuggler` | Smuggler | Invisible teleporter that scrambles units/vehicles and conjures objects. |
-| `steamer`  | Steamer  | Invisible entity erupting geyser bursts beneath targets. |
+| `steamer`  | Steamer  | Invisible entity erupting geyser bursts beneath targets; its death tears the ground open and throws everything nearby. |
 | `strigoi`  | Strigoi  | Spectral stamina-drainer that hops between trees (night-only option). |
-| `swarmer`  | Swarmer  | Insect hive whose fly swarm devours victims; killed with pesticide. |
+| `swarmer`  | Swarmer  | Insect hive whose fly swarm devours victims; killed with its configured pesticide. |
 | `twins`    | Twins    | Electric anomaly with a vulnerable "heart"; freezes when observed; EMP on death. |
-| `worm`     | Worm     | Burrowing creature that erupts and flings/strikes targets; killed with a diffuser. |
+| `worm`     | Worm     | Burrowing creature that erupts and flings/strikes targets; killed with a diffuser, baited by a diversion device for a set number of attacks. |
 | `scp173`   | SCP-173  | Cannot move while observed; blinks to the nearest victim and snaps their neck. |
 | `scp096`   | SCP-096  | Docile until its face is seen, then sprints to and kills the viewer. |
-| `wraith`   | Wraith   | Floating demon that teleport-stalks the living, burning them and radiating dread. |
+| `wraith`   | Wraith   | Ground-walking stalker stitched from Strigoi, Flamer and Farmer flesh; invisible to the naked eye, only seen through night vision and/or thermal optics. |
 
-> New creatures (SCP-173, SCP-096, Wraith) use the default VR soldier as a placeholder model.
+> SCP-173 and SCP-096 use the default VR soldier as a placeholder model.
+
+## Sedation and capture
+
+Every anomaly can be sedated and captured, with or without ACE.
+
+1. Throw a **sedative smoke** near it: the default sedative, or the classes set in the module's
+   *Sedation Classes* (magazine or ammo names, e.g. `SmokeShellGreen`). A kill device (Swarmer
+   pesticide, Worm diffuser) never counts as a sedative.
+2. While sedated the anomaly **comes out of hiding, is frozen in place, cannot hurt anyone** and the
+   capture action appears on it: ACE interaction *Capture Anomaly* (progress bar), or a vanilla hold
+   action within 6 m without ACE.
+3. It stays down for *Sedation Time* seconds after the last smoke clears, then wakes up and stays
+   docile for *Post-Sedation Cooldown* seconds before attacking again.
+4. Completing the capture removes the anomaly and raises the `root_anomalies_captured` event.
+
+The Steamer is sedated by smoke anywhere in its territory and materialises where the smoke landed.
+The Farmer catches smoke within 25 m. All of these options exist in both the 3DEN modules and the Zeus
+dialogs.
+
+## Multiplayer
+
+Works in single player, hosted multiplayer and on dedicated servers, with or without headless
+clients. Every anomaly runs on the server; effects and sounds play on each client (JIP safe). Thrown
+kill devices and sedatives are detected whoever throws them (players, AI or headless clients, ACE
+advanced throwing or vanilla).
 
 ## Usage
 

@@ -21,7 +21,7 @@ params ["_obj", "_core", ["_damage", 0.1, [0]]];
 
 while {alive _obj && {!(_obj getVariable [QEGVAR(main,terminate), false])}} do {
     private _protector = _obj getVariable [QGVAR(protector), ""];
-    private _cfg = _obj getVariable [QGVAR(config), createHashMap];
+    private _cfg = _obj getVariable [QEGVAR(main,config), createHashMap];
     private _damageLive = _cfg getOrDefault ["damage", _damage];
     private _tpRange = _cfg getOrDefault ["tpRange", 300];
 

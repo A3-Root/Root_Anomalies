@@ -49,7 +49,7 @@ deleteVehicle _logic;
         ["COMBO", ["Immunity Mode", "How immunity gear wears out."], [["Infinite", "Time", "Damage"], ["Infinite (never fails)", "Time (seconds)", "Damage (absorbed)"], 0]],
         ["SLIDER", ["Immunity Value", "Seconds (Time) or total damage (Damage) the gear lasts. 0 = never."], [0, 600, 0, 0]],
         ["SLIDER:RADIUS", ["Activation Range (m)", "Players within this distance wake the Screamer."], [50, 3000, 1000, 0, _pos, [120, 120, 40, 1]]]
-    ],
+    ] + ([] call EFUNC(main,zeusCaptureRows)),
     {
         params ["_results", "_markerName"];
         _results params ["_spawnSide", "_hostiles", "_model", "_health", "_territory", "_atkRadius", "_affectVehicles", "_aiEngage", "_aiPanic", "_dmgClose", "_dmgMedium", "_dmgFar", "_protGear", "_protPct", "_immGear", "_immMode", "_immValue", "_activation"];
@@ -65,6 +65,7 @@ deleteVehicle _logic;
 
         ["Screamer Anomaly configured and active!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "screamer"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["activationRange", _activation], ["protGear", [_protGear] call EFUNC(main,parseClassList)], ["protPct", _protPct], ["immGear", [_immGear] call EFUNC(main,parseClassList)], ["immMode", _immMode], ["immValue", _immValue]];
+        [_config, _results] call EFUNC(main,zeusCaptureApply);
         [_markerName, _model, _dmgClose, _dmgMedium, _dmgFar, _territory, _hostiles, _atkRadius, _affectVehicles, _aiEngage, _aiPanic, _spawnSide, _health, _config] remoteExec [QFUNC(ScreamerMain), 2];
     },
     {

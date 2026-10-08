@@ -7,6 +7,10 @@
  * Public: No
  */
 
+[QGVAR(fling), {
+    _this call FUNC(SteamerFling);
+}] call CBA_fnc_addEventHandler;
+
 ["steamer", {
     params ["_pos", "_config"];
     private _idx = missionNamespace getVariable ["ROOT_ANOMALIES_STEAMER_IDX", 0];

@@ -120,6 +120,18 @@
 #ifndef ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME
     #define ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME 30
 #endif
+// Seconds a sedative keeps an anomaly down after the last smoke is gone.
+#ifndef ROOT_ANOMALIES_DEFAULT_SEDATION_TIME
+    #define ROOT_ANOMALIES_DEFAULT_SEDATION_TIME 20
+#endif
+// Seconds an anomaly stays docile (no attacks) after waking from sedation.
+#ifndef ROOT_ANOMALIES_DEFAULT_SEDATION_COOLDOWN
+    #define ROOT_ANOMALIES_DEFAULT_SEDATION_COOLDOWN 10
+#endif
+// Default sedation detection radius (m) around the anomaly.
+#ifndef ROOT_ANOMALIES_DEFAULT_SEDATION_RADIUS
+    #define ROOT_ANOMALIES_DEFAULT_SEDATION_RADIUS 15
+#endif
 
 // Default activation range (m): players within this distance wake the anomaly's routine.
 #ifndef ROOT_ANOMALIES_DEFAULT_ACTIVATION
@@ -133,4 +145,8 @@
 // CBA event raised (global) when an anomaly instance is killed/disabled: args [anomaly].
 #ifndef ROOT_ANOMALIES_EVENT_KILLED
     #define ROOT_ANOMALIES_EVENT_KILLED "root_anomalies_killed"
+#endif
+// CBA event raised (global) when an anomaly is held down or wakes up: args [anomaly, sedated].
+#ifndef ROOT_ANOMALIES_EVENT_SEDATED
+    #define ROOT_ANOMALIES_EVENT_SEDATED "root_anomalies_sedated"
 #endif

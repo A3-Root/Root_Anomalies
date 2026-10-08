@@ -25,10 +25,12 @@ private _cfg = createHashMapFromArray [
     ["activationRange", _logic getVariable ["ROOT_ACTIVATION", ROOT_ANOMALIES_DEFAULT_ACTIVATION]],
     ["captureEnabled", _logic getVariable ["ROOT_CAPTURE", true]],
     ["captureTime", _logic getVariable ["ROOT_CAPTURETIME", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME]],
-    ["captureRadius", 15]
+    ["captureRadius", 15],
+    ["sedationTime", _logic getVariable ["ROOT_SEDATIONTIME", ROOT_ANOMALIES_DEFAULT_SEDATION_TIME]],
+    ["sedationCooldown", _logic getVariable ["ROOT_SEDATIONCOOLDOWN", ROOT_ANOMALIES_DEFAULT_SEDATION_COOLDOWN]]
 ];
 
-private _sed = [_logic getVariable ["ROOT_SEDATION", ""]] call FUNC(parseClassList);
+private _sed = (([_logic getVariable ["ROOT_SEDATION", ""]] call FUNC(parseClassList)) apply {[_x] call FUNC(resolveThrowable)}) select {_x isNotEqualTo ""};
 if (_sed isNotEqualTo []) then { _cfg set ["sedationClassnames", _sed]; };
 
 _cfg

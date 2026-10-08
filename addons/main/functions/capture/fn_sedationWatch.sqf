@@ -2,9 +2,11 @@
 /*
  * Author: Root
  * Description: Server PFH that detects sedation smoke (default or per-instance custom
- *              classnames) within the anomaly's capture radius and opens a timed sedation
- *              window, during which the capture interaction becomes available. Also the
- *              hook used by traps to force a sedation window.
+ *              classnames) within the anomaly's sedation radius and opens a timed sedation
+ *              window, during which the anomaly is held down by sedationHold and the
+ *              capture interaction becomes available. Classes configured as the anomaly's
+ *              kill device (pesticide, diffuser) never count as sedation. Also the hook
+ *              used by traps to force a sedation window.
  *
  * Arguments:
  * 0: Anomaly <OBJECT>
@@ -28,25 +30,35 @@ private _h = [{
 
     private _cfg = _obj getVariable [QGVAR(config), createHashMap];
     private _classes = _cfg getOrDefault ["sedationClassnames", [ROOT_ANOMALIES_SEDATIVE_SMOKE, "ROOT_Ammo_SmokeShell_Sedative"]];
-    private _radius = _cfg getOrDefault ["captureRadius", 15];
+    private _exclude = _cfg getOrDefault ["killClassnames", []];
+    private _radius = _cfg getOrDefault ["sedationRadius", _cfg getOrDefault ["captureRadius", ROOT_ANOMALIES_DEFAULT_SEDATION_RADIUS]];
+    private _duration = _cfg getOrDefault ["sedationTime", ROOT_ANOMALIES_DEFAULT_SEDATION_TIME];
+    private _centre = _obj getVariable [QGVAR(sedationCentre), getPosATL _obj];
 
-    private _found = false;
+    private _found = objNull;
     {
         private _t = typeOf _x;
-        {
-            private _cls = _x;
-            if ((_t isKindOf [_cls, configFile >> "CfgAmmo"]) || _t == _cls) exitWith { _found = true; };
-        } forEach _classes;
-        if (_found) exitWith {};
-    } forEach ((getPosATL _obj) nearObjects _radius);
-
-    if (_found) then {
-        _obj setVariable [QGVAR(sedated), true, true];
-        _obj setVariable [QGVAR(sedatedUntil), time + 20, true];
-    } else {
-        if (time > (_obj getVariable [QGVAR(sedatedUntil), 0])) then {
-            _obj setVariable [QGVAR(sedated), false, true];
+        if !(_t in _exclude) then {
+            {
+                if (_t == _x || {_t isKindOf [_x, configFile >> "CfgAmmo"]}) exitWith { _found = _x; };
+            } forEach _classes;
         };
+        if (!isNull _found) exitWith {};
+    } forEach (_centre nearObjects _radius);
+
+    private _id = _cfg getOrDefault ["id", typeOf _obj];
+    if (isNull _found) then {
+        if ((_obj getVariable [QGVAR(sedated), false]) && {time > (_obj getVariable [QGVAR(sedatedUntil), 0])}) then {
+            _obj setVariable [QGVAR(sedated), false, true];
+            LOG_DEBUG_1("sedationWatch: %1 sedative wore off",_id);
+        };
+    } else {
+        if !(_obj getVariable [QGVAR(sedated), false]) then {
+            LOG_DEBUG_3("sedationWatch: %1 sedated by %2 at %3",_id,typeOf _found,mapGridPosition _found);
+        };
+        _obj setVariable [QGVAR(sedationPos), getPosATL _found, true];
+        _obj setVariable [QGVAR(sedated), true, true];
+        _obj setVariable [QGVAR(sedatedUntil), time + _duration, true];
     };
 }, 1, [_obj]] call CBA_fnc_addPerFrameHandler;
 

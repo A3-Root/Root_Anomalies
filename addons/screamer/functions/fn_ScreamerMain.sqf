@@ -142,7 +142,8 @@ private _entityObj = [_anomaly, _entity] select _isAlive;
 LOG_DEBUG_2("ScreamerMain spawned at %1 (territory %2)",_markerPos,_territory);
 
 while {alive _entity && {!(_entityObj getVariable [QEGVAR(main,captured), false])} && {!(_entityObj getVariable [QEGVAR(main,terminate), false])}} do {
-    private _cfg = _entityObj getVariable [QGVAR(config), createHashMap];
+    [_entityObj] call EFUNC(main,sedationHold);
+    private _cfg = _entityObj getVariable [QEGVAR(main,config), createHashMap];
     _territory = _cfg getOrDefault ["territory", _territory];
     private _cfgSides = _cfg getOrDefault ["hostileSides", []];
     if (_cfgSides isNotEqualTo []) then {_hostiles = _cfgSides};
@@ -158,6 +159,7 @@ while {alive _entity && {!(_entityObj getVariable [QEGVAR(main,captured), false]
     if (count _near > 1) then {
         private _teleport = false;
         while {!_teleport && {alive _entity} && {!(_entityObj getVariable [QEGVAR(main,captured), false])} && {!(_entityObj getVariable [QEGVAR(main,terminate), false])}} do {
+            [_entityObj] call EFUNC(main,sedationHold);
             _entity setUnitPos "UP";
             _near = (_markerPos nearEntities [_screamTargets, _territory]) - [_entity];
             if (count _near < 2) then {_teleport = true};
@@ -241,7 +243,7 @@ while {alive _entity && {!(_entityObj getVariable [QEGVAR(main,captured), false]
                         };
                     };
                     if (_affectVehicles && {(_u isKindOf "LandVehicle") || {_u isKindOf "Air"}}) then {
-                        [_u, random _bandDmg] call FUNC(ScreamerVehicleDamage);
+                        if !([_entityObj] call EFUNC(main,isPacified)) then {[_u, random _bandDmg] call FUNC(ScreamerVehicleDamage)};
                     };
                     [_u, _tempMass] remoteExec ["setMass", _u];
                 } forEach _band;

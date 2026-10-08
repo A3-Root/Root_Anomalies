@@ -44,7 +44,7 @@ deleteVehicle _logic;
         ["SLIDER", ["Static Object Limit", "Max live static objects kept; oldest deleted past this. 0 = unlimited."], [0, 50, 10, 0]],
         ["SLIDER", ["Dynamic Unit Limit", "Max live spawned AI units kept; oldest deleted past this. 0 = unlimited."], [0, 50, 10, 0]],
         ["SIDES", ["Hostile Sides", "Sides the Smuggler teleports. None selected = all."], []]
-    ],
+    ] + ([] call EFUNC(main,zeusCaptureRows)),
     {
         params ["_results", "_markerName"];
         _results params ["_roaming", "_detectable", "_protectable", "_disableSpawn", "_detector", "_protector", "_spawnStr", "_spawnDelay", "_damage", "_tpRange", "_staticLimit", "_dynLimit", "_sides"];
@@ -55,6 +55,7 @@ deleteVehicle _logic;
 
         ["Smuggler Anomaly configured and created!"] call zen_common_fnc_showMessage;
         private _config = createHashMapFromArray [["type", "smuggler"], ["manageDamage", false], ["captureEnabled", true], ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME], ["captureRadius", 15], ["tpRange", _tpRange], ["staticLimit", _staticLimit], ["dynLimit", _dynLimit], ["hostileSides", _sides]];
+        [_config, _results] call EFUNC(main,zeusCaptureApply);
         [_markerName, _roaming, _detector, _spawnList, _spawnDelay, _protector, _damage, _config] remoteExec [QFUNC(SmugglerMain), 2];
     },
     {

@@ -5,4 +5,5 @@
 PREP(Wraith3DEN);
 PREP(WraithMain);
 PREP(WraithSfx);
+PREP(WraithViewLocal);
 PREP(WraithZeus);

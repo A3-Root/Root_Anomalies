@@ -26,7 +26,7 @@ if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
     private _action = [
         QGVAR(capture),
         "Capture Anomaly",
-        "\A3\ui_f\data\IGUI\Cfg\holdactions\holdAction_ca.paa",
+        "\a3\ui_f\data\IGUI\Cfg\HoldActions\holdAction_secure_ca.paa",
         {
             params ["_target", "_player"];
             private _t = (_target getVariable [QGVAR(config), createHashMap]) getOrDefault ["captureTime", ROOT_ANOMALIES_DEFAULT_CAPTURE_TIME];
@@ -35,7 +35,8 @@ if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
                 [_target],
                 { (_this select 0) params ["_target"]; [_target] call API(capture); },
                 {},
-                "Capturing anomaly..."
+                "Capturing anomaly...",
+                { ((_this select 0) select 0) getVariable [QGVAR(sedated), false] }
             ] call ace_common_fnc_progressBar;
         },
         {
@@ -45,20 +46,27 @@ if (!isNil "ace_interact_menu_fnc_addActionToObject") exitWith {
             {(_target getVariable [QGVAR(config), createHashMap]) getOrDefault ["captureEnabled", true]}
         }
     ] call ace_interact_menu_fnc_createAction;
-    [_obj, 0, ["ACE_MainActions"], _action] call ace_interact_menu_fnc_addActionToObject;
+    // Men carry ACE's main interaction node; props (worm head, hives) do not, so the
+    // action sits on the object itself there.
+    private _parent = [[], ["ACE_MainActions"]] select (_obj isKindOf "CAManBase");
+    [_obj, 0, _parent, _action] call ace_interact_menu_fnc_addActionToObject;
 };
 
 // Vanilla hold-action fallback.
 [
     _obj,
     "Capture Anomaly",
-    "\A3\ui_f\data\IGUI\Cfg\holdactions\holdAction_ca.paa",
-    "\A3\ui_f\data\IGUI\Cfg\holdactions\holdAction_ca.paa",
-    format ["(_target getVariable ['%1', false]) && {!(_target getVariable ['%2', false])} && {(_target getVariable ['%3', createHashMap]) getOrDefault ['captureEnabled', true]}", QGVAR(sedated), QGVAR(captured), QGVAR(config)],
-    "true",
+    "\a3\ui_f\data\IGUI\Cfg\HoldActions\holdAction_secure_ca.paa",
+    "\a3\ui_f\data\IGUI\Cfg\HoldActions\holdAction_secure_ca.paa",
+    format ["(_target distance _this < 6) && {_target getVariable ['%1', false]} && {!(_target getVariable ['%2', false])} && {(_target getVariable ['%3', createHashMap]) getOrDefault ['captureEnabled', true]}", QGVAR(sedated), QGVAR(captured), QGVAR(config)],
+    format ["(_caller distance _target < 6) && {_target getVariable ['%1', false]}", QGVAR(sedated)],
     {},
     {},
-    { params ["_target"]; [_target] call API(capture); },
+    {
+        params ["_target", "_caller"];
+        LOG_DEBUG_2("capture: %1 captured by %2",typeOf _target,name _caller);
+        [_target] call API(capture);
+    },
     {},
     [],
     _captureTime,

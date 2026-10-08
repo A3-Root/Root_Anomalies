@@ -47,6 +47,9 @@ if (_anim isNotEqualTo "") then {
     };
 
     if (_delete && {!isNull _obj}) then {
+        {
+            if (!isNull _x) then {deleteVehicle _x};
+        } forEach (_obj getVariable [QGVAR(extraDelete), []]);
         hideObjectGlobal _obj;
         uiSleep 0.2;
         deleteVehicle _obj;

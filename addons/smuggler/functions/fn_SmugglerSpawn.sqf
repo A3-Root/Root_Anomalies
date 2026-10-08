@@ -40,6 +40,7 @@ _core setVariable [QGVAR(staticObjs), [], true];
 _core setVariable [QGVAR(dynUnits), [], true];
 
 while {!isNull _core && {!isNull _source} && {!(_source getVariable [QEGVAR(main,terminate), false])}} do {
+    [_source] call EFUNC(main,sedationHold);
     while {!(_core getVariable [QGVAR(active), false]) && {!(_source getVariable [QEGVAR(main,terminate), false])}} do {
         {if (_x distance getPos _core < 1100) exitWith {_core setVariable [QGVAR(active), true, true]}} forEach allPlayers;
         uiSleep 10;

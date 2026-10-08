@@ -46,9 +46,10 @@ _tail2 attachTo [_tail, [0, -1, 1]];
 [_tail, true] remoteExec ["hideObject", 0, true];
 [_tail2, true] remoteExec ["hideObject", 0, true];
 
-// Default the worm's diffuser as a sedation class if none specified in config.
-if !("sedationClassnames" in _config) then {
-    _config set ["sedationClassnames", [_diffuser, ROOT_ANOMALIES_SEDATIVE_SMOKE]];
+// The diffuser kills the worm; it must never also count as a sedative.
+if (_diffuser isNotEqualTo "") then {
+    _config set ["killClassnames", [_diffuser]];
+    _config set ["sedationClassnames", (_config getOrDefault ["sedationClassnames", [ROOT_ANOMALIES_SEDATIVE_SMOKE]]) - [_diffuser]];
 };
 [_head, _config] call EFUNC(main,finalizeInstance);
 
@@ -84,6 +85,7 @@ addCamShake [1, 4, 23];
 uiSleep 1;
 
 while {!isNull _head && {!(_head getVariable [QEGVAR(main,terminate), false])}} do {
+    [_head] call EFUNC(main,sedationHold);
     private _cfg = _head getVariable [QEGVAR(main,config), createHashMap];
     _damage = _cfg getOrDefault ["damage", _damage];
     _territory = _cfg getOrDefault ["territory", _territory];
@@ -95,8 +97,9 @@ while {!isNull _head && {!(_head getVariable [QEGVAR(main,terminate), false])}} 
     // the next few attacks, letting players bait it away from themselves.
     private _forceObj = _head getVariable [QGVAR(forceObj), objNull];
     private _forceCount = _head getVariable [QGVAR(forceCount), 0];
+    private _spent = _head getVariable [QGVAR(forceSpent), []];
     if (_forceCls isNotEqualTo "" && {isNull _forceObj || _forceCount <= 0}) then {
-        private _found = nearestObjects [_markerPos, [_forceCls], _territory];
+        private _found = (nearestObjects [_markerPos, [_forceCls], _territory]) - _spent;
         if (_found isNotEqualTo []) then {
             _forceObj = _found select 0;
             _forceCount = _forceN max 1;
@@ -107,6 +110,29 @@ while {!isNull _head && {!(_head getVariable [QEGVAR(main,terminate), false])}} 
     if (!isNull _forceObj && _forceCount <= 0) then {
         _forceObj = objNull;
         _head setVariable [QGVAR(forceObj), objNull, true];
+    };
+
+    // Diversion devices (smoke, chemlights) burn out or get picked up before the worm is
+    // done with them. The worm fixates on a decoy at the device's spot instead, which
+    // follows the device while it exists and stays behind once it is gone, so it always
+    // spends the full number of attacks on the diversion.
+    if (!isNull _forceObj && {!(_forceObj getVariable [QGVAR(isDecoy), false])}) then {
+        _head setVariable [QGVAR(forceSrc), _forceObj];
+        private _decoy = _head getVariable [QGVAR(decoy), objNull];
+        if (isNull _decoy) then {
+            _decoy = createVehicle ["Land_HelipadEmpty_F", getPosATL _forceObj, [], 0, "CAN_COLLIDE"];
+            _decoy setVariable [QGVAR(isDecoy), true];
+            _head setVariable [QGVAR(decoy), _decoy];
+        };
+        _forceObj = _decoy;
+        _head setVariable [QGVAR(forceObj), _decoy, true];
+        private _srcType = typeOf (_head getVariable [QGVAR(forceSrc), objNull]);
+        LOG_DEBUG_2("WormMain: diversion device %1 at %2, worm fixated",_srcType,mapGridPosition _decoy);
+    };
+    private _forceSrc = _head getVariable [QGVAR(forceSrc), objNull];
+    if (!isNull _forceObj && {!isNull _forceSrc}) then {
+        private _srcPos = getPosATL _forceSrc;
+        _forceObj setPosATL [_srcPos select 0, _srcPos select 1, 0];
     };
 
     if (_near isNotEqualTo [] || {!isNull _forceObj}) then {
@@ -150,7 +176,16 @@ while {!isNull _head && {!(_head getVariable [QEGVAR(main,terminate), false])}} 
             if (_isForce) then {
                 _forceCount = _forceCount - 1;
                 _head setVariable [QGVAR(forceCount), _forceCount, true];
-                if (_forceCount <= 0) then {_head setVariable [QGVAR(forceObj), objNull, true]};
+                LOG_DEBUG_2("WormMain: diversion attack done, %1 of %2 left",_forceCount,_forceN);
+                if (_forceCount <= 0) then {
+                    // Spent: never fixate on this device again, release the decoy.
+                    private _src = _head getVariable [QGVAR(forceSrc), objNull];
+                    if (!isNull _src) then {_spent pushBack _src; _head setVariable [QGVAR(forceSpent), _spent select {!isNull _x}]};
+                    _head setVariable [QGVAR(forceSrc), objNull];
+                    deleteVehicle (_head getVariable [QGVAR(decoy), objNull]);
+                    _head setVariable [QGVAR(decoy), objNull];
+                    _head setVariable [QGVAR(forceObj), objNull, true];
+                };
             };
         };
 

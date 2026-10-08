@@ -28,7 +28,8 @@ private _pesticide = _logic getVariable ["ROOT_SWARMER_PESTICIDE", "SmokeShellGr
 private _damage = _logic getVariable ["ROOT_SWARMER_DAMAGE", 0.6];
 
 if (getNumber (configFile >> "CfgVehicles" >> _hiveClass >> "scope") <= 0) then {_hiveClass = "Land_GarbageBags_F"};
-if (getNumber (configFile >> "CfgVehicles" >> _pesticide >> "scope") <= 0) then {_pesticide = "SmokeShellGreen"};
+_pesticide = [_pesticide] call EFUNC(main,resolveThrowable);
+if (_pesticide isEqualTo "") then {_pesticide = "SmokeShellGreen"};
 if (_disablePesticide) then {_pesticide = ""};
 if (!_override && _territory < 75) then {_territory = 75};
 

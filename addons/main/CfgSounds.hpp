@@ -1021,4 +1021,19 @@ class CfgSounds {
 		sound[] = {"\z\root_anomalies\addons\main\sounds\strigat.ogg","db+20", 1};
 		titles[] = {};
 	};
+	class steamer_erupt_1 {
+		name = "steamer_erupt_1";
+		sound[] = {"A3\Sounds_F\arsenal\explosives\shells\Artillery_shell_explosion_04.wss", "db+20", 0.5};
+		titles[] = {};
+	};
+	class steamer_erupt_2 {
+		name = "steamer_erupt_2";
+		sound[] = {"A3\Sounds_F\arsenal\explosives\shells\Tank_shell_explosion_02.wss", "db+15", 0.35};
+		titles[] = {};
+	};
+	class wraith_claw {
+		name = "wraith_claw";
+		sound[] = {"\z\root_anomalies\addons\main\sounds\punch_3.ogg", "db+20", 0.8};
+		titles[] = {};
+	};
 };

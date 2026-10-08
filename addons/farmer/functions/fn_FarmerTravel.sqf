@@ -29,7 +29,7 @@ _ground setParticleParams [["\A3\data_f\ParticleEffects\Universal\Mud.p3d", 1, 0
 _ground setDropInterval 0.05;
 
 while {alive _project} do {
-    _project say3D ["pietre", 50];
+    _project say3D ["pietre", 150];
     uiSleep 1;
 };
 
