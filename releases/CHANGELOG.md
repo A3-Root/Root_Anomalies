@@ -1,4 +1,13 @@
 # Changelog for Root Anomalies 07 Jun 2026
+## Version: 6.0.0 - Another major overhaul
+- Fixed almost all of the previous issues
+- Added a new wraith anomaly
+- Added ability to sedate and capture anomalies
+- More options to configure and tweak
+- More performant, less networking costs and less overhead overall
+
+
+# Changelog for Root Anomalies 07 Jun 2026
 ## Version: 5.0.0.3 - Updates, Fixes, and Refactor
 - More fixes, updates and refactoring
 
