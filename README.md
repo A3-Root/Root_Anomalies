@@ -1,6 +1,6 @@
 # Root's Anomalies
 
-![version](https://img.shields.io/badge/version-5.0.0.9-blue) ![build](https://img.shields.io/badge/build-passing-green)
+![version](https://img.shields.io/badge/version-6.0.0.0-blue) ![build](https://img.shields.io/badge/build-passing-green)
 
 A modular framework of anomalies, creatures and SCP-style entities for Arma 3, usable from
 **both the 3DEN Editor and Zeus (Game Master)**. Originally based on the 3DEN showcase by
