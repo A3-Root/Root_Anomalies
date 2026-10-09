@@ -33,7 +33,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [list]
 [*]Instantly kills all objects within configured radius.
 [*]Visible/detectable only for units with [b]Detection Device[/b] configured. (Default: Vanilla Mine Detector)
-[*]Evaded by units wearing [b]Protection Device[b]. (Default: Kitbag (MTP))
+[*]Evaded by units wearing [b]Protection Device[/b]. (Default: Kitbag (MTP))
 [*]Killed/destroyed via configured [b]Killswitch[/b] vehicle within Kill-Range. (Default: CSAT Typhoon Device Truck)
 [/list]
 
@@ -73,7 +73,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*][b][NOTE][/b] - Highly recommended NOT to manually delete the entity after being placed.
 [/list]
 
-[h3] Steamer Anomaly
+[h3]Steamer Anomaly[/h3]
 [img]http://i.imgur.com/FN9yRUy.gif[/img]
 [list]
 [*]Uses underground gas pipes to move to random target within territory and burst out.
@@ -83,7 +83,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*]When it dies the ground tears open beneath it, throwing soil, rock, people and vehicles into the air.
 [/list]
 
-[h3] Strigoi Anomaly
+[h3]Strigoi Anomaly[/h3]
 [img]http://i.imgur.com/t3D4g6A.gif[/img]
 [list]
 [*]Uses electric current to disorient, confuse, drain stamina, and kill units within territory.
@@ -91,7 +91,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*]Option to turn off [b]Flashing Lights[/b] for players with epilepsy or other conditions.
 [/list]
 
-[h3] Swarmer Anomaly
+[h3]Swarmer Anomaly[/h3]
 [img]http://i.imgur.com/VIYrFKS.gif[/img]
 [list]
 [*]Deadly flies that leech off nearby units until the unit is dead or away from territory.
@@ -106,7 +106,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*]Option to turn off [b]Flashing Lights[/b] for players with epilepsy or other conditions.
 [/list]
 
-[h3] Worm Anomaly
+[h3]Worm Anomaly[/h3]
 [img]http://i.imgur.com/ILe4Buj.gif[/img]
 [list]
 [*]Gaseous entity in the shape of a worm, attacks target by slamming to the ground.
@@ -115,7 +115,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*]Baited by a thrown [b]Diversion Device[b]: it attacks that spot instead of people for the configured number of attacks, even after the device burns out.
 [/list]
 
-[h3] Wraith Anomaly
+[h3]Wraith Anomaly[/h3]
 [list]
 [*]Ground-bound stalker stitched together from Strigoi, Flamer and Farmer flesh. Walks while it stalks, runs when it closes in, and claws whoever it reaches. No leaping.
 [*]Invisible to the naked eye. It only shows up through [b]night vision[b], [b]thermal[/b] or both (set per module), including vehicle optics and UAV cameras.

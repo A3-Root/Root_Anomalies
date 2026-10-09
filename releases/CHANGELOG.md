@@ -1,4 +1,4 @@
-# Changelog for Root Anomalies 07 Jun 2026
+# Changelog for Root Anomalies 09 Oct 2026
 ## Version: 6.0.0 - Another major overhaul
 - Fixed almost all of the previous issues
 - Added a new wraith anomaly
