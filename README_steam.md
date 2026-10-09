@@ -98,7 +98,7 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [*]Neutralized by throwing configured [b]Pesticide[/b] object (magazine or ammo classname, e.g. SmokeShellRed). The pesticide never counts as a sedative.
 [/list]
 
-[h3] Twins Anomaly
+[h3]Twins Anomaly[/h3]
 [img]http://i.imgur.com/EbXKTPc.gif[/img]
 [list]
 [*]Plays with the mind and vision of its target - slowly killing them.
@@ -127,7 +127,6 @@ Health is calculated by number of hits received from other units. 10 Health = pr
 [h2]Credits[/h2]
 [b]Author:[/b] Root (xMidnightSnowx)
 [b]ALIASCARTOONS[/b] — author of the original idea and work. [url=https://steamcommunity.com/id/aliascartoons/myworkshopfiles/]Check out more of his stuff here[/url].
-[url=https://77th-jsoc.com][b]77th JSOC[/b][/url]
 [hr]
 [h2]License[/h2]
 [b]APL-SA:[/b] Arma Public License Share Alike
